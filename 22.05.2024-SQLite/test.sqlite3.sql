@@ -37,3 +37,31 @@ SELECT * FROM Artist a JOIN Album l ON a.ArtistId = l.ArtistId;
 
 -- soluna ekleme
 SELECT * FROM Artist a LEFT JOIN Album l ON a.ArtistId = l.ArtistId;
+
+--sağına ekleme
+SELECT * FROM Artist a RIGHT JOIN Album l ON a.ArtistId = l.ArtistId;
+
+-- *** functions ***
+SELECT * FROM Invoice i JOIN InvoiceLine l ON i.InvoiceId = l.InvoiceId;
+
+SELECT i.Total AS 'Toplam Tutar' FROM Invoice i JOIN InvoiceLine l ON i.InvoiceId = l.InvoiceId;
+
+
+--zzzzzzzzzzzzzzzzzzzzzzzzzz--
+
+SELECT count(i.InvoiceId) FROM Invoice i JOIN InvoiceLine l on i.InvoiceLineId = l.InvoiceLineId;
+
+SELECT count(i.InvoiceId) FROM Invoice i;
+
+SELECT count(l.InvoiceLineId) FROM InvoiceLine l;
+
+
+SELECT SUM(i.Total) FROM Invoice i;
+select * from Invoice;
+
+SELECT SUM(i.Total)*2 FROM Invoice i;
+
+
+SELECT i.InvoiceId, i.Total FROM Invoice i WHERE i.InvoiceId IN (1,4,6,22);
+SELECT SUM(i.Total)*2 FROM Invoice i where i.InvoiceId IN (1,4,6,22);
+SELECT avg(i.Total) from Invoice i where i.InvoiceId IN (1,4,6,22);
