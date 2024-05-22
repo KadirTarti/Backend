@@ -65,3 +65,8 @@ SELECT SUM(i.Total)*2 FROM Invoice i;
 SELECT i.InvoiceId, i.Total FROM Invoice i WHERE i.InvoiceId IN (1,4,6,22);
 SELECT SUM(i.Total)*2 FROM Invoice i where i.InvoiceId IN (1,4,6,22);
 SELECT avg(i.Total) from Invoice i where i.InvoiceId IN (1,4,6,22);
+
+
+SELECT min(i.Total) FROM Invoice i WHERE i.InvoiceId IN (1,4,6,22);
+
+SELECT max(i.Total) FROM Invoice i WHERE i.InvoiceId IN (1,4,6,22);
