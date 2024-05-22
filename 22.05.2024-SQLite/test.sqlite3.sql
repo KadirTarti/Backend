@@ -20,3 +20,8 @@ Select * from Customer WHERE CustomerID IN (14,55) ORDER BY FirstName, LastName 
 
 SELECT * FROM Customer LIMIT 15,10; --15'den başka 10 kayıt getir 
 
+--& hiyerarşi between----> order by limit and where
+Select * from Customer WHERE CustomerID IN (14,55) ORDER BY FirstName, LastName DESC LIMIT 0,2; -- burada 0'dan veya 1den başlatmak zorundayız limiti. çünkü 2 kişi var. başlatmasak hata verir. ikinci parametre çok önemli değil.Address
+
+--^* SUM
+select SUM(Total) as total from Invoice;
