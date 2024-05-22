@@ -6,3 +6,6 @@ SELECT * FROM Customer
 WHERE Country 
 IN  ('USA','Brazil','Denmark') 
 and (CustomerId BETWEEN 24 and 30);
+
+SELECT * from Customer WHERE Country like '%US%';  --ülkede US içerenler
+SELECT * from Customer WHERE Country like 'U%'; --ülke U ile başlayanlar
