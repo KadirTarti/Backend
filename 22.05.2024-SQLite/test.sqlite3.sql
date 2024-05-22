@@ -66,7 +66,23 @@ SELECT i.InvoiceId, i.Total FROM Invoice i WHERE i.InvoiceId IN (1,4,6,22);
 SELECT SUM(i.Total)*2 FROM Invoice i where i.InvoiceId IN (1,4,6,22);
 SELECT avg(i.Total) from Invoice i where i.InvoiceId IN (1,4,6,22);
 
+SELECT round(sum(i.Total), 2) from Invoice i where i.InvoiceId in (1,5,7,12); -- round yuvarlama... 2 de virgülden sonrasındaki iki basamak
+
 
 SELECT min(i.Total) FROM Invoice i WHERE i.InvoiceId IN (1,4,6,22);
 
 SELECT max(i.Total) FROM Invoice i WHERE i.InvoiceId IN (1,4,6,22);
+
+SELECT a.AlbumId, a.Title, length(a.Title) as 'Title Uzunluk', a.ArtistId from Album a;
+
+
+--^* GROUP BY
+
+-- tüm bilgileri getir, başta country olsun
+SELECT Country, * FROM Customer;
+
+-- DISTINC komutu group by'a bvenzer ama count vermez. sadece listeler
+SELECT DISTINCT(Country) FROM Customer;
+
+-- bu ülkeden kaç kayıt var count altında listele :
+SELECT count(*), Country FROM Customer GROUP BY Country;
