@@ -9,3 +9,11 @@ and (CustomerId BETWEEN 24 and 30);
 
 SELECT * from Customer WHERE Country like '%US%';  --ülkede US içerenler
 SELECT * from Customer WHERE Country like 'U%'; --ülke U ile başlayanlar
+
+--^* ORDER BY
+-- desc tersten sıralatır
+SELECT * from Customer ORDER BY CustomerId DESC;
+
+-- Select * from Customer ORDER BY FirstName, LastName DESc WHERE CustomerID IN (14,55)   --HATA VERİR..HİYERARŞİ
+
+Select * from Customer WHERE CustomerID IN (14,55) ORDER BY FirstName, LastName DESC;   -- Hiyerarşiyi doğru sıralamak gerekir. 
