@@ -17,3 +17,6 @@ SELECT * from Customer ORDER BY CustomerId DESC;
 -- Select * from Customer ORDER BY FirstName, LastName DESc WHERE CustomerID IN (14,55)   --HATA VERİR..HİYERARŞİ
 
 Select * from Customer WHERE CustomerID IN (14,55) ORDER BY FirstName, LastName DESC;   -- Hiyerarşiyi doğru sıralamak gerekir. 
+
+SELECT * FROM Customer LIMIT 15,10; --15'den başka 10 kayıt getir 
+
