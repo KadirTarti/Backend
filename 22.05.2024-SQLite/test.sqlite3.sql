@@ -25,3 +25,15 @@ Select * from Customer WHERE CustomerID IN (14,55) ORDER BY FirstName, LastName 
 
 --^* SUM
 select SUM(Total) as total from Invoice;
+
+--^* Relation Database / İlişkisel veritabanı
+-- aynı satırda farklı base'lerden album ismi ve şarkıcıyı listelemek
+SELECT * from Album a JOIN Artist c ON a.ArtistId  = c.ArtistId;
+
+-- üsttekinde 2 defa artistId görmüştük. Bu tablo daha temiz... bunda yıldız yerine istediğimiz kolonları görüyoruz
+SELECT a.AlbumId, a.Title, c.Name from Album a JOIN Artist c ON a.ArtistId  = c.ArtistId;
+
+SELECT * FROM Artist a JOIN Album l ON a.ArtistId = l.ArtistId;
+
+-- soluna ekleme
+SELECT * FROM Artist a LEFT JOIN Album l ON a.ArtistId = l.ArtistId;
