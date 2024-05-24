@@ -86,3 +86,12 @@ SELECT DISTINCT(Country) FROM Customer;
 
 -- bu ülkeden kaç kayıt var count altında listele :
 SELECT count(*), Country FROM Customer GROUP BY Country;
+
+SELECT * FROM Invoice;
+
+SELECT * FROM Invoice GROUP BY BillingCity;
+SELECT * FROM Invoice GROUP BY CustomerId;
+SELECT * FROM Invoice GROUP BY InvoiceId;
+
+
+
