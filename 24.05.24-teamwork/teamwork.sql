@@ -32,7 +32,7 @@ SELECT tracks.AlbumId, albums.Title, MIN(tracks.Milliseconds) AS min_duration FR
 SELECT albums.Title, SUM(tracks.Milliseconds) AS total_duration FROM tracks JOIN albums ON tracks.AlbumId = albums.AlbumId GROUP BY tracks.AlbumId HAVING  total_duration > 3600000 ORDER BY total_duration DESC;
 
 
---! and veya or'u in içerisine eklersek sağ ve solundakileri ignore ediyor. IN içinde ararken or veya and kullanmıyoruz
+--! and veya or'u in içerisine eklersek sağ ve solundakileri ignore ediyor. IN içinde ararken or veya and kullanmıyoruz!!
 SELECT TrackId, Name, AlbumId 
 FROM tracks WHERE AlbumId 
 IN (SELECT AlbumId FROM albums WHERE Title 
