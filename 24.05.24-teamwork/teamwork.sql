@@ -19,3 +19,5 @@ SELECT AlbumId, COUNT(*) AS number_of_tracks FROM tracks GROUP BY AlbumId ORDER 
 SELECT Name, MIN(Milliseconds) as Min, MAX(Milliseconds) as Max FROM tracks;
 SELECT AVG(Milliseconds) FROM tracks;
 SELECT * FROM tracks WHERE Milliseconds < (SELECT AVG(Milliseconds) FROM tracks);
+SELECT Composer, COUNT(*) FROM tracks WHERE Composer IS NOT NULL GROUP BY Composer;
+SELECT Composer, COUNT(*) FROM tracks GROUP BY Composer;
