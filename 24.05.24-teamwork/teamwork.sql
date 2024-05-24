@@ -1,0 +1,1 @@
+SELECT Name, Composer FROM trucks;
