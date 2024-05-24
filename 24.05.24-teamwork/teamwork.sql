@@ -21,3 +21,6 @@ SELECT AVG(Milliseconds) FROM tracks;
 SELECT * FROM tracks WHERE Milliseconds < (SELECT AVG(Milliseconds) FROM tracks);
 SELECT Composer, COUNT(*) FROM tracks WHERE Composer IS NOT NULL GROUP BY Composer;
 SELECT Composer, COUNT(*) FROM tracks GROUP BY Composer;
+SELECT tracks.Name, genres.Name FROM tracks JOIN genres ON tracks.GenreId = genres.GenreId;
+SELECT albums.Title, artists.Name from artists LEFT JOIN albums ON albums.ArtistId = artists.ArtistId;
+SELECT tracks.AlbumId, albums.Title, MIN(tracks.Milliseconds) AS min_duration FROM tracks JOIN albums ON tracks.AlbumId = albums.AlbumId GROUP BY tracks.AlbumId, albums.Title ORDER BY  min_duration;
