@@ -23,4 +23,23 @@ SELECT Composer, COUNT(*) FROM tracks WHERE Composer IS NOT NULL GROUP BY Compos
 SELECT Composer, COUNT(*) FROM tracks GROUP BY Composer;
 SELECT tracks.Name, genres.Name FROM tracks JOIN genres ON tracks.GenreId = genres.GenreId;
 SELECT albums.Title, artists.Name from artists LEFT JOIN albums ON albums.ArtistId = artists.ArtistId;
-SELECT tracks.AlbumId, albums.Title, MIN(tracks.Milliseconds) AS min_duration FROM tracks JOIN albums ON tracks.AlbumId = albums.AlbumId GROUP BY tracks.AlbumId, albums.Title ORDER BY  min_duration;
+
+--! from ve join yerleri değişse de veri aynı
+SELECT tracks.AlbumId, albums.Title, MIN(tracks.Milliseconds) AS min_duration FROM tracks JOIN albums ON tracks.AlbumId = albums.AlbumId GROUP BY albums.AlbumId ORDER BY  min_duration DESC;
+
+SELECT tracks.AlbumId, albums.Title, MIN(tracks.Milliseconds) AS min_duration FROM albums JOIN tracks ON tracks.AlbumId = albums.AlbumId GROUP BY albums.AlbumId ORDER BY  min_duration DESC;
+
+SELECT albums.Title, SUM(tracks.Milliseconds) AS total_duration FROM tracks JOIN albums ON tracks.AlbumId = albums.AlbumId GROUP BY tracks.AlbumId HAVING  total_duration > 3600000 ORDER BY total_duration DESC;
+
+
+--! and veya or'u in içerisine eklersek sağ ve solundakileri ignore ediyor. IN içinde ararken or veya and kullanmıyoruz
+SELECT TrackId, Name, AlbumId 
+FROM tracks WHERE AlbumId 
+IN (SELECT AlbumId FROM albums WHERE Title 
+IN('Prenda Minha', 'Heart of the Night' OR 'Out of Exile'));
+
+--& üstteki ile aynı çözüm:
+SELECT tracks.TrackId, tracks.Name, albums.AlbumId 
+FROM tracks JOIN albums 
+ON tracks.AlbumId = albums.AlbumId WHERE albums.Title 
+IN ('Prenda Minha', 'Heart of the Night', 'Out of Exile');
