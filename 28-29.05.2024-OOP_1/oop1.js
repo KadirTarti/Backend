@@ -72,3 +72,69 @@ console.log(colorList) // [ 'white', 'red', 'green' ]
 
 const newColors = [...colorList, 'gray', 'purple']
 console.log('new colors >>>', newColors)  // --->  [ 'white', 'red', 'green', 'gray', 'purple' ]
+
+const userCool = {
+    name: 'Cool',
+    surname: 'Break',
+    birthDay: 1973,
+    car: {
+        brand: 'mazda'
+    }
+}
+
+const {name: adi} = userCool
+// const ad = name  (üstteki ifade buna denk)
+console.log('name >>>', adi)  // Output: Cool
+
+
+
+//! REST operator {...}
+
+const Auto = {
+    brand: 'opel',
+    model: 'vectra'
+}
+const AutoDetail = {
+    year: 2003,
+    color: 'brown',
+}
+const newAuto = {...Auto, ...AutoDetail}
+console.log(newAuto)
+
+const newAutoDetail = {...AutoDetail, gear: 'automatic'}
+console.log('NewAutoDetail: >>>', newAutoDetail)
+
+
+
+//! --------------------------------------------
+//&   Object to JSON
+//^*  Object to JSON
+
+const json = JSON.stringify(newAutoDetail)
+console.log('json  >>>', json ) // Output:  {"year":2003,"color":"brown","gear":"automatic"} 
+
+//^ JSON to Object
+const obj = JSON.parse(json)
+console.log('obj', obj)
+//! --------------------------------------------
+
+
+
+
+//! --------------------------------------------
+//& Object to ARRAY
+//Keys
+const keysInArray = Object.keys(newAutoDetail)
+console.log('keys in array >>>', keysInArray)
+
+//Values
+const valuesInArray = Object.values(newAutoDetail)
+console.log('values in array >>>', valuesInArray)
+
+//keys-value array
+const objInArray = Object.entries(newAutoDetail)
+console.log('obj', newAutoDetail)  // --------> obj { year: 2003, color: 'brown', gear: 'automatic' }
+console.log('objInArray', objInArray) // -----> objInArray [ [ 'year', 2003 ], [ 'color', 'brown' ], [ 'gear', 'automatic' ] ]
+
+
+//! --------------------------------------------
