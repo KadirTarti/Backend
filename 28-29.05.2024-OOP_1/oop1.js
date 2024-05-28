@@ -160,5 +160,11 @@ const CarConstructor = function (brand, model, year = 1973) {
 } 
 
 const newCar = new CarConstructor ('mercedes', 'e200')
-console.log('newcar >>>', newCar)
-console.log('fullText >>>', newCar.fullText())
+// console.log('newcar >>>', newCar)
+// console.log('fullText >>>', newCar.fullText())
+
+let year = 101;
+if (year || year > 100) {
+    console.log('year ---->', year)
+}
+
