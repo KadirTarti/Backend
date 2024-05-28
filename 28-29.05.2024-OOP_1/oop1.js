@@ -135,6 +135,30 @@ console.log('values in array >>>', valuesInArray)
 const objInArray = Object.entries(newAutoDetail)
 console.log('obj', newAutoDetail)  // --------> obj { year: 2003, color: 'brown', gear: 'automatic' }
 console.log('objInArray', objInArray) // -----> objInArray [ [ 'year', 2003 ], [ 'color', 'brown' ], [ 'gear', 'automatic' ] ]
-
-
 //! --------------------------------------------
+
+
+
+
+
+
+
+//& Obejct Constructor
+
+const ConstructorFunction = function () {
+    this.property = 'value'
+}
+
+//^ NEW keyword
+const CarConstructor = function (brand, model, year = 1973) {
+    this.brand = brand,
+    this.model = model,
+    this.year = year,
+    this.fullText = function () {
+        return this.brand + " " + this.model + " " + this.year
+    }
+} 
+
+const newCar = new CarConstructor ('mercedes', 'e200')
+console.log('newcar >>>', newCar)
+console.log('fullText >>>', newCar.fullText())
