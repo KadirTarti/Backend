@@ -140,7 +140,7 @@ console.log('all >>>', FordClimate)
 //^override : önceki metodla aynı isim ve yapıda yeni bir metod oluşturma
 //^overload : önceki metodla aynı adda fakat farklı yapıda yeni bir method oluşturma
 
-
+/*
 class Vehicle {
     vehicleActive = false
     constructor (vehicleType) {
@@ -190,4 +190,99 @@ const BMW = new Car ('BMW', '7.30i', 2021, 'Limusine')
 console.log(BMW)
 BMW.getDetails()
 BMW.getType('Car', 'Ford')
+*/
+
+
+
+//& Public & Private Properties
+/*
+class Vehicle {
+    vehicleActive = false; // PUBLIC
+    #abc // PRIVATE property
+    _protectedProperty = 'limitid-access'; // PROTECTED
+
+    constructor (vehicleType) {
+        this.vehicleActive = vehicleType;
+        console.log(this.#abc);
+        console.log(this._protectedProperty);
+    }
+}
+
+class Car extends Vehicle {
+    isRunning = false
+    
+    constructor(brand, model, year, vehicleType= 'Car') {
+        super(vehicleType)
+        this.brand = brand
+        this.model = model
+        this.year = year
+    }
+
+    runEngine() {
+        this.isRunning = true
+        console.log('Start Engine')
+        console.log('privateProperty >>', this.vehicleActive)
+    }
+
+}
+
+
+const Mercedes = new Car('Mercedes', 'M300', 2010, 'Truck')
+//Mercedes.runEngine()
+
+const vehicle = new Vehicle('Car')
+console.log(vehicle.vehicleActive);
+console.log(vehicle.privateProperty);
+*/
+
+/* --------------------------------------------- */
+//? GETTER & SETTER METHODS: Görevi veri getirme (getter) ve veri güncelleme (setter) olan metodlardır.
+//? "STATIC" KEYWORD: Class'dan direkt erişim. (Instance erişemez.)
+/*
+class Car {
+    isRunning = false
+    #price
+    #color
+
+    constructor(brand, model, year) {
+        this.brand = brand
+        this.model = model
+        this.year = year
+    }
+
+    runEngine() {
+        this.isRunning = true
+        console.log('runEngine >> ','Start Engine')
+        //return this.isRunning
+    }
+
+    set setPrice(price) {
+        this.#price = price
+        console.log('price update');
+    }
+
+    get getPrice() {
+        return `price is ${this.#price}`
+    }
+
+    setColor(color) {
+        this.#color = color
+        console.log('color update');
+    }
+
+    getColor(){
+        return `color is ${this.#color}`
+    }
+}
+
+const Toyota = new Car('Toyota', 'Yaris', 2000)
+
+console.log(Toyota);
+
+Toyota.setPrice = 500
+Toyota.setColor('mavi')
+
+console.log(Toyota.getPrice);
+console.log(Toyota.getColor());
+*/
 
