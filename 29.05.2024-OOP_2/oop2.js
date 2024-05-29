@@ -238,6 +238,7 @@ console.log(vehicle.privateProperty);
 /* --------------------------------------------- */
 //? GETTER & SETTER METHODS: Görevi veri getirme (getter) ve veri güncelleme (setter) olan metodlardır.
 //? "STATIC" KEYWORD: Class'dan direkt erişim. (Instance erişemez.)
+
 /*
 class Car {
     isRunning = false
@@ -286,3 +287,29 @@ console.log(Toyota.getPrice);
 console.log(Toyota.getColor());
 */
 
+class KdvHesapla {
+    #kdv
+
+    constructor (fiyat) {
+        this.fiyat = fiyat
+    }
+
+    set setKDV(kdvOrani) {
+        this.#kdv = kdvOrani
+    }
+
+    get getKdvMiktari () {
+        return this.fiyat * 100 / this.#kdv
+    }
+
+    get getKdvliFiyat () {
+        return ((this.fiyat / 100) * this.#kdv) + this.fiyat
+    }
+}
+
+const hesap = new KdvHesapla(100)
+
+hesap.setKDV = 18
+
+console.log(hesap.getKdvMiktari)
+console.log(hesap.getKdvliFiyat)
