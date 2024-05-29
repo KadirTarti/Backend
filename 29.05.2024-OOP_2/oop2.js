@@ -87,6 +87,7 @@ console.log('Mazda >>>', Mazda.isRunning) //true
 // this = child class
 // super = parent class
 
+/*
 class Vehicle {
     vehicleActive = false
     
@@ -131,3 +132,62 @@ class Accessory extends Car {
 }
 const FordClimate = new Accessory('Bosch Climate', 'Ford', 'Mustang', 1991)
 console.log('all >>>', FordClimate)
+
+*/
+
+
+//& Polymorphism - yeniden yazabilme
+//^override : önceki metodla aynı isim ve yapıda yeni bir metod oluşturma
+//^overload : önceki metodla aynı adda fakat farklı yapıda yeni bir method oluşturma
+
+
+class Vehicle {
+    vehicleActive = false
+    constructor (vehicleType) {
+        this.vehicleActive = vehicleType
+    }
+
+    getDetails () {
+        console.log('Vehicle/getDetails started')
+        return this
+    }
+
+    getType (vehicleType) {
+        console.log(`'Vehicle type: ${this.vehicleType}`)
+    }
+}
+
+
+class Car extends Vehicle {
+    isRunning = false
+
+    constructor(brand, model, year, vehicleType=true) {
+        super(vehicleType)
+        this.brand = brand
+        this.model = model
+        this.year = year
+    }
+
+    runEngine() {
+        this.isRunning = true
+        console.log('Engine Started')
+        return this.isRunning
+    }
+
+    getDetails() {
+        console.log('Car/getDetails started')
+    }
+
+    getType (vehicleType, brand) {
+        console.log(`vehicle/Brand type ${vehicleType} ${brand}`)
+    }
+}
+
+const BMW = new Car ('BMW', '7.30i', 2021, 'Limusine')
+
+
+//! sor ... getType neden undefined geldi... car ford onu overload yerine düzeltmiş gibi olmadı mı?
+console.log(BMW)
+BMW.getDetails()
+BMW.getType('Car', 'Ford')
+
