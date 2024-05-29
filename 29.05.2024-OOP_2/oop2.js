@@ -313,3 +313,5 @@ hesap.setKDV = 18
 
 console.log(hesap.getKdvMiktari)
 console.log(hesap.getKdvliFiyat)
+
+
