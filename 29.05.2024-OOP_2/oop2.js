@@ -61,7 +61,21 @@ class Car {
         this.model = model
         this.year = year
     }
+
+    runEngine() {
+        this.isRunning= true
+    }
 }
 
 
-const Ford = new Car
+const Ford = new Car('Ford', 'Mustang', 1990)
+console.log(Ford)
+
+console.log(Ford.isRunning) //false
+Ford.runEngine()
+console.log(Ford.isRunning) //true
+
+const Mazda = new Car('Mazda' ,'323', 2000)  //false
+console.log('Mazda >>>', Mazda.isRunning)
+Mazda.runEngine()
+console.log('Mazda >>>', Mazda.isRunning) //true
