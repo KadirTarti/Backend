@@ -53,6 +53,7 @@ console.log(InstanceName.methodName1());
 
 //& constructor Method
 
+/*
 class Car {
     isRunning = false
     
@@ -64,6 +65,7 @@ class Car {
 
     runEngine() {
         this.isRunning= true
+        return this.isRunning
     }
 }
 
@@ -79,3 +81,53 @@ const Mazda = new Car('Mazda' ,'323', 2000)  //false
 console.log('Mazda >>>', Mazda.isRunning)
 Mazda.runEngine()
 console.log('Mazda >>>', Mazda.isRunning) //true
+*/
+
+//& INHERITANCE -> miras alma. başka bir class'ın tüm özelliklerini devralma
+// this = child class
+// super = parent class
+
+class Vehicle {
+    vehicleActive = false
+    
+    constructor (vehicleType) {
+        this.vehicleActive= vehicleType
+    }
+
+    sayHi() {
+        console.log('Hi')
+    }
+}
+
+class Car extends Vehicle{
+    isRunning = false
+    
+    constructor(brand, model, year, vehicleType='Car') {
+        super(vehicleType)
+        this.brand = brand
+        this.model = model
+        this.year = year
+    }
+
+    runEngine() {
+        this.isRunning= true
+    }
+}
+
+const Mercedes = new Car('Mercedes', 'E200', 2006)
+console.log('all  >>>', Mercedes)
+console.log(Mercedes.vehicleActive)
+Mercedes.sayHi()
+
+
+
+
+
+class Accessory extends Car {
+       constructor(accessoryName, brand, model, year, vehicleType=true) {
+        super (brand, model, year)
+        this.accessoryName = accessoryName = accessoryName
+       }
+}
+const FordClimate = new Accessory('Bosch Climate', 'Ford', 'Mustang', 1991)
+console.log('all >>>', FordClimate)
