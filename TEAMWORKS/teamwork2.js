@@ -1,16 +1,23 @@
+class Animal {
+  constructor(name, weight) {
+    this.name = name;
+    this.weight = weight;
+  }
+  eat() {
+    return `${this.name} is eating`;
+  }
+  sound() {
+    return `${this.name} is says`;
+  }
+}
 
-class Employee{
-constructor(id,name){
-this.id=id;
-this.name=name;
+class Cat extends Animal {
+  constructor(name, weight) {
+    super(name, weight);
+  }
+  sound() {
+    return `${super.sound()} Meow!`;
+  }
 }
-detail(){
-console.log(this.id+" "+this.name)
-}
-}
-let e1=new Employee(10,"Qadir Adamson");
-let e2=new Employee("Victor Hug");
-let e3=new Employee(12)
-e1.detail();
-e2.detail();
-e3.detail();
+let felix = new Cat("felix", 5);
+console.log(felix.sound());
