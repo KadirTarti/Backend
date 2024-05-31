@@ -3,15 +3,15 @@
 console.log("this is module.js");
 
 //! single function
-const testFunction=function() {
-    console.log('this is test function')
-}
-module.exports=testFunction  
+// const testFunction=function() {
+//     console.log('this is test function')
+// }
+// module.exports=testFunction  
 
-//^short hand :
-module.exports=function() {
-    console.log('this is a function, what direct exported')
-}
+// //^short hand :
+// module.exports=function() {
+//     console.log('this is a function, what direct exported')
+// }
 
 
 //! multi function
@@ -43,15 +43,29 @@ const test4=function() {
 // }
 
 //? shorthand
-module.exports.test2 = function(){
-    console.log('2-- test func 2')
-}
+// module.exports.test2 = function(){
+//     console.log('2-- test func 2')
+// }
 
-module.exports.test3 = function(){
-console.log('3-- test func 3')
-}
+// module.exports.test3 = function(){
+// console.log('3-- test func 3')
+// }
 
-module.exports.test4 = function(){
-    console.log('4-- test func 4')
+// module.exports.test4 = function(){
+//     console.log('4-- test func 4')
+// }
+// module.exports.message = 'hallooo'
+
+//? shorthand-2
+module.exports={
+    test2:function(){
+        console.log('this is second test')
+    },
+    test3:function(){
+        console.log('this is third test')
+    },
+    test4:function(){
+        console.log('this is forth test')
+    },
+    message: 'this is my message'
 }
-module.exports.message = 'hallooo'

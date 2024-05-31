@@ -26,3 +26,8 @@ t_C() //test3()
 console.log(message)
 t_D() //test4()
 test2()
+
+
+//! buildin
+require('http')  //ilk önce node_modules klasörüne bakar. bulamazsa globalde arar
+require('node:http') // direk globalde node'a bakar
