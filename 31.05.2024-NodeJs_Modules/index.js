@@ -31,3 +31,8 @@ test2()
 //! buildin
 require('http')  //ilk önce node_modules klasörüne bakar. bulamazsa globalde arar
 require('node:http') // direk globalde node'a bakar
+
+require('dotenv').config() //node modules içinden dotenv dosyasından config fonksiyonunu çalıştır
+console.log(process.env)
+console.log(process.env.ENV_HOST)
+console.log(process.env.ENV_PORT)
