@@ -85,6 +85,7 @@ const app = http.createServer((req, res)=> {
             res.end(JSON.stringify(myObj))
         }
 
+
         //! altta syntax hatası aldım. üstte yazım doğru oldu. kontrol et
         //  else if (req.url == "/FS") {
         //     res.writeHead(200, 'status message basarili', {'myHeader':'comment1', 'myHeader2':'comment2'})  // statuscode and statusmessage
@@ -103,7 +104,7 @@ const app = http.createServer((req, res)=> {
     res.end('welcome to Data Science')
    } else 
    //! path'leri yönetirken en sona bu else i koymakta fayda var. kullanıcıya bilgi gitsin
-   res.statusCode=404
+   res.statusCode=403
    res.statusMessage='aradiginiz sayfa bulunamadi!'
    res.end('<h1> no page </h1>')
 })
