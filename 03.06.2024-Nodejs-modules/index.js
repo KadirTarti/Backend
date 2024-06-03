@@ -7,7 +7,7 @@
 console.log('node js server');
 const http = require('node:http');
 
-
+/*
 // http.createServer((parameter1, parameter2) => {
 //     console.log('server is running');
 // })
@@ -32,15 +32,15 @@ const applic = http.createServer((req, res)=>{
     // console.log('server is running');
 })
 applic.listen(8000)
-
+*/
 
 //! port'u elle 8000 olarak değil de env dosyası üzerinden yazmak için:
 // .env dosyasını oluşturduk. içine PORT=8000 yazdık. sonra terminalden npm i dotenv kurduk
 const dotenv = require('dotenv').config()
-const PORT = process.env.PORT
-const HOST = process.env.HOST
+const PORT = process.env.PORT || 8000
+const HOST = process.env.HOST ||'127.0.0.1'
 
 const ap = http.createServer((req, res)=> {
-    res.end('server runned')
+    res.end('<h1> server runned </h1>')
 })
 ap.listen(PORT,()=>console.log(`server is running http://${HOST}:${PORT}`))
