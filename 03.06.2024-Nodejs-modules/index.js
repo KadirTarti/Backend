@@ -5,7 +5,7 @@
 /* ------------------------------------- */
 
 console.log('node js server');
-const http = require('http');
+const http = require('node:http');
 
 
 // http.createServer((parameter1, parameter2) => {
@@ -18,4 +18,5 @@ const http = require('http');
 
 const app = http.createServer((req, res)=>{
     console.log('server is running');
-}).listen(8000)
+})
+app.listen(8000)
