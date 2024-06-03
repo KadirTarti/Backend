@@ -78,6 +78,7 @@ const app = http.createServer((req, res)=> {
    } else if (req.url == '/DS') {
     res.end('welcome to Data Science')
    } else 
+   //! path'leri yönetirken en sona bu else i koymakta fayda var. kullanıcıya bilgi gitsin
    res.statusCode=404
    res.statusMessage='aradiginiz sayfa bulunamadi!'
    res.end('<h1> no page </h1>')
