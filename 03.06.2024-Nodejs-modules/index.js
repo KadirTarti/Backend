@@ -40,21 +40,46 @@ const dotenv = require('dotenv').config()
 const PORT = process.env.PORT || 8000
 const HOST = process.env.HOST ||'127.0.0.1'
 
-const app = http.createServer((req, res)=> {
+
+
+//const app = http.createServer((req, res)=> {
     
     /*
         "/" homepage
         "/FS" fullstack page
         "/DS" data science page
     */
-   if(req.url == "/") {
-    res.end('homepage')
+/*
+        if(req.url == "/") {
+    res.end('this is homepage')
    } else if (req.url == "/FS") {
     res.end('welcome to FS page')
    } else if (req.url == '/DS') {
     res.end('welcome to Data Science')
-   }
+   } else res.end('<h1> no page </h1>')
 
     // res.end('<h1> server runned </h1>')
+})
+app.listen(PORT,()=>console.log(`server is running http://${HOST}:${PORT}`))
+*/
+
+const app = http.createServer((req, res)=> {
+    
+//    if(req.url == "/" && req.method=='GET') {
+    if(req.url == "/") {
+        if(req.method=='GET'){
+            res.statusCode=200
+            res.end('welcome to your website')  // slash ile arayınca status 200 verecek 
+        }else{
+            res.statusCode=403   // get metodunu değiştirince bu 403 metodunu alacağız
+            res.end('you can not use this method')
+        }
+
+   } else if (req.url == '/DS') {
+    res.end('welcome to Data Science')
+   } else 
+   res.statusCode=404
+   res.statusMessage='aradiginiz sayfa bulunamadi!'
+   res.end('<h1> no page </h1>')
 })
 app.listen(PORT,()=>console.log(`server is running http://${HOST}:${PORT}`))
