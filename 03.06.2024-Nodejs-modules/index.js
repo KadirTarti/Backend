@@ -75,7 +75,10 @@ const app = http.createServer((req, res)=> {
             res.write('Fullstack path + ')
             res.write('Path * ')
             res.end('welcome to your website')  // slash ile arayınca status 200 verecek 
-      
+        } else {
+            res.statusCode=403
+            res.end('you can not this method')
+        }      
       
         } else if (req.url=='/JSON') {
             const myObj={
@@ -96,16 +99,13 @@ const app = http.createServer((req, res)=> {
       
         // }
         else{
-            res.statusCode=403   // get metodunu değiştirince bu 403 metodunu alacağız
-            res.end('you can not use this method')
+            res.statusCode=404  // get metodunu değiştirince bu 403 metodunu alacağız
+            res.end('aradiginiz sayfa yok')
+            res.end('<h1> no page </h1>')
         }
 
-   } else if (req.url == '/DS') {
-    res.end('welcome to Data Science')
-   } else 
    //! path'leri yönetirken en sona bu else i koymakta fayda var. kullanıcıya bilgi gitsin
-   res.statusCode=403
-   res.statusMessage='aradiginiz sayfa bulunamadi!'
-   res.end('<h1> no page </h1>')
+
+   
 })
 app.listen(PORT,()=>console.log(`server is running http://${HOST}:${PORT}`))
