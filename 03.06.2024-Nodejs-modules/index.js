@@ -40,7 +40,21 @@ const dotenv = require('dotenv').config()
 const PORT = process.env.PORT || 8000
 const HOST = process.env.HOST ||'127.0.0.1'
 
-const ap = http.createServer((req, res)=> {
-    res.end('<h1> server runned </h1>')
+const app = http.createServer((req, res)=> {
+    
+    /*
+        "/" homepage
+        "/FS" fullstack page
+        "/DS" data science page
+    */
+   if(req.url == "/") {
+    res.end('homepage')
+   } else if (req.url == "/FS") {
+    res.end('welcome to FS page')
+   } else if (req.url == '/DS') {
+    res.end('welcome to Data Science')
+   }
+
+    // res.end('<h1> server runned </h1>')
 })
-ap.listen(PORT,()=>console.log(`server is running http://${HOST}:${PORT}`))
+app.listen(PORT,()=>console.log(`server is running http://${HOST}:${PORT}`))
