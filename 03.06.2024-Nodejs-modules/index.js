@@ -4,7 +4,7 @@
 //!          NODE JS SERVER               */
 /* ------------------------------------- */
 
-console.log('node js server');
+// console.log('node js server');
 const http = require('node:http');
 
 /*
@@ -36,7 +36,8 @@ applic.listen(8000)
 
 //! port'u elle 8000 olarak değil de env dosyası üzerinden yazmak için:
 // .env dosyasını oluşturduk. içine PORT=8000 yazdık. sonra terminalden npm i dotenv kurduk
-const dotenv = require('dotenv').config()
+
+require('dotenv').config()
 const PORT = process.env.PORT || 8000
 const HOST = process.env.HOST ||'127.0.0.1'
 
@@ -69,8 +70,31 @@ const app = http.createServer((req, res)=> {
     if(req.url == "/") {
         if(req.method=='GET'){
             res.statusCode=200
+            res.writeHead(200, 'status message basarili', {'myHeader':'comment1', 'myHeader2':'comment2'})  // statuscode and statusmessage
+            res.write('welcome - ')
+            res.write('Fullstack path + ')
+            res.write('Path * ')
             res.end('welcome to your website')  // slash ile arayınca status 200 verecek 
-        }else{
+      
+      
+        } else if (req.url=='/JSON') {
+            const myObj={
+                username:'user',
+                emal:'email@hotmail.com'
+            }
+            res.end(JSON.stringify(myObj))
+        }
+
+        //! altta syntax hatası aldım. üstte yazım doğru oldu. kontrol et
+        //  else if (req.url == "/FS") {
+        //     res.writeHead(200, 'status message basarili', {'myHeader':'comment1', 'myHeader2':'comment2'})  // statuscode and statusmessage
+        //     res.write('welcome - ')
+        //     res.write('Fullstack path + ')
+        //     res.write('Path * ')
+        //     res.end()       
+      
+        // }
+        else{
             res.statusCode=403   // get metodunu değiştirince bu 403 metodunu alacağız
             res.end('you can not use this method')
         }
