@@ -53,12 +53,47 @@ const HOST=process.env.HOST || '127.0.0.1'
 
 
 //& url params
-app.get('/:userId', (req, res) => {
-    const {userId, productId} = req.params
-    console.log(userId, productId)
-    req.send({userId, productId})})
+// app.get('/:userId/:productId', (req, res) => {
+//     const {userId, productId} = req.params
+//     console.log(userId, productId)
+//     req.send({userId, productId})})
 
 
+// app.get('/:userId/:productId', (req, res)=>{
+//     res.send({
+//         protocol: req.protocol,
+//         hostname: req.hostname,
+//         method: req.method,
+//         url: req.url,
+//         params: req.params,
+//         body: req.body,
+//         query: req.query,
+//         header: req.headers,
+//     })
+// })
+
+
+//& query
+// app.get('/', (req, res)=>{
+//     res.send({query: req.query})
+// })
+
+//! bu linki girince
+// http://127.0.0.1:8000/?namw=test&surname=user 
+
+//! bu çıktıyı alıyoruz
+// {
+//     'query': {
+//         'name': 'firstname',
+//         'surname': 'lastname'
+//     }
+// }
+
+
+//^ ACHTUNG!
+app.get('/:name-:surname/:topCategory/:subCategory/:gender-:genderCategory', (req, res) =>{res.send(req.params)})
+// http://127.0.0.1:8000/test-user/elbise/pantalon/kadin-pantalon
+//* link ve get metodu içinde kullanılan slash ve tire'ler aynı yerlerde olmalı. sonuç açısından ikisi de aynı!
 
 
 app.listen(PORT, () =>{
