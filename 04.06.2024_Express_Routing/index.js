@@ -20,7 +20,10 @@ app.put('/', (req, res) => {req.send('PUT method called!')}) // veri güncelleme
 app.patch('/', (req, res) => {req.send('PATCH method called!')})
 app.delete('/', (req, res) => {req.send('DELETE method called!')})
 
-
+// app.all('/', (req, res, next) => {    // all >>>  tüm istekleri çalıştırır 
+//     console.log('req >>>', req);
+//     next()
+// })
 
 app.listen(PORT, () =>{
     console.log(`Beispiel app arbeitet on port http://${HOST}:${PORT}`)
