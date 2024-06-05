@@ -14,24 +14,26 @@ const HOST = process.env.HOST || "127.0.0.1";
 /*-------------------*/
 //? Router ist spezial app für URL Kontrolle in ExpressJS
 
-const router = express.Router();
+// const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send({ message: "Hallo Welt" });
-});
+// router.get("/", (req, res) => {
+//   res.send({ message: "Hallo Welt" });
+// });
 
-router
-  .route("/user")
-  .get((req, res) => res.send({ message: "Hallo Welt GET" }))
-  .post((req, res) => res.send({ message: "Hallo Welt POST" }))
-  .put((req, res) => res.send({ message: "Hallo Welt PUT" }))
-  .delete((req, res) => res.send({ message: "Hallo Welt DELETE" }));
+// router
+//   .route("/user")
+//   .get((req, res) => res.send({ message: "Hallo Welt GET" }))
+//   .post((req, res) => res.send({ message: "Hallo Welt POST" }))
+//   .put((req, res) => res.send({ message: "Hallo Welt PUT" }))
+//   .delete((req, res) => res.send({ message: "Hallo Welt DELETE" }));
 
 //? Nachdem fertiges route-design, es sollte wie middleware geruft werden:
-app.use(router);
+// app.use(router);
 
 //? Move to /routers/index.js
-const router = require('./routers/index.js')
+// const router = require('./routers/index.js')
+// const router = require('./routers/index')
+const router = require('./routers/')
 app.use(router)
 
 app.listen(PORT, () => {

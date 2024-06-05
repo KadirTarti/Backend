@@ -5,9 +5,11 @@
 /* ----------------------------------- */
 
 
-const router = require('express').Router()
-router.get("/", (req, res) => {
-    res.send({ message: "Hallo Welt" });
+const abc = require('express').Router()
+
+
+abc.get("/", (req, res) => {
+    res.send({ message: "Hallo Welt123456" });
   });
 
-  module.exports = router
+  module.exports = abc
