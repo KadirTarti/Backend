@@ -29,20 +29,43 @@ const HOST = process.env.HOST || "127.0.0.1";
 //   });
 
 
+//! middleware kullanıcı kontrolü yaptığımız bir yer!
+
+// app.get('/', (req, res, next) => { 
+//     console.log(req.query?.username);
+//     if(req.query?.username === 'abdulkadir') {
+//         next()
+//     }else {
+//         res.send('username ist falsch')
+//     }
+// })
+
+// app.get('/', (req, res) => {
+//     res.send('Hier ist Middleware - username ist eingegeben')
+// })
 
 
-app.get('/', (req, res, next) => { 
-    console.log(req.query?.username);
-    if(req.query?.username === 'abdulkadir') {
+
+
+app.get('/', (req, res, next) => {
+    console.log('middleware  1  is here');
         next()
-    }else {
-        res.send('username ist falsch')
-    }
+})
+app.get('/', (req, res, next) => {
+    console.log('middleware  2  is here');
+        next()
+})
+app.get('/', (req, res, next) => {
+    console.log('middleware  3  is here');
+        next()
+})
+app.get('/', (req, res, next) => {
+    console.log('middleware  4  is here');
+        next()
 })
 
-app.get('/', (req, res) => {
-    res.send('Hier ist Middleware - username ist eingegeben')
-})
+
+
 
 
 app.listen(PORT, () => {
