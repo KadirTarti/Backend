@@ -1,5 +1,9 @@
 import express from 'express'
 
+
+//routes
+import users from './routes/users.js'
+
 const app = express()
 const PORT = 3000
 
@@ -8,15 +12,20 @@ app.get('/', (req,res) => {
     res.send('hallo zusammen!')
 })
 
-app.get('/user/:url', (req,res)=>{
-    res.json({
-        username:req.params.url
-    })
-})
+// app.get('/user/:url', (req,res)=>{
+//     res.json({
+//         username:req.params.url
+//     })
+// })
 //! üstteki kod bize http://localhost:3000/user/abdulkadir_tartilaci adresinde şunu veriyor:
 //  {
 // "username": "abdulkadir_tartilaci"
 // }
+
+
+app.use('/users', users)
+
+
 
 
 app.use((req, res) => {
