@@ -158,7 +158,6 @@ const HOST = process.env.HOST || "127.0.0.1";
 
 
 
-
 //? move to file:
 const {middlewareOne, middlewareTwo} = require ('./middlewares/')
 app.use(middlewareOne, middlewareTwo)
@@ -170,7 +169,6 @@ app.get('/user', (req, res) => {
         messageEnd: 'welcome to my website !! akt'
     })
 })
-
 
 app.listen(PORT, () => {
     console.log(`Middleware app arbeitet auf port http://${HOST}:${PORT}`);
