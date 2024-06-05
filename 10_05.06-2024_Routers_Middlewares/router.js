@@ -33,7 +33,7 @@ const HOST = process.env.HOST || "127.0.0.1";
 //? Move to /routers/index.js
 // const router = require('./routers/index.js')
 // const router = require('./routers/index')
-const router = require('./routers/')
+const router = require('./routers/router-index')
 app.use(router)
 
 app.listen(PORT, () => {
