@@ -8,4 +8,9 @@ const middlewareOne = (req, res, next) => {
     next()
 }
 
-module.exports = middlewareOne
+const middlewareTwo = (req, res, next) => {
+    req.messageTwo = 'middleware two called'
+    next()
+}
+
+module.exports = {middlewareOne, middlewareTwo}

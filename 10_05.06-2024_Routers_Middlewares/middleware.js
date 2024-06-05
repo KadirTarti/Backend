@@ -160,12 +160,13 @@ const HOST = process.env.HOST || "127.0.0.1";
 
 
 //? move to file:
-const middlewareOne = require ('./middlewares/')
-app.use(middlewareOne)
+const {middlewareOne, middlewareTwo} = require ('./middlewares/')
+app.use(middlewareOne, middlewareTwo)
 
 app.get('/user', (req, res) => {
     res.send({
         messageOne: req.messageOne,
+        messageTwo: req.messageTwo,
         messageEnd: 'welcome to my website !! akt'
     })
 })
