@@ -95,7 +95,55 @@ app.get('/:name-:surname/:topCategory/:subCategory/:gender-:genderCategory', (re
 // http://127.0.0.1:8000/test-user/elbise/pantalon/kadin-pantalon
 //* link ve get metodu içinde kullanılan slash ve tire'ler aynı yerlerde olmalı. sonuç açısından ikisi de aynı!
 
+/* response değeri
+{
+  "name": "test",
+  "surname": "user",
+  "topCategory": "elbise",
+  "subCategory": "pantalon",
+  "gender": "kadin",
+  "genderCategory": "pantalon"
+}
+*/
 
 app.listen(PORT, () =>{
     console.log(`Beispiel app arbeitet on port http://${HOST}:${PORT}`)
+})
+
+
+//https://restfulapi.net/http-status-codes/
+// HTTP defines these standard status codes that can be used to convey the results of a client’s request. The status codes are divided into five categories.
+
+// 1xx: Informational – Communicates transfer protocol-level information.
+// 2xx: Success – Indicates that the client’s request was accepted successfully.
+// 3xx: Redirection – Indicates that the client must take some additional action in order to complete their request.
+// 4xx: Client Error – This category of error status codes points the finger at clients.
+// 5xx: Server Error – The server takes responsibility for these error status codes.
+
+
+//? EXTRA
+/*
+app.get('/', (req, res) => {
+    //res.redirect('https://www.google.com')
+    res.redirect(302, '/about')
+})
+
+app.get('/about', (req, res) => {
+    res.send('about')
+})
+*/
+
+//* file
+/*
+app.get('/file', (req, res) => {
+    res.sendFile(`${__dirname}/readme.md`)
+})
+
+app.get('/download', (req, res) => {
+    res.download('./readme.md', 'express-routing.txt')
+})
+*/
+
+app.listen(PORT, () => {
+    console.log(`Example app listening on port http://${HOST}:${PORT}`)
 })
