@@ -14,13 +14,34 @@ const HOST = process.env.HOST || "127.0.0.1";
 
 //& middleware
 
+// app.get('/', (req, res, next) => { 
+//     console.log('middle next'); 
+//     next()
+// })
+
+// app.get('/', (req, res) => {
+//     res.send('Hier ist Middleware')
+// })
+
+
+// app.listen(PORT, () => {
+//     console.log(`Middleware app arbeitet auf port http://${HOST}:${PORT}`);
+//   });
+
+
+
+
 app.get('/', (req, res, next) => { 
-    console.log('middle next'); 
-    next()
+    console.log(req.query?.username);
+    if(req.query?.username === 'abdulkadir') {
+        next()
+    }else {
+        res.send('username ist falsch')
+    }
 })
 
 app.get('/', (req, res) => {
-    res.send('Hier ist Middleware')
+    res.send('Hier ist Middleware - username ist eingegeben')
 })
 
 
