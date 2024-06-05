@@ -7,6 +7,15 @@ import users from './routes/users.js'
 const app = express()
 const PORT = 3000
 
+app.set('view engine', 'ejs') //view özelliği
+app.get('/', (req,res) => {
+    res.render('index', {
+        title: 'myTitle',
+        heading: 'hoşgeldin recep'
+    })
+})
+
+
 
 app.get('/', (req,res) => {
     res.send('hallo zusammen!')
