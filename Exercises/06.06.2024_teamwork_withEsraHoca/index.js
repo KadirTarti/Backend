@@ -1,19 +1,18 @@
 "use strict";
 
 const express = require("express");
-const app = express();
-
 const router = express.Router();
+const app = express();
 
 const port = 8000;
 
 //! 1.a)
-app.get(/^\/(abc|acd)/, (req, res) => {
+router.get(/^\/(abc|acd)/, (req, res) => {
   res.send("Path Matched abc - acd!");
 });
 
 //! 1.b)
-app.get(/\/a\d\/c{2,3}/, (req, res) => {
+router.get(/\/a\d\/c{2,3}/, (req, res) => {
   res.send("Path matched a(number)cc-ccc!");
 });
 //http://localhost:8000/a0/ccc    //'Path matched!'
@@ -23,14 +22,17 @@ app.get(/\/a\d\/c{2,3}/, (req, res) => {
 //      c{2,3}: c karakteri 2 veya 3 defa tekrarlanmalı.
 
 //! 1.c)
-app.get(/.*Hello$/, (req, res) => {
+router.get(/.*Hello$/, (req, res) => {
   res.send("Path matched!");
 });
+
 
 //! 1.d)
 app.get(/^\/Hello$/, (req, res) => {
   res.send("Path matched!");
 });
+
+
 
 //! 2)
 const students = [
@@ -64,6 +66,7 @@ router.get("/students/:id", (req, res) => {
 app.use(router);
 
 
+
 //! 3)
 /*
 
@@ -89,6 +92,7 @@ app.listen(port, () => {
 });
 
 */
+
 
 //! 4)
 // throw Error:
