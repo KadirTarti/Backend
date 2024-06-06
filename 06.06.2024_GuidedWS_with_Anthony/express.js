@@ -71,3 +71,15 @@ app.get("/products", (req, res) => {
   });
   //? üstteki kod varken sadece /product send edersek hata verir. bu durumda query varlığı doğrulanmalı. bunu da üstteki const page tanımlaası ile yapıyoruz.
 });
+
+
+
+//! iki alttaki req.body post'u için alttaki middleware'e ihtiyacımız var
+app.use(express.json()) // gelen body bilgisini parse edip anlaşılabilir yapıya dönüştürür. bunu yazmadan önce alttaki kodla verileri gönderemiyorduk !!
+
+app.post('/products', (req, res) =>{
+    console.log(req.body)
+    res.send({
+        data: req.body
+    })
+})
