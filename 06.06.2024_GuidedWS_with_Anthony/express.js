@@ -2,7 +2,8 @@ const express = require('express')
 const app = express()
 
 //import
-const products = require('./products.js')
+const products = require('./products.json')
+
 
 app.listen(3001, function(){
     console.log('server başladı')
@@ -53,6 +54,7 @@ app.get('/', (req, res) => {
     res.send({message: 'app get message calisti'})
 })
 
+// products.json dosyasından verileri çekmek için:
 app.get('/products', (req,res)=>{
     res.send({
         message:'this is products page',
