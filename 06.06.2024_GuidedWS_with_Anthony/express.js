@@ -67,7 +67,7 @@ app.get("/products", (req, res) => {
     message: "this is products page",
     // products
     // ilk 4ünü yazdırmak için
-    products: products.filter(item=>item.category == category).slice((page-1) * limit, page * limit),
+    products: products.filter(item=>item.category.includes(category)).slice((page-1) * limit, page * limit),
   });
   //? üstteki kod varken sadece /product send edersek hata verir. bu durumda query varlığı doğrulanmalı. bunu da üstteki const page tanımlaası ile yapıyoruz.
 });
