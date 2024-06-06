@@ -3,7 +3,7 @@
 //^server kurulumu
 // const { strict } = require('assert')
 const http = require('http')
-const { parse } = require('path')
+const url = require('url')
 
 const routerHandler = (req, res)=> {
     
