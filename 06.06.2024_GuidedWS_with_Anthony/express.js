@@ -83,3 +83,30 @@ app.post('/products', (req, res) =>{
         data: req.body
     })
 })
+
+
+app.get('/products/:id', (req, res) => {
+    if (products.filter((item)=> item.id == req.params.id).length) {
+    res.send(products.find((item)=> item.id == req.params.id))
+    } else {
+        res.status(404).send({
+            error: true,
+            message: 'Not Found!'
+        })
+    }
+})
+
+
+
+
+
+app.use((req, res, next) => {
+    res.user = 'abdulkadir';
+    next()    
+})
+
+app.use((req, res) => {
+    res.send({
+        message: `Hi ${res.user}`
+    })
+})
