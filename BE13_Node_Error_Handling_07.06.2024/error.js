@@ -42,22 +42,19 @@ app.get('/async', async (req, res, next) => {
 })
 
 //**********************************************
-const errorHandler = (err, req, res, next) => {
-    const errorStatusCode = res?.errorStatusCode || 500
-    res.status(errorStatusCode).send({
-        error: true,
-        status: false,
-        message: err.message
-    })
-}
-app.use(errorHandler)
+// const errorHandler = (err, req, res, next) => {
+//     const errorStatusCode = res?.errorStatusCode || 500
+//     res.status(errorStatusCode).send({
+//         error: true,
+//         status: false,
+//         message: err.message
+//     })
+// }
+// app.use(errorHandler)
 //bu kısmı  errorHandler sayfasına taşıdık
 //**********************************************
-// app.use(require('./errorHandler'))
+app.use(require('./errorHandler'))
 //! ***************************************************
-
-
-
 
 
 
