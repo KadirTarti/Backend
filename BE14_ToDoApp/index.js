@@ -32,18 +32,41 @@ const sequelize = new Sequelize('sqlite:./db.sqlite3'); // (RDBMS Adress)
 //& create MODEL
 // const Todo=sequelize.define('table / modem name', {'model details'})
 const Todo=sequelize.define('todos', {
-    id:{
-        type:DataTypes.BIGINT,
-        primaryKey: true,   // default false
-        unique: true,       // default false
-        autoIncrement: true, // default false
-        allowNull: false,   // default true
-        comment:'my comment',
-        field: 'custom name',
-        defaultValue: 'default value'
+    // id:{
+    //     type:DataTypes.BIGINT,
+    //     primaryKey: true,   // default false
+    //     unique: true,       // default false
+    //     autoIncrement: true, // default false
+    //     allowNull: false,   // default true
+    //     comment:'my comment',
+    //     field: 'custom name',
+    //     defaultValue: 'default value'
+    // },
+    title: {
+        type:DataTypes.STRING,
+        allowNull: false
+    },
+
+    description: DataTypes.TEXT,
+
+    priority: {
+        type: DataTypes.TINYINT,
+        allowNull: false,
+        defaultValue:0 // -1 low, 0 normal, 1 high
+    },
+    // creat and update date auto generated    
+    // createdDate: {type: DataTypes.DATE},
+    isDone: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     }
+
 })
 
+//? bu async bir metod : (onun için then-chatch kullanabiliriz)
+sequelize.authenticate()   // connect to db
+    .then(()=>console.log('Todo DB has been connected'))
+    .catch(()=>console.log('Todo DB has not been connected'))
 
 
 
