@@ -8,6 +8,9 @@ const express = require('express')
 // const { Sequelize } = require('sequelize')
 const app = express()
 
+// üstteki npm i ile bu paketi kurunca bu şekilde çağırıyoruz. bu bizim async-await yapımızdaki tüm hataların errorHandling'ini yapıyor'
+require('express-async-error')
+
 require('dotenv').config()
 const PORT=process.env?.PORT ||  8000
 const HOST=process.env?.HOST || '127.0.0.1'
@@ -64,10 +67,10 @@ const Todo=sequelize.define('todos', {
 })
 
 
-//^* sequelize.sync() //! run once (bir kez çalışması yeterli)
+// sequelize.sync() //! run once (bir kez çalışması yeterli)
 //bu kod js kodlarımızı sql kodlarına çeviriyor.
 
-//& sequelize.sync({force:true})   // DROP Tables then CREATE tables (mevcut tabloları silip default'a göre yenisini oluşturur) 
+//* sequelize.sync({force:true})   // DROP Tables then CREATE tables (mevcut tabloları silip default'a göre yenisini oluşturur) 
 //^ sequelize.sync({alter:true}) // BACKUP DB, then DROP tables then CREATE tables then RECOVER (üstteki işlemi yapıyor ama öncesinde tabloları yedeğe alıyor)
 
 //? bu async bir metod : (onun için then-chatch kullanabiliriz)
@@ -76,8 +79,67 @@ sequelize.authenticate()   // connect to db
     .catch(()=>console.log('Todo DB has not been connected'))
 
 
-//? CRUD operations
 
+
+//&  CRUD operations
+const router = express.Router()
+
+// LIST Todos (all)
+router.get('/todos', async (req, res)=>{
+
+//    const data = await Todo.findAll(req.body)  // tümünü bul-listele
+    const data = await Todo.findAndCountAll(req.body)  // bu üstteki ile aynı ama id'den ayrı olarak sayıya da bakarak getiriyor
+    res.status(200).send({
+        error:false,
+        data:data
+    })
+})
+
+
+// CREATE todo
+router.post('/todos', async (req, res)=>{
+
+    // console.log(req.body)
+
+    const data = await Todo.create(req.body)
+    res.status(201).send({
+        error:false,
+        data:data
+    })
+})
+
+
+
+
+// READ todo (with id)
+router.get('/todos/:id', async (req, res)=>{
+    const data = await Todo.findOne({where:{id:req.params.id}}) 
+    // const data = await Todo.findByPk(req.params.id) //--- pk: PrimaryKey -- biz hangi param verirsek onu baz alıyor. burada id 
+    res.status(200).send({
+        error:false,
+        data:data
+    })
+})
+
+
+
+// UPDATE todo
+router.put('/todos/:id', async (req, res)=>{
+
+    const data = await Todo.update(req.body, {where:{id:req.params.id}})
+    res.status(201).send({
+        error:false,
+        data:data
+    })
+})
+
+
+
+// DELETE todo
+
+
+
+app.use(router)
 
 
 //error control
@@ -91,6 +153,7 @@ const errorHandler = (err, req, res, next) => {
         // stack: err.stack
     })
 }
+app.use(errorHandler)
 
 
 app.listen(PORT,()=>console.log(`server runned http://${HOST}:${PORT}`))
