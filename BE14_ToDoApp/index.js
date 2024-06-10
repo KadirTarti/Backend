@@ -76,6 +76,9 @@ sequelize.authenticate()   // connect to db
     .catch(()=>console.log('Todo DB has not been connected'))
 
 
+//? CRUD operations
+
+
 
 //error control
 const errorHandler = (err, req, res, next) => {
