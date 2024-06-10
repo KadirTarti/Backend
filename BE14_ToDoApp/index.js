@@ -2,6 +2,7 @@
 
 //npm i express dotenv
 // npm i express-async-error  -> async functionlarda hataları yakalıyor
+//npm install sequelize sqlite3
 
 const express = require('express')
 const app = express()
@@ -33,7 +34,6 @@ const errorHandler = (err, req, res, next) => {
         // stack: err.stack
     })
 }
-
 
 
 app.listen(PORT,()=>console.log(`server runned http://${HOST}:${PORT}`))
