@@ -27,9 +27,22 @@ app.use(express.json())
 
 // express to database connection
 const {Sequelize, DataTypes}=require('sequelize')
-const sequelize = new Sequelize('sqlite:./db.sqlite3');
+const sequelize = new Sequelize('sqlite:./db.sqlite3'); // (RDBMS Adress)
 
-
+//& create MODEL
+// const Todo=sequelize.define('table / modem name', {'model details'})
+const Todo=sequelize.define('todos', {
+    id:{
+        type:DataTypes.BIGINT,
+        primaryKey: true,   // default false
+        unique: true,       // default false
+        autoIncrement: true, // default false
+        allowNull: false,   // default true
+        comment:'my comment',
+        field: 'custom name',
+        defaultValue: 'default value'
+    }
+})
 
 
 
