@@ -63,6 +63,13 @@ const Todo=sequelize.define('todos', {
 
 })
 
+
+//^* sequelize.sync() //! run once (bir kez çalışması yeterli)
+//bu kod js kodlarımızı sql kodlarına çeviriyor.
+
+//& sequelize.sync({force:true})   // DROP Tables then CREATE tables (mevcut tabloları silip default'a göre yenisini oluşturur) 
+//^ sequelize.sync({alter:true}) // BACKUP DB, then DROP tables then CREATE tables then RECOVER (üstteki işlemi yapıyor ama öncesinde tabloları yedeğe alıyor)
+
 //? bu async bir metod : (onun için then-chatch kullanabiliriz)
 sequelize.authenticate()   // connect to db
     .then(()=>console.log('Todo DB has been connected'))
