@@ -1,7 +1,7 @@
 'use strict'
 
 //npm i express dotenv
-// npm i express-async-error  -> asenkron hataları yakalıyor
+// npm i express-async-error  -> async functionlarda hataları yakalıyor
 
 const express = require('express')
 const app = express()
@@ -22,6 +22,7 @@ app.all('/', (req, res)=>{
 // json to obj - obj to json
 app.use(express.json())
 
+//error control
 const errorHandler = (err, req, res, next) => {
     const errorStatusCode = res?.errorStatusCode || 500
     res.status(errorStatusCode).send({
