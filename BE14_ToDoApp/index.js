@@ -5,6 +5,7 @@
 //npm install sequelize sqlite3
 
 const express = require('express')
+// const { Sequelize } = require('sequelize')
 const app = express()
 
 require('dotenv').config()
@@ -22,6 +23,16 @@ app.all('/', (req, res)=>{
 
 // json to obj - obj to json
 app.use(express.json())
+
+
+// express to database connection
+const {Sequelize, DataTypes}=require('sequelize')
+const sequelize = new Sequelize('sqlite:./db.sqlite3');
+
+
+
+
+
 
 //error control
 const errorHandler = (err, req, res, next) => {
