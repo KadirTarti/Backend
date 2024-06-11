@@ -4,12 +4,16 @@
 // npm i express-async-error  -> async functionlarda hataları yakalıyor
 //npm install sequelize sqlite3
 
+
 const express = require('express')
 // const { Sequelize } = require('sequelize')
 const app = express()
 
+
+
 // üstteki npm i ile bu paketi kurunca bu şekilde çağırıyoruz. bu bizim async-await yapımızdaki tüm hataların errorHandling'ini yapıyor'
 require('express-async-error')
+
 
 require('dotenv').config()
 const PORT=process.env?.PORT ||  8000
@@ -32,19 +36,26 @@ app.use(express.json())
 const {Sequelize, DataTypes}=require('sequelize')
 const sequelize = new Sequelize('sqlite:./db.sqlite3'); // (RDBMS Adress)
 
+
+
+
 //& create MODEL
 // const Todo=sequelize.define('table / modem name', {'model details'})
 const Todo=sequelize.define('todos', {
-    // id:{
-    //     type:DataTypes.BIGINT,
-    //     primaryKey: true,   // default false
-    //     unique: true,       // default false
-    //     autoIncrement: true, // default false
-    //     allowNull: false,   // default true
-    //     comment:'my comment',
-    //     field: 'custom name',
-    //     defaultValue: 'default value'
-    // },
+
+    // fieldname:{
+        //     type:DataTypes.BIGINT,
+        //     primaryKey: true,   // default false
+        //     unique: true,       // default false
+        //     autoIncrement: true, // default false
+        //     allowNull: false,   // default true
+        //     comment:'my comment',
+        //     field: 'custom name',
+        //     defaultValue: 'default value'
+        // },
+
+
+        // id: {} id field auto generated
     title: {
         type:DataTypes.STRING,
         allowNull: false
@@ -67,6 +78,10 @@ const Todo=sequelize.define('todos', {
 })
 
 
+
+
+
+
 // sequelize.sync() //! run once (bir kez çalışması yeterli)
 //bu kod js kodlarımızı sql kodlarına çeviriyor.
 
@@ -77,6 +92,8 @@ const Todo=sequelize.define('todos', {
 sequelize.authenticate()   // connect to db
     .then(()=>console.log('Todo DB has been connected'))
     .catch(()=>console.log('Todo DB has not been connected'))
+
+
 
 
 
@@ -96,6 +113,8 @@ router.get('/todos', async (req, res)=>{
 })
 
 
+
+
 // CREATE todo
 router.post('/todos', async (req, res)=>{
 
@@ -113,8 +132,8 @@ router.post('/todos', async (req, res)=>{
 
 // READ todo (with id)
 router.get('/todos/:id', async (req, res)=>{
-    const data = await Todo.findOne({where:{id:req.params.id}}) 
-    // const data = await Todo.findByPk(req.params.id) //--- pk: PrimaryKey -- biz hangi param verirsek onu baz alıyor. burada id 
+    // const data = await Todo.findOne({where:{id:req.params.id}}) 
+    const data = await Todo.findByPk(req.params.id) //--- pk: PrimaryKey -- biz hangi param verirsek onu baz alıyor. burada id 
     res.status(200).send({
         error:false,
         data:data
@@ -127,7 +146,7 @@ router.get('/todos/:id', async (req, res)=>{
 router.put('/todos/:id', async (req, res)=>{
 
     let data = await Todo.update(req.body, {where:{id:req.params.id}})
-    data = await Todo.findByPk(req.params.id)
+    data = await Todo.findByPk(req.params.id)  //verinin güncel halini getirir
     res.status(201).send({
         error:false,
         data:data
@@ -137,6 +156,21 @@ router.put('/todos/:id', async (req, res)=>{
 
 
 // DELETE todo
+router.delete('/todos/:id', async (req, res)=>{
+    const data = await Todo.destroy({where:{id:req.params.id}})
+    if(data) {
+        res.status(200).send({
+            error:false,
+            data:data
+        })    
+    } else {
+        res.status(204).send({
+            error:false,
+            data
+        })    
+    }
+    
+})
 
 
 
