@@ -3,22 +3,31 @@
 //? express to DB connection
 //https://sequelize.org/docs/v6/getting-started/
 
-const {Sequelize, DataTypes}=require('sequelize')
+const { Sequelize, DataTypes } = require("sequelize");
 //const sequelize=new Sequelize('RDB_name:adress')
 
-// SQLITE
-// const sequelize=new Sequelize('sqlite:./db.sqlite3')
+const HOST=process.env?.HOST || '127.0.0.1'
 
+require("dotenv").config();
+const PSW = process.env?.PSW;
+const DB = process.env.DB;
+let sequelize;
+if (DB == "SQLITE") {
+  //SQLITE
+  sequelize = new Sequelize("sqlite:./db.sqlite3");
+} else {
+  //POSTGRE
+  // npm install --save pg pg-hstore
+  // const sequelize= new Sequelize (`postgres://abdulkadir1:${PSW}@localhost:5432/todoapp`)
 
-//POSTGRE
-// npm install --save pg pg-hstore
-require('dotenv').config()
-const PSW=process.env?.PSW 
-const sequelize= new Sequelize (`postgres://abdulkadir1:${PSW}@localhost:5432/todoapp`)
+  sequelize = new Sequelize(
+    `postgres://abdulkadir1:${PSW}@${HOST}:5432/todoapp`
+  );
+}
 
-sequelize.authenticate() // connect to db
-    .then(()=>console.log('Todo DB connected'))
-    .catch(()=>console.log('Todo DB NOT connected'))
+sequelize
+  .authenticate() // connect to db
+  .then(() => console.log("Todo DB connected"))
+  .catch(() => console.log("Todo DB NOT connected"));
 
-
-module.exports={sequelize, DataTypes}
+module.exports = { sequelize, DataTypes };
