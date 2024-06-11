@@ -12,7 +12,9 @@ const {Sequelize, DataTypes}=require('sequelize')
 
 //POSTGRE
 // npm install --save pg pg-hstore
-const sequelize= new Sequelize ('postgres://abdulkadir1:1234@localhost:5432/todoapp')
+require('dotenv').config()
+const PSW=process.env?.PSW 
+const sequelize= new Sequelize (`postgres://abdulkadir1:${PSW}@localhost:5432/todoapp`)
 
 sequelize.authenticate() // connect to db
     .then(()=>console.log('Todo DB connected'))
