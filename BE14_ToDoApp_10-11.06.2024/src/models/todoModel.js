@@ -35,7 +35,8 @@ const Todo=sequelize.define('todos',{
     //     type:DataTypes.TEXT,  
     //     },
     priority:{ 
-        type:DataTypes.TINYINT,
+        // type:DataTypes.TINYINT,
+        type:DataTypes.INTEGER,
         allowNull:false,
         defaultValue:0 // -1: low, 0: Normal, 1 High
     },
@@ -54,8 +55,6 @@ const Todo=sequelize.define('todos',{
 // sequelize.sync({force:true}) // DROP tables then CREATE tables
 // sequelize.sync({alter:true}) // BACKUP DB then DROP tables then CREATE tables then RECOVER
 
-sequelize.authenticate() // connect to db
-    .then(()=>console.log('Todo DB connected'))
-    .catch(()=>console.log('Todo DB NOT connected'))
+
 
 module.exports= Todo

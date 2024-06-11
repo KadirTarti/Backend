@@ -63,13 +63,15 @@ module.exports={
     delete:async (req,res)=>{
 
         const data=  await Todo.destroy({where:{id:req.params.id}})
-        console.log('****');
-    
-        console.log(data);
-        res.status(204).send({
-            error:false,
-            data
-        })
+        if(data==1) {          
+                res.status(201).send({
+                    error:false,
+                    data
+                })
+        } else {
+            res.status(404)
+            throw new Error('Not found todo to delete')
+        }
     },
     getPending: async (req, res) => {
         const data = await Todo.findAndCountAll({ where: { isDone: false } })
