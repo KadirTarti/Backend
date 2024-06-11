@@ -70,6 +70,13 @@ module.exports={
             error:false,
             data
         })
+    },
+    getPending: async (req, res) => {
+        const data = await Todo.findAndCountAll({ where: { isDone: false } })
+        res.status(200).send({
+            error: false,
+            data: data
+        })
     }
 
 }

@@ -3,15 +3,13 @@
     EXPRESSJS 
     ! TODO MODEL
 */
-//? express to DB connection
-//https://sequelize.org/docs/v6/getting-started/
 
-const {Sequelize, DataTypes}=require('sequelize')
-//const sequelize=new Sequelize('RDB_name:adress')
-const sequelize=new Sequelize('sqlite:./db.sqlite3')
 
 //? create MODEL
 // const Todo=sequelize.define('table / model name',{'model details'})
+
+
+const {sequelize,DataTypes}=require('../configs/connectDB')
 const Todo=sequelize.define('todos',{
 
     
