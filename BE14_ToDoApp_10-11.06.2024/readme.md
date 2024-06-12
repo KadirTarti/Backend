@@ -6,7 +6,7 @@
     /todos methed GET list all todos
 
 // npm i express dotenv
-// npm i express-async-error // async func. error control
+// npm i express-async-errors // async func. error control
 // npm install sequelize sqlite3
 
 # folder structure
