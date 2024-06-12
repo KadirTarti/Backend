@@ -33,7 +33,9 @@ const Contact = sequelize.define(
     }
 
 )
-sequelize.sync()
+
+module.exports = Contact
+// sequelize.sync()
 
 // User.sync() //- bir kerelik çalıştırır
 // User.sync({ force: true }) //- tabloyu düşürüp yeniden çalıştırır
