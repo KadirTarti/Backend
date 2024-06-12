@@ -4,14 +4,29 @@ const Contact = require("../models/contactModel");
 // const sequelize=require('../configs/db')
 
 module.exports = {
-  list: async (req, res) => {
+  list: async (req, res, next) => {
     // const data = await sequelize.query('SELECT * FROM contacts')
-    const data = await Contact.findAndCountAll(); //! ORM
+    // const data = await Contact.findAndCountAll(); //! ORM
+    // const data = await Contact.findAll(); //! ORM
+    try{
+    const data = await Contact.findAll({
+      where: {
+        isActive: true,
+      },
+    });
+    console.log(data)
     res.status(200).send({
       error: false,
       contacts: data,
     });
+  } catch {
+    throw new Error ('hata fırlattım, yakala!')
+    console.log(data)
+  }
   },
+
+
+
   create: async (req, res) => {
     // const data = await Contact.create(req.body)
     //^ alttaki uzun kod üstteki create komutu ile aynı işi yapıyor!

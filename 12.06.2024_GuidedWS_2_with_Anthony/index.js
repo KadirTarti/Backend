@@ -12,6 +12,10 @@ app.all("/", (req, res) => {
 // ROUTER
 app.use(require('./src/routers/contactRouter'))
 
+// errorHandler rootların bittiği yerde  tanımlanmalı
+
+app.use(require('./src/middlewares/errorHandler'))
+
 app.listen(8000, () => console.log(`server runned http://localhost:8000`));
 
 
