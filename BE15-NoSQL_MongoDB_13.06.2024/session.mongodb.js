@@ -38,7 +38,7 @@
 	// db.coll.insertOne( { new_values } )
 	// db.coll.insertMany( [ { new_values } ] )
 	db.coll.insertOne({ firstName: 'Test', lastName: 'Test', age: 10 })
-	db.coll.insertMany([ // in array[]
+	db.coll.insertMany([
 		{ firstName: 'Test1', lastName: 'Test1', age: 11 },
 		{ firstName: 'Test2', lastName: 'Test2', age: 12 },
 		{ firstName: 'Test3', lastName: 'Test3', age: 13 },
