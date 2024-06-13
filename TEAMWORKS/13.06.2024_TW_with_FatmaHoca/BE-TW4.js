@@ -1,14 +1,15 @@
 //Write mongoDB statements corresponding to the SQL statements given below.
 
-/*
-                    MongoDB
-
+/* 
+people tablosundaki tüm verileri getir.
 1- db.people.find({
  
 });
 
 
-2- db.people.find({
+2- people tablosundaki id, user_id ve status sütunlarını getir.
+
+db.people.find({
  
 },{
    "id": 1,
@@ -18,7 +19,8 @@
 );
 
 
-3- db.people.find({
+3- people tablosundaki user_id vestatus sütunlarını getir.
+db.people.find({
  
 },{
    "user_id": 1,
@@ -27,27 +29,34 @@
 );
 
 
-4- db.people.find({
+4- people tablosundan status değerinin "A" olduğu satırları getir.
+db.people.find({
  "status " :  "A"
 });
 
 
-5- db.people.find(
+5-  people tablosundan user_id ve status sütunlarını seç, status değerinin "A" olduğu satırları getir.
+db.people.find(
 {  "status": "A" } , 
   {  "_id": 0, "user_id": 1, "status": 1 })
 
-6- db.people.find({
+
+
+6- people tablosundan status sütununun değeri "A" olmayan tüm satırları getir
+db.people.find({
   "status": { "$ne": "A" }
 })
 
 
-7- db.people.find({
+7- people tablosundan status değeri "A" olan VE age'i 50 olanları getir.
+db.people.find({
   status: 'A',
   age: 50
 });
 
 
-8-db.people.find({
+8- people tablosundan status değeri "A" olan VEYA age'i 50 olanları getir.
+db.people.find({
   $or: [
     { status: 'A' },
     { age: 50 }
@@ -55,53 +64,67 @@
 });
 
 
-9-db.people.find({
+9-  people tablosundan yaşı 25'in üzerinde olanları getir.
+db.people.find({
   age: { $gt: 25 }
 });
 
 
-10- db.people.find({
+10- people tablosundan yaşı 25'in altında olanları getir.
+db.people.find({
   age: { $lt: 25 }
 });
 
 
-11-db.people.find({
+11- people tablosundan yaşı 25 ile 50 arasında olanları getir. 25 hariç 50 dahil.
+db.people.find({
   age: { $gt: 25, $lte: 50 }
 });
 
-12-db.people.find({
+12- people tablosundan user_id'si   bc   içerenleri getir.
+db.people.find({
   user_id: { $regex: 'bc', $options: 'i' }
 });
 
 
-13-db.people.find({ status: 'A' }).sort({ user_id: 1 });
+13-people tablosundan status değerinin "A" olduğu satırları getir, user_id'ye göre sırala
+db.people.find({ status: 'A' }).sort({ user_id: 1 });
 
 
-14-db.people.find({ status: 'A' }).sort({ user_id: -1 });
+14- people tablosundan status değerinin "A" olduğu satırları getir, user_id'ye göre TERSTEN sırala
+db.people.find({ status: 'A' }).sort({ user_id: -1 });
 
 
-15-db.people.countDocuments();   
+15- people adlı tablodan toplam satır sayısını getir
+db.people.countDocuments();   
  or 
 db.people.estimatedDocumentCount();
 
 
-16-db.people.countDocuments({ user_id: { $exists: true } });
+16- people adlı tablodan user_id sütunundaki toplam satır sayısını getir
+db.people.countDocuments({ user_id: { $exists: true } });
 
 
-17-db.people.countDocuments({ age: { $gt: 30 } });
+17- people adlı tablodan yaşı 30'dan büyük olanları içeren toplam satır sayısını getir
+db.people.countDocuments({ age: { $gt: 30 } });
 
 
-18-db.people.distinct('status');
+18-  people adlı tablodan status sütunundaki benzersiz değerleri döndür 
+db.people.distinct('status');
 
 
-19-db.people.findOne();
+19- people adlı tablodan ilk satırı seçer
+db.people.findOne();
 
 
 
-20-db.people.find().limit(5).skip(10);
+20-  people adlı tablodan ilk beş satırı seçer, ardından 10 satır sonraki veriyi getirir
+db.people.find().limit(5).skip(10);
 
 
-21-db.createCollection("people", {
+21- yeni tablo oluşturma!
+
+db.createCollection("people", {
    validator: {
       $jsonSchema: {
          bsonType: "object",
