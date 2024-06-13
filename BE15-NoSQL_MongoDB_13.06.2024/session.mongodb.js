@@ -38,6 +38,37 @@
 	// db.coll.insertOne( { new_values } )
 	// db.coll.insertMany( [ { new_values } ] )
 	db.coll.insertOne({ firstName: 'Test', lastName: 'Test', age: 10 })
+	db.coll.insertMany([ // in array[]  - add this without comment
+		{ firstName: 'Test1', lastName: 'Test1', age: 11 },
+		{ firstName: 'Test2', lastName: 'Test2', age: 12 },
+		{ firstName: 'Test3', lastName: 'Test3', age: 13 },
+		{ firstName: 'Test4', lastName: 'Test4', age: 14 },
+		{ firstName: 'Test5', lastName: 'Test5', age: 15 },
+		{ firstName: 'Test6', lastName: 'Test6', age: 16 },
+		{ firstName: 'Test7', lastName: 'Test7', age: 17 },
+		{ firstName: 'Test8', lastName: 'Test8', age: 18 },
+		{ firstName: 'Test9', lastName: 'Test9', age: 19 },
+		{ firstName: 'Test', lastName: 'Test', age: 10 },
+		{ firstName: 'Test1', lastName: 'Test1', age: 11 },
+		{ firstName: 'Test2', lastName: 'Test2', age: 12 },
+		{ firstName: 'Test3', lastName: 'Test3', age: 13 },
+		{ firstName: 'Test4', lastName: 'Test4', age: 14 },
+		{ firstName: 'Test5', lastName: 'Test5', age: 15 },
+		{ firstName: 'Test6', lastName: 'Test6', age: 16 },
+		{ firstName: 'Test7', lastName: 'Test7', age: 17 },
+		{ firstName: 'Test8', lastName: 'Test8', age: 18 },
+		{ firstName: 'Test9', lastName: 'Test9', age: 19 },
+		{ firstName: 'Test', lastName: 'Test', age: 10 },
+		{ firstName: 'Test1', lastName: 'Test1', age: 11 },
+		{ firstName: 'Test2', lastName: 'Test2', age: 12 },
+		{ firstName: 'Test3', lastName: 'Test3', age: 13 },
+		{ firstName: 'Test4', lastName: 'Test4', age: 14 },
+		{ firstName: 'Test5', lastName: 'Test5', age: 15 },
+		{ firstName: 'Test6', lastName: 'Test6', age: 16 },
+		{ firstName: 'Test7', lastName: 'Test7', age: 17 },
+		{ firstName: 'Test8', lastName: 'Test8', age: 18 },
+		{ firstName: 'Test9', lastName: 'Test9', age: 19 },
+	])
 	db.coll.insertMany([
 		{ firstName: 'Test1', lastName: 'Test1', age: 11 },
 		{ firstName: 'Test2', lastName: 'Test2', age: 12 },
