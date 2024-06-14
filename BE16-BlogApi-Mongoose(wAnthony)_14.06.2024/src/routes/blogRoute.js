@@ -9,12 +9,15 @@ router
   .get(BlogPostController.list)
   .post(BlogPostController.create);
 router
+  .route("/post/many")
+  .post(BlogPostController.createMany)
+  .delete(BlogPostController.deleteMany);  
+router
   .route("/post/:id")
   .get(BlogPostController.read)
   .put(BlogPostController.update)
-  .delete(BlogPostController.delete)
+  .delete(BlogPostController.delete);
 
 
-router.route("/post/createMany").post(BlogPostController.createMany);
 
 module.exports = router;
