@@ -53,3 +53,14 @@ const blogPostSchema = new mongoose.Schema({
         collection: 'blogsPosts',
         timestamps: true,
     })
+
+    // const BlogPostModel = mongoose.model('BlogPost', blogPostSchema)
+    // module.exports = {
+    //     BlogPost: BlogPostModel
+    // }
+    //^daha kısa yazılışı:
+    module.exports = {
+        BlogPost: mongoose.model('BlogPost', blogPostSchema)
+    }
+
+    
