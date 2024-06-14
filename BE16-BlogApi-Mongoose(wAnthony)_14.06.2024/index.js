@@ -16,7 +16,7 @@ app.all('/', (req, res) => {
 })
 
 // Route
-app.use('blog', require('./src/routes/blogRoute'))
+app.use('/blog', require('./src/routes/blogRoute'))
 
 // errorHandler:
 app.use(require('./src/middlewares/errorHandler'))
