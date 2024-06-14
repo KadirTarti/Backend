@@ -59,8 +59,8 @@ const blogPostSchema = new mongoose.Schema({
     //     BlogPost: BlogPostModel
     // }
     //^daha kısa yazılışı:
+    
     module.exports = {
         BlogPost: mongoose.model('BlogPost', blogPostSchema)
     }
 
-    
