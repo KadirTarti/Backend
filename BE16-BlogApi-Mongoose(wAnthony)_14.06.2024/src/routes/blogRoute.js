@@ -8,4 +8,4 @@ router.route('/post')
     .get(BlogPostController.list)
     .post(BlogPostController.create)
 
-
+module.exports = router
