@@ -41,9 +41,22 @@ app.listen(8000, function(){
 })
 
 
-// app.use('/', (req, res)=>{       // bununla hepsini çağırabiliyoruz. GET, PUT, DELETE vs
+// app.use('/', (req, res)=>{       // use ile  hepsini çağırabiliyoruz. GET, PUT, DELETE vs
 //     res.send('Hello')   
 // })
+
+//app.use() 'da özelden genele okuma yapar
+
+app.use('/products', (req, res)=>{       
+    if(req.method == 'GET') {
+        res.send('Hello GET PRODUCTS')
+    }   else if (req.method == 'POST'){
+        res.send('Hello POST')
+    } else {
+        res.send('req is not GET or POST')
+    }
+})
+
 
 app.use('/', (req, res)=>{       // bununla hepsini çağırabiliyoruz. GET, PUT, DELETE vs
     if(req.method == 'GET') {
@@ -54,3 +67,5 @@ app.use('/', (req, res)=>{       // bununla hepsini çağırabiliyoruz. GET, PUT
         res.send('req is not GET or POST')
     }
 })
+
+
