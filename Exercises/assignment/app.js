@@ -36,9 +36,9 @@ server.listen(3000)
 const express = require('express')
 const app = express()
 
-app.listen(8000, function(){
-    console.log('server is running')
-})
+// app.listen(8000, function(){
+//     console.log('server is running')
+// })
 
 
 // app.use('/', (req, res)=>{       // use ile  hepsini çağırabiliyoruz. GET, PUT, DELETE vs
@@ -47,25 +47,25 @@ app.listen(8000, function(){
 
 //app.use() 'da özelden genele okuma yapar
 
-app.use('/products', (req, res)=>{       
-    if(req.method == 'GET') {
-        res.send('Hello GET PRODUCTS')
-    }   else if (req.method == 'POST'){
-        res.send('Hello POST')
-    } else {
-        res.send('req is not GET or POST')
-    }
-})
+// app.use('/products', (req, res)=>{       
+//     if(req.method == 'GET') {
+//         res.send('Hello GET PRODUCTS')
+//     }   else if (req.method == 'POST'){
+//         res.send('Hello POST')
+//     } else {
+//         res.send('req is not GET or POST')
+//     }
+// })
 
 
-app.use('/', (req, res)=>{       // bununla hepsini çağırabiliyoruz. GET, PUT, DELETE vs
-    if(req.method == 'GET') {
-        res.send('Hello GET')
-    }   else if (req.method == 'POST'){
-        res.send('Hello POST')
-    } else {
-        res.send('req is not GET or POST')
-    }
-})
+// app.use('/', (req, res)=>{       // bununla hepsini çağırabiliyoruz. GET, PUT, DELETE vs
+//     if(req.method == 'GET') {
+//         res.send('Hello GET')
+//     }   else if (req.method == 'POST'){
+//         res.send('Hello POST')
+//     } else {
+//         res.send('req is not GET or POST')
+//     }
+// })
 
 
