@@ -8,8 +8,14 @@ const http=require('node:http')
 //^ const http=require('http')
 
 
-const routeHandler = () => {
-
+const routeHandler = (req, res) => {
+if (req.url == '/') {
+    res.write('Welcome to MyPage');
+    res.end()
+} else {
+    res.write('Page can not found');
+    res.end()
+}
 }
 
 //server kurulum
