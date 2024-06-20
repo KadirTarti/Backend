@@ -30,3 +30,27 @@ const server = http.createServer(routeHandler)
 
 //server ayağa kaldırma
 server.listen(3000)
+
+
+
+const express = require('express')
+const app = express()
+
+app.listen(8000, function(){
+    console.log('server is running')
+})
+
+
+// app.use('/', (req, res)=>{       // bununla hepsini çağırabiliyoruz. GET, PUT, DELETE vs
+//     res.send('Hello')   
+// })
+
+app.use('/', (req, res)=>{       // bununla hepsini çağırabiliyoruz. GET, PUT, DELETE vs
+    if(req.method == 'GET') {
+        res.send('Hello GET')
+    }   else if (req.method == 'POST'){
+        res.send('Hello POST')
+    } else {
+        res.send('req is not GET or POST')
+    }
+})
