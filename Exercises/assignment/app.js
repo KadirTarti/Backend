@@ -9,6 +9,8 @@ const http=require('node:http')
 
 
 const routeHandler = (req, res) => {
+    console.log(req.url)
+    console.log(req.method)
 if (req.url == '/') {
     res.write('Welcome to MyPage');
     res.end()
