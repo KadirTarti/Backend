@@ -7,8 +7,6 @@ const app=express()
 require("express-async-errors")
 
 require('dotenv').config()
-
-
 const PORT=process.env?.PORT ||8000
 const HOST=process.env?.HOST ||'127.0.0.1'
 
@@ -20,5 +18,12 @@ app.use('/', (req,res)=>{   // use verilen pathe eklenen şeyleri de kontrol ede
     res.send('Welcome to my API - TODO APP')
 })
 
+//! json router'dan önce gelmeli. YERİ ÖNEMLİ
+// json to obj  and obj to json 
+app.use(express.json())
 
-app.listen(PORT,()=>console.log('server runned on localhost') )
+app.use(require('./src/routers/todoRouter'))
+
+app.use(require('./src/middlewares/errorHandler') )
+
+app.listen(PORT,()=>console.log(`server runned http://${HOST}:${PORT}`))
