@@ -10,7 +10,7 @@ const express = require('express')
 const app = express()
 
 //catch async-error  
-require("express-async-error")
+require("express-async-errors")
 
 require('dotenv').config()
 const PORT=process.env?.PORT ||  8000
