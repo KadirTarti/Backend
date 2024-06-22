@@ -5,14 +5,6 @@ require("express-async-errors");
 const { BookPost } = require("../models/bookModel");
 
 module.exports.BookPostController = {
-  list: async (req, res) => {
-    const data = await BlogPost.find({ _id: true });
-
-    res.status(200).send({
-      error: false,
-      blogs: data,
-    });
-  },
   create: async (req, res) => {
     const data = await BlogPost.create(req.body);
 
@@ -50,37 +42,4 @@ module.exports.BookPostController = {
       });
     }
   },
-  deleteMany: async (req, res) => {
-    const data = await Bookpost.deleteMany(); //* optionda ekleyebilirsiniz.
-    res.status(200).send({
-      error: false,
-      message: "All blog posts deleted successfully",
-    });
-  },
-  createMany: async (req, res) => {
-    const data = await BlogPost.insertMany(req.body.blogs);
-    // {
-    //         "blogs": [
-    //     {
-    //       "title": "Blog Title 7",
-    //       "content": "Blog Content 7",
-    //       "published": false
-    //     },
-    //     {
-    //       "title": "Blog Title 8",
-    //       "content": "Blog Content 8",
-    //       "published": false
-    //     },
-    //     {
-    //       "title": "Blog Title 9",
-    //       "content": "Blog Content 9",
-    //       "published": false
-    //     }
-    //   ]
-    // }
-    res.status(201).send({
-        error: false,
-        blog: data,
-      });
-    },
 };

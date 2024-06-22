@@ -7,7 +7,8 @@ const app=express()
 require("express-async-errors")
 
 require('dotenv').config()
-const PORT = process.env.PORT;
+const PORT=process.env?.PORT ||  8000
+const HOST=process.env?.HOST || '127.0.0.1'
 
 //! json router'dan önce gelmeli. YERİ ÖNEMLİ
 // json to obj  and obj to json 
@@ -27,4 +28,4 @@ app.use('/book', require('./src/routes/bookRoute'))
 
 app.use(require('./src/middlewares/errorHandler') )
 
-app.listen(PORT, () => console.log('Running: http://127.0.0.1:' + PORT))
+app.listen(PORT,()=>console.log(`server runned http://${HOST}:${PORT}`))
