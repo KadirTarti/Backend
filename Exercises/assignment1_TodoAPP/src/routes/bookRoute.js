@@ -11,7 +11,7 @@ router
 
 router
     .route('/books/:id')
-    .get(book.get)
+    .get(book.list)
     .put(book.update)
     .delete(book.delete)
 
