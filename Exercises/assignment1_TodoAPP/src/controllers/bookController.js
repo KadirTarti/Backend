@@ -2,44 +2,55 @@
 
 require("express-async-errors");
 
-const { BookPost } = require("../models/bookModel");
 
-module.exports.BookPostController = {
+const Book = require('../models/bookModel')
+
+
+module.exports = {
   create: async (req, res) => {
-    const data = await BlogPost.create(req.body);
+    const data = await Book.create(req.body);
 
     res.status(201).send({
       error: false,
-      blogs: data,
+      books: data,
     });
   },
+  list: async (req,res)=>{
+
+    const data=  await Book.findAndCountAll()
+    //res.sendStatus(200)
+    res.status(200).send({
+        error:false,
+        books:data    
+    })
+  },
   read: async (req, res) => {
-    const data = await BlogPost.findOne({ _id: req.params.id });
+    const data = await Book.findOne({ _id: req.params.id });
 
     res.status(200).send({
       error: false,
-      blogs: data,
+      books: data,
     });
   },
   update: async (req, res) => {
-    const data = await BlogPost.updateOne({ _id: req.params.id }, req.body);
+    const data = await Book.updateOne({ _id: req.params.id }, req.body);
 
     res.status(202).send({
       error: false,
-      blogs: data,
-      newData: await BookPost.findOne({ _id: req.params.id }),
+      books: data,
+      newData: await Book.findOne({ _id: req.params.id }),
     });
   },
   delete: async (req, res) => {
-    const data = await BookPost.deleteOne({ _id: req.params.id });
-    console.log(data);
-    if (data.deletedCount) {
-      res.sendStatus(204);
-    } else {
-      res.status(404).send({
-        error: true,
-        message: "Book post can not found",
-      });
-    }
+    const data=  await Book.destroy({where:{id:req.params.id}})
+        if(data==1) {          
+                res.status(201).send({
+                    error:false,
+                    data
+                })
+        } else {
+            res.status(404)
+            throw new Error('Not found Book to delete')
+        }
   },
 };

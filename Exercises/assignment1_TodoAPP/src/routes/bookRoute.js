@@ -2,23 +2,18 @@
 
 const router = require('express').Router()
 
-const { BookPostController } = require('../controllers/bookController')
+const book=require('../controllers/bookController')
 
 router
-    .route('/post')
-    .get(BookPostController.list)
-    .post(BookPostController.create);
+    .route('/books')
+    .get(book.list)
+    .post(book.create);
 
 router
-    .route('/post/many')
-    .post(BookPostController.createMany)
-    .delete(BookPostController.deleteMany);
-
-router
-    .route('/post/:id')
-    .get(BookPostController.read)
-    .put(BookPostController.update)
-    .delete(BookPostController.delete)
+    .route('/books/:id')
+    .get(book.get)
+    .put(book.update)
+    .delete(book.delete)
 
     
 module.exports = router;

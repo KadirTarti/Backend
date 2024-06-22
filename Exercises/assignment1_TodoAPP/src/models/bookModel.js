@@ -1,9 +1,8 @@
 // Book Models
 
-const mongoose = require('mongoose')
+const {sequelize,DataTypes}=require('../configs/connectDB')
+const Book=sequelize.define('books',{
 
-const bookPostSchema = new mongoose.Schema(
-    {
         title: {
             type: String,
             trim: true,
@@ -47,6 +46,4 @@ const bookPostSchema = new mongoose.Schema(
 )
 
 
-module.exports = {
-    BookPost: mongoose.model("BookPost", bookPostSchema),
-  };
+module.exports= Book
