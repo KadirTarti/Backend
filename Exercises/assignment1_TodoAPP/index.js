@@ -26,4 +26,4 @@ app.use(require('./src/routers/todoRouter'))
 
 app.use(require('./src/middlewares/errorHandler') )
 
-app.listen(PORT,()=>console.log(`server runned http://${HOST}:${PORT}`))
+app.listen(PORT,()=>console.log('server runned on localhost') )
