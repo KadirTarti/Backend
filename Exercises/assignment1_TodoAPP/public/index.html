@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <title>Kütüphane Yönetim Sistemi</title>
+</head>
+<body>
+    <h1>Kütüphane Yönetim Sistemi</h1>
+    <button onclick="fetchBooks()">Kitapları Görüntüle</button>
+    <div id="books"></div>
+
+    <script>
+        function fetchBooks() {
+            fetch('http://localhost:8000/api/books')
+               .then(response => response.json())
+               .then(data => displayBooks(data))
+               .catch(error => console.error('Error:', error));
+        }
+
+        function displayBooks(books) {
+            let booksDiv = document.getElementById('books');
+            books.forEach(book => {
+                let bookElement = document.createElement('div');
+                bookElement.innerHTML = `
+                    <h2>${book.title}</h2>
+                    <p>Yazar: ${book.author}</p>
+                    <img src="${book.image}" alt="Kitap Resmi">
+                `;
+                booksDiv.appendChild(bookElement);
+            });
+        }
+    </script>
+</body>
+</html>
