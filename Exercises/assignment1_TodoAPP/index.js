@@ -22,7 +22,7 @@ app.use('/', (req,res)=>{   // use verilen pathe eklenen şeyleri de kontrol ede
 // json to obj  and obj to json 
 app.use(express.json())
 
-app.use(require('./src/routers/todoRouter'))
+app.use(require('./src/routes/bookRoute'))
 
 app.use(require('./src/middlewares/errorHandler') )
 
