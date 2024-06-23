@@ -1,7 +1,7 @@
 // Book Models
 
 const {sequelize,DataTypes}=require('../configs/connectDB')
-const Book=sequelize.define('books',{
+const Book=sequelize.define('book',{
 
         title: {
             type: String,

@@ -12,7 +12,10 @@ let sequelize;
 
 if (DB == "SQLITE") {
   //SQLITE
-  sequelize = new Sequelize("sqlite:./datab.sqlite3");
+  sequelize = new Sequelize("sqlite:./datab.sqlite3", "username", "password", {
+    host: process.env.DB,
+    dialect: 'postgres',
+  });
 } else {
   //POSTGRE
   // npm install --save pg pg-hstore
