@@ -1,42 +1,40 @@
 //* MongoDb connection
 
-
-const { Sequelize, DataTypes } = require("sequelize");
-
-
-
-// const HOST=process.env?.HOST || '127.0.0.1'
-
 require("dotenv").config();
-const PSW = process.env?.PSW;
+
+const { Sequelize } = require("sequelize");
+
+const PSW = process.env.PSW;
 const DB = process.env.DB;
-let sequelize;
 
-
-const HOST = process.env?.HOST || '127.0.0.1'
-const PORT = process.env?.PORT || 5000
-
-if (DB == "SQLITE") {
-  //SQLITE
-  sequelize = new Sequelize(
-    `postgres://abdulkadir1:1234@localhost:5432/BookAPI`,
-    {
-      dialect: 'postgres'
-    }
-  );
-} else {
-  //POSTGRE
-  // npm install --save pg pg-hstore
-  // const sequelize= new Sequelize (`postgres://abdulkadir1:${PSW}@localhost:5432/todoapp`)
-
-  sequelize = new Sequelize(
-    `postgres://abdulkadir1:1234@localhost:5432/BookAPI`
-  );
-}
+// SQLite3 için Sequelize yapılandırması
+const sequelize = new Sequelize(DB, PSW, {
+  dialect: 'sqlite',
+  storage: './bookDB.sqlite3' // SQLite3 dosya yolunu buraya girin
+});
 
 sequelize
-  .authenticate() // connect to db
-  .then(() => console.log("BooKAPI DB connected"))
-  .catch(() => console.log("BooKAPI DB NOT connected"));
+ .authenticate()
+ .then(() => console.log("BooKAPI DB connected"))
+ .catch(err => console.error("BooKAPI DB NOT connected", err));
 
-module.exports = { sequelize, DataTypes };
+module.exports = { sequelize, Sequelize };
+
+
+// if (DB == "SQLITE") {
+//   //SQLITE
+//   sequelize = new Sequelize(
+//     `postgres://${process.env.USERNAME}:${process.env.PSW}@${process.env.HOST}:${process.env.PORT}/${process.env.DB}`,
+//     {
+//       dialect: 'postgres'
+//     }
+//   );
+// } else {
+//   //POSTGRE
+//   // npm install --save pg pg-hstore
+//   // const sequelize= new Sequelize (`postgres://abdulkadir1:${PSW}@localhost:5432/todoapp`)
+
+//   sequelize = new Sequelize(
+//     `postgres://abdulkadir1:${PSW}@${HOST}/BookAPI`
+//   );
+// }
