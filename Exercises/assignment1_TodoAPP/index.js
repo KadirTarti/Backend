@@ -45,7 +45,7 @@ app.use('/', (req,res)=>{   // use verilen pathe eklenen şeyleri de kontrol ede
 
 
 
-app.use('/book', require('./src/routes/bookRoute'))
+// app.use('/book', require('./src/routes/bookRoute'))
 
 app.use(require('./src/middlewares/errorHandler') )
 
