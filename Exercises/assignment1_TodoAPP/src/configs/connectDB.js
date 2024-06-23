@@ -3,12 +3,16 @@
 
 const { Sequelize, DataTypes } = require("sequelize");
 
-const HOST=process.env?.HOST || '127.0.0.1'
+// const HOST=process.env?.HOST || '127.0.0.1'
 
 require("dotenv").config();
 const PSW = process.env?.PSW;
 const DB = process.env.DB;
 let sequelize;
+
+
+const HOST = process.env?.HOST || '127.0.0.1'
+const PORT = process.env?.PORT || 8000
 
 if (DB == "SQLITE") {
   //SQLITE
@@ -22,7 +26,7 @@ if (DB == "SQLITE") {
   // const sequelize= new Sequelize (`postgres://abdulkadir1:${PSW}@localhost:5432/todoapp`)
 
   sequelize = new Sequelize(
-    `postgres://abdulkadir2:${PSW}@${HOST}:5432/todoapp`
+    `postgres://abdulkadir1:1234@localhost:5432/BookAPI`
   );
 }
 

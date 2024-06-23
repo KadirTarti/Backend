@@ -5,12 +5,12 @@ const app=express()
 const cors = require('cors')
 
 const { Pool } = require('pg');
-const pool = new Pool({
-     port:process.env?.PORT ||  8000,
-     host:process.env?.HOST || '127.0.0.1',
-     password: process.env?.PSW,
-     database: process.env?.DB
-})
+// const pool = new Pool({
+//      port:process.env?.PORT ||  8000,
+//      host:process.env?.HOST || '127.0.0.1',
+//      password: process.env?.PSW,
+//      database: process.env?.DB
+// })
 
 //catch async-error  
 require("express-async-errors")
@@ -39,4 +39,4 @@ app.use('/book', require('./src/routes/bookRoute'))
 
 app.use(require('./src/middlewares/errorHandler') )
 
-app.listen(PORT,()=>console.log(`server runned http://${HOST}:${PORT}`))
+app.listen(PORT,()=>console.log(`server runned`))
