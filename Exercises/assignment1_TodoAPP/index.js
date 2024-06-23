@@ -3,6 +3,8 @@
 const express=require('express')
 const app=express()
 
+const mongoose = require('mongoose')
+
 //catch async-error  
 require("express-async-errors")
 
