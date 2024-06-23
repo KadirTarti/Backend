@@ -3,6 +3,8 @@
 
 const { Sequelize, DataTypes } = require("sequelize");
 
+
+
 // const HOST=process.env?.HOST || '127.0.0.1'
 
 require("dotenv").config();
@@ -12,14 +14,16 @@ let sequelize;
 
 
 const HOST = process.env?.HOST || '127.0.0.1'
-const PORT = process.env?.PORT || 8000
+const PORT = process.env?.PORT || 5000
 
 if (DB == "SQLITE") {
   //SQLITE
-  sequelize = new Sequelize("sqlite:./datab.sqlite3", "username", "password", {
-    host: process.env.DB,
-    dialect: 'postgres',
-  });
+  sequelize = new Sequelize(
+    `postgres://abdulkadir1:1234@localhost:5432/BookAPI`,
+    {
+      dialect: 'postgres'
+    }
+  );
 } else {
   //POSTGRE
   // npm install --save pg pg-hstore

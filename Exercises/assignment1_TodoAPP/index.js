@@ -6,7 +6,7 @@ const cors = require('cors')
 
 const { Pool } = require('pg');
 // const pool = new Pool({
-//      port:process.env?.PORT ||  8000,
+//      port:process.env?.PORT ||  5000,
 //      host:process.env?.HOST || '127.0.0.1',
 //      password: process.env?.PSW,
 //      database: process.env?.DB
@@ -18,7 +18,7 @@ require("express-async-errors")
 require('dotenv').config()
 
 
-const PORT = process.env?.PORT || 8000
+const PORT = process.env?.PORT || 5000
 
 //! json router'dan önce gelmeli. YERİ ÖNEMLİ
 // json to obj  and obj to json 

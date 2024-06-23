@@ -11,7 +11,7 @@
 
     <script>
         function fetchBooks() {
-            fetch('http://localhost:8000/api/books')
+            fetch('http://localhost:5000/api/books')
                .then(response => response.json())
                .then(data => displayBooks(data))
                .catch(error => console.error('Error:', error));
