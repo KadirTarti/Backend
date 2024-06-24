@@ -53,7 +53,7 @@ module.exports.BlogCategoryController = {
 
 module.exports.BlogPostController = {
   list: async (req, res) => {
-    const data = await BlogPost.find({ published: true });
+    const data = await BlogPost.find({ published: true }).populate('blogCategoryId', 'name -_id')
 
     res.status(200).send({
       error: false,
