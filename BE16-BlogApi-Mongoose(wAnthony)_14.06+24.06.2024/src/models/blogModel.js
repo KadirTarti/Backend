@@ -35,9 +35,26 @@ const mongoose = require("mongoose");
 //   }
 // );
 
+const blogCategorySchema = new mongoose.Schema({
+  name : {
+    type: String,
+    trim:true,
+    required: true,
+    unique: true
+  }
+},{
+  collection:"blogCategory",
+  timestamps: true
+})
+
 const blogPostSchema = new mongoose.Schema(
   {
     // _id
+    blogCategoryId: {
+      type: mongoose.Schema.Types.ObjectId, //ForeingKey, relationalId
+      required: true,
+      ref: "BlogCategory",
+    },
     title: {
       type: String,
       trim: true,
@@ -69,4 +86,5 @@ const blogPostSchema = new mongoose.Schema(
 
 module.exports = {
   BlogPost: mongoose.model("BlogPost", blogPostSchema),
+  BlogCategory : mongoose.model("BlogCategory",blogCategorySchema)
 };
