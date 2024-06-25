@@ -12,7 +12,7 @@ app.all("/", (req, res) => {
 });
 
 // // ROUTER
-// app.use(require('./src/routers/contactRouter'))
+app.use(require('./src/routers/bookRoute'))
 
 // // errorHandler rootların bittiği yerde  tanımlanmalı
 // app.use(require('./src/middlewares/errorHandler'))

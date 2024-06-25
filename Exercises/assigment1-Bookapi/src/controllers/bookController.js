@@ -32,25 +32,18 @@ module.exports = {
     //^ alttaki uzun kod üstteki create komutu ile aynı işi yapıyor!
 
     //! eski tip klasik sql sorgusu:
-    const { firstName, lastName, email, phone, address } = req.body;
+    const { title, image, author, ISBN, genre, publicationYear } = req.body;
     const data = await sequelize.query(
       "INSERT INTO contacts (firstName, lastName, email, phone, address, createdAt, updatedAt, isActive) VALUES (?,?,?,?,?,?,?,?)",
       {
         replacements: [
-          firstName,
-          lastName,
-          email,
-          phone,
-          address,
-          new Date(),
-          new Date(),
-          isActive || true,
+          title, image, author, ISBN, genre, publicationYear
         ],
       }
     );
     res.status(201).send({
       error: false,
-      contact: data,
+      book: data,
     });
   },
   get: async (req, res) => {},
