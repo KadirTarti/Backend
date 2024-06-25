@@ -3,6 +3,7 @@
 const router = require("express").Router();
 
 const { BlogPostController,BlogCategoryController } = require("../controllers/blogController");
+const isAuth=require('../middlewares/isAuth')
 
 //! base route => /blog
 //*category
@@ -29,7 +30,7 @@ router
   .route("/post/:id")
   .get(BlogPostController.read)
   .put(BlogPostController.update)
-  .delete(BlogPostController.delete);
+  .delete(isAuth, BlogPostController.delete);
 
 
 
