@@ -50,9 +50,20 @@ module.exports = {
     if(email && password){
       const user = await User.findOne({email});
       if (user) {
-        console.log('db:', user.password)
-        console.log('user:', passwordEncrpyt(password))
+        // console.log('db:', user.password)
+        // console.log('user:', passwordEncrpyt(password))
         if (user.password == passwordEncrpyt(password)) {
+
+
+          //& session
+          // req.session = {
+          //   email: user.email,
+          //   password: user.password
+          // }
+          req.session.email = user.email
+          req.session.password = user.password
+          req.session.id = user._id
+
           res.status(200).send({
             error:false,
             message:'login ok!',

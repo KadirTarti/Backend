@@ -19,9 +19,16 @@ app.use(session({
 }))
 
 // HomePage:
+// app.all('/', (req, res) => {
+//     res.send("<h1 style='text-align:center;margin-top:150px'>WELCOME TO BLOG API</h1>");
+// })
 app.all('/', (req, res) => {
-    res.send("<h1 style='text-align:center;margin-top:150px'>WELCOME TO BLOG API</h1>");
+    res.send({
+        message: 'Welcome to BlogApi',
+        session: req.session
+    });
 })
+
 
 app.use("/blog", require("./src/routes/blogRoute"))
 app.use("/user",require("./src/routes/userRoute"))
