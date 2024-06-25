@@ -8,6 +8,21 @@ const PSW = process.env.PSW;
 const DB = process.env.DB;
 const USERNAME =process.env.USERNAME
 const HOST = process.env.HOST
+const PORT = process.env.PORT
+
+const {Client} = require('pg')
+
+const client = new Client({user:USERNAME, host:HOST, database:DB, password: PSW, port: PORT})
+
+client.connect().then(()=>{console.log('connected to PostgreSQL')})
+.catch((err)=>{console.error('error connecting to the database')})
+
+const {Pool} = require('pg')
+const pool = new Pool({user:USERNAME, host:HOST, database: DB, password:PSW, port:PORT, max: 20, idleTimeoutMillis: 30000, closed});
+pool.query('SELECT * FROM bbokapi  ')
+
+
+
 
 // SQLite3 için Sequelize yapılandırması
 const sequelize = new Sequelize(DB, USERNAME, PSW, {
