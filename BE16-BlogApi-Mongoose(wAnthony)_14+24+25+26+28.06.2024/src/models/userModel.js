@@ -18,7 +18,7 @@ const mongoose = require("mongoose");
 // passwordEncrpyt("123456")
 // passwordEncrpyt("1234576")
 //* bu işlemi daha temiz olması açısından ayrı bir dosyaya taşıdık
-const passwordEncrpyt = require("../helpers/passwordEncrpyt")
+const passwordEncrpyt = require("../helpers/passwordEncrypt")
 
 const UserSchema = new mongoose.Schema(
   {
