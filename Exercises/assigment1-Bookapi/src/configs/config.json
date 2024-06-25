@@ -1,0 +1,9 @@
+{
+    "development": {
+      "username": "abdulkadir",
+      "password": "1234",
+      "database": "db.sqlite3",
+      "host": "127.0.0.1",
+      "dialect": "postgres"
+    }
+  }
