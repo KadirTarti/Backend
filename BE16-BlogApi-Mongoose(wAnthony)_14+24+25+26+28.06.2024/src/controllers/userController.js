@@ -46,7 +46,7 @@ module.exports = {
     }
   },
   login: async (req, res) => {
-    const {email, password} = req.body;
+    const {email, password, remeindMe} = req.body;
     if(email && password){
       const user = await User.findOne({email});
       if (user) {
@@ -63,7 +63,12 @@ module.exports = {
           req.session.email = user.email
           req.session.password = user.password
           req.session.id = user._id
-
+          
+          if(remindMe) {
+            req.session.remindMe = remindMe
+            //* sessionu cookieye çeviriyoruz. Verdiğimiz süre kadar erişim sağlanır
+            req.sessionOptions.maxAge = 1000 * 60 * 60 * 24 * 3;
+          }
           res.status(200).send({
             error:false,
             message:'login ok!',
