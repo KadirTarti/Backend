@@ -3,9 +3,10 @@
 const { Sequelize } = require('sequelize');
 
 const sequelize = new Sequelize('db.sqlite3', 'abdulkadir', '1234', {
-  host: '127.0.0.1',
+  host: 'http://127.0.0.1:8000',
   dialect: 'postgres',
 });
+
 
 (async () => {
     try {
@@ -15,11 +16,5 @@ const sequelize = new Sequelize('db.sqlite3', 'abdulkadir', '1234', {
         console.error('Unable to connect to the database:', error);
       }
 })();
-
-
-
-
-
-
 
   module.exports = {sequelize}

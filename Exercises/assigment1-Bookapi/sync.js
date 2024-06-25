@@ -1,15 +1,6 @@
 const sequelize = require('./src/configs/db');
-const Book = require('./src/models/bookModel');
+const db = require('./src/configs/db'); // db.js dosyasını içe aktarın
 
-const syncDatabase = async () => {
-  try {
-    await sequelize.sync({ force: true }); // Use force: true for development, but be cautious as it will drop tables
-    console.log('Database synchronized');
-    process.exit(0);
-  } catch (error) {
-    console.error('Unable to synchronize the database:', error);
-    process.exit(1);
-  }
-};
-
-syncDatabase();
+db.sequelize.sync({ force: true })
+ .then(() => console.log('Veritabanı başarıyla senkronize edildi'))
+ .catch(err => console.error('Senkronizasyon sırasında bir hata oluştu:', err));
