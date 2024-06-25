@@ -8,6 +8,16 @@ const PORT = process.env.PORT;
 
 app.use(express.json());
 require("./src/configs/dbConnection")
+
+
+const session =  require('cookie-session')
+
+app.use(session({
+    secret: process.env.SECRET_KEY,
+    // maxAge: 1000 * 60 * 60 * 24 * 3 // miliseconds -->   3 days
+    // maxAge: 3600000 // 1 hour
+}))
+
 // HomePage:
 app.all('/', (req, res) => {
     res.send("<h1 style='text-align:center;margin-top:150px'>WELCOME TO BLOG API</h1>");
