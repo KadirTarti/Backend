@@ -43,6 +43,34 @@ module.exports = {
       })
     }
   },
-  
+  login: async (req, res) => {
+    const {email, password} = req.body;
+    if(email && password){
+      const user = await User.findOne({email});
+      if (user) {
+        if (user.password == password) {
+          res.status(200).send({
+            error:false,
+            message:'login ok!',
+            user
+          })
+        } else {
+          res.errorStatusCode = 401;
+          throw new Error ('Login parameters are not true')
+        }
+      } else {
+        res.errorStatusCode = 401;
+        throw new Error ('User not found!')
+      }
+
+    } else {
+      res.errorStatusCode = 401;
+      throw new Error('Email and password are required')
+
+    }
+  },
+  logout: (req, res) => {
+
+  }
 
 };
