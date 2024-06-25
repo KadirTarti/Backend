@@ -18,15 +18,27 @@ app.use(session({
     // maxAge: 3600000 // 1 hour
 }))
 
+
+
+//* user control
+app.use(require('./src/middlewares/userContrrol'))
+
+
 // HomePage:
 // app.all('/', (req, res) => {
 //     res.send("<h1 style='text-align:center;margin-top:150px'>WELCOME TO BLOG API</h1>");
 // })
 app.all('/', (req, res) => {
+    if(req.isLogin) {
     res.send({
         message: 'Welcome to BlogApi',
         session: req.session
     });
+}else {
+    res.send({
+        
+    })
+}
 })
 
 
