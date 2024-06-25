@@ -57,6 +57,8 @@ module.exports.BlogPostController = {
       "blogCategoryId",
       "name -_id"
     ); //* ilk parametre alanın adı. Eğer istemdğimiz alanlar varsa bunları belirtebiliriz. istedğimiz veya istemediğimiz alanları aralara boşluk koyarak ekleyebiliriz . İstemediğimiz alanların başına "-" koyarak bunları getirme diyebiliriz.
+    //! bu haliyle get isteği atıldığında blogCategoryId gösterilmiyor.
+
 
     res.status(200).send({
       error: false,
