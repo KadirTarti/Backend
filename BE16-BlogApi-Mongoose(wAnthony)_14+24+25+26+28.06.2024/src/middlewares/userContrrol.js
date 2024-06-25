@@ -13,4 +13,5 @@ module.exports = async (req, res, next) => {
                 req.isLogin = false
         }
     }
+    next()
 }

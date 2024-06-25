@@ -32,15 +32,16 @@ app.all('/', (req, res) => {
     if(req.isLogin) {
     res.send({
         message: 'Welcome to BlogApi',
-        session: req.session
+        session: req.session,
+        user: req.user
     });
 }else {
     res.send({
-        
+            message: 'Welcome to BlogApi',
+            session: req.session,
     })
 }
 })
-
 
 app.use("/blog", require("./src/routes/blogRoute"))
 app.use("/user",require("./src/routes/userRoute"))
