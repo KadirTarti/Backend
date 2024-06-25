@@ -63,8 +63,8 @@ module.exports = {
           req.session.email = user.email
           req.session.password = user.password
           req.session.id = user._id
-          
-          if(remindMe) {
+
+          if(remeindMe) {
             req.session.remindMe = remindMe
             //* sessionu cookieye çeviriyoruz. Verdiğimiz süre kadar erişim sağlanır
             req.sessionOptions.maxAge = 1000 * 60 * 60 * 24 * 3;
@@ -90,7 +90,11 @@ module.exports = {
     }
   },
   logout: (req, res) => {
-
+    req.session = null
+    res.status(200).send({
+      error: false,
+      message: 'Logout Ok!'
+    })
   }
 
 };
