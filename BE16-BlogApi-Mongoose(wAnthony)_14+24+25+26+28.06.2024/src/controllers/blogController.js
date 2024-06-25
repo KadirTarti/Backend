@@ -53,7 +53,10 @@ module.exports.BlogCategoryController = {
 
 module.exports.BlogPostController = {
   list: async (req, res) => {
-    const data = await BlogPost.find({ published: true }).populate('blogCategoryId', 'name -_id')
+    const data = await BlogPost.find({ published: true }).populate(
+      "blogCategoryId",
+      "name -_id"
+    ); //* ilk parametre alanın adı. Eğer istemdğimiz alanlar varsa bunları belirtebiliriz. istedğimiz veya istemediğimiz alanları aralara boşluk koyarak ekleyebiliriz . İstemediğimiz alanların başına "-" koyarak bunları getirme diyebiliriz.
 
     res.status(200).send({
       error: false,
@@ -71,8 +74,8 @@ module.exports.BlogPostController = {
   read: async (req, res) => {
     // const data = await BlogPost.findById(req.params.id); //* sadce id secenegini kabul eder.
     // const data = await BlogPost.findOne({published: false });
-    const data = await BlogPost.findOne({ _id: req.params.id }); //* diğer seçenekleri de kabul eder.
-
+    // const data = await BlogPost.findOne({ _id: req.params.id }); //* diğer seçenekleri de kabul eder.
+    const data = await BlogPost.findOne({ _id: req.params.id }).populate("blogCategoryId");
     res.status(200).send({
       error: false,
       blog: data,

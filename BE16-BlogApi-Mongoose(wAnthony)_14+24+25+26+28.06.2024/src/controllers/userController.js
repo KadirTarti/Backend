@@ -2,7 +2,7 @@ const User = require("../models/user.model");
 
 module.exports = {
   list: async (req, res) => {
-    const data = await User.find();
+    const data = await User.find().select("-password");
     res.status(200).send({
       error: false,
       users: data,

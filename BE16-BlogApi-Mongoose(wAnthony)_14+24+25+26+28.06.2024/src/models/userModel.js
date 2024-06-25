@@ -1,7 +1,5 @@
 const mongoose = require("mongoose");
 
-const passwordEncrypt = require('../helpers/passwordEncrypt')
-
 // const crypto = require('node:crypto')
 
 // const keyCode = process.env.SECRET_KEY
@@ -17,10 +15,10 @@ const passwordEncrypt = require('../helpers/passwordEncrypt')
 //     .toString("hex");
 // }
 
-// module.exports = passwordEncrpyt
-
-
-
+// passwordEncrpyt("123456")
+// passwordEncrpyt("1234576")
+//* bu işlemi daha temiz olması açısından ayrı bir dosyaya taşıdık
+const passwordEncrpyt = require("../helpers/passwordEncrpyt")
 
 const UserSchema = new mongoose.Schema(
   {
@@ -45,7 +43,9 @@ const UserSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
-      set: (password) => passwordEncrypt(password)
+      // set: (password) => "anthony",
+      set: (password) => passwordEncrpyt(password),//* set; db ye akydolurken veriyi işlemden geçirerk kaydolmasını sağlar
+      //! db ye şifre bilgileri güvenlik amaçlı doğrudan eklenmez. Hashlenmiş bir şekilde veritabanına eklenir.
     },
     firstName: String,
     lastName: String,
