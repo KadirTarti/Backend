@@ -1,5 +1,7 @@
 const User = require("../models/userModel");
 
+const passwordEncrpyt = require("../helpers/passwordEncrypt")
+
 module.exports = {
   list: async (req, res) => {
     const data = await User.find().select("-password");
@@ -48,7 +50,9 @@ module.exports = {
     if(email && password){
       const user = await User.findOne({email});
       if (user) {
-        if (user.password == password) {
+        console.log('db:', user.password)
+        console.log('user:', passwordEncrpyt(password))
+        if (user.password == passwordEncrpyt(password)) {
           res.status(200).send({
             error:false,
             message:'login ok!',
