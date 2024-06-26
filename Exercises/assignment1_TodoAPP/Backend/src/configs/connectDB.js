@@ -9,6 +9,6 @@ const mongoose = require("mongoose");
 // }
 
 mongoose
-    .connect(process.env.MONGODB)
+    .connect('mongodb://localhost:27017/BOOKAPI')
     .then(() => console.log("DB Connection"))
     .catch((err) => console.log(err));
