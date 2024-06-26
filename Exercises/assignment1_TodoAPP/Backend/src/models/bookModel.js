@@ -1,49 +1,42 @@
-// Book Models
+//* Book Models
+const mongoose = require("mongoose");
 
-const {sequelize,DataTypes}=require('../configs/connectDB')
-const Book=sequelize.define('book',{
-
+const bookPostSchema = new mongoose.Schema(
+    {
         title: {
             type: String,
             trim: true,
             required: true,
+            unique: true
         },
         author: {
             type: String,
-            trim: true,
-            required: true,
+            required: true
         },
-        ISBN : {
-            type: String,
-            trim: true,
+        ISBN: {
+            type: Number,
             required: true,
+            unique: true
         },
         genre: {
             type: String,
-            trim: true,
-            required: true,
         },
         publicationYear: {
             type: Number,
-            required: true,
+            required: true
         },
         image: {
-            type: String, // Assuming this will store the URL of the image
-            trim: true,
+            type: String,
             required: true,
+            unique: true
         },
-        createdAt: {
-            type: Date,
-            default: Date.now,
-        },
-        updatedAt: {
-            type: Date,
-            default: Date.now,
-        },
-
+    },
+    {
+        collection: "bookPosts",
+        timestamps: true,
     }
-
 )
 
-
-module.exports= Book
+module.exports = {
+    BookPost: mongoose.model("bookpost", bookPostSchema)
+}

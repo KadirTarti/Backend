@@ -14,7 +14,7 @@ const PORT = process.env.PORT || 8000
 //   };
   
 // herkesin erişimi için
-  app.use(cors(corsOptions));
+  app.use(cors());
 
 
 
