@@ -38,5 +38,5 @@ const bookPostSchema = new mongoose.Schema(
 )
 
 module.exports = {
-    BookPost: mongoose.model("bookposts", bookPostSchema)
+    BookPost: mongoose.model("bookpost", bookPostSchema)
 }

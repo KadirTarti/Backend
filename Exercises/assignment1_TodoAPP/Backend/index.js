@@ -25,8 +25,8 @@ require('./src/configs/connectDB')
 // app.use(express.json())
 
 
-app.use('/', (req,res)=>{   // use verilen pathe eklenen şeyleri de kontrol eder
-    res.send('Welcome to my API - BOOK APP')
+app.all('/', (req,res)=>{   // use verilen pathe eklenen şeyleri de kontrol eder
+  res.send('Welcome to my API - BOOK APP')
 })
 
 
