@@ -29,6 +29,10 @@ app.all('/', (req,res)=>{   // use verilen pathe eklenen şeyleri de kontrol ede
   res.send('Welcome to my API - BOOK APP')
 })
 
+app.get('/api', (req,res)=>{   // use verilen pathe eklenen şeyleri de kontrol eder
+  res.json("")
+})
+
 
 app.use('/books', require('./src/routes/bookRoute'))
 
