@@ -1,7 +1,7 @@
 // BookPost Controller
 
 require("express-async-errors");
-const { BookPost} = require('../models/bookModel')
+const { BookPost } = require('../models/bookModel')
 
 
 module.exports.BookPostController = {

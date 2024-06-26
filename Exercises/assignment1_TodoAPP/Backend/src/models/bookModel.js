@@ -32,11 +32,11 @@ const bookPostSchema = new mongoose.Schema(
         },
     },
     {
-        collection: "bookPosts",
+        collection: "bookposts",
         timestamps: true,
     }
 )
 
 module.exports = {
-    BookPost: mongoose.model("bookpost", bookPostSchema)
+    BookPost: mongoose.model("bookposts", bookPostSchema)
 }
