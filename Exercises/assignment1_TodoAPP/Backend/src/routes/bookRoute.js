@@ -1,19 +1,30 @@
-// book Route
+//* Book Route
 
-const router = require('express').Router()
+const router = require("express").Router()
 
-const book=require('../controllers/bookController')
-
-router
-    .route('/books')
-    .get(book.list)
-    .post(book.create);
+const { BookPostController } = require("../controllers/bookController")
 
 router
-    .route('/books/:id')
-    .get(book.list)
-    .put(book.update)
-    .delete(book.delete)
+    .route("/")
+    .get(BookPostController.list)
 
-    
+router
+    .get("/search", BookPostController.search)
+
+router
+    .route("/post")
+    .post(BookPostController.create)
+
+router
+    .route("/post/many")
+    .delete(BookPostController.deleteMany)
+
+router
+    .route("/post/:id")
+    .get(BookPostController.read)
+    .put(BookPostController.update)
+    .delete(BookPostController.delete)
+
+
+
 module.exports = router;

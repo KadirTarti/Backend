@@ -50,7 +50,7 @@ module.exports.BookPostController = {
   },
 
   update: async (req, res) => {
-    const data = await Book.findByIdAndUpdate({ _id: req.params.id }, req.body, {new: true} );
+    const data = await BookPost.findByIdAndUpdate({ _id: req.params.id }, req.body, {new: true} );
 
     res.status(202).send({
       error: false,
