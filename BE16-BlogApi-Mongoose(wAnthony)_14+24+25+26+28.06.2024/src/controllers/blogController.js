@@ -76,9 +76,13 @@ module.exports.BlogPostController = {
     }
     console.log('search2:' , search)
 
+    //! sorting
+
+    const sort = req.rquery?.sort ||{}
 
 
-    const data = await BlogPost.find({...filter, ...search}) //spread
+
+    const data = await BlogPost.find({...filter, ...search}).sort(sort)
 
     // const data = await BlogPost.find({ published: true }).populate(
     //   "blogCategoryId",
