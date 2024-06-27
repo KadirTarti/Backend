@@ -62,8 +62,32 @@ module.exports = (req,res,next) => {
          return await Model.find({ ...filter, ...search })
            .sort(sort)
            .limit(limit)
-           .skip(skip);
+           .skip(skip)
+           .populate(populate);
        }
-   
+
+       res.getModelListDetails = async (Model) => {
+        const data = await Model.find({...filter, ...search});
+
+        let details = {
+            filter,
+            search,
+            sort,
+            skip,
+            limit,
+            page,
+            pages: {
+                previous: (page > 0 ? page : false),
+                activePage: page + 1,
+                next: page + 2,
+                totalPage: Math.ceil(data.length / limit),
+            },
+            total: data.length,
+        };
+        details.pages.next = details.pages.next > details.pages.totalPage ? false : details.pages.next;
+        if(details.total <= limit) details.pages = false
+        return details;
+       }
+
        next()
    }
