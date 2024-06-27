@@ -53,10 +53,37 @@ module.exports.BlogCategoryController = {
 
 module.exports.BlogPostController = {
   list: async (req, res) => {
-    const data = await BlogPost.find({ published: true }).populate(
-      "blogCategoryId",
-      "name -_id"
-    ); //* ilk parametre alanın adı. Eğer istemdğimiz alanlar varsa bunları belirtebiliriz. istedğimiz veya istemediğimiz alanları aralara boşluk koyarak ekleyebiliriz . İstemediğimiz alanların başına "-" koyarak bunları getirme diyebiliriz.
+  //! Filtering
+    // console.log(req.query)
+    const filter = req.query?.filter ||{}
+    console.log('filter:', filter)
+    
+    //! Searching
+    // https://www.mongodb.com/docs/manual/reference/operator/query/regex/
+    // bu sitede mongoDB 'nin bizden beklediği searcing syntax'ı var... : 
+    //  { "<field>": { "$regex": "pattern", "$options": "<options>" } }
+
+    const search = req.query?.search ||{}
+    console.log('search:', search)
+    // {title: 'Testuser1', content: 'Testuser' } => {title: {$regex: 'Tstuser1'} , content {$regex: 'Testuser'} }
+
+    //& for döngüsünü kullanma nedenimiz kaç kelime ile search sorgusu yapılacağını bilmediğimizden
+
+    for (let key in search) {
+    // search ["title"] = {$regex: search['title']}
+    search [key] = {$regex: search[key]}
+  
+    }
+    console.log('search2:' , search)
+
+
+
+    const data = await BlogPost.find({...filter, ...search}) //spread
+
+    // const data = await BlogPost.find({ published: true }).populate(
+    //   "blogCategoryId",
+    //   "name -_id"
+    // ); //* ilk parametre alanın adı. Eğer istemdğimiz alanlar varsa bunları belirtebiliriz. istedğimiz veya istemediğimiz alanları aralara boşluk koyarak ekleyebiliriz . İstemediğimiz alanların başına "-" koyarak bunları getirme diyebiliriz.
     //! bu haliyle get isteği atıldığında blogCategoryId gösterilmiyor.
 
 

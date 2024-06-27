@@ -10,8 +10,8 @@ import { EventFunc } from "./models/models";
 // import { MdDeleteOutline } from "react-icons/md";
 
 
-const PORT = import.meta.env.VITE_PORT || 8000
-const App = () => {
+const PORT = 8000
+const Home = () => {
     const [search, setSearch] = useState("")
     const dispatch = useAppDispatch()
     const { loading, error, booksList } = useAppSelector(state => state.books)
@@ -29,9 +29,7 @@ const App = () => {
             dispatch(fetchFail())
         }
     }
-
-
-
+    
     useEffect(() => {
         getData()
     }, [search])
@@ -42,14 +40,12 @@ const App = () => {
     // }
 
     //! 2. way clean code import from (models.ts)
-    const handleChange: EventFunc= (e) => {
+    const handleChange: EventFunc = (e) => {
         setSearch(e.target.value);
     }
 
-  
-  
-  return (
-    <div>
+    return (
+        <div>
             <SearchComp handleChange={handleChange} />
             {loading ? (
                 <p className="text-center text-red-600">Books loading...</p>
@@ -82,9 +78,8 @@ const App = () => {
 
             )
             }
-            <div className="p-6"></div>
         </div>
-  )
-}
+    );
+};
 
-export default App
+export default Home;
