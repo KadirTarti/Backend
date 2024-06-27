@@ -20,8 +20,12 @@ app.use(session({
 
 
 
-//* user control
+//? user control
 app.use(require('./src/middlewares/userContrrol'))
+
+//*Filter,Search,Sort and Pagination
+app.use(require("./src/middlewares/findSearchSortPagi"));
+
 
 
 // HomePage:
