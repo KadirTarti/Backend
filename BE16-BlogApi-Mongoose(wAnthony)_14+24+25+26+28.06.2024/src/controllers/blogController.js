@@ -4,7 +4,8 @@ const { BlogPost,BlogCategory } = require("../models/blogModel");
 
 module.exports.BlogCategoryController = {
   list: async (req, res) => {
-    const data = await BlogCategory.find();
+    // const data = await BlogCategory.find();
+    const data = await res.getModelList(BlogCategory);
 
     res.status(200).send({
       error: false,
@@ -53,72 +54,89 @@ module.exports.BlogCategoryController = {
 
 module.exports.BlogPostController = {
   list: async (req, res) => {
-  //! Filtering
-  // URL?filter[key1]=value1&filter[key2]=value2 => url array parameter
-    // console.log(req.query)
-  
-    const filter = req.query?.filter ||{}
-    console.log('filter:', filter)
-    
-    //! Searching
-    // https://www.mongodb.com/docs/manual/reference/operator/query/regex/
-    // bu sitede mongoDB 'nin bizden beklediği searcing syntax'ı var... : 
-    //  { "<field>": { "$regex": "pattern", "$options": "<options>" } }
+    // //! Filtering
+    // // URL?filter[key1]=value1&filter[key2]=value2 => url array parameter
+    // // console.log(req.query)
+    // const filter = req.query?.filter || {};
+    // console.log("filter: ", filter);
 
-    const search = req.query?.search ||{}
-    console.log('search:', search)
-    //* {title: 'Testuser1', content: 'Testuser' } => {title: {$regex: 'Tstuser1'} , content {$regex: 'Testuser'} }
+    // //* Searching => gelen ifaade içerisinde geçiyor mu geçmiyor mu
+    // // URL?search[key1]=value1&search[key2]=value2 => url array parameter
+    // //https://www.mongodb.com/docs/manual/reference/operator/query/regex/
+    // const search = req.query?.search || {};
+    // console.log("search: ", search);
+    // //* { title: 'Testuser1', content: 'Testuser' } => { title: {$regex:'Testuser1'}, content:{ $regex: 'Testuser'} }
+    // for (let key in search) {
+    //   // search["title"] = {$regex : search["title"]}
+    //   search[key] = { $regex: search[key] };
+    // }
+    // console.log("search2: ", search);
 
-    //& for döngüsünü kullanma nedenimiz kaç kelime ile search sorgusu yapılacağını bilmediğimizden
+    // //? Sorting
+    // //https://mongoosejs.com/docs/api/query.html#Query.prototype.sort()
+    // // URL?sort[key1]=value1&sort[key2]=value2 => url array parameter
+    // // 1:A-Z - -1:Z-A deprecated
+    // // asc:A-Z - desc:Z-A
+    // const sort = req.query?.sort || {};
 
-    for (let key in search) {
-    // search ["title"] = {$regex: search['title']}
-    search [key] = {$regex: search[key]}
-  
-    }
-    console.log('search2:' , search)
+    // //* Pagination
+    // // url?page=3&limit=10
 
-    //! sorting
-    //https://mongoosejs.com/docs/api/query.html#Query.prototype.sort()
-    // URL?sort[key1]=value1&sort[key2]=value2 => url array parameter
-    // 1:A-Z - -1:Z-A deprecated
-    // asc:A-Z - desc:Z-A
-    const sort = req.rquery?.sort ||{}
+    // // =>mongoose =>  limit() ve skip()
 
-    //! pagination 
-    // ex: url?page=3&limit=10
-    // mongodb'de page metodu yok ama limit() ve skip() metodları var
+    // //! Limit
+    // let limit = Number(req.query?.limit); // limit() metodu number bekler diyelim
+    // limit = limit > 0 ? limit : 20;
+    // console.log(typeof limit, limit);
 
-    //& limit   -> number değeri bekler
-    let limit = Number(req.query?.limit)
-    limit = limit > 0 ? limit : 20
-    console.log(typeof limit, limit)
+    // //? Page
+    // let page = Number(req.query?.page);
+    // // page = page > 0 ? page : 1
+    // page = page > 0 ? page - 1 : 0; // Backend 'de sayfa sayısı her zmaan page-1 olarak hesaplanmalı. Kullanıcı yine page=1 olarak görecek ama hesaplama yapılruıken page-1 olarak hesaplama yapacağız. skip metodundan dolayı bunu yapıyoruz
+    // console.log(typeof page, page);
 
-    //& page
-    let page = Number(req.query?.page)
-    page = page > 0 ? (page-1) : 0  // Backend 'de sayfa sayısı her zmaan page-1 olarak hesaplanmalı. Kullanıcı yine page=1 olarak görecek ama hesaplama yapılruıken page-1 olarak hesaplama yapacağız. skip metodundan dolayı bunu yapıyoruz
-    console.log(typeof page, page)
+    // //! Skip => atlanacak veri sayısı
+    // let skip = Number(req.query?.skip);
+    // skip = skip > 0 ? skip : page * limit;
+    // console.log(typeof skip, skip);
 
-    //! skip  => atlanacak veri sayısı
-    let skip = Number(req.query?.skip)
-    skip = skip > 0 ? skip : (page*limit)
-    console.log(typeof skip, skip)
-   // const data = await BlogPost.find({}) = BlogPost.find()
+    // const data = await BlogPost.find({}) = BlogPost.find()
     // const data = await BlogPost.find(filter);
     // const data = await BlogPost.find({filter,search}); => {filter:{ userId: '667d10dc03839026052691ab', published: '0' },search:{ title: { '$regex': 'Testuser1' }, content: { '$regex': 'Testuser' } }} // wrong
     // const [a,b,...x] = [12,13,56,6455,456] => rest => toplama
     // function(a,...x) => rest
     // const data = await BlogPost.find({ ...filter, ...search }); // spread => yayma
 
+    // const data = await BlogPost.find({ ...filter, ...search })
+    //   .sort(sort)
+    //   .limit(limit)
+    //   .skip(skip);
 
-    const data = await BlogPost.find({...filter, ...search}).sort(sort).limit(limit).skip(skip)
+    //! operator kullanımı => https://www.mongodb.com/docs/manual/reference/operator/query/
+    // const query = req.query?.q || '';
 
-    // const data = await BlogPost.find({ published: true }).populate(
+    // const data = await BlogPost.find({
+    //   $or: [
+    //     { title: { $regex: query, $options: "i" } }, //* i => insensitive
+    //     { content: { $regex: query, $options: "i" } },
+    //   ],
+    // });
+
+    // const data = await res.getModelList(BlogPost, "blogCategoryId");
+    const data = await res.getModelList(BlogPost, [
+      {
+        path: "blogCategoryId",
+        select: "name -_id",
+      },
+      { path: "userId" },
+    ]);
+    //! populate v2 => populate({path:"blogCategoryId",select:"name -id"})
+    //! multi populate => populate([ {path: "blogCategoryId", select: "name -_id", }, { path: "userId" }, ])
+    //! multi populate => populate({path: "blogCategoryId", select: "name -_id", }).populate({ path: "userId" })
+    // const data = await BlogPost.find({ published: true, }).populate(
     //   "blogCategoryId",
     //   "name -_id"
     // ); //* ilk parametre alanın adı. Eğer istemdğimiz alanlar varsa bunları belirtebiliriz. istedğimiz veya istemediğimiz alanları aralara boşluk koyarak ekleyebiliriz . İstemediğimiz alanların başına "-" koyarak bunları getirme diyebiliriz.
-    //! bu haliyle get isteği atıldığında blogCategoryId gösterilmiyor.
-
 
     res.status(200).send({
       error: false,
@@ -126,6 +144,7 @@ module.exports.BlogPostController = {
     });
   },
   create: async (req, res) => {
+    // req.body.userId = req.session.id
     const data = await BlogPost.create(req.body);
 
     res.status(201).send({
@@ -137,7 +156,9 @@ module.exports.BlogPostController = {
     // const data = await BlogPost.findById(req.params.id); //* sadce id secenegini kabul eder.
     // const data = await BlogPost.findOne({published: false });
     // const data = await BlogPost.findOne({ _id: req.params.id }); //* diğer seçenekleri de kabul eder.
-    const data = await BlogPost.findOne({ _id: req.params.id }).populate("blogCategoryId");
+    const data = await BlogPost.findOne({ _id: req.params.id }).populate(
+      "blogCategoryId"
+    );
     res.status(200).send({
       error: false,
       blog: data,
