@@ -77,12 +77,30 @@ module.exports.BlogPostController = {
     console.log('search2:' , search)
 
     //! sorting
-
     const sort = req.rquery?.sort ||{}
 
+    //! pagination 
+    // ex: url?page=3&limit=10
+    // mongodb'de page metodu yok ama limit() ve skip() metodları var
+
+    //& limit   -> number değeri bekler
+    let limit = Number(req.query?.limit)
+    limit = limit > 0 ? limit : 20
+    console.log(typeof limit, limit)
+
+    //& page
+    let page = Number(req.query?.page)
+    page = page > 0 ? (page-1) : 0
+    console.log(typeof page, page)
+
+    //! skip  => atlanacak veri sayısı
+    let skip = Number(req.query?.skip)
+    skip = skip > 0 ? skip : (page*limit)
+    console.log(typeof skip, skip)
 
 
-    const data = await BlogPost.find({...filter, ...search}).sort(sort)
+
+    const data = await BlogPost.find({...filter, ...search}).sort(sort).limit(limit).skip(skip)
 
     // const data = await BlogPost.find({ published: true }).populate(
     //   "blogCategoryId",
