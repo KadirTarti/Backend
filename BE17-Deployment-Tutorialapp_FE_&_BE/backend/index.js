@@ -9,8 +9,12 @@ const { mongooseConnection } = require("./startup/mongooseConnection");
 
 const PORT = process.env?.PORT || 8000;
 
+const cors = require('cors')
+
 const app = express();
 app.use(express.json());
+
+app.use(cors())
 
 app.all("/", (req, res) => {
   res.send("Hello TutorialApp");
