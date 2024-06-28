@@ -1,6 +1,9 @@
 "use strict";
 require("express-async-errors");
 const express = require("express");
+
+require('dotenv').config()
+
 const { mongooseConnection } = require("./startup/mongooseConnection");
 
 
