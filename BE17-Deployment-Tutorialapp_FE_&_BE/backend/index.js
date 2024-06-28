@@ -16,6 +16,8 @@ app.all("/", (req, res) => {
   res.send("Hello TutorialApp");
 });
 
+app.use('/tutorials', require('./routes/tutorialRoute'))
+
 app.use(require('./middlewares/errorHandler'))
 
 mongooseConnection()
