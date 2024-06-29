@@ -39,7 +39,7 @@ const Home = () => {
     //     setSearch(e.target.value);
     // }
 
-    //! 2. way clean code import from (models.ts)
+    //! 2. way clean code import from (models.js)
     const handleChange: EventFunc = (e) => {
         setSearch(e.target.value);
     }
