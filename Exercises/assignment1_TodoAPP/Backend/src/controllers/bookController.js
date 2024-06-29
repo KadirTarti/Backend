@@ -41,7 +41,7 @@ module.exports.BookPostController = {
           {genre: searchBook},
         ];
       }
-      const data = await BookPost.find(quer)
+      const data = await BookPost.find(query)
       res.status(200).send({
         error: false,
         query: req.query,
