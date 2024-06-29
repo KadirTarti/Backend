@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 import type { PayloadAction } from "@reduxjs/toolkit";
-import { Book } from "../models/models.ts";
+import { Book } from "../models/models.js";
 
 // export interface Book {
 //   id: number;
