@@ -5,17 +5,16 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import Slide, { SlideProps } from '@mui/material/Slide';
+import Slide from '@mui/material/Slide'; // SlideProps tipini doğrudan burada içe aktarma
 import { MdDeleteOutline } from "react-icons/md";
 import axios from 'axios';
 
 interface IDeleteCard {
     id: string;
     getData: () => void;
-
 }
 
-const Transition = React.forwardRef<HTMLDivElement, SlideProps>(function Transition(props, ref) {
+const Transition = React.forwardRef((props, ref) => { // props ve ref parametrelerini doğru şekilde kullanılıyor
     return <Slide direction="up" ref={ref} {...props} />;
 });
 
@@ -35,7 +34,7 @@ const DeleteCard: React.FC<IDeleteCard> = ({ id, getData }) => {
     const handleDelete = async () => {
         try {
             await axios.delete(`http://127.0.0.1:${PORT}/books/post/${id}`);
-            getData()
+            getData();
             setOpen(false);
         } catch (error) {
             console.error("Failed to delete the book:", error);
@@ -44,13 +43,11 @@ const DeleteCard: React.FC<IDeleteCard> = ({ id, getData }) => {
 
     React.useEffect(() => {
 
-    }, [
-
-    ])
+    }, []);
 
     return (
         <React.Fragment>
-            <Button variant="contained" sx={{ bgcolor: "red" }} onClick={handleClickOpen}>
+            <Button variant="contained" sx={{ bgColor: "red" }} onClick={handleClickOpen}>
                 <MdDeleteOutline className='text-xl' />
             </Button>
             <Dialog
@@ -75,4 +72,4 @@ const DeleteCard: React.FC<IDeleteCard> = ({ id, getData }) => {
     );
 }
 
-export default DeleteCard
+export default DeleteCard;
