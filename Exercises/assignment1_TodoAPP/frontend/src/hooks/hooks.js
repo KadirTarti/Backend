@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
-import type { RootState, AppDispatch } from "./store";
 
-// Use throughout your app instead of plain `useDispatch` and `useSelector`
-export const useAppDispatch = useDispatch.withTypes<AppDispatch>();
-export const useAppSelector = useSelector.withTypes<RootState>();
+// No need for withTypes in JavaScript, just use useDispatch and useSelector directly
+export const useAppDispatch = () => useDispatch();
+
+export const useAppSelector = (selector) => useSelector(selector);
