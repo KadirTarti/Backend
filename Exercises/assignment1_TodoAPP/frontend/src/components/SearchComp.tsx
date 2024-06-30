@@ -3,7 +3,7 @@
 //     handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 // }
 
-import { EventFunc } from "../models/models.ts";
+import { EventFunc } from "../models/models";
 
 interface ISearchComp {
     handleChange: EventFunc
