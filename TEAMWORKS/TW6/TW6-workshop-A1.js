@@ -7,9 +7,6 @@ const router = express.Router();
 //! 1.What do permissions do in an express.js application?
 
 
-
-
-
 /*
 ! Adım 1: Route-Level Permissions
 Öncelikle, belirli bir kullanıcıya sadece belirli rotalara erişim izni vermek istiyoruz.
