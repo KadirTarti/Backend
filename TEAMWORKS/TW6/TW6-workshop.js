@@ -1,8 +1,10 @@
-
-
 const express = require('express');
 const app = express();
 const router = express.Router();
+
+
+
+
 
 
 /*
@@ -45,7 +47,7 @@ Bu, genellikle bir oturum yönetimi veya token tabanlı kimlik doğrulama sistem
 Bu örnekte, basitlik adına req.user objesini doğrudan kullanacağız, ancak gerçek bir uygulamada bu obje oturumdan alınmalı veya bir API anahtarı kullanarak doğrulanmalı.
 */
 
-// Bu middleware, tüm istekler için çalışır ve kullanıcıyı doğrular
+//& Bu middleware, tüm istekler için çalışır ve kullanıcıyı doğrular
 function authenticateUser(req, res, next) {
     // Burada kullanıcıyı gerçekten doğrulamak yerine, sadece bir örnek olarak req.user objesini ayarlıyoruz
     req.user = { id: 1, role: 'admin' }; // Gerçek uygulamada bu değerler oturumdan veya token'dan alınmalıdır
@@ -55,6 +57,34 @@ function authenticateUser(req, res, next) {
   router.get('/admin', authenticateUser, isAdmin, (req, res) => {
     res.send('Admin paneline hoş geldiniz.');
   });
+
+
+/*
+ ! Adım 4: Role-Based Access Control (RBAC)
+Belirli bir rotaya erişim kontrolü sağlar. Örneğimizde, admin rolüne sahip kullanıcıların kontrolünü yapıyoruz.
+*/
+
+// Rol tabanlı izinler için ortam koşulunu tanımlayın
+function hasPermission(role, requiredPermission) {
+    return (req, res, next) => {
+      if (roles[role] && roles[role].includes(requiredPermission)) {
+        next();
+      } else {
+        res.status(403).send(`Forbidden: ${requiredPermission} permission not granted.`);
+      }
+    };
+  }
+  
+  // Rol ve izinleri tanımlayın
+  const roles = {
+    admin: ['read', 'write', 'delete'],
+  };
+  
+  // Rol tabanlı erişim kontrolü ile rotayı koruyun
+  app.get('/edit-resource', hasPermission('admin', 'write'), (req, res) => {
+    res.send('Resource editing page.');
+  });
+  
 
 
 
