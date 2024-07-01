@@ -60,7 +60,7 @@ module.exports = {
       );
     }
     const data = await Personnel.updateOne({ _id: req.params.id }, req.body, {
-      runValidators: true, //* modelde var olan validate fonksiyonlarının(built-in ve custom) update işlemi sırasında çalışmasını sağlayan özellik *** default off(false)
+      runValidators: true, //* modelde var olan validate fonksiyonlarının(built-in ve custom) update işlemi sırasında çalışmasını sağlayan özellik ***
     });
     res.status(202).send({
       error: false,
