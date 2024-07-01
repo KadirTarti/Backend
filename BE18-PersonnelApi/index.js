@@ -43,7 +43,7 @@ dbConnection()
 app.use(express.json())
 
 //* filter, search, sort, pegination(res.getModelList)
-require('./src/middlewares/findSearchSortPagi')
+app.use(require('./src/middlewares/findSearchSortPagi'))
 
 
 
@@ -53,6 +53,8 @@ require('./src/middlewares/findSearchSortPagi')
 app.all("/",(req,res)=> {
     res.send("Welcome to the Personnel API")
 })
+
+app.use('/departments', require('./src/routes/department.router'))
 
 
 /* ------------------------------------------------------- */
