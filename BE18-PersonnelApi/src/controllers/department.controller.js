@@ -51,4 +51,10 @@ module.exports = {
             data
         })
     },
+
+    personnels: async (req, res) => {
+        const Personnel = require('../models/personnel.model')
+        {departmentId: req.params.id}
+        
+    }
 }

@@ -42,7 +42,7 @@ const PersonnelSchema = new mongoose.Schema({
         type: String,
         trim: true,
         required: true,
-        unique: ttrue,
+        unique: true,
         validate: (email) => email.includes('@') && email.includes()
     },
     title: {
@@ -65,7 +65,7 @@ const PersonnelSchema = new mongoose.Schema({
         default: true
     },
     isAdmin: {
-        type: Boolen,
+        type: Boolean,
         default: false
     }, 
     isLead: {
@@ -74,7 +74,7 @@ const PersonnelSchema = new mongoose.Schema({
     },
     startedAt: {
         type: Date,
-        default: Date.new()
+        default: Date.new
     }
 }, 
 {
