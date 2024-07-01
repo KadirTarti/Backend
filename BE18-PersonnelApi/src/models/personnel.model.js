@@ -52,7 +52,7 @@ const PersonnelSchema = new mongoose.Schema({
     },
 
     salary: {
-        type: number,
+        type: Number,
         default: 0,
     },
     description: {
