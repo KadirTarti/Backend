@@ -10,53 +10,54 @@ const express = require('express')
 const app = express()
 
 /* ------------------------------------------------------- */
-
-
+// Required Modules
 
 //* envVariables to process.env
 require('dotenv').config()
-const PORT = process.env.PORT || 8000
+const PORT = process.env.PORT || 8000;
 
-
-/* -------------------------------------------------------------------------- */
-/*                                errorHandler                                */
-/* -------------------------------------------------------------------------- */
-//& asyncErrors to errorHandler
-require('express-async-errors')
-
-
-
+//? asyncErrors to errorHandler
+require("express-async-errors")
 
 /* -------------------------------------------------------------------------- */
-/*                               configurations                               */
+/*                               Configurations                               */
 /* -------------------------------------------------------------------------- */
-//! db connection
-const {dbConnection} = require('./src/configs/dbConnection')
-const errorHandler = require('./src/middlewares/errorHandler')
+
+//! database connection
+const {dbConnection} = require("./src/configs/dbConnection")
 dbConnection()
 
 
 /* -------------------------------------------------------------------------- */
-/*                                 Middlewares                                */
+/*                                 MiddleWares                                */
 /* -------------------------------------------------------------------------- */
+
 //* accept json
 app.use(express.json())
 
-//* filter, search, sort, pegination(res.getModelList)
-app.use(require('./src/middlewares/findSearchSortPagi'))
 
-
+//*Filter,Search,Sort,Pagination(res.getModelList)
+app.use(require("./src/middlewares/findSearchSortPagi"))
 
 /* -------------------------------------------------------------------------- */
-/*                                   routes                                   */
+/*                                   Routes                                   */
 /* -------------------------------------------------------------------------- */
+
 app.all("/",(req,res)=> {
     res.send("Welcome to the Personnel API")
 })
 
-app.use('/departments', require('./src/routes/department.router'))
-app.use('/personnels', require('./src/routes/personnel.router'))
+app.use("/departments", require("./src/routes/department.router"));
 
+app.use("/personnels", require("./src/routes/personnel.router"));
+
+//* eşleşmeyen routeları yakalar
+app.use((req,res,next)=> {
+    res.status(404).send({
+        error:true,
+        message: "Route not found!"
+    })
+})
 
 /* ------------------------------------------------------- */
 
