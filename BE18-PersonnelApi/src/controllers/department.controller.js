@@ -32,7 +32,23 @@ module.exports = {
             data
         })
     },
-    
-    update:async(req, res)=> {},
-    delete:async(req, res)=> {},
+
+    update:async(req, res)=> {
+        const data = await Department.updateOne({_id: req.paramsid}, req.body, {
+            runValidators: true
+        });
+        res.status(202).send({
+            error: false,
+            data,
+            newData: await Department.findOne({ _id: req.params.id})
+        })
+    },
+
+    delete:async(req, res)=> {
+        const data = await Department.deleteOne ({_id: rq.params.id})
+        res.status(data.deletedCount > 0 ? 204 : 404).send({
+            error: !data.deletedCount
+            data
+        })
+    },
 }
