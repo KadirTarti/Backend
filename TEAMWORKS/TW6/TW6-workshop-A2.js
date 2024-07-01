@@ -1,3 +1,8 @@
+//!   QUESTION 2
+//! Can you explain the concept of middleware in Node.js and how it is employed for managing user permissions using Token?
+
+
+
 /*
 Middleware, bir isteği işlerken veya kontrolü bir sonraki middleware fonksiyona aktarırken çalışan yazılım katmanını ifade eder. 
 Kullanıcı izinlerinin yönetiminde token kullanıldığında, middleware, kullanıcının token'ını doğrular ve erişim izinlerini kontrol eder. Eğer kullanıcı yetkilendirilmişse, middleware isteği devam ettirir; aksi takdirde, yetkisiz veya yasaklanmış bir hata döndürür.
