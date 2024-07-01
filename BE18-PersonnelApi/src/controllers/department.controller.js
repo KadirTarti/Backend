@@ -24,14 +24,15 @@ module.exports = {
             data
         })
     },
-    
+
     read:async(req, res)=> {
-        const data = await Department.findById(req.params.id)
+        const data = await Department.findById({_id: req.params.id})
         res.status(200).send({
             error:false,
             data
         })
     },
+    
     update:async(req, res)=> {},
     delete:async(req, res)=> {},
 }
