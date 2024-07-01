@@ -74,7 +74,7 @@ const PersonnelSchema = new mongoose.Schema({
     },
     startedAt: {
         type: Date,
-        default: Date.neow()
+        default: Date.new()
     }
 }, 
 {
