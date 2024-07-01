@@ -5,7 +5,7 @@
 const { mongoose } = require('../configs/dbConnection')
 /* ------------------------------------------------------- */
 
-const PersonelSchema = new mongoose.Schema({
+const PersonnelSchema = new mongoose.Schema({
     departmentId : {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Department',
@@ -44,10 +44,42 @@ const PersonelSchema = new mongoose.Schema({
         required: true,
         unique: ttrue,
         validate: (email) => email.includes('@') && email.includes()
-    }
+    },
+    title: {
+        type: String,
+        trim: true,
+        required: true,
+    },
 
+    salary: {
+        type: number,
+        default: 0,
+    },
+    description: {
+        type: String,
+        trim: true,
+        default: null,
+    },
+    isActive: {
+        type: Boolean,
+        default: true
+    },
+    isAdmin: {
+        type: Boolen,
+        default: false
+    }, 
+    isLead: {
+        type: Boolean,
+        default: false
+    },
+    startedAt: {
+        type: Date,
+        default: Date.neow()
+    }
 }, 
 {
-    collection: 'personel',
+    collection: 'personnel',
     timestamps: true
 })
+
+module.export = mongoose.model('Personnel', PersonnelSchema)
