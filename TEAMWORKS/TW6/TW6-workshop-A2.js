@@ -41,5 +41,15 @@ function checkRole(role) {
 app.get('/admin', authenticateToken, checkRole('admin'), (req, res) => {
     res.send('Admin paneline hoş geldiniz.');
   });
+
   
+/*
+
+  Bu örnekte, authenticateToken middleware fonksiyonu, gelen isteklerdeki Authorization başlığını kontrol eder ve eğer geçerli bir JWT token bulursa, bu token'ı doğrular. Token doğrulanırsa, req.user nesnesine kullanıcı bilgileri atanır ve next() fonksiyonu çağrılır, böylece istek ilgili rotaya yönlendirilir. Eğer token geçersiz veya eksikse, uygun bir hata mesajı döndürülür.
+
+  checkRole middleware fonksiyonu, belirli bir rola sahip olup olmadığını kontrol eder. Eğer kullanıcı belirtilen rola sahipse, isteği ilgili rotaya yönlendirir; aksi takdirde, kullanıcıya erişim izni verilmeyerek bir hata mesajı döndürülür.
+  
+  Bu örnekte, /admin rotasına erişim, önce authenticateToken middleware'ı ile kontrol edilir. Eğer kullanıcı yetkilendirilmişse, checkRole('admin') middleware'ı ile tekrar kontrol edilir. Eğer kullanıcı admin rolündeyse, isteği ilgili rotaya yönlendirir; aksi takdirde, kullanıcıya erişim izni verilmeyerek bir hata mesajı döndürülür.
+  */
+
   app.listen(3000, () => console.log('Server started on port 3000'));
