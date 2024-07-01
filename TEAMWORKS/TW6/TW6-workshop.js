@@ -84,6 +84,8 @@ function hasPermission(role, requiredPermission) {
   app.get('/edit-resource', hasPermission('admin', 'write'), (req, res) => {
     res.send('Resource editing page.');
   });
+
+//?  Bu örnekte, /edit-resource rotasına erişim, hasPermission middleware'ı kullanılarak kontrol edilir. Eğer kullanıcı admin rolünde ve write iznine sahipse, isteği ilgili rotaya yönlendirir. Eğer değilse, kullanıcıya erişim izni verilmeyerek bir hata mesajı döndürülür.
   
 
 
