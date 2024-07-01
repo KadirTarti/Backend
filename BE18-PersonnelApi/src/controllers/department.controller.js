@@ -47,7 +47,7 @@ module.exports = {
     delete:async(req, res)=> {
         const data = await Department.deleteOne ({_id: rq.params.id})
         res.status(data.deletedCount > 0 ? 204 : 404).send({
-            error: !data.deletedCount
+            error: !data.deletedCount,
             data
         })
     },
