@@ -90,6 +90,17 @@ function hasPermission(role, requiredPermission) {
 
 
 
+//^Differences:
+//* Adım 1 ve 2, erişim kontrol mantığını organize etmedeki yaklaşımlarında farklılık gösterir (gömülü vs. ara yazılım).
+//* Adım 3 ve 4, kimlik doğrulama ve yetkilendirme işlevlerini katmanlama gösterir.
+//* Tüm bu adımlar, modüler erişim kontrol mantığı için ara yazılım işlevlerini kullanır.
+
+
+//^Importance in Node.js Applications (Security)
+/* Bu adımlar, hassas verilerle veya eylemlerle ilgilenen Node.js uygulamaları için çok önemlidir. */
+
+
+
 
 app.use('/', router);
 app.listen(3000, () => console.log('Server started on port 3000'));
