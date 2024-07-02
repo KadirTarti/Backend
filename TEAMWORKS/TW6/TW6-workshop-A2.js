@@ -4,7 +4,7 @@
 
 
 /*
-Middleware, bir isteği işlerken veya kontrolü bir sonraki middleware fonksiyona aktarırken çalışan yazılım katmanını ifade eder. 
+Middleware, request ve response arasında çalışan bir yazılım katmanıdır. 
 Kullanıcı izinlerinin yönetiminde token kullanıldığında, middleware, kullanıcının token'ını doğrular ve erişim izinlerini kontrol eder. Eğer kullanıcı yetkilendirilmişse, middleware isteği devam ettirir; aksi takdirde, yetkisiz veya yasaklanmış bir hata döndürür.
 
 Aşağıdaki örnekte Express.js uygulamasında JWT (JSON Web Tokens) kullanarak kullanıcı izinlerini yöneteceğiz:
