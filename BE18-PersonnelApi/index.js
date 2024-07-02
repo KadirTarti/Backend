@@ -47,9 +47,14 @@ app.all("/",(req,res)=> {
     res.send("Welcome to the Personnel API")
 })
 
-app.use("/departments", require("./src/routes/department.router"));
+// app.use("/departments", require("./src/routes/department.router"));
 
-app.use("/personnels", require("./src/routes/personnel.router"));
+// app.use("/personnels", require("./src/routes/personnel.router"));
+
+// app.use('/tokens', require('./src/routes/token.router'))
+
+// app.use(require('./src/routes/index')) //! üstteki satırları route'daki index'e aktarıp bu satırla çağırdık. 
+app.use(require('./src/routes/')) //^JS index isimlendirmesini default kabul ettiği için burada ('./src/routes/') yazmamız da yeterli.
 
 //* eşleşmeyen routeları yakalar
 app.use((req,res,next)=> {
