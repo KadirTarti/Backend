@@ -66,6 +66,3 @@ module.exports = {
     },
 
     }
-
-
-}
