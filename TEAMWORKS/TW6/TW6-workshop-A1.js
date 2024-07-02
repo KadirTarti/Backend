@@ -6,19 +6,24 @@ const router = express.Router();
 //!   QUESTION 1
 //! 1.What do permissions do in an express.js application?
 
+//? permissionlar sayesinde hassas bilgilere kimin erişeceği kontrol edilir.
+//? Böylece uygulamanın güvenliği sağlanır 
+
+// Route-Level Permissions
+// Middleware
+// Authentication and Authorization
+// Role-Based Access Control (RBAC)
+
 
 /*
 ! Adım 1: Route-Level Permissions
-Öncelikle, belirli bir kullanıcıya sadece belirli rotalara erişim izni vermek istiyoruz.
-Örneğin, sadece admin rolündeki kullanıcıların /admin rotasına erişimini sınırlıyoruz.
+Uygulamamızda farklı sayfalar için rotalar tanımlarız.
 */
 
-router.get('/admin', (req, res) => {
-    res.send('Admin paneline hoş geldiniz.');
+router.get('/books', (req, res) => {
+    res.send('Books sayfasına hoş geldiniz.');
 });
-//? Bu kodda, /admin rotası sadece GET isteklerine yanıt verir ve 
-//? "Admin paneline hoş geldiniz." mesajını gönderir. 
-//? Ancak, bu rotaya "erişim kontrolü yapmadık" henüz.
+//? Burada herhangi bir "erişim kontrolü yapmadık" (henüz).
 
 
 
@@ -28,11 +33,10 @@ router.get('/admin', (req, res) => {
 
 
 
-
 /*
 ! Adım 2: Middleware
-/admin rotasına erişim kontrolü ekliyoruz
-Kullanıcının admin rolünde olup olmadığını kontrol ediyoruz ve ardından isteği ilgili rotaya yönlendirir.
+Gelen isteği yakalayıp belirlenen rotaya gitmeden önce kontrolünü sağlıyoruz.
+Kullanıcı rolünü ve/veya iznini kontrol edip, izin varsa (next ile) geçiş sağlıyoruz. Yoksa hata döndürüyoruz.
 */
 function isAdmin(req, res, next) {
     if (req.user && req.user.role === 'admin') {
@@ -58,7 +62,6 @@ function isAdmin(req, res, next) {
 
 
 
-
 //! Adım 3: Authentication and Authorization:
 /* Kullanıcıların kimliklerini doğrulamak ve yetkilendirmek için bir yöntem sağlamamız gerekiyor. 
 Bu, genellikle bir oturum yönetimi veya token tabanlı kimlik doğrulama sistemi kullanılarak yapılır. 
@@ -67,16 +70,20 @@ Bu örnekte, basitlik adına req.user objesini doğrudan kullanacağız, ancak g
 
 //& Bu middleware, tüm istekler için çalışır ve kullanıcıyı doğrular
 
+// https://www.digitalocean.com/community/tutorials/nodejs-jwt-expressjs
+
+//npm install jsonwebtoken
+
 const jwt = require('jsonwebtoken');
 // JWT'yi doğrulayan middleware fonksiyonu
 function authenticateUser(req, res, next) {
-  const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1]; // Bearer <token>
+  const authHeader = req.headers['authorization'];  // gelen istekten Authorization başlığı oku. (Bu başlık genellikle Bearer <token> şeklinde gelir)
+  const token = authHeader && authHeader.split(' ')[1]; // Bearer <token>   Burada Token ifadesini ayırıp  alıyoruz.
 
   // if (token == null) return res.sendStatus(401); 
   if (!token) return res.sendStatus(401); // Eğer token yoksa, yetkisiz erişim hatası döndür
   try {
-    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+    const decoded = jwt.verify(token, process.env.TOKEN_SECRET);
     req.user = decoded;
     next();
   } catch (err) {
@@ -128,29 +135,20 @@ function hasPermission(role, requiredPermission) {
   
   // Rol ve izinleri tanımlayın
   const roles = {
-    admin: ['read', 'write', 'delete'],
+    admin: ['create', 'read', 'update', 'delete'],
   };
   
   // Rol tabanlı erişim kontrolü ile rotayı koruyun
-  app.get('/edit-resource', hasPermission('admin', 'write'), (req, res) => {
+  app.get('/edit-resource', hasPermission('admin', 'update'), (req, res) => {
     res.send('Resource editing page.');
   });
 
-//?  Bu örnekte, /edit-resource rotasına erişim, hasPermission middleware'ı kullanılarak kontrol edilir. Eğer kullanıcı admin rolünde ve write iznine sahipse, isteği ilgili rotaya yönlendirir. Eğer değilse, kullanıcıya erişim izni verilmeyerek bir hata mesajı döndürülür.
+//?  Bu örnekte, /edit-resource rotasına erişim, hasPermission middleware'ı kullanılarak kontrol edilir. Eğer kullanıcı admin rolünde ve update iznine sahipse, isteği ilgili rotaya yönlendirir. Eğer değilse, kullanıcıya erişim izni verilmeyerek bir hata mesajı döndürülür.
   
 
-
-
-//^Differences:
-//* Adım 1 ve 2, erişim kontrol mantığını organize etmedeki yaklaşımlarında farklılık gösterir (gömülü vs. ara yazılım).
-//* Adım 3 ve 4, kimlik doğrulama ve yetkilendirme işlevlerini katmanlama gösterir.
-//* Tüm bu adımlar, modüler erişim kontrol mantığı için ara yazılım işlevlerini kullanır.
-
-
-//^Importance in Node.js Applications (Security)
-/* Bu adımlar, hassas verilerle veya eylemlerle ilgilenen Node.js uygulamaları için çok önemlidir. */
-
-
+//^Notes:
+//* Tüm bu adımlar, modüler erişim kontrol mantığı için middlware işlevlerini kullanır.
+//* Bu adımlar, hassas verilerle veya eylemlerle ilgilenen Node.js uygulamaları için çok önemlidir. 
 
 
 app.use('/', router);
