@@ -15,9 +15,9 @@ router.route("/").get(permission.isAdmin, personnel.list).post(permission.isAdmi
 router
   .route("/:id")
   .all(idValidation)
-  .get(personnel.read)
-  .put(personnel.update)
-  .patch(personnel.update)
+  .get(permission.isAdminOrOwn,personnel.read)
+  .put(permission.isAdminOrOwn,personnel.update)
+  .patch(permission.isAdminOrOwn,personnel.update)
   .delete(permission.isAdmin, personnel.delete);
 
 
