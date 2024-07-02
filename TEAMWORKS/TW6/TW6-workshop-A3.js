@@ -108,8 +108,8 @@ Structured logging, log mesajlarının içeriğini analiz etmek için kullanıl�
 monitoring genellikle metrik ve istatistikleri analiz etmek için kullanılır.
 */
 
-//^FAYDALARI
 /*
+^Structred Logging FAYDALARI
 1- Key-value çiftleri içeren formatı ile logların anlamını ve bağlamını kolaylaştırır
 
 2- Log mesajlarını tutarlı ve standart olarak biçimlendirerek okunmalarını kolaylaştırır.
@@ -122,7 +122,12 @@ monitoring genellikle metrik ve istatistikleri analiz etmek için kullanılır.
 
 6- Uygulamanın tümünde teşvik ettiği tutarlı ve standart bir log formatı sayesinde kapasitesinin ölçeklendirilmesini ve logların standart bir şekilde sürdürülmesini kolaylaştırır.
 
-7- 
 
+^Monitoring Faydaları
+1- Uygulamanın yanıt sürelerini, CPU kullanımını, bellek kullanımını ve diğer önemli metrikleri izlemek, performansı optimize etmek ve potansiyel performans sorunlarını erken aşamada tespit etmek için önemlidir.
 
+2- Uygulamanın yanıt sürelerini ve hata oranlarını izlemek, kullanıcı deneyimini iyileştirmeye katkı sağlar
+
+3- Otomasyon senaryolarını destekler. Örneğin, belirli bir performans eşik değerinden düşüş olduğunda otomatik olarak uyarılar gönderebilir veya otomatik düzeltme adımları gerçekleştirebilir 
 */ 
+
