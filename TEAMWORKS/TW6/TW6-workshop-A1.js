@@ -77,8 +77,8 @@ Bu örnekte, basitlik adına req.user objesini doğrudan kullanacağız, ancak g
 const jwt = require('jsonwebtoken');
 // JWT'yi doğrulayan middleware fonksiyonu
 function authenticateUser(req, res, next) {
-  const authHeader = req.headers['authorization'];  // gelen istekten Authorization başlığı oku. (Bu başlık genellikle Bearer <token> şeklinde gelir)
-  const token = authHeader && authHeader.split(' ')[1]; // Bearer <token>   Burada Token ifadesini ayırıp  alıyoruz.
+  const authHeader = req.headers['authorization'] || null;  // gelen istekten Authorization başlığı oku. (Bu başlık genellikle Bearer <token> şeklinde gelir)
+  const token = authHeader && authHeader.split(' '); 
 
   // if (token == null) return res.sendStatus(401); 
   if (!token) return res.sendStatus(401); // Eğer token yoksa, yetkisiz erişim hatası döndür
@@ -90,15 +90,48 @@ function authenticateUser(req, res, next) {
     return res.sendStatus(403); // Eğer token geçersizse, yetkisiz erişim hatası döndür
   }
 }
+//& ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//& PersonnelApi'deki yapımız:   (authentication.js)
+module.exports = async(req,res,next) => {
+  const auth = req.headers?.authorization || null;
+  console.log(auth);
+  const tokenKey = auth ? auth.split(" ") : null
+  console.log(tokenKey);
+  
+  if(tokenKey && tokenKey[0] == 'Token'){
+    const tokenData = await Token.findOne({ token: tokenKey[1] }).populate("userId");
+    console.log(tokenData);
+    if(tokenData) req.user = tokenData.userId
+  }
+  next();
+  }
+//& ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+
+
+
 
 // Rol tabanlı erişim kontrolü için middleware fonksiyonu
 function isAdmin(req, res, next) {
   if (req.user && req.user.role === 'admin') {
     next();
   } else {
-    res.status(403).send('Forbidden: You do not have permission to access this resource.');
+    throw new Error('NoPermission: You must login and to be Admin')
   }
 }
+//& ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//& PersonnelApi'deki yapımız:   (permission.js)
+isAdmin: (req,res,next) => {
+  if(req.user && req.user.isActive && req.user.isAdmin) {
+      next();
+  }else {
+      res.errorStatusCode = 403;
+      throw new Error('NoPermission: You must login and to be Admin')
+  }
+}
+  //& ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 
 // Admin rolüne sahip kullanıcıların erişimini kontrol eden rotayı
 router.get('/admin', authenticateUser, isAdmin, (req, res) => {
