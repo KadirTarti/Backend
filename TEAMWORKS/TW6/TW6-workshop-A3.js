@@ -68,8 +68,30 @@ Log Dosyaları: PM2, uygulamamızın loglarını otomatik olarak izler ve saklar
 
 PM2 ile uygulamayı izlemek için çeşitli komutlara ihtiyacımız var:
 
-Örneğin,  pm2 logs komutu  logları görüntüler ve
-          pm2 monit komutu uygulamayı izlemeyi sağlar.
+Listeleme
+*pm2 list - Tüm süreçlerin durumunu gösterir.
+pm2 prettylist - Süreç listesini pretty JSON formatında yazdırır.
+pm2 describe 0 - Belirli bir süreç hakkında tüm bilgileri gösterir.
+
+İzleme
+*pm2 monit - Tüm süreçleri izler.
+
+Loglar
+*pm2 logs  - Tüm süreçlerin loglarını gösterir.
+*pm2 flush - Tüm log dosyalarını temizler.
+pm2 reloadLogs - Tüm logları yeniden yükler.
+
+Eylemler
+*pm2 stop all - Tüm süreçleri durdurur.
+*pm2 restart all - Tüm süreçleri yeniden başlatır.
+*pm2 reload all - Ağa bağlı uygulamalar için 0 saniye kesinti olmadan yeniden yükler.
+pm2 stop 0 - Belirli bir süreç ID'sini durdurur.
+pm2 restart 0 - Belirli bir süreç ID'sini yeniden başlatır.
+pm2 delete 0 - Belirli bir süreçten PM2 listesindeyi siler.
+pm2 delete all - Tüm süreçlerden PM2 listesindeyi siler.
+
+Diğer
+*pm2 save: Mevcut PM2 süreci listesini ve tüm yönetilen uygulamaların yapılandırma bilgilerini kaydeder, böylece PM2 yeniden başlatıldığında otomatik olarak başlatılır.
 */
 
 
