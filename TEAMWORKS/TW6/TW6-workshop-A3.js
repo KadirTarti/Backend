@@ -2,6 +2,20 @@
 //!   QUESTION 3
 //! What is the purpose of structured logging, and how can it benefit the debugging and monitoring of a Node.js application?
 
+
+// https://betterstack.com/community/guides/logging/best-nodejs-logging-libraries/
+// https://blog.appsignal.com/2021/09/01/best-practices-for-logging-in-nodejs.html
+
+//* Structured logging "analiz" ve "anlamayı" kolaylaştırmak için log verilerini JSON veya key-value formatında tutarlı biçimde düzenlemeyi amaçlar.
+
+//* * Açık, aranabilir, bağlam açısından zengin log'lar sağlayarak Node.js'te "debugging" ve "monitoring" den yararlanır.
+
+//* * * Sorunları hızlı biçimde tanımlama ve çözmeyi kolaylaştırır
+
+//& bazı structured loggin kütüphaneleri: Winston, Pino, Bunyan, Roarr
+
+
+
  // logger.js : 
 
 const winston = require('winston');
