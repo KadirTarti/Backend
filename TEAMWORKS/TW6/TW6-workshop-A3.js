@@ -9,7 +9,7 @@
 // https://blog.appsignal.com/2021/09/01/best-practices-for-logging-in-nodejs.html
 
 
-//* Structured logging "analiz" ve "anlamayı" kolaylaştırmak için log verilerini JSON veya key-value formatında tutarlı biçimde düzenlemeyi amaçlar.
+//* Structured logging "analiz" ve "anlamayı" kolaylaştırmak için log verilerini JSON veya key-value formatında tutarlı biçimde düzenlemeyi sağlar.
 //* * Açık, aranabilir, bağlam açısından zengin log'lar sağlayarak Node.js'te "debugging" ve "monitoring" den yararlanır. Her ikisi de uygulamanın sağlığını izlemek, hataları tespit etmek ve performans optimizasyonu yapmak için kullanılır ancak farklı odak noktalarına sahiptir.
 //* * * Sorunları hızlı biçimde tanımlama ve çözmeyi kolaylaştırır
 
@@ -43,7 +43,7 @@ logger.error('An error occurred', { message: 'Something went wrong' });
 
 
 
-//&  2 - bazı monitoring kütüphaneleri: Winston, Pino, Bunyan, Roarr
+//&  2 - bazı monitoring tooları : pm2 
 // https://blog.logrocket.com/top-tools-node-js-monitoring/
 // https://dev.to/devland/7-best-tools-for-monitoring-nodejs-servers-168h
 
