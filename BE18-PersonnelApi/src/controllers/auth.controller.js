@@ -18,10 +18,11 @@ module.exports = {
 
                 //* eğer token yoksa bu user'a yeni bir token oluştur
                 if(!tokenData) {
-                    const tokenKey = Date.now()
+                    const tokenKey = user._id  + Date.now()
+                    console.log(user._id + Date.now())
                     tokenData = await Token.create({userId: user_id, token: tokenKey})
                 }
-            }
+            } 
 
         }
     },
