@@ -40,5 +40,32 @@ module.exports = {
             throw new Error("username or password is required.")
         }
     },
-    logout:(req,res)=>{}
+    logout: async (req, res) => {
+      // 1.yöntem (Kısa yöntem)
+      // console.log(req.user);
+      // const deleted = await Token.deleteOne({ userId: req.user._id }); //* userId unique olduğu için bu yöntem kullanılabilir
+  
+      // 2.yöntem => her cihazdan çıkış yapmasını sağlama (çoklu cihaz)
+      // console.log(req.user);
+      // const deleted = await Token.deleteMany({ userId: req.user._id });
+  
+      // 2.yöntem: birden fazla token bilgisi olursa sadece gelen token bilgisinin silinmesini sağlama (çoklu cihaz)
+      //! bizim senaryomuzda userId ve token unique olduğu için bu yöntemde kullanılabilir
+      const auth = req.headers?.authorization || null;
+      const tokenKey = auth ? auth.split(" ") : null;
+  
+      let deleted = null;
+      if (tokenKey && tokenKey[0] == "Token") {
+        deleted = await Token.deleteOne({ token: tokenKey[1] });
+      }
+      res.status(deleted.deletedCount > 0 ? 200 : 400).send({
+        error: !deleted.deletedCount,
+        deleted,
+        message: deleted.deletedCount > 0 ? "Logout Ok" : "Logout Failed",
+      });
+    },
+
+    }
+
+
 }
