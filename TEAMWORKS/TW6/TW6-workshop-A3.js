@@ -3,7 +3,7 @@
 //! What is the purpose of structured logging, and how can it benefit the debugging and monitoring of a Node.js application?
 
 
-//& 1 - bazı structured logging kütüphaneleri: Morgan, Winston, Pino, Bunyan
+//& 1 - bazı structured logging kütüphaneleri: Morgan (middleware), Winston(lib), Pino(lib), Bunyan(lib)
 
 // https://betterstack.com/community/guides/logging/best-nodejs-logging-libraries/
 // https://expressjs.com/en/resources/middleware/morgan.html
@@ -41,6 +41,7 @@ const express = require('express');
 const morgan = require('morgan');
 
 const app = express();
+
 
 // Özel format stringini kullanarak Morgan'ı ekleme:
 app.use(morgan(function (tokens, req, res) {

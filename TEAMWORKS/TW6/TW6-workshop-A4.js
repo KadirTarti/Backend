@@ -77,7 +77,7 @@ GitHub, Jira, Trello, Slack, Asana, Microsoft Teams
 
 
 Logging Araçları: Winston, Pino, Bunyan, Morgan
-Documentation Araçları: TypeDoc, Redoc, JSDoc, Swagger 
+Documentation Araçları: TypeDoc, Redoc, JSDoc, Swagger, 
 https://38103.fullstack.clarusway.com/documents/swagger/#/
 https://38103.fullstack.clarusway.com/documents/redoc/
 */
