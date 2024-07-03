@@ -22,7 +22,7 @@ function authenticateToken(req, res, next) {
   
     if (token == null) return res.sendStatus(401); // Eğer token yoksa, yetkisiz erişim hatası döndür
   
-    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
+    jwt.verify(token, process.env.TOKEN_SECRET, (err, user) => {
       if (err) return res.sendStatus(403); // Eğer token geçersizse, yetkisiz erişim hatası döndür
       req.user = user;
       next();
@@ -33,7 +33,7 @@ function authenticateToken(req, res, next) {
  //* Role-Based Access Control (RBAC) middleware'i
 function checkRole(role) {
     return (req, res, next) => {
-      if (req.user && req.user.role === role) {
+      if (req.user && req.user.role === 'lead') {
         next();
       } else {
         res.status(403).send('Forbidden: You do not have permission to access this resource.');
@@ -43,8 +43,8 @@ function checkRole(role) {
 
 
 //* Admin olanlarin erişimini kontrol:
-app.get('/admin', authenticateToken, checkRole('admin'), (req, res) => {
-    res.send('Admin paneline hoş geldiniz.');
+app.get('/lead', authenticateToken, checkRole('lead'), (req, res) => {
+    res.send('Lead paneline hoş geldiniz.');
   });
 
   
@@ -54,7 +54,7 @@ app.get('/admin', authenticateToken, checkRole('admin'), (req, res) => {
 
   checkRole middleware fonksiyonu, belirli bir rola sahip olup olmadığını kontrol eder. Eğer kullanıcı belirtilen rola sahipse, isteği ilgili rotaya yönlendirir; aksi takdirde, kullanıcıya erişim izni verilmeyerek bir hata mesajı döndürülür.
   
-  Bu örnekte, /admin rotasına erişim, önce authenticateToken middleware'ı ile kontrol edilir. Eğer kullanıcı yetkilendirilmişse, checkRole('admin') middleware'ı ile tekrar kontrol edilir. Eğer kullanıcı admin rolündeyse, isteği ilgili rotaya yönlendirir; aksi takdirde, kullanıcıya erişim izni verilmeyerek bir hata mesajı döndürülür.
+  Bu örnekte, /lead rotasına erişim, önce authenticateToken middleware'ı ile kontrol edilir. Eğer kullanıcı yetkilendirilmişse, checkRole('lead') middleware'ı ile tekrar kontrol edilir. Eğer kullanıcı lead rolündeyse, isteği ilgili rotaya yönlendirir; aksi takdirde, kullanıcıya erişim izni verilmeyerek bir hata mesajı döndürülür.
   */
 
   app.listen(3000, () => console.log('Server started on port 3000'));

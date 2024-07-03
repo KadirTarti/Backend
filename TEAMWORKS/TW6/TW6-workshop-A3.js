@@ -16,7 +16,8 @@
 //winston kütüphanesi ile örnek bir kod yapısı
 
  // logger.js : 
-const winston = require('winston');
+const winston = require('winston'); 
+//&  morgan
 
 const logger = winston.createLogger({  //winston kütüphanesinin createLogger fonksiyonunu kullanarak bir logger nesnesi oluşturduk
 
@@ -42,70 +43,37 @@ logger.error('An error occurred', { message: 'Something went wrong' });
 
 
 
-
-//&  2 - bazı monitoring tooları : pm2 
+// informaiton
+//&  2 -  monitoring hakkında kısa bilgi  
 // https://blog.logrocket.com/top-tools-node-js-monitoring/
 // https://dev.to/devland/7-best-tools-for-monitoring-nodejs-servers-168h
 
 //* Monitoring uygulamamızı izlemek, hataları otomatik olarak raporlamak ve uygulamanın performansını izlemek için kullanılabilir.
-
-
-//pm2 tool'u ile örnek bir kod yapısı
-
-// npm install pm2 -g
-//pm2 src/index.js --NAME "myApp" --watch
-
 /*
-Bu komut, index.js adlı dosyanızı başlatır ve uygulamamıza myApp adını verir. 
---watch seçeneği, PM2'ye uygulamanın değişikliklerini izlemesini söyler. Bu sayede, yapılan değişiklikler PM2 tarafından otomatik olarak algılanır ve uygulama yeniden başlatılır.
 
-PM2 ile izleme yapmamızın bize faydaları şöyledir:
-*Statü Takibi: PM2, uygulamanın statüsünü sürekli olarak izler ve günceller. Bu, uygulamanın aktif mi yoksa pasif mi olduğunu görmek için yararlıdır.
-^Hata Raporları: PM2, uygulamada meydana gelen hataları otomatik olarak raporlar. Bu, hatalarımızı hızlı bir şekilde tespit etmemize yardımcı olur.
-&Yüklenme Durumu: PM2, uygulamanızın yüklenme durumunu izler. Bu, uygulamanızın ne kadar sürdüğünü görmek için yararlıdır.
-Log Dosyaları: PM2, uygulamamızın loglarını otomatik olarak izler ve saklar. Bu, loglarımızı kolayca yönetmemize yardımcı olur.
+*Monitoring'İn faydaları:
 
-
-PM2 ile uygulamayı izlemek için çeşitli komutlara ihtiyacımız var:
-
-Listeleme
-*pm2 list - Tüm süreçlerin durumunu gösterir.
-pm2 prettylist - Süreç listesini pretty JSON formatında yazdırır.
-pm2 describe 0 - Belirli bir süreç hakkında tüm bilgileri gösterir.
-
-İzleme
-*pm2 monit - Tüm süreçleri izler.
-
-Loglar
-*pm2 logs  - Tüm süreçlerin loglarını gösterir.
-*pm2 flush - Tüm log dosyalarını temizler.
-pm2 reloadLogs - Tüm logları yeniden yükler.
-
-Eylemler
-*pm2 stop all - Tüm süreçleri durdurur.
-*pm2 restart all - Tüm süreçleri yeniden başlatır.
-*pm2 reload all - Ağa bağlı uygulamalar için 0 saniye kesinti olmadan yeniden yükler.
-pm2 stop 0 - Belirli bir süreç ID'sini durdurur.
-pm2 restart 0 - Belirli bir süreç ID'sini yeniden başlatır.
-pm2 delete 0 - Belirli bir süreçten PM2 listesindeyi siler.
-pm2 delete all - Tüm süreçlerden PM2 listesindeyi siler.
-
-Diğer
-*pm2 save: Mevcut PM2 süreci listesini ve tüm yönetilen uygulamaların yapılandırma bilgilerini kaydeder, böylece PM2 yeniden başlatıldığında otomatik olarak başlatılır.
-*/
+^Statü Takibi:
+ Uygulamanın statüsünü sürekli olarak izleyip güncellemeyi, uygulamanın aktif mi yoksa pasif mi olduğunu görmeyi sağlar
+^Hata Raporları:
+ Uygulamada meydana gelen hataları otomatik olarak raporlar. Bu, hataları hızlı bir şekilde tespit etmemize yardımcı olur.
+^Yüklenme Durumu:
+ Uygulamanın yüklenme durumunu izler. Bu, uygulamanın ne kadar sürdüğünü görmek için yararlıdır.
+^Log Dosyaları: 
+Uygulamanın loglarını otomatik olarak izler ve saklar. Bu, logları kolayca yönetmemize yardımcı olur.
 
 
-
-//^FARKLARI
+^FARKLARI
 /*
 Structured logging       log mesajlarının içeriğini ve formatını içerrir,
 Monitoring               uygulamanın genel performansını ve güvenilirliğini izler.
 
 Structured logging      genellikle uygulama içi bir işlevsellik iken
-Monitoring         genellikle uygulamanın dışındaki bir hizmet veya aracı gerektirir(uygulamanın performansını ve sağlığını izlemek için kullanılır)
+Monitoring         genellikle uygulamanın dışındaki bir hizmet veya aracı gerektirir
+                (uygulamanın performansını ve devamlılığını izlemek için kullanılır)
 
 Structured logging, log mesajlarının içeriğini analiz etmek için kullanılırken, 
-monitoring genellikle metrik ve istatistikleri analiz etmek için kullanılır.
+monitoring genellikle verileri ve istatistikleri analiz etmek için kullanılır.
 */
 
 /*
@@ -124,7 +92,7 @@ monitoring genellikle metrik ve istatistikleri analiz etmek için kullanılır.
 
 
 ^Monitoring Faydaları
-1- Uygulamanın yanıt sürelerini, CPU kullanımını, bellek kullanımını ve diğer önemli metrikleri izlemek, performansı optimize etmek ve potansiyel performans sorunlarını erken aşamada tespit etmek için önemlidir.
+1- Uygulamanın yanıt sürelerini, CPU kullanımını, bellek kullanımını ve diğer önemli verileri izlemek, performansı optimize etmek ve potansiyel performans sorunlarını erken aşamada tespit etmek için önemlidir.
 
 2- Uygulamanın yanıt sürelerini ve hata oranlarını izlemek, kullanıcı deneyimini iyileştirmeye katkı sağlar
 

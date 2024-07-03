@@ -7,7 +7,7 @@ const router = express.Router();
 //! 1.What do permissions do in an express.js application?
 
 //? permissionlar sayesinde hassas bilgilere kimin erişeceği kontrol edilir.
-//? Böylece uygulamanın güvenliği sağlanır 
+//? Böylece uygulamanın güvenliği sağlanır.
 
 // Route-Level Permissions
 // Middleware
@@ -65,15 +65,32 @@ function isAdmin(req, res, next) {
 //! Adım 3: Authentication and Authorization:
 /* Kullanıcıların kimliklerini doğrulamak ve yetkilendirmek için bir yöntem sağlamamız gerekiyor. 
 Bu, genellikle bir oturum yönetimi veya token tabanlı kimlik doğrulama sistemi kullanılarak yapılır. 
-Bu örnekte, basitlik adına req.user objesini doğrudan kullanacağız, ancak gerçek bir uygulamada bu obje oturumdan alınmalı veya bir API anahtarı kullanarak doğrulanmalı.
 */
-
-//& Bu middleware, tüm istekler için çalışır ve kullanıcıyı doğrular
 
 // https://www.digitalocean.com/community/tutorials/nodejs-jwt-expressjs
 
-//npm install jsonwebtoken
+//! jwt (jsonwebtoken) mantığı nedir? güvenli mi? artıları - eksileri:
+/*
+JWT, kullanıcılara kimlik doğrulama ve yetkilendirme bilgileri sağlayan bir standarttır. 
+JWT, oturum bilgilerini saklamak için kullanılabilir, bu da kullanıcıların her istekte tekrar tekrar giriş yapma gerekliliğini ortadan kaldırır.
+JWT, bir kullanıcının hangi yetkilere sahip olduğunu gösteren bir payload içerebilir. Bu, uygulamalarınızda rol tabanlı erişim kontrolü (RBAC) uygulamanıza olanak tanır.
 
+^Avantajları:
+  - Kolay kimlik doğrulama / yetkilendirme yapma 
+  - Güvenlik : JWT güvenli algoritmalar kullanır 
+  - Esneklik : Kimlik doğrulama ve yetkilendirme dışında .... örn. meta veri taşımak veya kullanıcı verilerini saklamak için de kullanılabilir
+  - Bağımsızlık :JWT'ler belirli bir sunucu veya uygulamaya bağlı değildir. Farklı platformlar ve sistemler   arasında kolayca kullanılabilirler.
+  - Geniş topluluk desteği
+
+^Dezavantajları
+  - Karmaşıklık: Büyük projelerde JWT yönetimi karmaşık olabilir. 
+  - JWT'ler yanlış yönetilirse güvenlik riskleri oluşturabilir.
+  - Büyük ve karmaşık JWT'ler, özellikle düşük bant genişliği olan bağlantılarda performans sorunlarına neden olabilir.
+
+*/
+
+
+//npm install jsonwebtoken
 const jwt = require('jsonwebtoken');
 // JWT'yi doğrulayan middleware fonksiyonu
 function authenticateUser(req, res, next) {
@@ -161,7 +178,8 @@ function hasPermission(role, requiredPermission) {
       if (roles[role] && roles[role].includes(requiredPermission)) {
         next();
       } else {
-        res.status(403).send(`Forbidden: ${requiredPermission} permission not granted.`);
+        res.errorStatusCode = 403;
+        throw new Error(`Forbidden: ${requiredPermission} permission not granted.`);
       }
     };
   }
