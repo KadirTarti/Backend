@@ -1,6 +1,8 @@
-const express = require('express');
-const app = express();
-const router = express.Router();
+//& |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+
+//&     JWT,     RBAC,     Logging - Morgan,      Monitoring,     Documentation
+
+//& |||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 
 
 //!   QUESTION 1
@@ -13,6 +15,11 @@ const router = express.Router();
 // Middleware
 // Authentication and Authorization
 // Role-Based Access Control (RBAC)
+
+const express = require('express');
+const app = express();
+const router = express.Router();
+
 
 
 /*

@@ -3,7 +3,7 @@
 //! What is the purpose of structured logging, and how can it benefit the debugging and monitoring of a Node.js application?
 
 
-//& 1 - bazı structured logging kütüphaneleri: Morgan, Winston, Pino, Bunyan, Roarr
+//& 1 - bazı structured logging kütüphaneleri: Morgan, Winston, Pino, Bunyan
 
 // https://betterstack.com/community/guides/logging/best-nodejs-logging-libraries/
 // https://expressjs.com/en/resources/middleware/morgan.html
@@ -11,12 +11,13 @@
 
 
 //- Structured logging "analiz" ve "anlamayı" kolaylaştırmak için log verilerini key-value formatında tutarlı biçimde düzenlemeyi sağlar.
-//- Açık, aranabilir, bağlam açısından zengin log'lar sağlayarak Node.js'te "debugging" ve "monitoring" den yararlanır. Her ikisi de uygulamanın sağlığını izlemek, hataları tespit etmek ve performans optimizasyonu yapmak için kullanılır ancak farklı odak noktalarına sahiptir.
+//- Açık, aranabilir, bağlam açısından zengin log'lar sağlayarak Node.js'te "debugging" ve "monitoring" den yararlanır. Uygulamanın stabil işleyişini izleme, hataları tespit etme ve performans optimizasyonu yapmaya katkı sağlar.
 //- Sorunları hızlı biçimde tanımlama ve çözmeyi kolaylaştırır
-// Bu sayede loglar arasında arama, filtreleme ve analiz yapılabilir. Bu da sorunların kaynağını daha hızlı tespit etmenize ve uygulamanızın performansını daha etkin bir şekilde izlemenize yardımcı olur.
+//- Bu sayede loglar arasında arama, filtreleme ve analiz yapılabilir. Bu da sorunların kaynağını daha hızlı tespit etmenize ve uygulamanızın performansını daha etkin bir şekilde izlemenize yardımcı olur.
 
 
-//*morgan aracı ile örnek bir kod yapısı
+
+//*morgan middleware'i ile örnek bir kod yapısı
 
 //Morgan, varsayılan olarak Apache'nin standart kombinasyon çıktısını taklit eden bir format kullanır. Bu, genellikle HTTP isteklerini loglamak için kullanılır. Bir Apache output örneği:
 //? (combined) ----->  :remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"

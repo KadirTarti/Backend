@@ -44,7 +44,7 @@ function checkRole(role) {
 
 //* Admin olanlarin erişimini kontrol:
 app.get('/lead', authenticateToken, checkRole('lead'), (req, res) => {
-    res.send('Lead paneline hoş geldiniz.');
+    res.send('Welcome to Lead panel');
   });
 
   
