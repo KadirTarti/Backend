@@ -3,7 +3,7 @@
 //! What is the purpose of structured logging, and how can it benefit the debugging and monitoring of a Node.js application?
 
 
-//& 1 - bazı structured logging kütüphaneleri: Winston, Pino, Bunyan, Roarr
+//& 1 - bazı structured logging kütüphaneleri: Morgan, Winston, Pino, Bunyan, Roarr
 
 // https://betterstack.com/community/guides/logging/best-nodejs-logging-libraries/
 // https://blog.appsignal.com/2021/09/01/best-practices-for-logging-in-nodejs.html
@@ -13,23 +13,31 @@
 //* * Açık, aranabilir, bağlam açısından zengin log'lar sağlayarak Node.js'te "debugging" ve "monitoring" den yararlanır. Her ikisi de uygulamanın sağlığını izlemek, hataları tespit etmek ve performans optimizasyonu yapmak için kullanılır ancak farklı odak noktalarına sahiptir.
 //* * * Sorunları hızlı biçimde tanımlama ve çözmeyi kolaylaştırır
 
-//winston kütüphanesi ile örnek bir kod yapısı
+//morgan kütüphanesi ile örnek bir kod yapısı
 
- // logger.js : 
-const winston = require('winston'); 
-//&  morgan
+// $ npm install morgan
 
-const logger = winston.createLogger({  //winston kütüphanesinin createLogger fonksiyonunu kullanarak bir logger nesnesi oluşturduk
+const morgan = require('morgan')
 
-  level: 'info',   // level, logger'ın hangi log seviyelerini kaydetmesi gerektiğini belirtir (error, warn, info, http, verbose, debug ve silly)
-  format: winston.format.json(),    //log mesajlarının biçimi
-  transports: [  //mesajların nereye kaydedileceğini belirler
-    new winston.transports.File({ filename: 'error.log', level: 'error' }), //errorlar
-    new winston.transports.File({ filename: 'combined.log' })  //  tüm log mesajları (herhangi bir seviyeden) kaydedilir
-  ]
-});
-//Bu kod, winston ile bir logger oluşturur. Logger, log seviyesi olarak info kullanır ve logları JSON formatında saklar. Hatalar (error seviyesindeki loglar) ayrıca error.log dosyasına yazılır, diğer loglar ise combined.log dosyasına yazılır.
-module.exports = logger;
+morgan('tiny') 
+/* "Tiny" Morgan'ın en küçük ve en hızlı logger formatıdır. "Tiny" formatı, her istek için şu bilgileri içerir:
+İstek yöntemi (:method)
+İstek URL'si (:url)
+HTTP durum kodu (:status)
+İstek boyutu (:res[content-length])
+Cevap süresi (:response-time)
+*/
+
+morgan(function (tokens, req, res) {
+  return [
+    tokens.method(req, res),
+    tokens.url(req, res),
+    tokens.status(req, res),
+    tokens.res(req, res, 'content-length'), '-',
+    tokens['response-time'](req, res), 'ms'
+  ].join(' ')
+})
+
 
 
 
