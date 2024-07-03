@@ -9,34 +9,32 @@
 // https://expressjs.com/en/resources/middleware/morgan.html
 // https://dev.to/devland/how-to-use-morgan-in-your-nodejs-project-21im
 
+
 //- Structured logging "analiz" ve "anlamayı" kolaylaştırmak için log verilerini key-value formatında tutarlı biçimde düzenlemeyi sağlar.
 //- Açık, aranabilir, bağlam açısından zengin log'lar sağlayarak Node.js'te "debugging" ve "monitoring" den yararlanır. Her ikisi de uygulamanın sağlığını izlemek, hataları tespit etmek ve performans optimizasyonu yapmak için kullanılır ancak farklı odak noktalarına sahiptir.
 //- Sorunları hızlı biçimde tanımlama ve çözmeyi kolaylaştırır
+// Bu sayede loglar arasında arama, filtreleme ve analiz yapılabilir. Bu da sorunların kaynağını daha hızlı tespit etmenize ve uygulamanızın performansını daha etkin bir şekilde izlemenize yardımcı olur.
 
 
+//*morgan aracı ile örnek bir kod yapısı
 
-//*morgan kütüphanesi ile örnek bir kod yapısı
-
-//Morgan, varsayılan olarak Apache'nin standart kombinasyon çıktısını taklit eden bir format kullanır. Bu, genellikle HTTP isteklerini loglamak için kullanılır. Birkaç Apache output örneği:
+//Morgan, varsayılan olarak Apache'nin standart kombinasyon çıktısını taklit eden bir format kullanır. Bu, genellikle HTTP isteklerini loglamak için kullanılır. Bir Apache output örneği:
 //? (combined) ----->  :remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"
-//^ (common)   ----->  :remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length]
-//& (tiny)  -------->  :method :url :status :res[content-length] - :response-time ms
 
 
-
-// $ npm install morgan
 
 
 // "Tiny" Morgan'ın en küçük ve en hızlı logger formatıdır. "Tiny", her istek için şu bilgileri içerir:
 // Morgan'ın "tiny" formatını kullanarak bir logger oluşturun ve uygulamanıza ekleyin.
 app.use(morgan('tiny'));
+//& (tiny)  -------->  :method :url :status :res[content-length] - :response-time ms
 //! tiny çağırdığımız yerde aşağıdaki gibi kendi formatımızı yazmamıza gerek yok. o nedenle  bu kodu burada tuttuk. aşaıda index.js yapısında Morgan kullanımına küçük bir örnek var:
 
 
 
 
 
-
+// $ npm install morgan
 
 const express = require('express');
 const morgan = require('morgan');
