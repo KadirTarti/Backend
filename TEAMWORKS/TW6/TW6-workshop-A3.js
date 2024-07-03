@@ -6,48 +6,66 @@
 //& 1 - bazı structured logging kütüphaneleri: Morgan, Winston, Pino, Bunyan, Roarr
 
 // https://betterstack.com/community/guides/logging/best-nodejs-logging-libraries/
-// https://blog.appsignal.com/2021/09/01/best-practices-for-logging-in-nodejs.html
+// https://expressjs.com/en/resources/middleware/morgan.html
+// https://dev.to/devland/how-to-use-morgan-in-your-nodejs-project-21im
+
+//- Structured logging "analiz" ve "anlamayı" kolaylaştırmak için log verilerini key-value formatında tutarlı biçimde düzenlemeyi sağlar.
+//- Açık, aranabilir, bağlam açısından zengin log'lar sağlayarak Node.js'te "debugging" ve "monitoring" den yararlanır. Her ikisi de uygulamanın sağlığını izlemek, hataları tespit etmek ve performans optimizasyonu yapmak için kullanılır ancak farklı odak noktalarına sahiptir.
+//- Sorunları hızlı biçimde tanımlama ve çözmeyi kolaylaştırır
 
 
-//* Structured logging "analiz" ve "anlamayı" kolaylaştırmak için log verilerini JSON veya key-value formatında tutarlı biçimde düzenlemeyi sağlar.
-//* * Açık, aranabilir, bağlam açısından zengin log'lar sağlayarak Node.js'te "debugging" ve "monitoring" den yararlanır. Her ikisi de uygulamanın sağlığını izlemek, hataları tespit etmek ve performans optimizasyonu yapmak için kullanılır ancak farklı odak noktalarına sahiptir.
-//* * * Sorunları hızlı biçimde tanımlama ve çözmeyi kolaylaştırır
 
-//morgan kütüphanesi ile örnek bir kod yapısı
+//*morgan kütüphanesi ile örnek bir kod yapısı
+
+//Morgan, varsayılan olarak Apache'nin standart kombinasyon çıktısını taklit eden bir format kullanır. Bu, genellikle HTTP isteklerini loglamak için kullanılır. Birkaç Apache output örneği:
+//? (combined) ----->  :remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length] ":referrer" ":user-agent"
+//^ (common)   ----->  :remote-addr - :remote-user [:date[clf]] ":method :url HTTP/:http-version" :status :res[content-length]
+//& (tiny)  -------->  :method :url :status :res[content-length] - :response-time ms
+
+
 
 // $ npm install morgan
 
-const morgan = require('morgan')
 
-morgan('tiny') 
-/* "Tiny" Morgan'ın en küçük ve en hızlı logger formatıdır. "Tiny" formatı, her istek için şu bilgileri içerir:
-İstek yöntemi (:method)
-İstek URL'si (:url)
-HTTP durum kodu (:status)
-İstek boyutu (:res[content-length])
-Cevap süresi (:response-time)
-*/
+// "Tiny" Morgan'ın en küçük ve en hızlı logger formatıdır. "Tiny", her istek için şu bilgileri içerir:
+// Morgan'ın "tiny" formatını kullanarak bir logger oluşturun ve uygulamanıza ekleyin.
+app.use(morgan('tiny'));
+//! tiny çağırdığımız yerde aşağıdaki gibi kendi formatımızı yazmamıza gerek yok. o nedenle  bu kodu burada tuttuk. aşaıda index.js yapısında Morgan kullanımına küçük bir örnek var:
 
-morgan(function (tokens, req, res) {
+
+
+
+
+
+
+const express = require('express');
+const morgan = require('morgan');
+
+const app = express();
+
+// Özel format stringini kullanarak Morgan'ı ekleme:
+app.use(morgan(function (tokens, req, res) {
   return [
-    tokens.method(req, res),
-    tokens.url(req, res),
-    tokens.status(req, res),
-    tokens.res(req, res, 'content-length'), '-',
-    tokens['response-time'](req, res), 'ms'
-  ].join(' ')
-})
+    tokens.method(req, res),   // İstek yöntemini (GET, POST vb.) alır.
+    tokens.url(req, res),      // İstek URL'sini alır.
+    tokens.status(req, res),   // HTTP durum kodunu alır.
+    tokens.res(req, res, 'content-length'),   // İstek boyutunu alır.
+    tokens['response-time'](req, res),        // Yanıt süresini (milisaniye cinsinden) alır.
+  ].join(' ');   // join metodu ile birleştirilip boşluklarla ayrılan bir string olarak döner
+}));
+
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Server is running on http://localhost:${PORT}`);
+});
 
 
 
-
-//* logger'ı kullanacağımız dosyada:
-const logger = require('./logger');
-
-logger.info('Application started');
-logger.error('An error occurred', { message: 'Something went wrong' });
-
-//logger.info metodu, uygulama başlatıldığında bir bilgi mesajı loglar. logger.error metodu ise bir hata mesajı loglar ve ekstra bir nesne içerir, bu nesnenin içeriği log mesajına eklenir.
 
 
 
@@ -80,8 +98,8 @@ Structured logging      genellikle uygulama içi bir işlevsellik iken
 Monitoring         genellikle uygulamanın dışındaki bir hizmet veya aracı gerektirir
                 (uygulamanın performansını ve devamlılığını izlemek için kullanılır)
 
-Structured logging, log mesajlarının içeriğini analiz etmek için kullanılırken, 
-monitoring genellikle verileri ve istatistikleri analiz etmek için kullanılır.
+Structured logging,     log mesajlarının içeriğini analiz etmek için kullanılırken, 
+monitoring            genellikle verileri ve istatistikleri analiz etmek için kullanılır.
 */
 
 /*
