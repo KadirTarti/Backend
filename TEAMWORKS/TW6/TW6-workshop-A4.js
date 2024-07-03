@@ -67,7 +67,17 @@ Uygulamanın kullanımı ve işlevlerine dair bir rehber olan kullanıcı kılav
 - Dokümantasyon oluşturma ve güncelleme için otomasyon araçlarını kullanılabilir.
 
 
-*Araçlar:
+*Öneri:
+Görevleri yönetmek ve ekip çalışmasını geliştirmek için işbirliği araçları kullanılabilir.
+Bu araçlar, projelerin daha verimli bir şekilde yürütülmesini ve takım üyelerinin birbirleriyle daha etkili bir şekilde iletişim kurmasını sağlar. 
+Sorun izleyicileri ve proje panoları gibi araçlar, projenin ilerleyişini takip etme, görev dağılımını yönetme ve takım üyeleri arasında bilgi paylaşımını kolaylaştırma konusunda yardımcı olur.
+
+Projenin durumu ve takım çalışmasındaki gereksinimlere göre çeşitli araçlar belirlenebilir. Bazıları:
+GitHub, Jira, Trello, Slack, Asana, Microsoft Teams
+
+
 Logging Araçları: Winston, Pino, Bunyan, Morgan
 Documentation Araçları: TypeDoc, Redoc, JSDoc, Swagger 
+https://38103.fullstack.clarusway.com/documents/swagger/#/
+https://38103.fullstack.clarusway.com/documents/redoc/
 */
