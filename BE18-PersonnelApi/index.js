@@ -55,7 +55,31 @@ dbConnection()
 
 
 
+/*                                Documentation                               */
+/* -------------------------------------------------------------------------- */
+// https://swagger-autogen.github.io/docs/
+// $ npm i swagger-autogen
+// $ npm i swagger-ui-express
+// $ npm i redoc-express
 
+//* JSON
+app.use("/documents/json", (req, res) => {
+    res.sendFile("swagger.json", { root: "." });
+  });
+  
+  //! SWAGGER
+  const swaggerUi = require("swagger-ui-express");
+  const swaggerDocument = require("./swagger.json");
+  
+  app.use(
+    "/documents/swagger",
+    swaggerUi.serve,
+    swaggerUi.setup(swaggerDocument, {
+      swaggerOptions: {
+        persistAuthorization: true,
+      },
+    })
+  );
 
 /* -------------------------------------------------------------------------- */
 /*                                 MiddleWares                                */
