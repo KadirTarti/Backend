@@ -14,6 +14,8 @@ router.use('/auth', require('./auth.router'))
 
 router.use("/departments", require("./department.router"));
 
+router.use("/documents", require("./documents.router"));
+
 router.use("/personnels", require("./personnel.router"));
 
 router.use('/tokens', require('./token.router'))
