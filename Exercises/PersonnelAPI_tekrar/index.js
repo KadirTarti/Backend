@@ -17,7 +17,7 @@ require('dotenv').config()
 const PORT = process.env.PORT || 8000
 
 //asyncErrors to errorHandler
-require('express-async-errors ')
+require('express-async-errors')
 
 // continue from here...
 
