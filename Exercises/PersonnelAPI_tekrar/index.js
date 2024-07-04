@@ -11,6 +11,11 @@ const app = express()
 
 /* ------------------------------------------------------- */
 
+// Required modules
+//*envVariables to process .env
+require('dotenv').config()
+const PORT = process.env.PORT || 8000
+
 
 
 // continue from here...
