@@ -47,7 +47,7 @@ const morgan = require("morgan");
 //! write logs to a file
 // create a write stream (in append mode)
 const fs = require("node:fs") //* dosya işlemleri için built-in module
-var accessLogStream = fs.createWriteStream("./access.log", { flags: 'a+' })
+var accessLogStream = fs.createWriteStream("./access.log", { flags: 'a+' })  // otomatik acces dosyası oluşturur
 
 // setup the logger
 app.use(morgan('combined', { stream: accessLogStream }))
