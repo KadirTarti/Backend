@@ -83,3 +83,9 @@ const PersonnelSchema = new mongoose.Schema({
 })
 
 module.export = mongoose.model('Personnel', PersonnelSchema)
+
+module.exports = {
+    schema: {
+        obj: PersonnelSchema
+    }
+};
