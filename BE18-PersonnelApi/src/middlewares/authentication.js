@@ -28,6 +28,5 @@ if(tokenKey && tokenKey[0] == 'Token'){
   if(tokenData) req.user = tokenData.userId
 }
 
-
 next();
 }
