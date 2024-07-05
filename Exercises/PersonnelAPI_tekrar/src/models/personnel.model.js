@@ -6,11 +6,11 @@ const { mongoose } = require('../configs/dbConnection')
 /* ------------------------------------------------------- */
 
 const PersonnelSchema = new mongoose.Schema({
-    departmentId : {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Department',
-        required: true
-    },
+    departmentId: {
+  type: mongoose.Schema.Types.ObjectId,
+  ref: 'Department',
+  required: true
+},
     username: {
         type: String,
         trim: true,
