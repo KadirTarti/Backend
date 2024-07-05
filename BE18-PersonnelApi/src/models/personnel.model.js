@@ -74,7 +74,7 @@ const PersonnelSchema = new mongoose.Schema({
     },
     startedAt: {
         type: Date,
-        default: Date.new
+        default: Date.now
     }
 }, 
 {
@@ -82,7 +82,7 @@ const PersonnelSchema = new mongoose.Schema({
     timestamps: true
 })
 
-module.export = mongoose.model('Personnel', PersonnelSchema)
+module.exports = mongoose.model('Personnel', PersonnelSchema)
 
 module.exports = {
     schema: {
