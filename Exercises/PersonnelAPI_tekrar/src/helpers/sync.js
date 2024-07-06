@@ -23,6 +23,7 @@ module.exports = async function() {
         "DevOps Department",
         "CyberSec Department",
     ]
+
     departments.forEach(value => {
         // Department.create:
         Department.create({ name: value }).then((department) => {
