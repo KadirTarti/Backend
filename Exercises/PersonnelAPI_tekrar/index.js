@@ -37,7 +37,7 @@ dbConnection()
 //*accept json
 app.use(express.json())
 
-//* filter,search,sort,find Oagination
+//* filter,search,sort,find Oagination (res.getModelList)
 app.use(require('./src/middlewares/findSearchSortPagi'))
 
 
@@ -48,8 +48,14 @@ app.all('/', (req, res) => {
     res.send('Welcome to PersonneLAPI')
 })
 
-app.use('/departments', require('./src/routes/department.router'))
-app.use('/personnels', require('./src/routes/personnel.router'))
+// app.use('/departments', require('./src/routes/department.router'))
+// app.use('/personnels', require('./src/routes/personnel.router'))
+// app.use('/token', require('./src/routes/token.router'))
+// ?app.use(require('./src/routes/index'))  -> js indexleri default olarak arayıp bulur. bu nedenle alttaki gibi de yazılabilir:
+app.use(require('./src/routes/'))
+
+
+
 
 //* eşleşmeyen routerları yakalar
 app.use((req, res, next)=> {
