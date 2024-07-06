@@ -33,7 +33,7 @@ module.exports = async function() {
                 Personnel.create({
                     departmentId: department._id,
                     username: "test" + (value[0] + i),
-                    password: "as1234df",
+                    password: "1234",
                     firstName: "firstName",
                     lastName: "lastName",
                     phone: "123456789",
