@@ -46,7 +46,11 @@ app.use(require('./src/middlewares/authentication'))
 /*                                   Routes                                   */
 /* -------------------------------------------------------------------------- */
 app.all('/', (req, res) => {
-    res.send('Welcome to PersonneLAPI')
+    // res.send('Welcome to PersonneLAPI')
+    res.send({
+        message: "Welcome to the Personnel API",
+        user: req.user,
+})
 })
 
 // app.use('/departments', require('./src/routes/department.router'))
