@@ -19,4 +19,9 @@ const TokenSchema = new mongoose.Schema({
         index:true,
         unique: true
     }
-},{})
+},{
+    collection: 'tokens',
+    timestamps: true
+})
+
+module.exports = mongoose.model('Token', TokenSchema)
