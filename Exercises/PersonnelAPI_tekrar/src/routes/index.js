@@ -10,7 +10,7 @@ const router = require("express").Router();
 
 //! ana index.js'teki tüm route'ları burada topladık, orayı rahatlatmak için !
 
-// router.use('/auth', require('./auth.router'))
+router.use('/auth', require('./auth.router'))
 
 router.use("/departments", require("./department.router"));
 
