@@ -15,7 +15,7 @@ module.exports = async(req,res,next) => {
   // Authorization: x-auth-token ...
   // Authorization: Bearer ...
 
-//   console.log(req.headers);
+  console.log(req.headers);
 
 const auth = req.headers?.authorization || null;
 console.log(auth);

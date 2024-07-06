@@ -40,6 +40,7 @@ app.use(express.json())
 //* filter,search,sort,find Oagination (res.getModelList)
 app.use(require('./src/middlewares/findSearchSortPagi'))
 
+app.use(require('./src/middlewares/authentication'))
 
 /* -------------------------------------------------------------------------- */
 /*                                   Routes                                   */
