@@ -51,6 +51,16 @@ app.all('/', (req, res) => {
 app.use('/departments', require('./src/routes/department.router'))
 app.use('/personnels', require('./src/routes/personnel.router'))
 
+//* eşleşmeyen routerları yakalar
+app.use((req, res, next)=> {
+    res.status(404).send({
+        error:true,
+        message: "Route not found!"
+    })
+})
+
+
+
 /* ------------------------------------------------------- */
 
 // errorHandler:
