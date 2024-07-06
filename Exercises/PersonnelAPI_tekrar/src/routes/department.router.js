@@ -7,7 +7,6 @@ const router = require("express").Router();
 
 const department = require("../controllers/department.controller");
 const idValidation = require("../middlewares/idValidation");
-// const permission = require('../middlewares/permissions')
 
 //* URL : /departments
 
