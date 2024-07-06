@@ -38,7 +38,7 @@ dbConnection()
 app.use(express.json())
 
 //* filter,search,sort,find Oagination
-require('./src/middlewares/findSearchSortPagi')
+app.use(require('./src/middlewares/findSearchSortPagi'))
 
 
 /* -------------------------------------------------------------------------- */
@@ -48,6 +48,7 @@ app.all('/', (req, res) => {
     res.send('Welcome to PersonneLAPI')
 })
 
+app.use('/departments', require('./src/routes/department.router'))
 
 /* ------------------------------------------------------- */
 

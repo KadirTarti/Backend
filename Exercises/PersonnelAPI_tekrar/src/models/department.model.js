@@ -7,7 +7,7 @@ const { mongoose } = require('../configs/dbConnection')
 
 const DepartmentSchema = new mongoose.Schema({
     name: {
-        type: Strimg,
+        type: String,
         trim: true,
         required: true,
         unique: true
