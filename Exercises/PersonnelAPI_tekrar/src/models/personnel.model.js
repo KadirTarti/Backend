@@ -21,7 +21,7 @@ const PersonnelSchema = new mongoose.Schema({
         type: String,
         trim: true,
         required: true,
-        // set:(password)=> passwordEncrypt(password)
+        set:(password)=> passwordEncrypt(password)
     },
     firstName: {
         type: String,
@@ -44,6 +44,10 @@ const PersonnelSchema = new mongoose.Schema({
         required: true,
         unique: true,
         // validate: (email) => email.includes('@') && email.includes()
+        validate: [
+        (email) => email.includes("@") && email.split("@")[1].includes("."),
+        "Email is invalid!",
+      ],
     },
     title: {
         type: String,
