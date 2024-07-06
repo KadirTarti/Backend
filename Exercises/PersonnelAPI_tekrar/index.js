@@ -20,6 +20,10 @@ const PORT = process.env.PORT || 8000
 require('express-async-errors')
 
 
+/* -------------------------------------------------------------------------- */
+/*                                configuration                               */
+/* -------------------------------------------------------------------------- */
+
 //! database Connection
 const {dbConnection} = require('./src/configs/dbConnection')
 dbConnection()
@@ -27,19 +31,21 @@ dbConnection()
 
 
 /* -------------------------------------------------------------------------- */
-/*                                 Middleware                                 */
+/*                                 Middlewares                                 */
 /* -------------------------------------------------------------------------- */
 
 //*accept json
 app.use(express.json())
 
+//* filter,search,sort,find Oagination
+require('./src/middlewares/findSearchSortPagi')
 
 
 /* -------------------------------------------------------------------------- */
 /*                                   Routes                                   */
 /* -------------------------------------------------------------------------- */
-app.all('/', (res, req) => {
-    res.send('Welcome to my app')
+app.all('/', (req, res) => {
+    res.send('Welcome to PersonneLAPI')
 })
 
 
