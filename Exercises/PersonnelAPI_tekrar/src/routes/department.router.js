@@ -13,7 +13,7 @@ const idValidation = require("../middlewares/idValidation");
 
 router.route("/").get(department.list).post(department.create);
 
-// router.route("/:id/personnels").get(permission.isAdminOrLead,department.personnels);//* departmana göre personel listeleme
+router.route("/:id/personnels").get(department.personnels);//* departmana göre personel listeleme
 router
   .route("/:id")
   .all(idValidation)
