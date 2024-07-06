@@ -82,26 +82,26 @@ module.exports = {
       data,
     });
   },
-  personnels: async (req, res) => {
-    /*
-      #swagger.tags = ["Departments"]
-    */
-    const Personnel = require("../models/personnel.model");
+  // personnels: async (req, res) => {
+  //   /*
+  //     #swagger.tags = ["Departments"]
+  //   */
+  //   const Personnel = require("../models/personnel.model");
 
-    const data = await res.getModelList(
-      Personnel,
-      {
-        departmentId: req.params.id,
-      },
-      "departmentId"
-    );
+  //   const data = await res.getModelList(
+  //     Personnel,
+  //     {
+  //       departmentId: req.params.id,
+  //     },
+  //     "departmentId"
+  //   );
 
-    res.status(200).send({
-      error: false,
-      detail: await res.getModelListDetails(Personnel, {
-        departmentId: req.params.id,
-      }),
-      data,
-    });
-  },
+  //   res.status(200).send({
+  //     error: false,
+  //     detail: await res.getModelListDetails(Personnel, {
+  //       departmentId: req.params.id,
+  //     }),
+  //     data,
+  //   });
+  // },
 };
