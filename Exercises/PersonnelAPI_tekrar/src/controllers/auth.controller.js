@@ -32,6 +32,7 @@ module.exports = {
             })
           }else{
             res.errorStatusCode = 401;
+            console.log(username, password)
             throw new Error("Wrong Username or Password.")
           }
 
