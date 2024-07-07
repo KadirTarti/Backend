@@ -76,24 +76,24 @@ dbConnection()
 // $ npm i swagger-ui-express
 // $ npm i redoc-express
 
-//* JSON  (json formatında dökümantasyon)
-app.use("/documents/json", (req, res) => {
-  res.sendFile("swagger.json", { root: "." });
-});
+// //* JSON  (json formatında dökümantasyon)
+// app.use("/documents/json", (req, res) => {
+//   res.sendFile("swagger.json", { root: "." });
+// });
 
-//! SWAGGER  (swagger formatında dökümantasyon)
-const swaggerUi = require("swagger-ui-express");
-const swaggerDocument = require("./swagger.json");
+// //! SWAGGER  (swagger formatında dökümantasyon)
+// const swaggerUi = require("swagger-ui-express");
+// const swaggerDocument = require("./swagger.json");
 
-app.use(
-  "/documents/swagger",
-  swaggerUi.serve,
-  swaggerUi.setup(swaggerDocument, {
-    swaggerOptions: {
-      persistAuthorization: true,
-    },
-  })
-);
+// app.use(
+//   "/documents/swagger",
+//   swaggerUi.serve,
+//   swaggerUi.setup(swaggerDocument, {
+//     swaggerOptions: {
+//       persistAuthorization: true,
+//     },
+//   })
+// );
 
 //? REDOC
 // const redoc = require("redoc-express");
