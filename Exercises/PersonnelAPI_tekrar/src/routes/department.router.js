@@ -13,7 +13,7 @@ const permission = require('../middlewares/permissions')
 
 router.route("/").get(permission.isLogin, department.list).post(permission.isAdmin, department.create);
 
-router.route("/:id/personnels").get(persmission.isAdminOrLead, department.personnels);//* departmana göre personel listeleme
+router.route("/:id/personnels").get(permission.isAdminOrLead, department.personnels);//* departmana göre personel listeleme
 
 router
   .route("/:id")
