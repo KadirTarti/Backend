@@ -28,6 +28,46 @@ require('express-async-errors')
 const {dbConnection} = require('./src/configs/dbConnection')
 dbConnection()
 
+//-------------------------------------------------------------------------
+
+//* MORGAN LOGGING
+// https://expressjs.com/en/resources/middleware/morgan.html
+// https://github.com/expressjs/morgan
+//? npm i morgan
+
+const morgan = require("morgan");
+
+// app.use(morgan("combined"))
+app.use(morgan("common"))
+// app.use(morgan("dev"))
+// app.use(morgan("short"))
+// app.use(morgan("tiny"))
+// app.use(morgan('IP=:remote-addr - :remote-user | TIME=[:date[clf]] | "METHOD=:method | URL=:url | HTTP/:http-version" | STATUS=:status | LENGTH=:res[content-length] |  REF=":referrer" | AGENT=":user-agent"'))
+
+
+//! write logs to a file (tek bir dosy)
+// create a write stream (in append mode)
+// const fs = require("node:fs") //* dosya işlemleri için built-in module
+// let accessLogStream = fs.createWriteStream("./access.log", { flags: 'a+' })
+
+// // setup the logger
+// app.use(morgan('combined', { stream: accessLogStream }))
+// app.use(
+//   morgan("combined", {
+//     stream: fs.createWriteStream("./access.log", { flags: "a+" }),
+//   })
+// );
+//! write logs to a file day by day (her gün bir dosya)
+const fs = require("node:fs");
+
+const now = new Date().toISOString().split("T")[0]
+console.log(typeof now, now)
+
+app.use(
+  morgan("combined", {
+    stream: fs.createWriteStream(`./logs/${now}.log`, { flags: "a+" }),
+  })
+);
 
 
 /* -------------------------------------------------------------------------- */
