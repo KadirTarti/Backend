@@ -35,10 +35,10 @@ dbConnection()
 // https://github.com/expressjs/morgan
 //? npm i morgan
 
-const morgan = require("morgan");
+// const morgan = require("morgan");
 
 // app.use(morgan("combined"))
-app.use(morgan("common"))
+// app.use(morgan("common"))
 // app.use(morgan("dev"))
 // app.use(morgan("short"))
 // app.use(morgan("tiny"))
@@ -58,16 +58,16 @@ app.use(morgan("common"))
 //   })
 // );
 //! write logs to a file day by day (her gün bir dosya)
-const fs = require("node:fs");
+// const fs = require("node:fs");
 
-const now = new Date().toISOString().split("T")[0]
-console.log(typeof now, now)
+// const now = new Date().toISOString().split("T")[0]
+// console.log(typeof now, now)
 
-app.use(
-  morgan("combined", {
-    stream: fs.createWriteStream(`./logs/${now}.log`, { flags: "a+" }),
-  })
-);
+// app.use(
+//   morgan("combined", {
+//     stream: fs.createWriteStream(`./logs/${now}.log`, { flags: "a+" }),
+//   })
+// );
 
 
 /* -------------------------------------------------------------------------- */
@@ -76,6 +76,10 @@ app.use(
 
 //*accept json
 app.use(express.json())
+
+
+//* logging
+app.use(require('./src/middlewares/logging'))
 
 //* filter,search,sort,find Oagination (res.getModelList)
 app.use(require('./src/middlewares/findSearchSortPagi'))
