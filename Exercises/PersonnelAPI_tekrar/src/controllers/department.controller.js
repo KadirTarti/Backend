@@ -50,6 +50,7 @@ module.exports = {
   read: async (req, res) => {
     /*
       #swagger.tags = ["Departments"]
+      #swagger.summary = "Get Single Department"
     */
     // const data = await Department.findById(req.params.id) //* findById arka planda findOne sorgusunu çalıştırır.
     const data = await Department.findOne({ _id: req.params.id });
@@ -61,6 +62,14 @@ module.exports = {
   update: async (req, res) => {
     /*
       #swagger.tags = ["Departments"]
+      #swagger.summary = "Update Department"
+      #swagger.parameters["body"] = {
+      in: "body",
+      required : true,
+      schema:{
+        name:"Test Department"
+        }
+      }
     */
     const data = await Department.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true, //* modelde var olan validate fonksiyonlarının(built-in ve custom) update işlemi sırasında çalışmasını sağlayan özellik ***
@@ -74,6 +83,7 @@ module.exports = {
   delete: async (req, res) => {
     /*
       #swagger.tags = ["Departments"]
+      #swagger.summary = "Delete Department"
     */
     const data = await Department.deleteOne({ _id: req.params.id });
 
@@ -85,6 +95,7 @@ module.exports = {
   personnels: async (req, res) => {
     /*
       #swagger.tags = ["Departments"]
+      #swagger.summary = "Personnels of Department"
     */
     const Personnel = require("../models/personnel.model");
 
@@ -105,4 +116,3 @@ module.exports = {
     });
   },
 };
-  
