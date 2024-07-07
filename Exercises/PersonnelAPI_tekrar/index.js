@@ -68,6 +68,41 @@ dbConnection()
 //     stream: fs.createWriteStream(`./logs/${now}.log`, { flags: "a+" }),
 //   })
 // );
+/* -------------------------------------------------------------------------- */
+/*                                Documentation                               */
+/* -------------------------------------------------------------------------- */
+// https://swagger-autogen.github.io/docs/
+// $ npm i swagger-autogen
+// $ npm i swagger-ui-express
+// $ npm i redoc-express
+
+//* JSON
+// app.use("/documents/json", (req, res) => {
+//   res.sendFile("swagger.json", { root: "." });
+// });
+
+//! SWAGGER
+// const swaggerUi = require("swagger-ui-express");
+// const swaggerDocument = require("./swagger.json");
+
+// app.use(
+//   "/documents/swagger",
+//   swaggerUi.serve,
+//   swaggerUi.setup(swaggerDocument, {
+//     swaggerOptions: {
+//       persistAuthorization: true,
+//     },
+//   })
+// );
+
+//? REDOC
+// const redoc = require("redoc-express");
+// app.use("/documents/redoc", redoc({
+//   title: "Personnel Api",
+//   specUrl: '/documents/json'
+// }))
+
+
 
 
 /* -------------------------------------------------------------------------- */
