@@ -1,5 +1,7 @@
 'use strict'
 
+//* as a middleware (permission) || (authorization)
+
 
 module.exports = {
     isLogin: (req, res, next) => {
