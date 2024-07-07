@@ -3,7 +3,7 @@
 const { CustomError } = require("../errors/customError")
 
 /* -------------------------------------------------------
-    NODEJS EXPRESS | CLARUSWAY FullStack Team
+    ABDULKADIR TARTILACI - EXPRESS - PIZZA API
 ------------------------------------------------------- */
 
 module.exports = {
