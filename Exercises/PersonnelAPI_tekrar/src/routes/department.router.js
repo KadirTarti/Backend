@@ -11,16 +11,16 @@ const permission = require('../middlewares/permissions')
 
 //* URL : /departments
 
-router.route("/").get(permission.isLogin, department.list).post(department.create);
+router.route("/").get(permission.isLogin, department.list).post(permission.isAdmin, department.create);
 
 router.route("/:id/personnels").get(department.personnels);//* departmana göre personel listeleme
 router
   .route("/:id")
   .all(idValidation)
   .get(permission.isLogin, department.read)
-  .put(department.update)
-  .patch(department.update)
-  .delete(department.delete);
+  .put(permission.isAdmin, department.update)
+  .patch(permission.isAdmin, department.update)
+  .delete(permission.isAdmin, department.delete);
 
 /* ------------------------------------------------------- */
 module.exports = router;
