@@ -7,10 +7,14 @@ const router = require('express').Router()
 
 const personnel = require("../controllers/personnel.controller");
 const idValidation = require("../middlewares/idValidation");
-// const permission = require('../middlewares/permissions')
+const permission = require('../middlewares/permissions')
 
 //* url:  /personnels
-router.route("/").get(personnel.list).post(personnel.create);
+router
+  .route("/")
+  .get(permission.isAdmin, personnel.list)
+  .post(permission.isAdmin, personnel.create);
+
 
 router
   .route("/:id")
