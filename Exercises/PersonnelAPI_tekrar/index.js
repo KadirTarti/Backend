@@ -1,4 +1,4 @@
-"use strict"
+"use strict";
 /* -------------------------------------------------------
     EXPRESS - Personnel API
 ------------------------------------------------------- */
@@ -6,30 +6,28 @@
     $ npm i express dotenv mongoose express-async-errors
 */
 
-const express = require('express')
-const app = express()
+const express = require("express");
+const app = express();
 
 /* ------------------------------------------------------- */
+// Required Modules
 
-// Required modules
-//*envVariables to process .env
-require('dotenv').config()
-const PORT = process.env.PORT || 8000
+//* envVariables to process.env
+require("dotenv").config();
+const PORT = process.env.PORT || 8000;
 
-//asyncErrors to errorHandler
-require('express-async-errors')
-
+//? asyncErrors to errorHandler
+require("express-async-errors");
 
 /* -------------------------------------------------------------------------- */
-/*                                configuration                               */
+/*                               Configurations                               */
 /* -------------------------------------------------------------------------- */
 
-//! database Connection
-const {dbConnection} = require('./src/configs/dbConnection')
-dbConnection()
+//! database connection
+const { dbConnection } = require("./src/configs/dbConnection");
+dbConnection();
 
-//-------------------------------------------------------------------------
-
+/* ------------------------------------------------------- */
 //* MORGAN LOGGING
 // https://expressjs.com/en/resources/middleware/morgan.html
 // https://github.com/expressjs/morgan
@@ -44,20 +42,19 @@ dbConnection()
 // app.use(morgan("tiny"))
 // app.use(morgan('IP=:remote-addr - :remote-user | TIME=[:date[clf]] | "METHOD=:method | URL=:url | HTTP/:http-version" | STATUS=:status | LENGTH=:res[content-length] |  REF=":referrer" | AGENT=":user-agent"'))
 
-
-//! write logs to a file (tek bir dosy)
+//! write logs to a file
 // create a write stream (in append mode)
 // const fs = require("node:fs") //* dosya işlemleri için built-in module
-// let accessLogStream = fs.createWriteStream("./access.log", { flags: 'a+' })
+// var accessLogStream = fs.createWriteStream("./access.log", { flags: 'a+' })
 
-// // setup the logger
+// setup the logger
 // app.use(morgan('combined', { stream: accessLogStream }))
 // app.use(
 //   morgan("combined", {
 //     stream: fs.createWriteStream("./access.log", { flags: "a+" }),
 //   })
 // );
-//! write logs to a file day by day (her gün bir dosya)
+//! write logs to a file day by day
 // const fs = require("node:fs");
 
 // const now = new Date().toISOString().split("T")[0]
@@ -68,6 +65,7 @@ dbConnection()
 //     stream: fs.createWriteStream(`./logs/${now}.log`, { flags: "a+" }),
 //   })
 // );
+
 /* -------------------------------------------------------------------------- */
 /*                                Documentation                               */
 /* -------------------------------------------------------------------------- */
@@ -76,12 +74,12 @@ dbConnection()
 // $ npm i swagger-ui-express
 // $ npm i redoc-express
 
-// //* JSON  (json formatında dökümantasyon)
+//* JSON
 // app.use("/documents/json", (req, res) => {
 //   res.sendFile("swagger.json", { root: "." });
 // });
 
-// //! SWAGGER  (swagger formatında dökümantasyon)
+//! SWAGGER
 // const swaggerUi = require("swagger-ui-express");
 // const swaggerDocument = require("./swagger.json");
 
@@ -102,62 +100,70 @@ dbConnection()
 //   specUrl: '/documents/json'
 // }))
 
-
-
-
 /* -------------------------------------------------------------------------- */
-/*                                 Middlewares                                 */
+/*                                 MiddleWares                                */
 /* -------------------------------------------------------------------------- */
 
-//*accept json
-app.use(express.json())
+//* accept json
+app.use(express.json());
 
+app.use(require("./src/middlewares/logging"));
 
-//* logging
-app.use(require('./src/middlewares/logging'))
+//*Filter,Search,Sort,Pagination(res.getModelList)
+app.use(require("./src/middlewares/findSearchSortPagi"));
 
-//* filter,search,sort,find Oagination (res.getModelList)
-app.use(require('./src/middlewares/findSearchSortPagi'))
-
-app.use(require('./src/middlewares/authentication'))
+app.use(require("./src/middlewares/authentication"));
 
 /* -------------------------------------------------------------------------- */
 /*                                   Routes                                   */
 /* -------------------------------------------------------------------------- */
-app.all('/', (req, res) => {
-    // res.send('Welcome to PersonneLAPI')
-    res.send({
-        message: "Welcome to the Personnel API",
-        user: req.user,
-})
-})
 
-// app.use('/departments', require('./src/routes/department.router'))
-// app.use('/personnels', require('./src/routes/personnel.router'))
-// app.use('/token', require('./src/routes/token.router'))
-// ?app.use(require('./src/routes/index'))  -> js indexleri default olarak arayıp bulur. bu nedenle alttaki gibi de yazılabilir:
-app.use(require('./src/routes/'))
+// app.all("/", (req, res) => {
+//   // res.send("Welcome to the Personnel API")
+//   res.send({
+//     message: "Welcome to the Personnel API",
+//     user: req.user,
+//   });
+// });
+app.all("/", (req, res) => {
+  // res.send("Welcome to the Personnel API")
+  res.send({
+    message: "Welcome to the Personnel API",
+    user: req.user,
+    api: {
+      documents: {
+        swagger: "/documents/swagger",
+        redoc: "/documents/redoc",
+        json: "/documents/json",
+      },
+    },
+  });
+});
+// console.log("6682f675c85e532d286f602e"+Date.now())
+// app.use("/departments", require("./src/routes/department.router"));
 
+// app.use("/personnels", require("./src/routes/personnel.router"));
 
+// app.use("/tokens",require("./src/routes/token.router"))
 
+// app.use(require("./src/routes/index"));
+app.use(require("./src/routes/"));
 
-//* eşleşmeyen routerları yakalar
-app.use((req, res, next)=> {
-    res.status(404).send({
-        error:true,
-        message: "Route not found!"
-    })
-})
-
-
+//* eşleşmeyen routeları yakalar
+app.use((req, res, next) => {
+  res.status(404).send({
+    error: true,
+    message: "Route not found!",
+  });
+});
 
 /* ------------------------------------------------------- */
 
 // errorHandler:
-app.use(require('./src/middlewares/errorHandler'))
+app.use(require("./src/middlewares/errorHandler"));
 
 // RUN SERVER:
-app.listen(PORT, () => console.log('http://127.0.0.1:' + PORT))
+app.listen(PORT, () => console.log("http://127.0.0.1:" + PORT));
 
 /* ------------------------------------------------------- */
-// require('./src/helpers/sync')()
+// require("./src/helpers/sync")()

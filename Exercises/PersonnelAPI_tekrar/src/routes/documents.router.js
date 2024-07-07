@@ -28,8 +28,7 @@ router.use(
   })
 );
 //* URL => /documents
-
-//& JSON
+//* JSON
 router.use("/json", (req, res) => {
   res.sendFile("swagger.json", { root: "." });
 });
