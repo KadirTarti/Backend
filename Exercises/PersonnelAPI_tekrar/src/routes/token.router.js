@@ -21,6 +21,8 @@ const idValidation = require("../middlewares/idValidation");
 //   .patch(permission.isAdmin, token.update)
 //   .delete(permission.isAdmin, token.delete);
 
+
+//! üstteki kodların daha kısa ve idead yazımı:
 const {isAdmin} = require('../middlewares/permissions')
 
 router.use(isAdmin)
