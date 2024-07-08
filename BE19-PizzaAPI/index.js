@@ -51,7 +51,7 @@ app.use(require('./src/middlewares/logging'))
 // Auhentication:
 // app.use(require('./src/middlewares/authentication'))
 
-// findSearchSortPage / res.getModelList:
+//? findSearchSortPage / res.getModelList:
 app.use(require('./src/middlewares/queryHandler'))
 
 /* ------------------------------------------------------- */
@@ -72,7 +72,7 @@ app.all('/', (req, res) => {
 })
 
 // routes/index.js:
-app.use(require('./src/routes/'))//* default yazmadığımızda kök route u esas alır.
+// app.use(require('./src/routes/'))//* default yazmadığımızda kök route u esas alır.
 app.use('/', require('./src/routes/'))
 
 //* eşleşmeyen routeları yakalar
