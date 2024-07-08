@@ -3,10 +3,7 @@
     ABDULKADIR TARTILACI - EXPRESS - PIZZA API
 ------------------------------------------------------- */
 const { mongoose } = require('../configs/dbConnection')
-/* ------------------------------------------------------- */
 
-const { mongoose } = require('../configs/dbConnection')
-const passwordEncrypt = require('../helpers/passwordEncrypt')
 /* ------------------------------------------------------- */
 
 const OrderSchema = new mongoose.Schema({
