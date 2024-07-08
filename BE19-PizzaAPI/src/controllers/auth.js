@@ -32,7 +32,7 @@ module.exports = {
           throw new CustomError("This account is inactive!", 401);
         }
       } else {
-        throw new Error("Wrong username/email or password!");
+        throw new CustomError("Wrong username/email or password!");
       }
     } else {
       throw new CustomError("Please enter username/email and password!", 401);
