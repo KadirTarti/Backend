@@ -11,8 +11,9 @@ const passwordEncrypt = require("../helpers/passwordEncrypt");
 module.exports = {
   login: async (req, res) => {
     const { username, email, password } = req.body;
+
     if (password && (username || email)) {
-      // const user = await User.findOne({username,email}) //* bu şekilde username ve email birlikte arar. aşağıda or opr ile yazdık
+      // const user = await User.findOne({username,email}) //* and operatörü
       const user = await User.findOne({ $or: [{ username }, { email }] });
       if (user && user.password == passwordEncrypt(password)) {
         if (user.isActive) {
@@ -23,6 +24,7 @@ module.exports = {
               token: passwordEncrypt(user._id + Date.now()),
             });
           }
+
           res.status(200).send({
             error: false,
             token: tokenData.token,
@@ -32,7 +34,7 @@ module.exports = {
           throw new CustomError("This account is inactive!", 401);
         }
       } else {
-        throw new CustomError("Wrong username/email or password!");
+        throw new CustomError("Wrong username/email or password!", 401);
       }
     } else {
       throw new CustomError("Please enter username/email and password!", 401);
@@ -40,16 +42,17 @@ module.exports = {
   },
   logout: async (req, res) => {
     const auth = req.headers?.authorization;
-    const tokenKey = auth ? auth.split(' '): null;
-    
+    const tokenKey = auth ? auth.split(" ") : null;
+
     let deleted = null;
-      if (tokenKey && tokenKey[0] == "Token") {
-        deleted = await Token.deleteOne({ token: tokenKey[1] });
-      }
-      res.status(deleted.deletedCount > 0 ? 200 : 400).send({
-        error: !deleted.deletedCount,
-        deleted,
-        message: deleted.deletedCount > 0 ? "Logout Ok" : "Logout Failed",
-      });
+    if (tokenKey && tokenKey[0] == "Token") {
+      deleted = await Token.deleteOne({ token: tokenKey[1] });
+    }
+
+    res.status(deleted?.deletedCount > 0 ? 200 : 400).send({
+      error: !deleted?.deletedCount,
+      deleted,
+      message: deleted?.deletedCount > 0 ? "Logout Ok" : "Logout Failed",
+    });
   },
 };
