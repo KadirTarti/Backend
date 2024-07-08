@@ -2,45 +2,21 @@
 /* -------------------------------------------------------
         ABDULKADIR TARTILACI - EXPRESS - PIZZA API
 ------------------------------------------------------- */
+const User = require('../models/order')
 
-const { mongoose } = require('../configs/dbConnection')
-const passwordEncrypt = require('../helpers/passwordEncrypt')
 /* ------------------------------------------------------- */
-
-const UserSchema = new mongoose.Schema({
-    
-    username: {
-        type: String,
-        trim: true,
-        required: true,
-        unique: true    // username ile de sisteme giriş yapması için unique denilebilir
+// create - read- update- delete isimlendirmesi şart değil. farklı başlıklar konabilir
+module.exports = {
+    list: async(req, res)=>{
+        const data = await res.getModelList(User)
+        res.status(200).send({
+            error: false,
+            details: await res.getModelListDetails,
+            data
+        })
     },
-    password: {
-        type: String,
-        trim: true,
-        required: true,
-        set:(password)=> passwordEncrypt(password)
-
-    },
-    email: {
-        type: String,
-        trim: true,
-        required: true,
-        unique: true,
-        validate: (email) => email.includes('@') && email.includes()
-    },
-    isActive: {
-        type: Boolean,
-        default: true
-    },
-    isAdmin: {
-        type: Boolean,
-        default: false
-    }, 
-}, 
-{
-    collection: 'users',
-    timestamps: true
-})
-
-module.exports = mongoose.model('Users', UserSchema)
+    create: async(req, res)=>{},
+    read: async(req, res)=>{},
+    update: async(req, res)=>{},
+    delete: async(req, res)=>{},
+}

@@ -17,19 +17,23 @@ const UserSchema = new mongoose.Schema({
         type: String,
         trim: true,
         required: true,
-        set:(password)=> passwordEncrypt(password)
+        // set:(password)=> passwordEncrypt(password)
+        set: passwordEncrypt
     },
     email: {
         type: String,
         trim: true,
         required: true,
         unique: true,
-        validate: (email) => email.includes('@') && email.includes()
-    },
-    
+        // validate: (email) => email.includes('@') && email.includes()
+    }, 
     isActive: {
         type: Boolean,
         default: true
+    },
+    isActive: {
+        type: Boolean,
+        default:false
     },
 }, 
 {
