@@ -38,5 +38,18 @@ module.exports = {
       throw new CustomError("Please enter username/email and password!", 401);
     }
   },
-  logout: async (req, res) => {},
+  logout: async (req, res) => {
+    const auth = req.headers?.authorization;
+    const tokenKey = auth ? auth.split(' '): null;
+    
+    let deleted = null;
+      if (tokenKey && tokenKey[0] == "Token") {
+        deleted = await Token.deleteOne({ token: tokenKey[1] });
+      }
+      res.status(deleted.deletedCount > 0 ? 200 : 400).send({
+        error: !deleted.deletedCount,
+        deleted,
+        message: deleted.deletedCount > 0 ? "Logout Ok" : "Logout Failed",
+      });
+  },
 };
