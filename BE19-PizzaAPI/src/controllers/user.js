@@ -1,10 +1,10 @@
 "use strict";
 /* -------------------------------------------------------
-        ABDULKADIR TARTILACI - EXPRESS - PIZZA API
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
-const User = require("../models/order");
 
-/* ------------------------------------------------------- */
+const User = require("../models/user");
+
 module.exports = {
   list: async (req, res) => {
     const data = await res.getModelList(User);
@@ -14,7 +14,7 @@ module.exports = {
       data,
     });
   },
-  // create - read- update- delete isimlendirmesi şart değil. farklı başlıklar konabilir
+  //! CRUD(Create-Read-Update-Delete)
   create: async (req, res) => {
     const data = await User.create(req.body);
     res.status(201).send({
@@ -33,19 +33,18 @@ module.exports = {
     const data = await User.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });
-    res.status(200).send({
-        error:false,
-        data,
-        newData: await User.findOne({ _id: req.params.id})
-    })
+    res.status(202).send({
+      error: false,
+      data,
+      newData: await User.findOne({ _id: req.params.id }),
+    });
   },
   delete: async (req, res) => {
     const data = await User.deleteOne({ _id: req.params.id });
-    res.status(data.deletedCount ? 204: 404).send({
-        error: !data.deletedCount,
-        data,
-        message: 'User not found!'
-        
-    })
+    res.status(data.deletedCount ? 204 : 404).send({
+      error: !data.deletedCount,
+      data,
+      message: "User not found!",
+    });
   },
 };

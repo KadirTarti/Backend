@@ -1,44 +1,49 @@
 "use strict"
 /* -------------------------------------------------------
-    ABDULKADIR TARTILACI - EXPRESS - PIZZA API
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
-const { mongoose } = require('../configs/dbConnection')
-const passwordEncrypt = require('../helpers/passwordEncrypt')
+const { mongoose } = require('../configs/dbConnection');
+const passwordEncrypt = require('../helpers/passwordEncrypt');
 /* ------------------------------------------------------- */
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new mongoose.Schema(
+  {
     username: {
-        type: String,
-        trim: true,
-        required: true,
-        unique: true    // username ile de sisteme giriş yapması için unique denilebilir
+      type: String,
+      trim: true,
+      required: true,
+      unique: true,
     },
     password: {
-        type: String,
-        trim: true,
-        required: true,
-        // set:(password)=> passwordEncrypt(password)
-        set: passwordEncrypt
+      type: String,
+      trim: true,
+      required: true,
+      //   set: passwordEncrypt,
+      set: (password) => passwordEncrypt(password),
+      validate: [
+          (password) => /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!-\*?+&%{}])[A-Za-z\d!-\*?+&%{}]{8,}$/.test(password),
+          "Password type is incorrect"
+        ]
     },
     email: {
-        type: String,
-        trim: true,
-        required: true,
-        unique: true,
-        // validate: (email) => email.includes('@') && email.includes()
-    }, 
-    isActive: {
-        type: Boolean,
-        default: true
+      type: String,
+      trim: true,
+      required: true,
+      unique: true,
     },
     isActive: {
-        type: Boolean,
-        default:false
+      type: Boolean,
+      default: true,
     },
-}, 
-{
-    collection: 'users',
-    timestamps: true
-})
+    isAdmin: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    collection: "users",
+    timestamps: true,
+  }
+);
 
-module.exports = mongoose.model('User', UserSchema)
+module.exports = mongoose.model("User",UserSchema)
