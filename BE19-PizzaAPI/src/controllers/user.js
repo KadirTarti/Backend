@@ -33,6 +33,11 @@ module.exports = {
     const data = await User.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });
+    res.status(200).send({
+        error:false,
+        data,
+        newData: await User.findOne({ _id: req.params.id})
+    })
   },
   delete: async (req, res) => {
     const data = await User.deleteOne({ _id: req.params.id });
