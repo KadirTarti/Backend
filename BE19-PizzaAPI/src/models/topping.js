@@ -1,18 +1,22 @@
-"use strict"
-const { noTrueLogging } = require('sequelize/lib/utils/deprecations')
+"use strict";
+const { noTrueLogging } = require("sequelize/lib/utils/deprecations");
 /* -------------------------------------------------------
     ABDULKADIR TARTILACI - EXPRESS - PIZZA API
 ------------------------------------------------------- */
-const { mongoose } = require('../configs/dbConnection')
+const { mongoose } = require("../configs/dbConnection");
 /* ------------------------------------------------------- */
 
-const ToppingSchema = new mongoose.Schema({
+const ToppingSchema = new mongoose.Schema(
+  {
     name: {
-        type: String,
-        trim: true,
-        required: true,
-        unique: true
-    }
-}, {collection: 'toppings', timestamps: true})
+      type: String,
+      trim: true,
+      required: true,
+      unique: true,
+    },
+  },  { 
+    collection: "toppings", 
+    timestamps: true 
+});
 
-module.exports = mongoose.model("Topping",ToppingSchema)
+module.exports = mongoose.model("Topping", ToppingSchema);
