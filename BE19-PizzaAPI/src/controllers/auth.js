@@ -7,6 +7,7 @@ const User = require("../models/user");
 const Token = require("../models/token");
 const { CustomError } = require("../errors/customError");
 const passwordEncrypt = require("../helpers/passwordEncrypt");
+const jwt = require('jsonwebtoken')
 
 module.exports = {
   login: async (req, res) => {
@@ -17,6 +18,8 @@ module.exports = {
       const user = await User.findOne({ $or: [{ username }, { email }] });
       if (user && user.password == passwordEncrypt(password)) {
         if (user.isActive) {
+          
+          //? simple token
           let tokenData = await Token.findOne({ userId: user._id });
           if (!tokenData) {
             tokenData = await Token.create({
@@ -24,6 +27,14 @@ module.exports = {
               token: passwordEncrypt(user._id + Date.now()),
             });
           }
+          //? simple token
+
+
+          //& jwt
+          
+          //& jwt
+
+
 
           res.status(200).send({
             error: false,
