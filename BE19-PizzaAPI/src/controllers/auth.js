@@ -66,6 +66,10 @@ module.exports = {
 
           res.status(200).send({
             error: false,
+            bearer: {
+              acces: accessToken,
+              refresh: refreshToken,
+            },
             token: tokenData.token,
             user,
           });
