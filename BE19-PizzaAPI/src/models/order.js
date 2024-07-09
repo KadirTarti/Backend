@@ -74,10 +74,30 @@ const OrderSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+//! save data
 OrderSchema.pre("save", function (next) {
     // do stuff
     this.amount = this.price * this.quantity;
     next();
+});
+
+//! update data
+OrderSchema.pre("updateOne", async function (next) {
+  // do stuff
+  const updateData = this.getUpdate();
+  console.log(updateData)
+  let newPrice = updateData.price;
+  let newQuantity = updateData.quantity
+
+  if (newPrice || newQuantity) {
+    if (!newPrice || !newQuantity) {
+      const firstData = await this.model.findOne(this.getQuery())
+      newPrice = newPrice || firstData.price
+      newQuantity = newQuantity || firstData.quantity
+    } 
+    this.set({amount: newPrice * newQuantity})
+  }
+  next();
 });
 
 
