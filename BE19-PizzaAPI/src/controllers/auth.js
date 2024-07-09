@@ -33,7 +33,7 @@ module.exports = {
           //& jwt
           // accessToken
           const accessInfo = {
-            key: process.env.ACCESS_KEY,
+            key: process.env.ACCESS_KEY || '134325vmcqd-*...',
             time: process.env.ACCESS_EXP || "5m",
             data: {
               _id: user._id,
@@ -49,7 +49,7 @@ module.exports = {
           // refreshtoken
           const refreshInfo = {
             key: process.env.REFRESH_KEY ||'12345qazwxs-*09',
-            time: process.env.REFRESH_EXP || "4598vncs-*-*3d",
+            time: process.env.REFRESH_EXP || "30m",
             data: {
               _id: user._id,
               id: user._id,
