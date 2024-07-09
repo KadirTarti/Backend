@@ -85,18 +85,22 @@ OrderSchema.pre("save", function (next) {
 OrderSchema.pre("updateOne", async function (next) {
   // do stuff
   const updateData = this.getUpdate();
-  console.log(updateData)
+  console.log(updateData);
+  console.log(this.getQuery());
   let newPrice = updateData.price;
-  let newQuantity = updateData.quantity
-
+  let newQuantity = updateData.quantity;
+  // Eğer güncelleme sorgusunda fiyat veya miktar değişikliği varsa hesaplama yap
   if (newPrice || newQuantity) {
+    // Eğer yeni değerlerden biri yoksa önceki verileri al
     if (!newPrice || !newQuantity) {
-      const firstData = await this.model.findOne(this.getQuery())
-      newPrice = newPrice || firstData.price
-      newQuantity = newQuantity || firstData.quantity
-    } 
-    this.set({amount: newPrice * newQuantity})
+      const oldData = await this.model.findOne(this.getQuery()); //*
+      newPrice = newPrice || oldData.price;
+      newQuantity = newQuantity || oldData.quantity;
+    }
+    // Yeni miktarı hesapla ve güncelleme sorgusuna ekle
+    this.set({ amount: newPrice * newQuantity });
   }
+
   next();
 });
 
