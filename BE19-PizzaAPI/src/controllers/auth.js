@@ -26,12 +26,40 @@ module.exports = {
               userId: user._id,
               token: passwordEncrypt(user._id + Date.now()),
             });
-          }
+          };
           //? simple token
 
 
           //& jwt
-          
+          // accessToken
+          const accessInfo = {
+            key: process.env.ACCESS_KEY,
+            time: process.env.ACCESS_EXP || "5m",
+            data: {
+              _id: user._id,
+              id: user._id,
+              username: user.username,
+              email: user.email,
+              password: user.password,
+              isActive:user.isActive,
+              isAdmin:user.isAdmin
+            }
+          };
+
+          // refreshtoken
+          const refreshInfo = {
+            key: process.env.REFRESH_KEY,
+            time: process.env.REFRESH_EXP || "3d",
+            data: {
+              _id: user._id,
+              id: user._id,
+              password: user.password,
+            },
+          };
+
+          //* jwt.sign(data, secret_key, options)
+          const accessToken = jwt.sign(accessInfo.data, accessInfo.key, {expiresIn: accessInfo.time})
+          const refreshToken = jwt.sign(refreshInfo.data, refreshInfo.key, {expiresIn: refreshInfo.time})
           //& jwt
 
 
