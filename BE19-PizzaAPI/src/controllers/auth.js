@@ -48,8 +48,8 @@ module.exports = {
 
           // refreshtoken
           const refreshInfo = {
-            key: process.env.REFRESH_KEY,
-            time: process.env.REFRESH_EXP || "3d",
+            key: process.env.REFRESH_KEY ||'12345qazwxs-*09',
+            time: process.env.REFRESH_EXP || "4598vncs-*-*3d",
             data: {
               _id: user._id,
               id: user._id,
@@ -73,7 +73,7 @@ module.exports = {
             user,
           });
           //& jwt
-          
+
         } else {
           throw new CustomError("This account is inactive!", 401);
         }
