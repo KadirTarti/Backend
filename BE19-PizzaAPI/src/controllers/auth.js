@@ -60,10 +60,9 @@ module.exports = {
           //* jwt.sign(data, secret_key, options)
           const accessToken = jwt.sign(accessInfo.data, accessInfo.key, {expiresIn: accessInfo.time})
           const refreshToken = jwt.sign(refreshInfo.data, refreshInfo.key, {expiresIn: refreshInfo.time})
-          //& jwt
-
-
-
+          
+          
+          
           res.status(200).send({
             error: false,
             bearer: {
@@ -73,6 +72,8 @@ module.exports = {
             token: tokenData.token,
             user,
           });
+          //& jwt
+          
         } else {
           throw new CustomError("This account is inactive!", 401);
         }
