@@ -61,7 +61,7 @@ app.use(require('./src/middlewares/queryHandler'))
 app.all('/', (req, res) => {
     res.send({
         error: false,
-        message: 'Welcome to PIZZA API',
+        message: 'Welcome to my PIZZA API (AKT)',
         docs: {
             swagger: "/documents/swagger",
             redoc: "/documents/redoc",
