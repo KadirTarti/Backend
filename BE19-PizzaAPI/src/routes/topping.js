@@ -7,6 +7,9 @@ const router = require('express').Router()
 
 const topping = require("../controllers/topping");
 const idValidation = require("../middlewares/idValidation");
+const { isAdmin } = require("../middlewares/permissions");
+
+router.use(isAdmin);
 
 //* /toppings
 router.route("/").get(topping.list).post(topping.create);
