@@ -6,17 +6,19 @@ const router = require("express").Router();
 /* ------------------------------------------------------- */
 const user = require("../controllers/user");
 const idValidation = require("../middlewares/idValidation");
+const permission = require("../middlewares/permissions")
 
 //* /users
-router.route("/").get(user.list).post(user.create);
+router.route("/").get(permission.isAdmin, user.list).post(user.create);
+
 
 router
   .route("/:id")
   .all(idValidation)
-  .get(user.read)
-  .put(user.update)
-  .patch(user.update)
-  .delete(user.delete);
+  .get(permission.isLogin, user.read)
+  .put(permission.isLogin, user.update)
+  .patch(permission.isLogin, user.update)
+  .delete(permission.isAdmin, user.delete);
 
 /* ------------------------------------------------------- */
 module.exports = router;
