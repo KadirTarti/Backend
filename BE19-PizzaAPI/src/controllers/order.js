@@ -1,4 +1,5 @@
 "use strict"
+const sendMail = require("../helpers/sendMail");
 /* -------------------------------------------------------
     ABDULKADIR TARTILACI - EXPRESS - PIZZA API
     ------------------------------------------------------- */
@@ -58,6 +59,8 @@
         // req.body.userId = req.user._id //* istek atan user
     
         const data = await Order.create(req.body);
+        sendMail()
+
         res.status(201).send({
           error: false,
           data,
