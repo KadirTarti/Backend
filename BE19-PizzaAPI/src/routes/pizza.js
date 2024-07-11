@@ -8,19 +8,21 @@ const router = require("express").Router();
 const pizza = require("../controllers/pizza");
 const idValidation = require("../middlewares/idValidation");
 const { isAdmin } = require("../middlewares/permissions");
-const multer = require("multer");
+// const multer = require("multer");
 
-const upload = multer({
-  // dest: "./uploads",// root
-  storage:multer.diskStorage({
-    destination:"./uploads",
-    filename:function(req,file,returnCallback){
-      // returnCallback(null,"anthony,jpeg")
-      console.log(file)
-      returnCallback(null, Date.now() + "-" + file.originalname)
-    }
-  })
-});
+// const upload = multer({
+//   // dest: "./uploads",// root
+//   storage:multer.diskStorage({
+//     destination:"./uploads",
+//     filename:function(req,file,returnCallback){
+//       // returnCallback(null,"anthony,jpeg")
+//       console.log(file)
+//       returnCallback(null, Date.now() + "-" + file.originalname)
+//     }
+//   })
+// });
+
+const upload = require('../middlewares/upload')
 
 //* /pizzas
 router
