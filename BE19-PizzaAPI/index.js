@@ -105,22 +105,22 @@ const nodemailer = require('nodemailer');
 
 
 //* Gmail with nodemailer
-const transporter = nodemailer.createTransport({
-    // host: "smtp.ethereal.email", gmail'de host yerine service kısmı yazılıyor
-    service: "gmail",
-    auth: {
-      user: "tartilaci@gmail.com",
-      pass: "vnui vyvn xpyj thvu",
-    },
-  });
+// const transporter = nodemailer.createTransport({
+//     // host: "smtp.ethereal.email", gmail'de host yerine service kısmı yazılıyor
+//     service: "gmail",
+//     auth: {
+//       user: "tartilaci@gmail.com",
+//       pass: "vnui vyvn xpyj thvu",
+//     },
+//   });
 
-  transporter.sendMail({
-    // from: 'tartilaci@gmail.com',
-    // to: 'tartilaci@gmail.com',
-    text: '',
-    subject: 'Bu bir deneme mesajıdır',
-    text: 'Hello, deneme'
-  }, (error, success) => console.log(success, error))
+//   transporter.sendMail({
+//     // from: 'tartilaci@gmail.com',
+//     // to: 'tartilaci@gmail.com',
+//     text: '',
+//     subject: 'Bu bir deneme mesajıdır',
+//     text: 'Hello, deneme'
+//   }, (error, success) => console.log(success, error))
 
 
 // * ---------------------------------------------------------- * //
