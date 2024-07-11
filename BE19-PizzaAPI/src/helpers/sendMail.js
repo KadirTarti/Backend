@@ -27,7 +27,7 @@ module.exports = function (to,subject,message){
   //   },
   // });
 
-  //*Send Mail
+  //SenMail
   // transporter.sendMail({
   //   from: '"Anthony Harold 👻" <zbzbtrkybv5t24wm@ethereal.email>', // sender address
   //   to: "devfss99@gmail.com", // single user
@@ -43,8 +43,10 @@ module.exports = function (to,subject,message){
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      user: "devfs99@gmail.com",
-      pass: "hmqp yjwy oloo pdjd",
+      //   user: "devfs99@gmail.com",
+      user: process.env.EMAIL_USER,
+      //   pass: "hmqp yjwy oloo pdjd",
+      pass: process.env.EMAIL_PASS,
     },
   });
 

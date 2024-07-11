@@ -4,6 +4,7 @@
 ------------------------------------------------------- */
 
 const User = require("../models/user");
+const sendMail = require("../helpers/sendMail");
 
 module.exports = {
   list: async (req, res) => {
