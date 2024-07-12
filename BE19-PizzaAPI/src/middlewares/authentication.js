@@ -10,7 +10,7 @@ module.exports = async (req,res,next) => {
     const auth = req.headers?.authorization;
     const tokenKey = auth ? auth.split(' ') : null;
 
-    // if(tokenKey && tokenKey[0] == "Token"){//* "Token asdaırhıawerasd...""
+    // if(tokenKey && tokenKey[0] == "Token"){//* "Token asda45634hn5awerasd...""
     //     const tokenData = await Token.findOne({token : tokenKey[1]}).populate('userId')
     //     req.user = tokenData ? tokenData.userId : false
     // }
