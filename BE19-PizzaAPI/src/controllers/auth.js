@@ -31,7 +31,7 @@ module.exports = {
       const user = await User.findOne({ $or: [{ username }, { email }] });
       if (user && user.password == passwordEncrypt(password)) {
         if (user.isActive) {
-          /* Simple Token */
+          //* Simple Token */
           let tokenData = await Token.findOne({ userId: user._id });
           if (!tokenData) {
             tokenData = await Token.create({
@@ -39,8 +39,10 @@ module.exports = {
               token: passwordEncrypt(user._id + Date.now()),
             });
           }
-          /* Simple Token */
-          /* JWT */
+          //* Simple Token */
+          
+          
+          //& JWT */
           // accessToken
           const accessInfo = {
             key: process.env.ACCESS_KEY,
@@ -75,7 +77,7 @@ module.exports = {
           const refreshToken = jwt.sign(refreshInfo.data, refreshInfo.key, {
             expiresIn: refreshInfo.time,
           });
-          /* JWT */
+          //& JWT */
 
           res.status(200).send({
             error: false,
