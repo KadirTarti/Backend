@@ -31,7 +31,7 @@ module.exports = function (to,subject,message){
   // transporter.sendMail({
   //   from: '"Anthony Harold 👻" <zbzbtrkybv5t24wm@ethereal.email>', // sender address
   //   to: "devfss99@gmail.com", // single user
-  // //   to: "bar@example.com, baz@example.com", // list of receivers
+  //   to: "bar@example.com, baz@example.com", // list of receivers
   //   subject: "Hello ✔", // Subject line
   //   text: "Hello world?", // plain text body
   //   html: "<b>Hello world?</b>", // html body
@@ -43,9 +43,9 @@ module.exports = function (to,subject,message){
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
-      //   user: "devfs99@gmail.com",
+      //   user: "tartilaci@gmail.com",
       user: process.env.EMAIL_USER,
-      //   pass: "hmqp yjwy oloo pdjd",
+      //   pass: "vnui vyvn xpyj thvu",
       pass: process.env.EMAIL_PASS,
     },
   });
@@ -61,9 +61,9 @@ module.exports = function (to,subject,message){
 
   transporter.sendMail(
     {
-      // from:"devfs99@gmail.com",
-      to: to,
-      subject: subject, // Subject line
+      // from:"tartilaci@gmail.com",
+      to: to, //^fonksiyondan geliyor
+      subject: subject, // Subject line   //^fonksiyondan geliyor
     //   text: message, // plain text body
       html: message, // html body
     },
