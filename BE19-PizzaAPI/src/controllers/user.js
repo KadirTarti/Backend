@@ -76,7 +76,7 @@ module.exports = {
         */
     let customFilter = {};
     if (!req.user.isAdmin) {
-      customFilter = { _id: req.user._id }; //* admin değilse değişimi istenen user değil isteği atan userı güncelle
+      customFilter = { _id: req.user._id }; //* admin değilse değişmesi istenen user değil isteği atan userı güncelle
     } else {
       customFilter = { _id: req.params.id };
     }
