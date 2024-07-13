@@ -97,7 +97,7 @@ const nodemailer = require('nodemailer');
 //  transporter.sendMail({
 //     from: '"Abdulkadir 👻" <uktkuk3eb52y7bxx@ethereal.email>', // sender address
 //     to: "tartilaci@gmail.com", // single user
-//     // to: "bar@example.com, baz@example.com", // list of receivers
+    // to: "bar@example.com, baz@example.com", // list of receivers
 //     subject: "Hello ✔", // Subject line
 //     text: "Hello world?", // plain text body
 //     html: "<b>Hello world?</b>", // html body
@@ -106,9 +106,9 @@ const nodemailer = require('nodemailer');
 //   });
 
 
-//* Gmail with nodemailer
+//* nodemailer with Gmail
 // const transporter = nodemailer.createTransport({
-//     // host: "smtp.ethereal.email", gmail'de host yerine service kısmı yazılıyor
+    // host: "smtp.ethereal.email", gmail'de host yerine service kısmı yazılıyor
 //     service: "gmail",
 //     auth: {
 //       user: "tartilaci@gmail.com",
@@ -117,8 +117,8 @@ const nodemailer = require('nodemailer');
 //   });
 
 //   transporter.sendMail({
-//     // from: 'tartilaci@gmail.com',
-//     // to: 'tartilaci@gmail.com',
+    // from: 'tartilaci@gmail.com',
+    // to: 'tartilaci@gmail.com',
 //     text: '',
 //     subject: 'Bu bir deneme mesajıdır',
 //     text: 'Hello, deneme'
