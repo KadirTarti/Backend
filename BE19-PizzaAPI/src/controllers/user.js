@@ -35,7 +35,7 @@ module.exports = {
             #swagger.summary = "Create User"
         */
     const data = await User.create(req.body);
-    sendMail(data.email, "Welcome our Pizza Website", `<h1>Welcome ${data.username} </h1>! Kaydınız başarıyla oluşturuldu!`)
+    sendMail(data.email, "Welcome our Pizza Website", `<h1>Welcome ${data.username} </h1>! User Created Successfull!`)
     res.status(201).send({
       error: false,
       data,
