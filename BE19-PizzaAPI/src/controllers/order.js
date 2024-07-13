@@ -117,7 +117,7 @@ module.exports = {
       <body>
           <div class="container">
               <div class="header">
-                  <h1>ClarusPizzas</h1>
+                  <h1>AKT Pizzas</h1>
               </div>
               <div class="order-details">
                   <h2>Order Confirmation</h2>
@@ -135,7 +135,7 @@ module.exports = {
                   <p>Quantity: <strong>${data.quantity}</strong></p>
                   <p>Total Price: <strong>${data.amount}</strong></p>
                   <div>
-                      <img src="https://yuvamaya.com.tr/upload/recipes/pizza.jpg" alt="Pizza Image" class="pizza-image">
+                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQzLQ1fQxrdAA7WUtORz-XDQAFx93X08Z4BdQ&s" alt="Pizza Image" class="pizza-image">
                   </div>
               </div>
               <div class="footer">
