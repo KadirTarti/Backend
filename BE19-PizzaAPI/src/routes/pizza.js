@@ -15,7 +15,7 @@ const { isAdmin } = require("../middlewares/permissions");
 //   storage:multer.diskStorage({
 //     destination:"./uploads",
 //     filename:function(req,file,returnCallback){
-      // returnCallback(null,"anthony,jpeg")
+      // returnCallback(null,"anthony.jpeg")
 //       console.log(file)
 //       returnCallback(null, Date.now() + "-" + file.originalname)
 //     }
