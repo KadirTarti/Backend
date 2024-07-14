@@ -13,10 +13,15 @@ const PizzaSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    image: {
+    // image: {
+    //   type: String,
+    //   trim: true,
+    // },
+    //^array içine alınca bişrden fazla veri(image) ekleyebileceğiz:
+    image: [{
       type: String,
       trim: true,
-    },
+    }],
     price: {
       type: Number,
       required: true,
