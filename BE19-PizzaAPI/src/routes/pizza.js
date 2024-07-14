@@ -38,8 +38,8 @@ router
   .route("/:id")
   .all(idValidation)
   .get(pizza.read)
-  .put(isAdmin, pizza.update)
-  .patch(isAdmin, pizza.update)
+  .put(isAdmin, upload.array("images"), pizza.update)
+  .patch(isAdmin, upload.array("images"), pizza.update)
   .delete(isAdmin, pizza.delete);
 
 /* ------------------------------------------------------- */
