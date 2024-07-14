@@ -2,7 +2,6 @@
 /* -------------------------------------------------------
     ABDULKADIR TARTILACI - EXPRESS - PIZZA API
 ------------------------------------------------------- */
-
 const Pizza = require("../models/pizza");
 const fs = require("node:fs")
 
@@ -35,15 +34,19 @@ module.exports = {
             #swagger.summary = "Create Pizza"
         */
 
-
-    console.log(req.file) //* single file
-
-    if(req.files) {
+    // console.log(req.file) //* single file
+    console.log(req.files);
+    console.log(req.body);
+    if (req.files) {
       const images = [];
-      req.files.forEach(image=> images.push('/uploads/'+image.filename))
-      req.body.images = images
+      req.files.forEach((image) => images.push("/uploads/" + image.filename)); //* upload ile gelen resimlerin ismini yakaladık
+      //* db ye kaydetmek için req.body ye ekliyoruz
+      req.body.images = req.body.images
+        ? Array.isArray(req.body.images)
+          ? [...req.body.images, ...images]
+          : [req.body.images, ...images]
+        : images; //* aynı anda hem string hem de upload olarak gönderebilsin
     }
-
 
     const data = await Pizza.create(req.body);
     res.status(201).send({
@@ -67,7 +70,8 @@ module.exports = {
             #swagger.tags = ["Pizzas"]
             #swagger.summary = "Update Pizza"
         */
-        // const pizza = await Pizza.findOne(
+
+    // const pizza = await Pizza.findOne(
     //   { _id: req.params.id },
     //   { _id: 0, images: 1 }
     // );
