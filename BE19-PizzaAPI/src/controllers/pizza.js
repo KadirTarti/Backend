@@ -4,6 +4,7 @@
 ------------------------------------------------------- */
 
 const Pizza = require("../models/pizza");
+const fs = require("node:fs")
 
 module.exports = {
   list: async (req, res) => {
@@ -66,6 +67,51 @@ module.exports = {
             #swagger.tags = ["Pizzas"]
             #swagger.summary = "Update Pizza"
         */
+        // const pizza = await Pizza.findOne(
+    //   { _id: req.params.id },
+    //   { _id: 0, images: 1 }
+    // );
+    const images = []
+    // console.log(pizzaImages)
+    //! db deki önceki resimleri silmesin onların üzerine eklesin
+    // if (req.files) {
+    //   req.files.forEach(
+    //     (image) => pizza.images.push("/uploads/" + image.filename) //* önceki resimlerin üzerine ekledik.
+    // );
+    if (req.files) {
+      req.files.forEach(
+        (image) => images.push("/uploads/" + image.filename) //* önceki resimlerin üzerine ekledik.
+      );
+      // req.body.images = req.body.images
+      //   ? Array.isArray(req.body.images)
+      //     ? [...req.body.images, ...pizza.images]
+      //     : [req.body.images, ...pizza.images]
+      //   : pizza.images;
+    }
+    // else if(req.body.images) {//* kullanıcı upload etmeden string olarak da resim url i gönderebilir.
+    //   if(Array.isArray(req.body.images)) {
+    //     req.body.images = [...req.body.images, ...pizza.images];
+    //   }else {
+    //     req.body.images = [req.body.images, ...pizza.images];
+    //   }
+    // }
+    //* yukarıdaki örnekte update edilecekler arasına yeni resim yoksa resimleri eklemedik. 
+    // req.body.images = req.body.images
+    //   ? Array.isArray(req.body.images)
+    //     ? [...req.body.images, ...pizza.images]
+    //     : [req.body.images, ...pizza.images]
+    //   : pizza.images;
+    //* resim upload edildiyse veya string olarak resim yollandıysa 
+    if(req.body.images || images.length>0){
+      req.body.images = req.body.images
+        ? Array.isArray(req.body.images)
+          ? [...req.body.images, ...images]
+          : [req.body.images, ...images]
+        : images;
+    }
+    //! önceki pizzaya ait resim dosyaları kaldırılabilir.
+
+
     const data = await Pizza.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });
@@ -80,9 +126,20 @@ module.exports = {
             #swagger.tags = ["Pizzas"]
             #swagger.summary = "Delete Pizza"
         */
-    const data = await Pizza.deleteOne({ _id: req.params.id });
-    res.status(data.deletedCount ? 204 : 404).send({
-      error: !data.deletedCount,
+    // const data = await Pizza.deleteOne({ _id: req.params.id });
+    const data = await Pizza.findOneAndDelete({ _id: req.params.id });
+    // console.log(data);
+    //* silinen pizzanın resmininde durmasına gerek yok diyerek o resmi kayıtlarımızdan sildik.
+    if (data?.images) {
+      data?.images.forEach((image) => {
+        if (!image.startsWith("http")) {
+          fs.unlink(`.${image}`, (err) => console.log(err));
+        }
+      });
+    }
+
+    res.status(data ? 204 : 404).send({
+      error: !data,
       data,
       message: "Pizza not found!",
     });
