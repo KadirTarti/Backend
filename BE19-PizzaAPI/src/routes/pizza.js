@@ -11,11 +11,11 @@ const { isAdmin } = require("../middlewares/permissions");
 // const multer = require("multer");
 
 // const upload = multer({
-//   // dest: "./uploads",// root
+  // dest: "./uploads",// root
 //   storage:multer.diskStorage({
 //     destination:"./uploads",
 //     filename:function(req,file,returnCallback){
-//       // returnCallback(null,"anthony,jpeg")
+      // returnCallback(null,"anthony,jpeg")
 //       console.log(file)
 //       returnCallback(null, Date.now() + "-" + file.originalname)
 //     }
@@ -31,8 +31,8 @@ router
   // .post(isAdmin, upload.single("fileInputName"), pizza.create);
   // .post(isAdmin, upload.single("image"), pizza.create);// single
   // .post(isAdmin, upload.any(), pizza.create); // not recommended
-  .post(isAdmin, upload.array("images"), pizza.create); // recommended
-  // .post(isAdmin, upload.array("images",10), pizza.create); // recommended
+  // .post(isAdmin, upload.array("images"), pizza.create); // recommended 
+  .post(isAdmin, upload.array("images",10), pizza.create); // recommended  //! buradaki images ile thunder'da form kısmında gönderdiğimiz isim aynı olmalı
 
 router
   .route("/:id")
