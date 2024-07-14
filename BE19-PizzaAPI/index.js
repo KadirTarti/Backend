@@ -148,7 +148,8 @@ app.all('/', (req, res) => {
 // app.use(require('./src/routes/'))//* default yazmadığımızda kök route u esas alır.
 app.use('/', require('./src/routes/'))
 
-
+//*Static Files
+app.use("/uploads", express.static("./uploads"));//* resim vb dosyalar static dosyalardır. bunalrın işlenebilmesi için express.static middlewareine ihtiyacımız var.
 
 //* eşleşmeyen routeları yakalar
 app.use((req, res, next) => {
