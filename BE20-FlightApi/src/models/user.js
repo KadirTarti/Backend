@@ -59,7 +59,7 @@ UserSchema.pre("validate", function (next) {
   console.log(this.password);
   if (
     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!-\*?+&%{}])[A-Za-z\d!-\*?+&%{}]{8,}$/.test(
-      password
+      this.password
     )
   ) {
     next()
