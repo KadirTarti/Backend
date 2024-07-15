@@ -35,7 +35,7 @@ module.exports = {
             #swagger.summary = "Create Flight"
         */
 
-    req.body.createdId = req.Flight._id;
+    req.body.createdId = req.user._id;
 
     const data = await Flight.create(req.body);
 
@@ -61,13 +61,13 @@ module.exports = {
             #swagger.summary = "Update Flight"
         */
 
-    if (req.file) {
-      req.body.avatar = "/uploads/" + req.file.filename;
-    }
+    req.body.createdId = req.user._id;
+    
+    
     const data = await Flight.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });
-    //* eski resmi silme işlemi
+    
     res.status(202).send({
       error: false,
       data,
