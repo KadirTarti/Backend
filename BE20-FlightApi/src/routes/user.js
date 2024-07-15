@@ -1,14 +1,15 @@
 "use strict";
 /* -------------------------------------------------------
-    NODEJS EXPRESS |  FlightApi | Abdulkadir TARTILACI
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 const router = require("express").Router();
 /* ------------------------------------------------------- */
 const user = require("../controllers/user");
 const idValidation = require("../middlewares/idValidation");
+const upload = require("../middlewares/upload")
 
 //* /users
-router.route("/").get(user.list).post(user.create);
+router.route("/").get(user.list).post(upload.single("avatar"),user.create);
 
 router
   .route("/:id")

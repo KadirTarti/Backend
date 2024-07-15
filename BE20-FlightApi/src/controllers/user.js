@@ -1,6 +1,6 @@
 "use strict";
 /* -------------------------------------------------------
-    NODEJS EXPRESS |  FlightApi | Abdulkadir TARTILACI
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 
 const User = require("../models/user");
@@ -35,7 +35,12 @@ module.exports = {
         */
 
     console.log(req.file)
+    if(req.file){
+      req.body.avatar = "/uploads/" + req.file.filename
+    }
+
     const data = await User.create(req.body);
+
 
     res.status(201).send({
       error: false,
