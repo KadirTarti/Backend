@@ -28,7 +28,7 @@ module.exports = {
       );
     }
   },
-  isAdmin: (req, res, next) => {
+  isLoginAdmin: (req, res, next) => {
     if (req.user && req.user.isActive && req.user.isAdmin) {
       next();
     } else {

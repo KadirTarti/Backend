@@ -19,6 +19,6 @@ router
   .get(permission.isLogin, passenger.read)
   .put(permission.isLoginStaffOrAdmin, passenger.update)
   .patch(permission.isLoginStaffOrAdmin, passenger.update)
-  .delete(permission.isAdmin, passenger.delete);
+  .delete(permission.isLoginAdmin, passenger.delete);
 
 module.exports = router;

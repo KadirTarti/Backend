@@ -19,7 +19,7 @@ const permission = require("../middlewares/permissions");
 router
   .route("/")
   .get(permission.isLogin, flight.list)
-  .post(permission.isStaffOrAdmin, flight.create);
+  .post(permission.isLoginStaffOrAdmin, flight.create);
 
 router
   .route("/:id")
@@ -27,6 +27,6 @@ router
   .get(permission.isLogin, flight.read)
   .put(permission.isLoginStaffOrAdmin, flight.update)
   .patch(permission.isLoginStaffOrAdmin, flight.update)
-  .delete(permission.isAdmin, flight.delete);
+  .delete(permission.isLoginAdmin, flight.delete);
 
 module.exports = router;
