@@ -25,8 +25,8 @@ router
   .route("/:id")
   .all(idValidation)
   .get(permission.isLogin, flight.read)
-  .put(permission.isStaffOrAdmin, flight.update)
-  .patch(permission.isStaffOrAdmin, flight.update)
+  .put(permission.isLoginStaffOrAdmin, flight.update)
+  .patch(permission.isLoginStaffOrAdmin, flight.update)
   .delete(permission.isAdmin, flight.delete);
 
 module.exports = router;

@@ -14,7 +14,7 @@ module.exports = {
       throw new CustomError("NoPerimission: You must login.", 403);
     }
   },
-  isStaffOrAdmin: (req, res, next) => {
+  isLoginStaffOrAdmin: (req, res, next) => {
     if (
       req.user &&
       req.user.isActive &&
