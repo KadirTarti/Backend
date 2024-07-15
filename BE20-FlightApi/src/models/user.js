@@ -36,7 +36,6 @@ const UserSchema = new mongoose.Schema(
       //   (password) => password != "novalid",
       //   "Password type is incorrect!",
       // ],
-    // },
     },
     email: {
       type: String,
@@ -90,6 +89,7 @@ UserSchema.pre("save", function (next) {
   next();
 });
 
+//? update için
 const updateEncryptValidatePassword = function (next) {
   const update = this.getUpdate();
   if (update.password) {
