@@ -34,13 +34,12 @@ module.exports = {
             #swagger.summary = "Create User"
         */
 
-    console.log(req.file)
-    if(req.file){
-      req.body.avatar = "/uploads/" + req.file.filename
+    console.log(req.file);
+    if (req.file) {
+      req.body.avatar = "/uploads/" + req.file.filename;
     }
 
     const data = await User.create(req.body);
-
 
     res.status(201).send({
       error: false,
@@ -63,10 +62,14 @@ module.exports = {
             #swagger.tags = ["Users"]
             #swagger.summary = "Update User"
         */
+
+    if (req.file) {
+      req.body.avatar = "/uploads/" + req.file.filename;
+    }
     const data = await User.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });
-
+    //* eski resmi silme işlemi
     res.status(202).send({
       error: false,
       data,
@@ -79,6 +82,7 @@ module.exports = {
             #swagger.summary = "Delete User"
         */
     const data = await User.deleteOne({ _id: req.params.id });
+    //* eski resmi silme işlemi
     res.status(data.deletedCount ? 204 : 404).send({
       error: !data.deletedCount,
       data,
