@@ -1,6 +1,6 @@
 "use strict";
 /* -------------------------------------------------------
-    NODEJS EXPRESS | CLARUSWAY FullStack Team
+    NODEJS EXPRESS |  FlightApi | Abdulkadir TARTILACI
 ------------------------------------------------------- */
 // $ npm i morgan
 // app.use(require('./src/middlewares/logging')):

@@ -1,6 +1,6 @@
 "use strict";
 /* -------------------------------------------------------
-    NODEJS EXPRESS | CLARUSWAY FullStack Team
+    NODEJS EXPRESS |  FlightApi | Abdulkadir TARTILACI
 ------------------------------------------------------- */
 
 const Token = require("../models/token");
