@@ -68,6 +68,10 @@ UserSchema.pre("validate", function (next) {
   }
 });
 
+UserSchema.pre("save",function(next){
+  this.password = passwordEncrypt(this.password)
+  next()
+})
 
 
 
