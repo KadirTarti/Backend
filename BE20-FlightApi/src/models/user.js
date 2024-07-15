@@ -20,6 +20,23 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       required: true,
       // set: (password) => passwordEncrypt(password),
+      //* hashleme işlemini ve validasyonu middlewarelere taşıdık
+      // set: (password) => {
+      //   if (
+      //     /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!-\*?+&%{}])[A-Za-z\d!-\*?+&%{}]{8,}$/.test(
+      //       password
+      //     )
+      //   ) {
+      //     return passwordEncrypt(password);
+      //   } else {
+      //     return "novalid";
+      //   }
+      // },
+      // validate: [
+      //   (password) => password != "novalid",
+      //   "Password type is incorrect!",
+      // ],
+    // },
     },
     email: {
       type: String,
