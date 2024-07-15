@@ -54,6 +54,8 @@ const UserSchema = new mongoose.Schema(
   }
 );
 
+
+//^bu işlemi üstteki setter'da yapıyoruz. burada farklı kurgu ve senaryo örneği olması için daha ayrıntılı yazdık.
 //* create işleminde çalışacak
 UserSchema.pre("validate", function (next) {
   console.log(this.password);
@@ -70,6 +72,22 @@ UserSchema.pre("validate", function (next) {
 
 UserSchema.pre("save",function(next){
   this.password = passwordEncrypt(this.password)
+  next()
+})
+
+UserSchema.pre("updateOne",function(next){
+  const update = this.getUpdate();
+  if(update.password){
+    if (
+      /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!-\*?+&%{}])[A-Za-z\d!-\*?+&%{}]{8,}$/.test(
+        update.password
+      )
+    ) {
+      update.password = passwordEncrypt(update.password)
+    } else {
+      throw new CustomError("Password type is incorrect!",400)
+    }
+  }
   next()
 })
 
