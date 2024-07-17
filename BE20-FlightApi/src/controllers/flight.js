@@ -3,66 +3,154 @@
     NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 
-const Flight = require("../models/flight");
+const User = require("../models/user");
+const Token = require("../models/token");
+const { CustomError } = require("../errors/customError");
+const passwordEncrypt = require("../helpers/passwordEncrypt");
+const jwt = require("jsonwebtoken");
+const setToken = require("../helpers/setToken");
 
 module.exports = {
-  list: async (req, res) => {
+  login: async (req, res) => {
     /*
-            #swagger.tags = ["Flights"]
-            #swagger.summary = "List Flights"
-            #swagger.description = `
-                You can send query with endpoint for search[], sort[], page and limit.
-                <ul> Examples:
-                    <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>
-                    <li>URL/?<b>sort[field1]=1&sort[field2]=-1</b></li>
-                    <li>URL/?<b>page=2&limit=1</b></li>
-                </ul>
-            `
+            #swagger.tags = ["Authentication"]
+            #swagger.summary = "Login"
+            #swagger.description = 'Login with username (or email) and password for get simpleToken and JWT'
+            #swagger.parameters["body"] = {
+                in: "body",
+                required: true,
+                schema: {
+                    "username": "test",
+                    "password": "aA?123456",
+                }
+            }
         */
-    const data = await res.getModelList(Flight)   
+    const { username, email, password } = req.body;
 
-    res.status(200).send({
+    if (password && (username || email)) {
+      // const user = await User.findOne({username,email}) //* and operatörü
+      const user = await User.findOne({ $or: [{ username }, { email }] });
+      if (user && user.password == passwordEncrypt(password)) {
+        if (user.isActive) {
+          /* Simple Token */
+          let tokenData = await Token.findOne({ userId: user._id });
+          if (!tokenData) {
+            tokenData = await Token.create({
+              userId: user._id,
+              token: passwordEncrypt(user._id + Date.now()),
+            });
+          }
+          /* Simple Token */
+          /* JWT */
+          // accessToken
+          // const accessInfo = {
+          //   key: process.env.ACCESS_KEY,
+          //   time: process.env.ACCESS_EXP || "5m",
+          //   data: {
+          //     _id: user._id,
+          //     id: user._id,
+          //     username: user.username,
+          //     email: user.email,
+          //     password: user.password,
+          //     isActive: user.isActive,
+          //     isAdmin: user.isAdmin,
+          //   },
+          // };
+
+          // // refreshtoken
+          // const refreshInfo = {
+          //   key: process.env.REFRESH_KEY,
+          //   time: process.env.REFRESH_EXP || "3d",
+          //   data: {
+          //     _id: user._id,
+          //     id: user._id,
+          //     password: user.password,
+          //   },
+          // };
+
+          // // jwt.sign(data,secret_key,options)
+          // const accessToken = jwt.sign(accessInfo.data, accessInfo.key, {
+          //   expiresIn: accessInfo.time,
+          // });
+
+          // const refreshToken = jwt.sign(refreshInfo.data, refreshInfo.key, {
+          //   expiresIn: refreshInfo.time,
+          // });
+          /* JWT */
+
+          res.status(200).send({
+            error: false,
+            bearer: setToken(user),
+            token: tokenData.token,
+            user,
+          });
+        } else {
+          throw new CustomError("This account is inactive!", 401);
+        }
+      } else {
+        throw new CustomError("Wrong username/email or password!", 401);
+      }
+    } else {
+      throw new CustomError("Please enter username/email and password!", 401);
+    }
+  },
+  refresh: async (req, res) => {
+    /*
+            #swagger.tags = ["Authentication"]
+            #swagger.summary = "JWT : Refresh"
+            #swagger.description = 'Refresh token.'
+        */
+
+    const refreshToken = req.body?.bearer.refresh;
+
+    if (refreshToken) {
+      const refreshData = jwt.verify(refreshToken, process.env.REFRESH_KEY);
+      if (refreshData) {
+        const user = await User.findOne({ _id: refreshData._id });
+        if (user && user.password == refreshData.password) {
+          res.status(200).send({
+            error: false,
+            // bearer: {
+            //   access: jwt.sign(user.toJSON(), process.env.ACCESS_KEY, {
+            //     expiresIn: process.env.ACCESS_EXP,
+            //   }),
+            // },
+            bearer: setToken(user,false),
+          });
+        } else {
+          throw new CustomError("Wrong data!", 401);
+        }
+      } else {
+        throw new CustomError("Refresh data is wrong!", 401);
+      }
+    }else {
+      throw new CustomError("Please enter refresh token!", 401);
+    }
+  },
+  logout: async (req, res) => {
+    /*
+            #swagger.tags = ["Authentication"]
+            #swagger.summary = "simpleToken: Logout"
+            #swagger.description = 'Delete token key.'
+        */
+    const auth = req.headers?.authorization;
+    const tokenKey = auth ? auth.split(" ") : null;
+
+    let deleted = null;
+    if (tokenKey && tokenKey[0] == "Token") {
+      deleted = await Token.deleteOne({ token: tokenKey[1] });
+      res.status(deleted?.deletedCount > 0 ? 200 : 400).send({
+        error: !deleted?.deletedCount,
+        deleted,
+        message: deleted?.deletedCount > 0 ? "Logout Ok" : "Logout Failed",
+      });
+    }else {
+      res.send({
         error:false,
-        details: await res.getModelListDetails(Flight),
-        data,
-    })
-  },
-  create: async (req, res) => {
+        message:"Logout Ok!"
+      })
+    }
 
-    req.body.createdId = req.user._id;
-
-    const data = await Flight.create(req.body);
-
-    res.status(201).send({
-        error:false,
-        data
-    })
-  },
-  read: async (req, res) => {
-    const data = await Flight.findOne({_id:req.params.id}).populate("createdId");
-
-    res.status(200).send({
-        error:false,
-        data
-    })
-  },
-  update: async (req, res) => {
-    req.body.createdId = req.user._id;
-    const data = await Flight.updateOne({ _id: req.params.id }, req.body , {
-        runValidators:true
-    });
-    res.status(202).send({
-      error: false,
-      data,
-      new: await Flight.findOne({ _id: req.params.id }),
-    });
-  },
-  delete: async (req, res) => {
-    const data = await Flight.deleteOne({ _id: req.params.id });
-
-    res.status(data.deletedCount ? 204 : 404).send({
-        error: !data.deletedCount,
-        data
-    })
+    
   },
 };
