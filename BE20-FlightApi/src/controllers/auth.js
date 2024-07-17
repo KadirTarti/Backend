@@ -1,6 +1,6 @@
 "use strict";
 /* -------------------------------------------------------
-    NODEJS EXPRESS |  FlightApi | Abdulkadir TARTILACI
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 
 const User = require("../models/user");
@@ -8,6 +8,7 @@ const Token = require("../models/token");
 const { CustomError } = require("../errors/customError");
 const passwordEncrypt = require("../helpers/passwordEncrypt");
 const jwt = require("jsonwebtoken");
+const setToken = require("../helpers/setToken");
 
 module.exports = {
   login: async (req, res) => {
@@ -42,47 +43,44 @@ module.exports = {
           /* Simple Token */
           /* JWT */
           // accessToken
-          const accessInfo = {
-            key: process.env.ACCESS_KEY,
-            time: process.env.ACCESS_EXP || "5m",
-            data: {
-              _id: user._id,
-              id: user._id,
-              username: user.username,
-              email: user.email,
-              password: user.password,
-              isActive: user.isActive,
-              isAdmin: user.isAdmin,
-            },
-          };
+          // const accessInfo = {
+          //   key: process.env.ACCESS_KEY,
+          //   time: process.env.ACCESS_EXP || "5m",
+          //   data: {
+          //     _id: user._id,
+          //     id: user._id,
+          //     username: user.username,
+          //     email: user.email,
+          //     password: user.password,
+          //     isActive: user.isActive,
+          //     isAdmin: user.isAdmin,
+          //   },
+          // };
 
-          // refreshtoken
-          const refreshInfo = {
-            key: process.env.REFRESH_KEY,
-            time: process.env.REFRESH_EXP || "3d",
-            data: {
-              _id: user._id,
-              id: user._id,
-              password: user.password,
-            },
-          };
+          // // refreshtoken
+          // const refreshInfo = {
+          //   key: process.env.REFRESH_KEY,
+          //   time: process.env.REFRESH_EXP || "3d",
+          //   data: {
+          //     _id: user._id,
+          //     id: user._id,
+          //     password: user.password,
+          //   },
+          // };
 
-          // jwt.sign(data,secret_key,options)
-          const accessToken = jwt.sign(accessInfo.data, accessInfo.key, {
-            expiresIn: accessInfo.time,
-          });
+          // // jwt.sign(data,secret_key,options)
+          // const accessToken = jwt.sign(accessInfo.data, accessInfo.key, {
+          //   expiresIn: accessInfo.time,
+          // });
 
-          const refreshToken = jwt.sign(refreshInfo.data, refreshInfo.key, {
-            expiresIn: refreshInfo.time,
-          });
+          // const refreshToken = jwt.sign(refreshInfo.data, refreshInfo.key, {
+          //   expiresIn: refreshInfo.time,
+          // });
           /* JWT */
 
           res.status(200).send({
             error: false,
-            bearer: {
-              access: accessToken,
-              refresh: refreshToken,
-            },
+            bearer: setToken(user),
             token: tokenData.token,
             user,
           });
@@ -112,11 +110,12 @@ module.exports = {
         if (user && user.password == refreshData.password) {
           res.status(200).send({
             error: false,
-            bearer: {
-              access: jwt.sign(user.toJSON(), process.env.ACCESS_KEY, {
-                expiresIn: process.env.ACCESS_EXP,
-              }),
-            },
+            // bearer: {
+            //   access: jwt.sign(user.toJSON(), process.env.ACCESS_KEY, {
+            //     expiresIn: process.env.ACCESS_EXP,
+            //   }),
+            // },
+            bearer: setToken(user,false),
           });
         } else {
           throw new CustomError("Wrong data!", 401);
