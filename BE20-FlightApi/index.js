@@ -78,6 +78,7 @@ app.all('/', (req, res) => {
 // routes/index.js:
 app.use(require('./src/routes/'))
 
+//* static files served
 app.use("/uploads", express.static("./uploads"));
 
 //* eşleşmeyen routeları yakalar
