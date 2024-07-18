@@ -6,9 +6,10 @@ const router = require("express").Router();
 const room = require("../controllers/roomController");
 const idValidation = require("../middlewares/idValidation");
 const permissions = require("../middlewares/permissions");
+const upload = require('../middlewares/upload')
 /* ------------------------------------------------------- */
 
-router.route("/").get(room.list).post(permissions.isAdmin, room.create);
+router.route("/").get(room.list).post(permissions.isAdmin, room.create, upload.array('images'));
 router
   .route("/:id")
   .all(idValidation)
