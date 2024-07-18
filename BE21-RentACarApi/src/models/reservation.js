@@ -59,7 +59,7 @@ const ReservationSchema = new mongoose.Schema({
         ref: 'User',
         required: true
     },
-}, { collection: 'reservations', timestamps: true})
+}, { collection: 'Reservation', timestamps: true})
 
 // Export
 module.exports = mongoose.model('Reservation', ReservationSchema)
