@@ -34,38 +34,29 @@ const { mongoose } = require('../configs/dbConnection')
 
 const CarSchema = new mongoose.Schema({
 
-    carId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+    plateNumber: {
+        type: String,
+        trim: true,
+        unique: true,
         required: true,
-        index: true,
     },
-    plateNumber:{
-        type: String,
-    },
-    brand:{
-        type: String,
 
-    },
-    model:{
+    brand: {
         type: String,
-
+        trim: true,
+        required: true,
     },
-    year:{
+
+    model: {
+        type: String,
+        trim: true,
+        required: true,
+    },
+
+    year: {
         type: Number,
-
-    },
-    isAutomatic:{
-        type: Boole
-    },
-    pricePerDay:{},
-    isPublish:{},
-    createdId:{
-        type: mongoose.Schema.Types.ObjectId
-    },
-    updatedId:{
-        type: mongoose.Schema.Types.ObjectId
-
+        min: 1950,
+        max: new Date().getFullYear(), //2024
+        required: true,
     }
-
-}, { collection: 'cars', timestamps: true })
+})
