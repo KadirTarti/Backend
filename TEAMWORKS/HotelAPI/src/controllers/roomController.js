@@ -33,8 +33,8 @@ module.exports = {
             #swagger.summary = "Create Room"
         */
 
+       const images = [];
     if (req.files) {
-      const images = [];
       req.files.forEach((image) => images.push("/uploads" + image.filename));
     }
     req.body.images = req.body.images
