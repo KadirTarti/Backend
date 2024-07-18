@@ -9,7 +9,7 @@ const permissions = require("../middlewares/permissions");
 const upload = require('../middlewares/upload')
 /* ------------------------------------------------------- */
 
-router.route("/").get(room.list).post(permissions.isAdmin, room.create, upload.array('images'));
+router.route("/").get(room.list).post(permissions.isAdmin, upload.array('images'), room.create,);
 router
   .route("/:id")
   .all(idValidation)
