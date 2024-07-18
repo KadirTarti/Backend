@@ -25,7 +25,7 @@ module.exports = async (req, res, next) => {
   // SimpleToken: \\
 
   // JWT TOKEN \\
-  if (tokenKey[0] == "Bearer") {
+  if (tokenKey && tokenKey[0] == "Bearer") {
     //* JWT access token:
     jwt.verify(
       tokenKey[1],
