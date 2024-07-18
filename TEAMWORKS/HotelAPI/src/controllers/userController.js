@@ -35,11 +35,12 @@ module.exports = {
             #swagger.summary = "Create User"
         */
     const newUser = await User.create(req.body);
-    
-    sendMail(newUser.email,
-      'Welcome to our HotelAPI',
-      `Welcome ${newUser, username}` 
-    )
+
+    sendMail(
+      newUser.email,
+      "Welcome to the HOTEL!",
+      `Welcome, ${(newUser, req.body.username)}`
+    );
     
     res.status(201).send({
       error: false,
