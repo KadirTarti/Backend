@@ -13,15 +13,14 @@ const permissions = require('../middlewares/permissions')
 //URL:  'cars'
 
 router.route('/')
-    .get(permissions.isAdmin, car.list)
-    .post(permissions.isStaffOrisAdmin, car.create)
+    .get(car.list)
+    .post(permissions.isStaff, car.create)
 
 router.route('/:id')
-    .get(permissions.isLogin, car.read)
-    .put(permissions.isLogin, car.update)
-    .patch(permissions.isLogin, car.update)
-    .delete(permissions.isStaffOrisAdmin, car.delete)
-
+    .get(car.read)
+    .put(permissions.isStaff, car.update)
+    .patch(permissions.isStaff, car.update)
+    .delete(permissions.isAdmin, car.delete)
 
 /* ------------------------------------------------------- */
 module.exports = router
