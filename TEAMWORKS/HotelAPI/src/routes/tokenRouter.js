@@ -3,20 +3,18 @@
     EXPRESS - HOTEL API
 ------------------------------------------------------- */
 const router = require("express").Router();
-
-const room = require('../controllers/roomController')
+/* ------------------------------------------------------- */
+const token = require("../controllers/tokenController");
 const idValidation = require("../middlewares/idValidation");
 
-//^ "/rooms"
-
-router.route("/").get(room.list).post(room.create);
+router.route("/").get(token.list).post(token.create);
 router
   .route("/:id")
   .all(idValidation)
-  .get(room.read)
-  .put(room.update)
-  .patch(room.update)
-  .delete(room.delete);
+  .get(token.read)
+  .put(token.update)
+  .patch(token.update)
+  .delete(token.delete);
 
 /* ------------------------------------------------------- */
 module.exports = router;

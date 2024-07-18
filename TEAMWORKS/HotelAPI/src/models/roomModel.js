@@ -15,7 +15,6 @@ const RoomSchema = new mongoose.Schema(
     image: {
       type: String,
       trim: true,
-      //   unique: true,
     },
     bedType: {
       type: String,
@@ -24,7 +23,7 @@ const RoomSchema = new mongoose.Schema(
       enum: ["Small Bed", "Medium Bed", "Large Bed"],
     },
     price: {
-      type: Number,
+      type: String,
       required: true,
     },
   },

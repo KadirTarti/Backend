@@ -3,9 +3,9 @@
     EXPRESS - HOTEL API
 ------------------------------------------------------- */
 const { mongoose } = require("../configs/dbConnection");
-const { CustomError } = require("../errors/customError");
-const passwordEncrypt = require("../helpers/passwordEncrypt");
 const validator = require("validator");
+const passwordEncrypt = require("../helpers/passwordEncrypt");
+
 /* ------------------------------------------------------- */
 
 const UserSchema = new mongoose.Schema(
@@ -31,6 +31,7 @@ const UserSchema = new mongoose.Schema(
       //       throw new CustomError("Password type is incorrect", 400);
       //     }
       //   },
+      // },
       set: function (password) {
         if (validator.isStrongPassword(password)) {
           return passwordEncrypt(password);
@@ -44,11 +45,11 @@ const UserSchema = new mongoose.Schema(
       trim: true,
       required: true,
       unique: true,
-      //   validate: [
+      validate: [validator.isEmail, "Please provide a valid email"],
+      // validate: [
       //     (email) => email.includes("@") && email.split("@")[1].includes("."),
       //     "Email is invalid!",
-      //   ],
-      validate: [validator.isEmail, "Please provide a valid email!"],
+      // ],
     },
     isActive: {
       type: Boolean,

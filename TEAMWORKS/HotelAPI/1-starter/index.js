@@ -5,7 +5,6 @@
 
 const express = require("express");
 const app = express();
-const morgan = require("morgan");
 
 /* ------------------------------------------------------- */
 require("dotenv").config();
@@ -22,7 +21,6 @@ dbConnection();
 /*                               MIDDLEWARES                                  */
 /* -------------------------------------------------------------------------- */
 app.use(express.json());
-app.use(morgan("dev"));
 
 app.use(require("./src/middlewares/findSearchSortPagi"));
 /* -------------------------------------------------------------------------- */
