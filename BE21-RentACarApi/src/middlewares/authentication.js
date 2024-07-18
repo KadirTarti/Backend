@@ -14,10 +14,10 @@ module.exports = async (req, res, next) => {
 
     if (tokenKey) {
 
-        if (tokenKey[0] == 'Token') {
         // SimpleToken:
-
-            const tokenData = await Token.findOne({ token: tokenKey[1] }).populate('userId')
+        
+        const tokenData = await Token.findOne({ token: tokenKey[1] }).populate('userId')
+        if (tokenKey[0] == 'Token' && tokenData) {
             req.user = tokenData ? tokenData.userId : undefined
 
         } else if (tokenKey[0] == 'Bearer') {
