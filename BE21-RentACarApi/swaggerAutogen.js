@@ -42,7 +42,7 @@ const document = {
 		// Models:
 		"User": require('./src/models/user').schema.obj,
 		"Car": require('./src/models/car').schema.obj,
-		"Reservation": require('./src/models/car').schema.obj,
+		"Reservation": require('./src/models/reservation').schema.obj,
 	}
 }
 
