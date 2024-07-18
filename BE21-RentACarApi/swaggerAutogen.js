@@ -40,7 +40,7 @@ const document = {
 	security: [{ Token: [] }, { Bearer: [] }],
 	definitions: {
 		// Models:
-		"User": require('./src/models/user').schema.obj,
+		"User": require('./rentacarApi/src/models/user').schema.obj,
 	}
 }
 

@@ -20,7 +20,7 @@ require('express-async-errors')
 // Configrations:
 
 // Connect to DB:
-const { dbConnection } = require('./src/configs/dbConnection')
+const { dbConnection } = require('./rentacarApi/src/configs/dbConnection')
 dbConnection()
 
 /* ------------------------------------------------------- */
@@ -30,13 +30,13 @@ dbConnection()
 app.use(express.json())
 
 // Check Authentication:
-app.use(require('./src/middlewares/authentication'))
+app.use(require('./rentacarApi/src/middlewares/authentication'))
 
 // Run Logger:
-app.use(require('./src/middlewares/logger'))
+app.use(require('./rentacarApi/src/middlewares/logger'))
 
 // res.getModelList():
-app.use(require('./src/middlewares/findSearchSortPage'))
+app.use(require('./rentacarApi/src/middlewares/findSearchSortPage'))
 
 /* ------------------------------------------------------- */
 // Routes:
@@ -61,7 +61,7 @@ app.use(require('./src/routes'))
 /* ------------------------------------------------------- */
 
 // errorHandler:
-app.use(require('./src/middlewares/errorHandler'))
+app.use(require('./rentacarApi/src/middlewares/errorHandler'))
 
 // RUN SERVER:
 app.listen(PORT, HOST, () => console.log(`http://${HOST}:${PORT}`))
