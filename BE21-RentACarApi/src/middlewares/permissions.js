@@ -15,6 +15,7 @@ module.exports = {
             throw new Error('NoPermission: You must login.')
         }
     },
+    
 
     isAdmin: (req, res, next) => {
 
@@ -25,4 +26,6 @@ module.exports = {
             throw new Error('NoPermission: You must login and to be Admin.')
         }
     },
+
+    
 }
