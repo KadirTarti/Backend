@@ -31,3 +31,41 @@ const { mongoose } = require('../configs/dbConnection')
 }
 /* ------------------------------------------------------- */
 // Car Model:
+
+const CarSchema = new mongoose.Schema({
+
+    carId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'User',
+        required: true,
+        index: true,
+    },
+    plateNumber:{
+        type: String,
+    },
+    brand:{
+        type: String,
+
+    },
+    model:{
+        type: String,
+
+    },
+    year:{
+        type: Number,
+
+    },
+    isAutomatic:{
+        type: Boole
+    },
+    pricePerDay:{},
+    isPublish:{},
+    createdId:{
+        type: mongoose.Schema.Types.ObjectId
+    },
+    updatedId:{
+        type: mongoose.Schema.Types.ObjectId
+
+    }
+
+}, { collection: 'cars', timestamps: true })

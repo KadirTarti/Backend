@@ -18,7 +18,13 @@ const { mongoose } = require('../configs/dbConnection')
 const passwordEncrypt = require('../helpers/passwordEncrypt')
 
 const UserSchema = new mongoose.Schema({
-
+           userId: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+            required: true,
+            index: true,
+        }, 
+    
     username: {
         type: String,
         trim: true,
@@ -55,6 +61,15 @@ const UserSchema = new mongoose.Schema({
             'Email type is not correct.'
             
         ]
+    },
+
+    firstName: {
+        type: String,
+        trim:true
+    },
+    lastName: {
+        type: String,
+        trim:true
     },
 
     isActive: {
