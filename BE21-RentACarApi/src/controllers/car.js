@@ -61,8 +61,8 @@ module.exports = {
                 customFilter._id = {$nin : reservedCars}
             }
         } else {
-            res.errorStatusCode = 404
-            throw new Error('startDate and endDate queries are required.')
+            // res.errorStatusCode = 404
+            // throw new Error('startDate and endDate queries are required.')
         }
 
         const data = await res.getModelList(Car, customFilter, [
