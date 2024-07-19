@@ -22,7 +22,53 @@ module.exports = {
             `
         */
 
-        const data = await res.getModelList(Car)
+        // Müsait olmayan araçları listeleme:
+        let customFilter = { isAvailable: true }
+
+        /* tarıhe gore listele */
+
+        const { startDate: getStartDate, endDate: getEndDate } = req.query
+
+        if (getStartDate && getEndDate) {
+            const reservedCars = await Reservation.find({
+                $nor: [
+                    { startDate: { $gt: getEndDate } }, // gt: >
+                    { endDate: { $lt: getStartDate} } // lt: <
+                ]
+            },  { _id: 0, carId: 1}).distinct('carId')
+
+            console.log(reservedCars)
+
+            // 20-30 / 07 kiralık opel
+
+            // 10-19 / 07 aralığında araç kiralamam gerekli
+
+            // start date             and date      
+            // 20 / 07                30 / 07
+            // -------                -------
+            //    0                      0          => 0
+
+            // 10-20 / 07 aralığında araç kiralamam gerekli
+
+            // start date             and date      
+            // 20 / 07                30 / 07
+            // -------                -------
+            //    0                      1          => 1
+          
+            // console.log(' reservedCars >> ', reservedCars);
+
+            if (reservedCars.length){
+                customFilter._id = {$nin : reservedCars}
+            }
+        } else {
+            res.errorStatusCode = 404
+            throw new Error('startDate and endDate queries are required.')
+        }
+
+        const data = await res.getModelList(Car, customFilter, [
+            { path: 'createdId', select: 'username' },
+            { path: 'updatedId', select: 'username' },
+        ])
 
         res.status(200).send({
             error: false,
@@ -30,7 +76,6 @@ module.exports = {
             data
         })
     },
-
     create: async (req, res) => {
         /*
             #swagger.tags = ["Cars"]
