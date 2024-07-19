@@ -36,7 +36,7 @@ const CarSchema = new mongoose.Schema({
 
     carId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
+        ref: 'Car',
         required: true,
         index: true,
     },
