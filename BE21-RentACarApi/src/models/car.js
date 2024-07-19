@@ -34,12 +34,6 @@ const { mongoose } = require('../configs/dbConnection')
 
 const CarSchema = new mongoose.Schema({
 
-    carId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Car',
-        required: true,
-        index: true,
-    },
     plateNumber:{
         type: String,
         trim: true,
