@@ -22,14 +22,24 @@ module.exports = {
             `
         */
 
-            const data = await res.getModelList(Reservation)
-
+            let customFilter = {}
+            if (!req.user.isAdmin && !req.user.isStaff)
+                customFilter = { userId: req.user._id }
+    
+            const data = await res.getModelList(Reservation, customFilter, [
+                { path: 'userId', select: 'username firstName lastName' },
+                { path: 'carId' },
+                { path: 'createdId', select: 'username' },
+                { path: 'updatedId', select: 'username' },
+            ])
+    
             res.status(200).send({
                 error: false,
                 details: await res.getModelListDetails(Reservation),
                 data
             })
-    },
+        },
+    
     
     create: async (req, res) => {
          /*
