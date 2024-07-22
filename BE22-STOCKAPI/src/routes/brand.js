@@ -19,7 +19,7 @@ const permission = require("../middlewares/permissions");
 router
   .route("/")
   .get(permission.isLogin, brand.list)
-  .post(permission.isLoginStaffOrAdmin, brand.create);
+  .post(brand.create);
 
 router
   .route("/:id")
