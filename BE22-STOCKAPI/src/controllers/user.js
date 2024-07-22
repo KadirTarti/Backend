@@ -35,10 +35,10 @@ module.exports = {
             #swagger.summary = "Create User"
         */
 
-    console.log(req.file);
-    if (req.file) {
-      req.body.avatar = "/uploads/" + req.file.filename;
-    }
+    // console.log(req.file);
+    // if (req.file) {
+    //   req.body.avatar = "/uploads/" + req.file.filename;
+    // }
 
     const data = await User.create(req.body);
 
@@ -98,9 +98,9 @@ module.exports = {
     // const data = await User.deleteOne({ _id: req.params.id });
     const data = await User.findOneAndDelete({ _id: req.params.id });
     //* eski resmi silme işlemi
-    if(data.avatar) {
-      fs.unlink(`.${data.avatar}`, err=>console.log(err))
-    }
+    // if(data.avatar) {
+    //   fs.unlink(`.${data.avatar}`, err=>console.log(err))
+    // }
     res.status(data ? 204 : 404).send({
       error: !data,
       data,
