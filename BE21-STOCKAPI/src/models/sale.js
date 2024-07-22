@@ -25,33 +25,17 @@ const SaleSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
-    lastName: {
-      type: String,
+    price: {
+      type: Number,
       trim: true,
       required: true,
     },
-    gender: {
-      type: String,
-      enum: [null, "M", "F"],
-      default: null,
-    },
-    email: {
-      type: String,
+    priceTotal: {
+      type: Number,
       trim: true,
       required: true,
-      index:true,
-      unique: [true, "Email already exists! Email field must be unique!"],
-      validate: [
-        (email) => /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email),
-        "Email type is not correct.",
-      ],
     },
-    createdId:{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User',
-        required: true
-    }
-  },
+    },
   {
     collection: "Sales",
     timestamps: true,
