@@ -27,7 +27,7 @@ const FirmSchema = new mongoose.Schema(
     }
   },
   {
-    collection: "reservations",
+    collection: "firms",
     timestamps: false,
   }
 );
