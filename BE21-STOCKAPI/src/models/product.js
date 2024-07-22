@@ -29,7 +29,7 @@ const ProductSchema = new mongoose.Schema(
     },
   },
   {
-    collection: "Products",
+    collection: "products",
     timestamps: true,
   }
 );
