@@ -3,7 +3,7 @@
     NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 
-const Firm = require("../models/Firm");
+const Firm = require("../models/firm");
 
 module.exports = {
   list: async (req, res) => {

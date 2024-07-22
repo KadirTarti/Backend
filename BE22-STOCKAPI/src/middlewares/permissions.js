@@ -1,7 +1,6 @@
 "use strict";
 
 const { CustomError } = require("../errors/customError");
-const Reservation = require("../models/reservation");
 /* -------------------------------------------------------
     NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
@@ -61,18 +60,18 @@ module.exports = {
   isAdminOrStaffOrOwn: async (req, res, next) => {
     //* User-Reservation-Passenger models
     
-    if (!req.user.isAdmin && !req.user.isStaff) {
-      const checkData = await req.model.findOne({ _id: req.params.id });
-      if (
-        (checkData.createdId?.toString() || checkData._id?.toString()) !=
-        req.user._id.toString()
-      ) {
-        throw new CustomError(
-          "NoPermission! You must be admin or staff or own!",
-          403
-        );
-      }
-    }
+    // if (!req.user.isAdmin && !req.user.isStaff) {
+    //   const checkData = await req.model.findOne({ _id: req.params.id });
+    //   if (
+    //     (checkData.createdId?.toString() || checkData._id?.toString()) !=
+    //     req.user._id.toString()
+    //   ) {
+    //     throw new CustomError(
+    //       "NoPermission! You must be admin or staff or own!",
+    //       403
+    //     );
+    //   }
+    // }
 
     next();
   },
