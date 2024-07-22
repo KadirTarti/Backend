@@ -5,9 +5,9 @@
 
 const router = require("express").Router();
 
-//* URL => /reservations
-const Reservation = require("../models/reservation")
-const reservation = require("../controllers/reservation");
+//* URL => /firms
+const Firm = require("../models/firm")
+const Firm = require("../controllers/firm");
 const idValidation = require("../middlewares/idValidation");
 const permission = require("../middlewares/permissions")
 
@@ -16,19 +16,19 @@ const permission = require("../middlewares/permissions")
 //! Update işlemini Staf veya Adminse tüm rezervasyonlar, Staff veya Admin değilse sadece kendisine ait rezervasyonlar
 // Delete işlemini sadece Admin yapabilir.
 const getModel = (req, res, next) => {
-  req.model = Reservation;
+  req.model = Firm;
   next();
 };
 router.use(permission.isLogin)
 
-router.route("/").get(reservation.list).post(reservation.create);
+router.route("/").get(Firm.list).post(Firm.create);
 
 router
   .route("/:id")
   .all(idValidation)
-  .get(getModel, permission.isAdminOrStaffOrOwn, reservation.read)
-  .put(getModel, permission.isAdminOrStaffOrOwn, reservation.update)
-  .patch(getModel, permission.isAdminOrStaffOrOwn, reservation.update)
-  .delete(permission.isAdmin, reservation.delete);
+  .get(getModel, permission.isAdminOrStaffOrOwn, Firm.read)
+  .put(getModel, permission.isAdminOrStaffOrOwn, Firm.update)
+  .patch(getModel, permission.isAdminOrStaffOrOwn, Firm.update)
+  .delete(permission.isAdmin, Firm.delete);
 
 module.exports = router;

@@ -5,9 +5,9 @@
 
 const router = require("express").Router();
 
-//* URL => /flights
+//* URL => /brands
 
-const flight = require("../controllers/flight");
+const brand = require("../controllers/brand");
 const idValidation = require("../middlewares/idValidation");
 const permission = require("../middlewares/permissions");
 
@@ -18,15 +18,15 @@ const permission = require("../middlewares/permissions");
 
 router
   .route("/")
-  .get(permission.isLogin, flight.list)
-  .post(permission.isLoginStaffOrAdmin, flight.create);
+  .get(permission.isLogin, brand.list)
+  .post(permission.isLoginStaffOrAdmin, brand.create);
 
 router
   .route("/:id")
   .all(idValidation)
-  .get(permission.isLogin, flight.read)
-  .put(permission.isLoginStaffOrAdmin, flight.update)
-  .patch(permission.isLoginStaffOrAdmin, flight.update)
-  .delete(permission.isLoginAdmin, flight.delete);
+  .get(permission.isLogin, brand.read)
+  .put(permission.isLoginStaffOrAdmin, brand.update)
+  .patch(permission.isLoginStaffOrAdmin, brand.update)
+  .delete(permission.isLoginAdmin, brand.delete);
 
 module.exports = router;

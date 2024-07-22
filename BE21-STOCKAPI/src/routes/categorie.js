@@ -5,9 +5,9 @@
 
 const router = require("express").Router();
 
-//* URL => /passengers
-const Passenger = require("../models/passenger")
-const passenger = require("../controllers/passenger");
+//* URL => /categories
+const categorie = require("../models/categorie")
+const categorie = require("../controllers/categorie");
 const idValidation = require("../middlewares/idValidation");
 const permission = require("../middlewares/permissions")
 
@@ -15,21 +15,21 @@ const permission = require("../middlewares/permissions")
 //? Yolcu editleme işlemini staff yada Admin yapabilir.
 //! Yolcu silme işlemini Admin yapabilir.
 const getModel = (req,res,next)=>{
-  req.model = Passenger;
+  req.model = categorie;
   next()  
 }
 
 router
   .route("/")
-  .get(permission.isLogin, passenger.list)
-  .post(permission.isLogin, passenger.create);
+  .get(permission.isLogin, categorie.list)
+  .post(permission.isLogin, categorie.create);
 
 router
   .route("/:id")
   .all(idValidation)
-  .get(permission.isLogin,getModel, permission.isAdminOrStaffOrOwn, passenger.read)
-  .put(permission.isLoginStaffOrAdmin, passenger.update)
-  .patch(permission.isLoginStaffOrAdmin, passenger.update)
-  .delete(permission.isLoginAdmin, passenger.delete);
+  .get(permission.isLogin,getModel, permission.isAdminOrStaffOrOwn, categorie.read)
+  .put(permission.isLoginStaffOrAdmin, categorie.update)
+  .patch(permission.isLoginStaffOrAdmin, categorie.update)
+  .delete(permission.isLoginAdmin, categorie.delete);
 
 module.exports = router;
