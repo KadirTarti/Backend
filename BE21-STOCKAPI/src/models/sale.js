@@ -5,10 +5,23 @@
 
 const { mongoose } = require("../configs/dbConnection");
 
-const PassengerSchema = new mongoose.Schema(
+const SaleSchema = new mongoose.Schema(
   {
-    firstName: {
-      type: String,
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Sale',
+      required: true
+    },
+    brandId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Brand',
+    },
+    productId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Product',
+    },
+    quantity: {
+      type: Number,
       trim: true,
       required: true,
     },
@@ -40,9 +53,9 @@ const PassengerSchema = new mongoose.Schema(
     }
   },
   {
-    collection: "passengers",
+    collection: "Sales",
     timestamps: true,
   }
 );
 
-module.exports = mongoose.model("Passenger",PassengerSchema);
+module.exports = mongoose.model("Sales",SaleSchema);
