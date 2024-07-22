@@ -4,7 +4,7 @@
 ------------------------------------------------------- */
 const router = require('express').Router()
 /* ------------------------------------------------------- */
-const auth = require("../controllers/auth")
+const auth = require("../controllers/authController")
 
 //* /auth
 
