@@ -6,7 +6,7 @@
 const router = require("express").Router();
 
 //* URL => /categories
-const categorie = require("../models/categorie")
+
 const categorie = require("../controllers/categorie");
 const idValidation = require("../middlewares/idValidation");
 const permission = require("../middlewares/permissions")
