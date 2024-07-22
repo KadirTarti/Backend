@@ -10,7 +10,8 @@ const mongoose = require('mongoose');
 //? üstteki async await yerine alttaki gibi then catch ile de kullanılabilir!
 
 mongoose
-.connect('mongodb://localhost:27017/blogAPI')
+// .connect('mongodb://localhost:27017/blogAPI')
+.connect(process.env.MONGODBURL)
 .then(()=>console.log('DB Connection'))
 .catch((err) => console.log(err));
 
