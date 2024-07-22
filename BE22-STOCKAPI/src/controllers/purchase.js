@@ -3,13 +3,13 @@
     NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 
-const Sale = require("../models/sale");
+const Purchase = require("../models/Purchase");
 
 module.exports = {
   list: async (req, res) => {
     /*
-            #swagger.tags = ["Sales"]
-            #swagger.summary = "List Sales"
+            #swagger.tags = ["Purchases"]
+            #swagger.summary = "List Purchases"
             #swagger.description = `
                 You can send query with endpoint for filter[], search[], sort[], page and limit.
                 <ul> Examples:
@@ -20,7 +20,7 @@ module.exports = {
                 </ul>
             `
         */
-    const data = await res.getModelList(Sale);
+    const data = await res.getModelList(Purchase);
     res.status(200).send({
       error: false,
       details: await res.getModelListDetails,
@@ -30,10 +30,10 @@ module.exports = {
   //! CRUD(Create-Read-Update-Delete)
   create: async (req, res) => {
     /*
-            #swagger.tags = ["Sales"]
-            #swagger.summary = "Create Sale"
+            #swagger.tags = ["Purchases"]
+            #swagger.summary = "Create Purchase"
         */
-    const data = await Sale.create(req.body);
+    const data = await Purchase.create(req.body);
     res.status(201).send({
       error: false,
       data,
@@ -41,10 +41,10 @@ module.exports = {
   },
   read: async (req, res) => {
     /*
-            #swagger.tags = ["Sales"]
-            #swagger.summary = "Get Single Sale"
+            #swagger.tags = ["Purchases"]
+            #swagger.summary = "Get Single Purchase"
         */
-    const data = await Sale.findOne({ _id: req.params.id });
+    const data = await Purchase.findOne({ _id: req.params.id });
     res.status(200).send({
       error: false,
       data,
@@ -52,28 +52,28 @@ module.exports = {
   },
   update: async (req, res) => {
     /*
-            #swagger.tags = ["Sales"]
-            #swagger.summary = "Update Sale"
+            #swagger.tags = ["Purchases"]
+            #swagger.summary = "Update Purchase"
         */
-    const data = await Sale.updateOne({ _id: req.params.id }, req.body, {
+    const data = await Purchase.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });
     res.status(202).send({
       error: false,
       data,
-      newData: await Sale.findOne({ _id: req.params.id }),
+      newData: await Purchase.findOne({ _id: req.params.id }),
     });
   },
   delete: async (req, res) => {
     /*
-            #swagger.tags = ["Sales"]
-            #swagger.summary = "Delete Sale"
+            #swagger.tags = ["Purchases"]
+            #swagger.summary = "Delete Purchase"
         */
-    const data = await Sale.deleteOne({ _id: req.params.id });
+    const data = await Purchase.deleteOne({ _id: req.params.id });
     res.status(data.deletedCount ? 204 : 404).send({
       error: !data.deletedCount,
       data,
-      message: "Sale not found!",
+      message: "Purchase not found!",
     });
   },
 };
