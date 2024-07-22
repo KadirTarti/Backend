@@ -5,7 +5,7 @@
 
 const { mongoose } = require("../configs/dbConnection");
 
-const FirmsSchema = new mongoose.Schema(
+const FirmSchema = new mongoose.Schema(
   {
     name: {
       type: String,
@@ -32,4 +32,4 @@ const FirmsSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Reservation", ReservationSchema);
+module.exports = mongoose.model("Firm", FirmSchema);
