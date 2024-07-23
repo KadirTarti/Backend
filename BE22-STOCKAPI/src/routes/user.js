@@ -23,9 +23,16 @@ router
   .route("/:id")
   .all(idValidation)
   .get(user.read)
-  .put(user.update)
-  .patch(user.update)
-  .delete(user.delete);
+  .put(
+    user.update
+  )
+  .patch(
+    // getModel,
+    // permission.isAdminOrStaffOrOwn,
+    // upload.single("avatar"),
+    user.update
+  )
+  .delete(permission.isLoginAdmin, user.delete);
 
 /* ------------------------------------------------------- */
 module.exports = router;
