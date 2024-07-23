@@ -4,7 +4,9 @@
 ------------------------------------------------------- */
 
 const User = require("../models/user");
-const fs = require("node:fs")
+const Token = require('../models/token')
+const passwordEncrypt = require('../helpers/passwordEncrypt')
+const fs = require("node:fs");
 
 module.exports = {
   list: async (req, res) => {
@@ -28,6 +30,7 @@ module.exports = {
       data,
     });
   },
+
   //! CRUD(Create-Read-Update-Delete)
   create: async (req, res) => {
     /*
@@ -47,6 +50,7 @@ module.exports = {
       data,
     });
   },
+
   read: async (req, res) => {
     /*
             #swagger.tags = ["Users"]
@@ -58,19 +62,20 @@ module.exports = {
       data,
     });
   },
+
   update: async (req, res) => {
     /*
             #swagger.tags = ["Users"]
             #swagger.summary = "Update User"
         */
-    // kullanıcı statusu değiştime yetkisi sadece adminde olacak   
-    if(!req.user.isAdmin){
-      delete req.body.isAdmin
-      delete req.body.isStaff
-      delete req.body.isActive
+    // kullanıcı statusu değiştime yetkisi sadece adminde olacak
+    if (!req.user.isAdmin) {
+      delete req.body.isAdmin;
+      delete req.body.isStaff;
+      delete req.body.isActive;
     }
 
-    console.log(req.file)
+    console.log(req.file);
     if (req.file) {
       req.body.avatar = "/uploads/" + req.file.filename;
     }
@@ -79,10 +84,9 @@ module.exports = {
     });
     //* eski resmi silme işlemi
 
-    if(req.file && data.avatar) {
-      fs.unlink(`.${data.avatar}`, err=>console.log(err))
+    if (req.file && data.avatar) {
+      fs.unlink(`.${data.avatar}`, (err) => console.log(err));
     }
-
 
     res.status(202).send({
       error: false,
@@ -90,6 +94,7 @@ module.exports = {
       newData: await User.findOne({ _id: req.params.id }),
     });
   },
+
   delete: async (req, res) => {
     /*
             #swagger.tags = ["Users"]
