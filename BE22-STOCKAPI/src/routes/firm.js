@@ -9,7 +9,7 @@ const router = require("express").Router();
 
 const Firm = require("../controllers/firm");
 const idValidation = require("../middlewares/idValidation");
-const permission = require("../middlewares/permissions")
+const permission =  require("../middlewares/permissions")
 
 //* Login olan kullanıcılar delete hariç tüm işlemleri yapabilecek. 
 //? Listeleme işlemini Staf veya Adminse tüm rezervasyonlar, Staff veya Admin değilse sadece kendisine ait rezervasyonlar
