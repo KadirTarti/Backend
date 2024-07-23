@@ -1,6 +1,6 @@
 "use strict";
 /* -------------------------------------------------------
-    NODEJS EXPRESS | Abdulkadir Tartilaci
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 
 const router = require("express").Router();
@@ -28,5 +28,4 @@ router
   .put(permission.isLoginStaffOrAdmin, brand.update)
   .patch(permission.isLoginStaffOrAdmin, brand.update)
   .delete(permission.isLoginAdmin, brand.delete);
-
 module.exports = router;

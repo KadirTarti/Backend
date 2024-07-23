@@ -26,10 +26,10 @@ module.exports = {
 
         // Sadece kendi kayıtlarını görebilir:
         // Çalışanlarımız ve Admin tük kullanıcıları görebilir
-        const customFilters = (req.user?.isAdmin || req.user?.isStaff) ? {} : {_id: req.user._id}
+        const customFilters = (req.user?.isAdmin || req.user?.isStaff) ? {} : { _id: req.user._id }
 
         const data = await res.getModelList(User, customFilters)
-        
+
         res.status(200).send({
             error: false,
             details: await res.getModelListDetails(User, customFilters),
@@ -38,21 +38,21 @@ module.exports = {
     },
 
     create: async (req, res) => {
-          /*
-            #swagger.tags = ["Users"]
-            #swagger.summary = "Create User"
-            #swagger.parameters['body'] = {
-                in: 'body',
-                required: true,
-                schema: {
-                    "username": "test",
-                    "password": "1234",
-                    "email": "test@site.com",
-                    "firstName": "test",
-                    "lastName": "test",
-                }
-            }
-        */
+        /*
+          #swagger.tags = ["Users"]
+          #swagger.summary = "Create User"
+          #swagger.parameters['body'] = {
+              in: 'body',
+              required: true,
+              schema: {
+                  "username": "test",
+                  "password": "1234",
+                  "email": "test@site.com",
+                  "firstName": "test",
+                  "lastName": "test",
+              }
+          }
+      */
 
         // Yeni kayıtlarda admin/staff = false
         req.body.isStaff = false
@@ -86,10 +86,10 @@ module.exports = {
 
         // Sadece kendi kayıtını görebilir:
         // Çalışanlarımız ve Admin tük kullanıcıları görebilir
-        const customFilters = (req.user?.isAdmin || req.user?.isStaff) ? {} : {_id: req.user._id}
+        const customFilters = (req.user?.isAdmin || req.user?.isStaff) ? {} : { _id: req.user._id }
 
         const data = await User.findOne(customFilters)
-        
+
         res.status(200).send({
             error: false,
             data
@@ -112,7 +112,7 @@ module.exports = {
                 }
             }
         */
-            console.log('--->>', req.params.id, req.user?.isAdmin);
+        console.log('--->>', req.params.id, req.user?.isAdmin);
 
         // Sadece kendi kaydını güncelleyebilir:
         //const customFilters = req.user?.isAdmin ? { _id: req.params.id } : { _id: req.user._id }
@@ -123,7 +123,7 @@ module.exports = {
             delete req.body.isStaff
             delete req.body.isAdmin
         }
-        
+
         const data = await User.updateOne(customFilters, req.body, { runValidators: true })
 
         res.status(202).send({
@@ -134,9 +134,27 @@ module.exports = {
     },
 
     delete: async (req, res) => {
-        res.status(200).send({
-            error: false,
-            data: 'list'
-        })
+        /*
+            #swagger.tags = ["Users"]
+            #swagger.summary = "Delete User"
+        */
+
+        // Permission tarafında permissions.isAdmin kontrolü yapıldığı için burda gerek kalmadı.
+
+        if (req.params.id !== req.user._id) {
+            const data = await User.deleteOne({ _id: req.params.id })
+            const count = data?.deletedCount ?? 0
+
+
+            console.log('delete >> ', count);
+            res.status(count > 0 ? 204 : 404).send({
+                error: count !== 0,
+                data
+            })
+        } else {
+            // Admin kendini silemez.
+            res.errorStatusCode = 403
+            throw new Error('You can not remove your account.')
+        }
     }
 }
