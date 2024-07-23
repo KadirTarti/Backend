@@ -30,7 +30,7 @@ router.use('/sales', require('./sale'))
 // tokens:
 router.use('/tokens', require('./token'))
 // users:
-router.use('/users', require('./user'))
+router.use('/userss', require('./user'))
 
 
 /* ------------------------------------------------------- */

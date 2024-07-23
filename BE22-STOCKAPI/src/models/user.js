@@ -56,7 +56,7 @@ const UserSchema = new mongoose.Schema(
     },
   },
   {
-    collection: "users",
+    collection: "userss",
     timestamps: true,
   }
 );
@@ -79,6 +79,7 @@ UserSchema.pre("save", function (next) {
   this.password = passwordEncrypt(this.password);
   next();
 });
+
 
 //? update için
 const updateEncryptValidatePassword = function (next) {
