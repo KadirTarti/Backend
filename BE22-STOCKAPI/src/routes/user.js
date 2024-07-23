@@ -17,7 +17,7 @@ const getModel = (req, res, next) => {
 
 
 //* /users
-router.route("/").get(permission.isLoginAdmin,user.list).post(upload.single("avatar"),user.create);
+router.route("/").get(user.list).post(user.create);
 
 router
   .route("/:id")
@@ -26,13 +26,13 @@ router
   .put(
     getModel,
     permission.isAdminOrStaffOrOwn,
-    upload.single("avatar"),
+    // upload.single("avatar"),
     user.update
   )
   .patch(
     getModel,
     permission.isAdminOrStaffOrOwn,
-    upload.single("avatar"),
+    // upload.single("avatar"),
     user.update
   )
   .delete(permission.isLoginAdmin, user.delete);
