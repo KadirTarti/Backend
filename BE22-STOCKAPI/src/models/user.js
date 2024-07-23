@@ -1,6 +1,6 @@
 "use strict";
 /* -------------------------------------------------------
-    NODEJS EXPRESS | CLARUSWAY FullStack Team
+    NODEJS EXPRESS | Abdulkadir Tartilaci
 ------------------------------------------------------- */
 const { mongoose } = require("../configs/dbConnection");
 const { CustomError } = require("../errors/customError");

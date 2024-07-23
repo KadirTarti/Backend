@@ -1,6 +1,6 @@
 "use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS | CLARUSWAY FullStack Team
+    NODEJS EXPRESS | Abdulkadir Tartilaci
 ------------------------------------------------------- */
 
 const Purchase = require("../models/Purchase");

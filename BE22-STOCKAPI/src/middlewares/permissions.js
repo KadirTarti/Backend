@@ -2,7 +2,7 @@
 
 const { CustomError } = require("../errors/customError");
 /* -------------------------------------------------------
-    NODEJS EXPRESS | CLARUSWAY FullStack Team
+    NODEJS EXPRESS | Abdulkadir Tartilaci
 ------------------------------------------------------- */
 
 module.exports = {
