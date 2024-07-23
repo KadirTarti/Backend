@@ -22,20 +22,10 @@ router.route("/").get(user.list).post(user.create);
 router
   .route("/:id")
   .all(idValidation)
-  .get(getModel, permission.isAdminOrStaffOrOwn, user.read)
-  .put(
-    getModel,
-    permission.isAdminOrStaffOrOwn,
-    // upload.single("avatar"),
-    user.update
-  )
-  .patch(
-    getModel,
-    permission.isAdminOrStaffOrOwn,
-    // upload.single("avatar"),
-    user.update
-  )
-  .delete(permission.isLoginAdmin, user.delete);
+  .get(user.read)
+  .put(user.update)
+  .patch(user.update)
+  .delete(user.delete);
 
 /* ------------------------------------------------------- */
 module.exports = router;

@@ -69,11 +69,11 @@ module.exports = {
             #swagger.summary = "Update User"
         */
     // kullanıcı statusu değiştime yetkisi sadece adminde olacak
-    if (!req.user.isAdmin) {
-      delete req.body.isAdmin;
-      delete req.body.isStaff;
-      delete req.body.isActive;
-    }
+    // if (!req.user.isAdmin) {
+    //   delete req.body.isAdmin;
+    //   delete req.body.isStaff;
+    //   delete req.body.isActive;
+    // }
 
     console.log(req.file);
     if (req.file) {
