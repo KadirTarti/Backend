@@ -2,7 +2,7 @@
 
 ### ERD:
 
-![ERD](./flightApiERD.png)
+![ERD](./StockApiERD.png)
 
 ### Folder/File Structure:
 
@@ -46,7 +46,7 @@
  ┣ 📜.env
  ┣ 📜.env-sample
  ┣ 📜.gitignore
- ┣ 📜flightApiERD.png
+ ┣ 📜StockApiERD.png
  ┣ 📜index.js
  ┣ 📜package-lock.json
  ┣ 📜package.json

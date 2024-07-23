@@ -1,6 +1,6 @@
 "use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS |  FlightApi | Abdulkadir TARTILACI
+    NODEJS EXPRESS |  StockApi | Abdulkadir TARTILACI
 ------------------------------------------------------- */
 const router = require('express').Router()
 /* ------------------------------------------------------- */

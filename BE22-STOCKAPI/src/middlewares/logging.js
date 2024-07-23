@@ -1,6 +1,6 @@
 "use strict";
 /* -------------------------------------------------------
-    NODEJS EXPRESS |  FlightApi | Abdulkadir TARTILACI
+    NODEJS EXPRESS |  StockApi | Abdulkadir TARTILACI
 ------------------------------------------------------- */
 // $ npm i morgan
 // app.use(require('./src/middlewares/logging')):
