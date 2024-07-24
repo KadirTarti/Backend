@@ -33,6 +33,24 @@ module.exports = {
     },
 
     create: async (req, res) => {
+        /*
+            #swagger.tags = ["Products"]
+            #swagger.summary = "Create Product"
+            #swagger.parameters['body'] = {
+                in: 'body',
+                required: true,
+                schema: {
+                    "name": "Product 1"
+                }
+            }
+        */
+
+        const data = await Product.create(req.body)
+
+        res.status(200).send({
+            error: false,
+            data
+        })
     },
 
     read: async (req, res) => {
@@ -67,8 +85,38 @@ module.exports = {
     },
 
     update: async (req, res) => {
+        /*
+            #swagger.tags = ["Products"]
+            #swagger.summary = "Update Product"
+            #swagger.parameters['body'] = {
+                in: 'body',
+                required: true,
+                schema: {
+                    "name": "Product 1"
+                }
+            }
+        */
+
+        const data = await Product.updateOne({ _id: req.params.id }, req.body, { runValidators: true })
+
+        res.status(200).send({
+            error: false,
+            new: await Product.findOne({ _id: req.params.id }),
+            data
+        })
     },
 
     delete: async (req, res) => {
+        /*
+            #swagger.tags = ["Products"]
+            #swagger.summary = "Delete Product"
+        */
+
+        const data = await Product.deleteOne({ _id: req.params.id })
+
+        res.status(200).send({
+            error: !data.deleteCount,
+            data
+        })
     },
 }
