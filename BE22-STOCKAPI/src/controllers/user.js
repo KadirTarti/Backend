@@ -7,6 +7,7 @@
 const User = require('../models/user')
 const Token = require('../models/token')
 const passwordEncrypt = require('../helpers/passwordEncrypt')
+const { CustomError } = require('../errors/customError')
 
 module.exports = {
     list: async (req, res) => {
@@ -128,7 +129,7 @@ module.exports = {
             const data = await User.updateOne(customFilters, req.body, { runValidators: true });
 
             if (!data.matchedCount) {
-                return res.status(404).send({ error: true, message: "User not found or cannot update another user's profile." });
+                return res.status(404).send(CustomError);
             }
             res.status(202).send({
                 error: false,
@@ -137,7 +138,7 @@ module.exports = {
             });
         } catch (error) {
             console.error(error);
-            res.status(500).send({ error: true, message: "An error occurred while updating the user." });
+            res.status(500).send(CustomError);
         }
     },
 
