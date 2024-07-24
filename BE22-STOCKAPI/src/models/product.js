@@ -22,10 +22,13 @@ const ProductSchema = new mongoose.Schema(
       trim: true,
       required: true,
     },
+    price: {
+      type: Number,
+      default: 0
+    },
     quantity: {
         type: Number,
-        trim: true,
-        required: true,
+        default: 0
     },
   },
   {
