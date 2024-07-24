@@ -116,7 +116,7 @@ module.exports = {
 
         // Sadece kendi kaydını güncelleyebilir:
         //const customFilters = req.user?.isAdmin ? { _id: req.params.id } : { _id: req.user._id }
-        const customFilters = { _id: req.params.id }
+        const customFilters = req.user?.isAdmin ? { _id: req.params.id } : { _id: req.user._id };
 
         // Yeni kayıtlarda admin/staff durumunu değiştiremez:
         if (!req.user?.isAdmin) {
@@ -124,13 +124,21 @@ module.exports = {
             delete req.body.isAdmin
         }
 
-        const data = await User.updateOne(customFilters, req.body, { runValidators: true })
+        try {
+            const data = await User.updateOne(customFilters, req.body, { runValidators: true });
 
-        res.status(202).send({
-            error: false,
-            data,
-            new: await User.findOne(customFilters),
-        })
+            if (!data.matchedCount) {
+                return res.status(404).send({ error: true, message: "User not found or cannot update another user's profile." });
+            }
+            res.status(202).send({
+                error: false,
+                data,
+                new: await User.findOne(customFilters),
+            });
+        } catch (error) {
+            console.error(error);
+            res.status(500).send({ error: true, message: "An error occurred while updating the user." });
+        }
     },
 
     delete: async (req, res) => {
