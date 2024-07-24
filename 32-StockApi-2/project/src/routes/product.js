@@ -11,9 +11,21 @@ const permissions = require('../middlewares/permissions')
 
 // URL: /products
 
-router.route('/(:id)?')
-    .post(permissions.isAdmin, product.create)
+/* 
+router.route('/')
+    .get(permissions.isLogin, product.list)
+    .post(product.create)
+
+router.route('/:id')
     .get(permissions.isStaff, product.read)
+    .put(permissions.isAdmin, product.update)
+    .patch(permissions.isAdmin, product.update)
+    .delete(permissions.isAdmin, product.delete)
+*/
+
+router.route('/(:id)?')
+    .get(permissions.isStaff, product.read)
+    .post(product.create)
     .put(permissions.isAdmin, product.update)
     .patch(permissions.isAdmin, product.update)
     .delete(permissions.isAdmin, product.delete)

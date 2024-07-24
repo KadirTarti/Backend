@@ -23,13 +23,47 @@ module.exports = {
             `
         */
 
-            const data = await res.getModelList(Product, {}, ['categoryId', 'brandId'])
+        const data = await res.getModelList(Product, {}, ['categoryId', 'brandId'])
+
+        res.status(200).send({
+            error: false,
+            details: await res.getModelListDetails(Product),
+            data
+        })
     },
 
     create: async (req, res) => {
     },
 
     read: async (req, res) => {
+        /*
+            #swagger.tags = ["Products"]
+            #swagger.summary = "Get Single Product"
+        */
+
+        console.log('read run');
+
+        if (req.params.id) {
+            // Single
+
+            const data = await Product.findOne({ _id: req.params.id })
+                .populate(['categoryId', 'brandId'])
+
+            res.status(200).send({
+                error: false,
+                data
+            })
+        } else {
+            // All
+
+            const data = await res.getModelList(Product, {}, ['categoryId', 'brandId'])
+
+            res.status(200).send({
+                error: false,
+                details: await res.getModelListDetails(Product),
+                data
+            })
+        }
     },
 
     update: async (req, res) => {
