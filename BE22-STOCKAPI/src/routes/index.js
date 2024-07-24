@@ -14,7 +14,7 @@ router.use('/auth', require('./auth'))
 // brands:
 // router.use('/brands', require('./brand'))
 // // categories:
-// router.use('/categories', require('./categorie'))
+// router.use('/categories', require('./category'))
 // // firms:
 // router.use('/firms', require('./firm'))
 // document:

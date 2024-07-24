@@ -1,4 +1,5 @@
 "use strict";
+const { transform } = require("framer-motion");
 /* -------------------------------------------------------
     NODEJS EXPRESS | Abdulkadir Tartilaci
 ------------------------------------------------------- */
@@ -26,17 +27,20 @@ const PurchaseSchema = new mongoose.Schema(
       ref: 'Product',
       required: true
     },
-    quantity: {
-      type: Number,
-      required: true
-    },
+
     price: {
       type: Number,
       required: true
     },
-    priceTotal: {
+    quantity: {
       type: Number,
       required: true
+    },
+
+    amount: {
+      type: Number,
+      default: function() {return this.price * this.quantity},
+      transform: function() {return this.price * this.quantity}
     }    
   },
   {
