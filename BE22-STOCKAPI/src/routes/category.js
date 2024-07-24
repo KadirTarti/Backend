@@ -7,7 +7,7 @@ const router = require("express").Router();
 
 //* URL => /categories
 
-const categorie = require("../controllers/categorie");
+const category = require("../controllers/category");
 const idValidation = require("../middlewares/idValidation");
 const permission = require("../middlewares/permissions")
 
@@ -15,21 +15,21 @@ const permission = require("../middlewares/permissions")
 //? Yolcu editleme işlemini staff yada Admin yapabilir.
 //! Yolcu silme işlemini Admin yapabilir.
 const getModel = (req,res,next)=>{
-  req.model = categorie;
+  req.model = category;
   next()  
 }
 
 router
   .route("/")
-  .get( categorie.list)
-  .post( categorie.create);
+  .get( category.list)
+  .post( category.create);
 
 router
   .route("/:id")
   .all(idValidation)
-  .get(categorie.read)
-  .put(categorie.update)
-  .patch(categorie.update)
-  .delete(categorie.delete);
+  .get(category.read)
+  .put(category.update)
+  .patch(category.update)
+  .delete(category.delete);
 
 module.exports = router;

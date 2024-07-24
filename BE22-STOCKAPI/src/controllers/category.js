@@ -3,7 +3,7 @@
     NODEJS EXPRESS | Abdulkadir Tartilaci
 ------------------------------------------------------- */
 
-const Categorie = require("../models/Categorie");
+const Category = require("../models/category");
 
 module.exports = {
   list: async (req, res) => {
@@ -20,7 +20,7 @@ module.exports = {
                 </ul>
             `
         */
-    const data = await res.getModelList(Categorie);
+    const data = await res.getModelList(Category);
     res.status(200).send({
       error: false,
       details: await res.getModelListDetails,
@@ -31,9 +31,9 @@ module.exports = {
   create: async (req, res) => {
     /*
             #swagger.tags = ["Categories"]
-            #swagger.summary = "Create Categorie"
+            #swagger.summary = "Create Category"
         */
-    const data = await Categorie.create(req.body);
+    const data = await Category.create(req.body);
     res.status(201).send({
       error: false,
       data,
@@ -42,9 +42,9 @@ module.exports = {
   read: async (req, res) => {
     /*
             #swagger.tags = ["Categories"]
-            #swagger.summary = "Get Single Categorie"
+            #swagger.summary = "Get Single Category"
         */
-    const data = await Categorie.findOne({ _id: req.params.id });
+    const data = await Category.findOne({ _id: req.params.id });
     res.status(200).send({
       error: false,
       data,
@@ -53,27 +53,27 @@ module.exports = {
   update: async (req, res) => {
     /*
             #swagger.tags = ["Categories"]
-            #swagger.summary = "Update Categorie"
+            #swagger.summary = "Update Category"
         */
-    const data = await Categorie.updateOne({ _id: req.params.id }, req.body, {
+    const data = await Category.updateOne({ _id: req.params.id }, req.body, {
       runValidators: true,
     });
     res.status(202).send({
       error: false,
       data,
-      newData: await Categorie.findOne({ _id: req.params.id }),
+      newData: await Category.findOne({ _id: req.params.id }),
     });
   },
   delete: async (req, res) => {
     /*
             #swagger.tags = ["Categories"]
-            #swagger.summary = "Delete Categorie"
+            #swagger.summary = "Delete Category"
         */
-    const data = await Categorie.deleteOne({ _id: req.params.id });
+    const data = await Category.deleteOne({ _id: req.params.id });
     res.status(data.deletedCount ? 204 : 404).send({
       error: !data.deletedCount,
       data,
-      message: "Categorie not found!",
+      message: "Category not found!",
     });
   },
 };
