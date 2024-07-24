@@ -24,16 +24,9 @@ router
 router
   .route("/:id")
   .all(idValidation)
-  .get(
-    // permission.isLogin, 
-    brand.read)
-  .put(
-    // permission.isLoginStaffOrAdmin, 
-    brand.update)
-  .patch(
-    // permission.isLoginStaffOrAdmin, 
-    brand.update)
-  .delete(
-    // permission.isLoginAdmin, 
-    brand.delete);
+  .get(permission.isLogin, brand.read)
+  .put(permission.isLoginStaffOrAdmin, brand.update)
+  .patch(permission.isLoginStaffOrAdmin, brand.update)
+  .delete(permission.isLoginAdmin, brand.delete);
+
 module.exports = router;

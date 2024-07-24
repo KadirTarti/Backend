@@ -1,18 +1,18 @@
 "use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS |  StockApi | Abdulkadir TARTILACI
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 const router = require('express').Router()
 /* ------------------------------------------------------- */
-const auth = require("../controllers/auth")
+// routes/auth:
 
-//* /auth
+const auth = require('../controllers/auth')
 
-router.post("/login",auth.login)
+// URL: /auth
 
-router.post("/refresh",auth.refresh)
-
-router.get("/logout",auth.logout)
+router.post('/login', auth.login) // SimpleToken & JWT
+router.post('/refresh', auth.refresh) // JWT Refresh
+router.get('/logout', auth.logout) // SimpleToken Logout
 
 /* ------------------------------------------------------- */
 module.exports = router

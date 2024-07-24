@@ -1,38 +1,27 @@
-"use strict";
+"use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS | Abdulkadir Tartilaci
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
-const router = require("express").Router();
+const router = require('express').Router()
 /* ------------------------------------------------------- */
-const user = require("../controllers/user");
-const User = require("../models/user");
-const idValidation = require("../middlewares/idValidation");
-const upload = require("../middlewares/upload")
-const permission = require("../middlewares/permissions")
+// routes/user:
 
-const getModel = (req, res, next) => {
-  req.model = User;
-  next();
-};
+const permissions = require('../middlewares/permissions')
+const user = require('../controllers/user')
 
+// URL: /users
 
-//* /users
-router.route("/").get(user.list).post(user.create);
+router.route('/')
+    // .get(permissions.isAdmin, user.list)
+    //? user.list içinde isAdmin kontrolü yaptık:
+    .get(permissions.isLogin, user.list)
+    .post(user.create)
 
-router
-  .route("/:id")
-  .all(idValidation)
-  .get(user.read)
-  .put(
-    user.update
-  )
-  .patch(
-    // getModel,
-    // permission.isAdminOrStaffOrOwn,
-    // upload.single("avatar"),
-    user.update
-  )
-  .delete(permission.isLoginAdmin, user.delete);
+router.route('/:id')
+    .get(permissions.isLogin, user.read)
+    .put(permissions.isLogin, user.update)
+    .patch(permissions.isLogin, user.update)
+    .delete(permissions.isAdmin, user.delete)
 
 /* ------------------------------------------------------- */
-module.exports = router;
+module.exports = router

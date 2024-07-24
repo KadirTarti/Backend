@@ -21,15 +21,15 @@ const getModel = (req,res,next)=>{
 
 router
   .route("/")
-  .get(permission.isLogin, categorie.list)
-  .post(permission.isLogin, categorie.create);
+  .get( categorie.list)
+  .post( categorie.create);
 
 router
   .route("/:id")
   .all(idValidation)
-  .get(permission.isLogin,getModel, permission.isAdminOrStaffOrOwn, categorie.read)
-  .put(permission.isLoginStaffOrAdmin, categorie.update)
-  .patch(permission.isLoginStaffOrAdmin, categorie.update)
-  .delete(permission.isLoginAdmin, categorie.delete);
+  .get(categorie.read)
+  .put(categorie.update)
+  .patch(categorie.update)
+  .delete(categorie.delete);
 
 module.exports = router;
