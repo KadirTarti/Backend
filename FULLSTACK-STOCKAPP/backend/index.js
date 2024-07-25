@@ -23,6 +23,10 @@ require('express-async-errors')
 const { dbConnection } = require('./src/configs/dbConnection')
 dbConnection()
 
+
+//cors
+const cors = require('cors');
+app.use(cors())
 /* ------------------------------------------------------- */
 // Middlewares:
 
