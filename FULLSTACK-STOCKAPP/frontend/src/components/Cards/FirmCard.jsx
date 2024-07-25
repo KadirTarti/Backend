@@ -7,7 +7,9 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import * as React from "react";
 import { btnStyle } from "../../styles/globalStyle";
-import { useDeleteFirmMutation } from "../../services/stocks";
+import useStockCall from "../../hooks/useStockCall";
+
+
 export default function FirmCard({
   _id,
   name,
@@ -17,7 +19,7 @@ export default function FirmCard({
   handleOpen,
   setInitialState,
 }) {
-  const [deleteFirm] = useDeleteFirmMutation();
+  const { deleteStockData } = useStockCall();
   return (
     <Card
       sx={{
@@ -62,7 +64,7 @@ export default function FirmCard({
           }}
           sx={btnStyle}
         />
-        <DeleteOutlineIcon onClick={() => deleteFirm(_id)} sx={btnStyle} />
+        <DeleteOutlineIcon onClick={() => deleteStockData("firms", _id)} sx={btnStyle} />
       </CardActions>
     </Card>
   );
