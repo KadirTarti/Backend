@@ -1,35 +1,22 @@
 "use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS | Abdulkadir Tartilaci
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
+const router = require('express').Router()
+/* ------------------------------------------------------- */
+// routes/purchase:
 
-const router = require("express").Router();
+const purchase = require('../controllers/purchase')
+const permissions = require('../middlewares/permissions')
 
-//* URL => /purchases
+// URL: /purchases
 
-const purchase = require("../controllers/purchase");
-const idValidation = require("../middlewares/idValidation");
-const permission = require("../middlewares/permissions")
+router.route('/(:id)?')
+    .post(permissions.isAdmin, purchase.create)
+    .get(permissions.isStaff, purchase.read)
+    .put(permissions.isAdmin, purchase.update)
+    .patch(permissions.isAdmin, purchase.update)
+    .delete(permissions.isAdmin, purchase.delete)
 
-//* login olan kullanıcı kendi yolcularını görüntüleyebilir, yolcu oluşturabilir.
-//? Yolcu editleme işlemini staff yada Admin yapabilir.
-//! Yolcu silme işlemini Admin yapabilir.
-const getModel = (req,res,next)=>{
-  req.model = purchase;
-  next()  
-}
-
-router
-  .route("/")
-  .get(permission.isLogin, purchase.list)
-  .post(permission.isLogin, purchase.create);
-
-router
-  .route("/:id")
-  .all(idValidation)
-  .get(permission.isLogin,getModel, permission.isAdminOrStaffOrOwn, purchase.read)
-  .put(permission.isLoginStaffOrAdmin, purchase.update)
-  .patch(permission.isLoginStaffOrAdmin, purchase.update)
-  .delete(permission.isLoginAdmin, purchase.delete);
-
-module.exports = router;
+/* ------------------------------------------------------- */
+module.exports = router

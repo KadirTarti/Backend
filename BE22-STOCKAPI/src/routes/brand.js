@@ -1,32 +1,22 @@
-"use strict";
+"use strict"
 /* -------------------------------------------------------
     NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
+const router = require('express').Router()
+/* ------------------------------------------------------- */
+// routes/brand:
 
-const router = require("express").Router();
+const brand = require('../controllers/brand')
+const permissions = require('../middlewares/permissions')
 
-//* URL => /brands
+// URL: /brands
 
-const brand = require("../controllers/brand");
-const idValidation = require("../middlewares/idValidation");
-const permission = require("../middlewares/permissions");
+router.route('/(:id)?')
+    .post(permissions.isAdmin, brand.create)
+    .get(permissions.isStaff, brand.read)
+    .put(permissions.isAdmin, brand.update)
+    .patch(permissions.isAdmin, brand.update)
+    .delete(permissions.isAdmin, brand.delete)
 
-
-//* Login olan herkes uçuşları listeleyebilir.
-//! Staff yada Admin olan post,put,patch işlemlerini yapabilir.
-//? sadece admin delete işlemini yapabilir.
-
-router
-  .route("/")
-  .get(permission.isLogin, brand.list)
-  .post(brand.create);
-
-router
-  .route("/:id")
-  .all(idValidation)
-  .get(permission.isLogin, brand.read)
-  .put(permission.isLoginStaffOrAdmin, brand.update)
-  .patch(permission.isLoginStaffOrAdmin, brand.update)
-  .delete(permission.isLoginAdmin, brand.delete);
-
-module.exports = router;
+/* ------------------------------------------------------- */
+module.exports = router

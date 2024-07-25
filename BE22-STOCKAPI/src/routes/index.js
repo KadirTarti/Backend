@@ -1,37 +1,36 @@
 "use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS |  StockApi | Abdulkadir TARTILACI
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
 const router = require('express').Router()
 /* ------------------------------------------------------- */
-// ROUTER INDEX:
+// routes/:
 
 // URL: /
 
-
-// auth:
+// // auth:
 router.use('/auth', require('./auth'))
-// brands:
-// router.use('/brands', require('./brand'))
-// // categories:
-// router.use('/categories', require('./category'))
-// // firms:
-// router.use('/firms', require('./firm'))
-// document:
-router.use('/documents', require('./documents'))
-// products:
-// router.use('/products', require('./product'))
-// // purchases:
-// router.use('/purchases', require('./purchase'))
-// // products:
-// router.use('/products', require('./product'))
-// // sales:
-// router.use('/sales', require('./sale'))
-// // tokens:
-// router.use('/tokens', require('./token'))
-// users:
+// // user:
 router.use('/users', require('./user'))
+// // token:
+router.use('/tokens', require('./token'))
 
+
+// // brand:
+router.use('/brands', require('./brand'))
+// // category:
+router.use('/categories', require('./category'))
+// // firm:
+router.use('/firms', require('./firm'))
+// // product:
+router.use('/products', require('./product'))
+// // purchase:
+router.use('/purchases', require('./purchase'))
+// // sale:
+router.use('/sales', require('./sale'))
+
+// document:
+router.use('/documents', require('./document'))
 
 /* ------------------------------------------------------- */
-module.exports = router;
+module.exports = router

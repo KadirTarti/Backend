@@ -1,34 +1,22 @@
 "use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS | Abdulkadir Tartilaci
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
+const router = require('express').Router()
+/* ------------------------------------------------------- */
+// routes/firm:
 
-const router = require("express").Router();
+const firm = require('../controllers/firm')
+const permissions = require('../middlewares/permissions')
 
-//* URL => /firms
+// URL: /firms
 
-const Firm = require("../controllers/firm");
-const idValidation = require("../middlewares/idValidation");
-const permission =  require("../middlewares/permissions")
+router.route('/(:id)?')
+    .post(permissions.isAdmin, firm.create)
+    .get(permissions.isStaff, firm.read)
+    .put(permissions.isAdmin, firm.update)
+    .patch(permissions.isAdmin, firm.update)
+    .delete(permissions.isAdmin, firm.delete)
 
-//* Login olan kullanıcılar delete hariç tüm işlemleri yapabilecek. 
-//? Listeleme işlemini Staf veya Adminse tüm rezervasyonlar, Staff veya Admin değilse sadece kendisine ait rezervasyonlar
-//! Update işlemini Staf veya Adminse tüm rezervasyonlar, Staff veya Admin değilse sadece kendisine ait rezervasyonlar
-// Delete işlemini sadece Admin yapabilir.
-const getModel = (req, res, next) => {
-  req.model = Firm;
-  next();
-};
-router.use(permission.isLogin)
-
-router.route("/").get(Firm.list).post(Firm.create);
-
-router
-  .route("/:id")
-  .all(idValidation)
-  .get(getModel, permission.isAdminOrStaffOrOwn, Firm.read)
-  .put(getModel, permission.isAdminOrStaffOrOwn, Firm.update)
-  .patch(getModel, permission.isAdminOrStaffOrOwn, Firm.update)
-  .delete(permission.isAdmin, Firm.delete);
-
-module.exports = router;
+/* ------------------------------------------------------- */
+module.exports = router
