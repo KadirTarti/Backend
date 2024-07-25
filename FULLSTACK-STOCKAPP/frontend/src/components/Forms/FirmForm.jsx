@@ -1,19 +1,19 @@
 import Box from "@mui/material/Box";
 import * as React from "react";
-import { firmFields } from "../../helper/formFields";
+import useStockCall from "../../hooks/useStockCall";
 import { flexColumn } from "../../styles/globalStyle";
 import MyButton from "../Commons/MyButton";
 import MyTextField from "../Commons/MyTextField";
-import { usePostFirmMutation, useUpdateFirmMutation } from "../../services/stocks";
+import { firmFields } from "../../helper/formFields";
+
 export default function FirmForm({ open, handleClose, initialState }) {
   const [info, setInfo] = React.useState(initialState);
-  const [postFirm] = usePostFirmMutation();
-  const [updateFirm] = useUpdateFirmMutation();
+  const { postStockData, putStockData } = useStockCall();
 
   const handleChange = (e) => {
     console.log(e.target.id);
     console.log(e.target.name);
-    setInfo({ ...info, [e.target.name]: e.target.value }); //! inputların name attributelarındaki isimler ile info statetimin içindeki keyler aynı olduğu için bu şekilde tek bir fonksiyonla inputdaki verilerimi state e aktarabildim.
+    setInfo({ ...info, [e.target.name]: e.target.value });
   };
   console.log(info);
   const handleSubmit = (e) => {
@@ -22,12 +22,12 @@ export default function FirmForm({ open, handleClose, initialState }) {
 
     if (info._id) {
       //* id varsa edit işlemi
-      updateFirm(info); //! update işleminde info dolu geldiği için içerisinde id bilgiside yer alıyor. Biz bu id üzerinden sorgulama yaparak id varsa yapacağın işlem put işlemi id yoksa yapacağın işlem post işlemi diye belirtmiş olduk.
+      putStockData("firms", info);
     } else {
       //* id yoksa create işlemi
-      postFirm(info);
+      postStockData("firms", info);
     }
-    handleClose(); //? submit işleminden sonra modalın kapanması için burada handleClose fonksiyonunu çağırıyoruz.
+    handleClose();
   };
 
   return (
@@ -38,12 +38,7 @@ export default function FirmForm({ open, handleClose, initialState }) {
       sx={flexColumn}
     >
       {firmFields.map((item) => (
-        <MyTextField
-          key={item.id}
-          onChange={handleChange}
-          value={info[item.id]}
-          {...item}
-        />
+        <MyTextField key={item.id} onChange={handleChange} value={info[item.id]} {...item} />
       ))}
       <MyButton
         type="submit"
