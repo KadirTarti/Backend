@@ -1,63 +1,70 @@
-const getTotals = (arr) => arr.reduce((acc, item) => acc + item.amount, 0);
-// import { Card, Metric, Text, Icon, Flex, Grid } from "@tremor/react";
-import { Card, Flex, Grid, Metric, ProgressBar, Text } from "@tremor/react";
-import Loading from "../Commons/Loading";
-import { useGetPurchasesQuery, useGetSalesQuery } from "../../services/stocks";
+// 'use client';
+import { Card } from '@tremor/react';
+import { useSelector } from "react-redux";
+function classNames(...classes) {
+  return classes.filter(Boolean).join(' ');
+}
+
+const getTotals = (arr) => arr.reduce((acc,item) => acc + item.amount,0);
 
 export default function KpiCards() {
-  const { data: purchases } = useGetPurchasesQuery();
-  const { data: sales, isLoading } = useGetSalesQuery();
-
-  const totalSales = sales?.reduce((acc, item) => acc + Number(item.amount), 0);
-  const totalPurchases = purchases?.reduce(
-    (acc, item) => acc + Number(item.amount),
-    0
-  );
-  const totalCash = totalSales - totalPurchases;
-  const categories = [
-    {
-      title: "Sales",
-      metric: `€ ${totalSales}`,
-      value: `${((totalSales / 200000) * 100).toFixed(2)}`,
-      target: "$ 200,000",
-      color: "indigo",
-    },
-    {
-      title: "Cash",
-      metric: `€ ${totalCash}`,
-      value: `${((totalCash / 100000) * 100).toFixed(2)}`,
-      target: "$ 100,000",
-      color: "fuchsia",
-    },
-    {
-      title: "Purchases",
-      metric: `€ ${totalPurchases}`,
-      value: `${((totalPurchases / 100000) * 100).toFixed(2)}`,
-      target: "$ 100,000",
-      color: "amber",
-    },
-  ];
-
-  if (isLoading) return <Loading />;
-
+    const {sales,purchases} = useSelector(state=> state.stock)
+    // const totalSales = sales?.reduce((acc,item) => acc + item.amount,0)
+    const totalSales = getTotals(sales)
+    console.log(totalSales)
+    // const totalPurchases = purchases?.reduce((acc,item) => acc + item.amount,0)
+    const totalPurchases = getTotals(purchases)
+    console.log(totalPurchases)
+    const data = [
+        {
+          name: 'Sales',
+          value: `€ ${totalSales}`,
+        //   change: '+6.1%',
+        //   changeType: 'positive',
+          color:"indigo"
+        },
+        {
+          name: 'Cash',
+          value: `€ ${totalSales - totalPurchases}`,
+        //   change: '+19.2%',
+        //   changeType: 'positive',
+          color:"amber"
+        },
+        {
+          name: 'Purchases',
+          value: `€ ${totalPurchases}`,
+        //   change: '-1.2%',
+        //   changeType: 'negative',
+          color:"fuchsia"
+        },
+      ];
   return (
-    <Grid className="flex justify-center items-center flex-wrap gap-6 w-full mt-3">
-      {categories.map((item) => (
-        <Card
-          key={item.title}
-          decoration="top"
-          decorationColor={item.color}
-          className="w-full flex-grow lg:w-5/12 2xl:w-[32%]"
-        >
-          <Text>{item.title}</Text>
-          <Metric>{item.metric}</Metric>
-          <Flex className="mt-4">
-            <Text className="truncate">{`${item.value}% (${item.metric})`}</Text>
-            <Text>{item.target}</Text>
-          </Flex>
-          <ProgressBar color={item.color} value={item.value} className="mt-2" />
-        </Card>
-      ))}
-    </Grid>
+    <>
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 mt-3">
+        {data.map((item) => (
+          <Card key={item.name} decoration="top"
+          decorationColor={item.color}>
+            <p className="flex items-start justify-between">
+              <span className="text-tremor-metric font-semibold text-tremor-content-strong dark:text-dark-tremor-content-strong">
+                {item.value}
+              </span>
+              {/* <span
+                className={classNames(
+                  item.changeType === 'positive'
+                    ? 'text-emerald-700 dark:text-emerald-500'
+                    : 'text-red-700 dark:text-red-500',
+                  'text-tremor-default font-medium',
+                )}
+              >
+                {item.change}
+              </span> */}
+            </p>
+            <p className="mt-1 text-tremor-default text-tremor-content dark:text-dark-tremor-content">
+              {item.name}
+            </p>
+          </Card>
+        ))}
+      </div>
+    </>
   );
 }
