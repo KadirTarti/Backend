@@ -4,12 +4,11 @@ import { brandFields } from "../../helper/formFields";
 import { flexColumn } from "../../styles/globalStyle";
 import MyButton from "../Commons/MyButton";
 import MyTextField from "../Commons/MyTextField";
-import { usePostBrandMutation, useUpdateBrandMutation } from "../../services/stocks";
 
 export default function BrandForm({ open, handleClose, initialState }) {
   const [info, setInfo] = React.useState(initialState);
-  const [updateBrand] = useUpdateBrandMutation();
-  const [postBrand] = usePostBrandMutation();
+  const { postStockData, putStockData } = useStockCall();
+
 
   const handleChange = (e) => {
     setInfo({ ...info, [e.target.name]: e.target.value });
@@ -18,10 +17,10 @@ export default function BrandForm({ open, handleClose, initialState }) {
     e.preventDefault();
     if (info._id) {
       //* id varsa edit işlemi
-      updateBrand(info);
+      putStockData("brands", info);
     } else {
       //* id yoksa create işlemi
-      postBrand(info);
+      postStockData("brands", info);
     }
     handleClose();
   };
