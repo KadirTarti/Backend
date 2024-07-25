@@ -1,35 +1,33 @@
 "use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS | Abdulkadir Tartilaci
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
+const router = require('express').Router()
+/* ------------------------------------------------------- */
+// routes/category:
 
-const router = require("express").Router();
+const category = require('../controllers/category')
+const permissions = require('../middlewares/permissions')
 
-//* URL => /categories
+// URL: /categories
 
-const category = require("../controllers/category");
-const idValidation = require("../middlewares/idValidation");
-const permission = require("../middlewares/permissions")
+// router.route('/')
+//     // .get(permissions.isStaff, category.list)
+//     .get(permissions.isStaff, category.read)
+//     .post(permissions.isAdmin, category.create)
 
-//* login olan kullanıcı kendi yolcularını görüntüleyebilir, yolcu oluşturabilir.
-//? Yolcu editleme işlemini staff yada Admin yapabilir.
-//! Yolcu silme işlemini Admin yapabilir.
-const getModel = (req,res,next)=>{
-  req.model = category;
-  next()  
-}
+// router.route('/:id')
+//     .get(permissions.isStaff, category.read)
+//     .put(permissions.isAdmin, category.update)
+//     .patch(permissions.isAdmin, category.update)
+//     .delete(permissions.isAdmin, category.delete)
 
-router
-  .route("/")
-  .get( category.list)
-  .post( category.create);
+router.route('/(:id)?')
+    .post(permissions.isAdmin, category.create)
+    .get(permissions.isStaff, category.read)
+    .put(permissions.isAdmin, category.update)
+    .patch(permissions.isAdmin, category.update)
+    .delete(permissions.isAdmin, category.delete)
 
-router
-  .route("/:id")
-  .all(idValidation)
-  .get(category.read)
-  .put(category.update)
-  .patch(category.update)
-  .delete(category.delete);
-
-module.exports = router;
+/* ------------------------------------------------------- */
+module.exports = router
