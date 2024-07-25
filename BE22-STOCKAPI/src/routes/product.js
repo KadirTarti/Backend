@@ -1,35 +1,34 @@
 "use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS | Abdulkadir Tartilaci
+    NODEJS EXPRESS | CLARUSWAY FullStack Team
 ------------------------------------------------------- */
+const router = require('express').Router()
+/* ------------------------------------------------------- */
+// routes/product:
 
-const router = require("express").Router();
+const product = require('../controllers/product')
+const permissions = require('../middlewares/permissions')
 
-//* URL => /products
+// URL: /products
 
-const product = require("../controllers/product");
-const idValidation = require("../middlewares/idValidation");
-const permission = require("../middlewares/permissions")
+/* 
+router.route('/')
+    .get(permissions.isLogin, product.list)
+    .post(product.create)
 
-//* login olan kullanıcı kendi yolcularını görüntüleyebilir, yolcu oluşturabilir.
-//? Yolcu editleme işlemini staff yada Admin yapabilir.
-//! Yolcu silme işlemini Admin yapabilir.
-const getModel = (req,res,next)=>{
-  req.model = product;
-  next()  
-}
+router.route('/:id')
+    .get(permissions.isStaff, product.read)
+    .put(permissions.isAdmin, product.update)
+    .patch(permissions.isAdmin, product.update)
+    .delete(permissions.isAdmin, product.delete)
+*/
 
-router
-  .route("/")
-  .get(product.list)
-  .post(product.create);
+router.route('/(:id)?')
+    .get(permissions.isStaff, product.read)
+    .post(product.create)
+    .put(permissions.isAdmin, product.update)
+    .patch(permissions.isAdmin, product.update)
+    .delete(permissions.isAdmin, product.delete)
 
-router
-  .route("/:id")
-  .all(idValidation)
-  .get(product.read)
-  .put(product.update)
-  .patch(product.update)
-  .delete(product.delete);
-
-module.exports = router;
+/* ------------------------------------------------------- */
+module.exports = router

@@ -13,6 +13,7 @@
 */ 
 const Sale = require('../models/sale')
 const Product = require('../models/product')
+const product = require('../models/product')
 
 module.exports = {
 
@@ -59,17 +60,29 @@ module.exports = {
         // userId verisini req.user'dan al
         req.body.userId = req.user._id
 
-        // Create
+        const productData = await Prodcut.findOne({_id: data.productId })
 
-        const data = await Sale.create(req.body)
+        // mevcut stok miktarı gelen satış talebi miktarından büyük veya eşitse işlem yapılabilir
+        if(productData.quantity >= req.body.quantity) {
 
-        // Satınalma sonrası quantity bilgisini göncelle yani artış olmalı
-        const updateProduct = await Product.updateOne({ _id: data.productId }, { $inc: { quantity: -data.quantity } })
+            // Create
+            const data = await Sale.create(req.body)
+    
+            // Satınalma sonrası quantity bilgisini göncelle yani artış olmalı
+            const updateProduct = await Product.updateOne({ _id: data.productId }, { $inc: { quantity: -data.quantity } })
+    
+            res.status(201).send({
+                error: false,
+                data
+            })
+        } else {
+            res.errorStatusCode = 422;
+            throw new Error (
+                `There is not enough product-quantity for this sale. This product's stock is ${productData.quantity}`
+            );
+        }
 
-        res.status(201).send({
-            error: false,
-            data
-        })
+
     },
 
     read: async (req, res) => {
