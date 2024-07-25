@@ -13,9 +13,8 @@ export default function ProductForm({ handleClose }) {
     brandId: "",
     name: "",
   });
-  const { data: brands } = useGetBrandsQuery();
-  const { data: categories } = useGetCategoriesQuery();
-  const [postProduct] = usePostProductMutation();
+  const { postStockData } = useStockCall();
+  const { categories, brands } = useSelector((state) => state.stock);
 
   const handleChange = (e) => {
     setInfo({ ...info, [e.target.name]: e.target.value });
@@ -23,7 +22,7 @@ export default function ProductForm({ handleClose }) {
   console.log(info);
   const handleSubmit = (e) => {
     e.preventDefault();
-    postProduct(info);
+    postStockData("products", info);
     handleClose();
   };
 
