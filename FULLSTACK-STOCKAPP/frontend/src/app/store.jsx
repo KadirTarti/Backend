@@ -23,15 +23,14 @@ const persistedReducer = persistReducer(persistConfig, authReducer);
 const store = configureStore({
   reducer: {
     auth: persistedReducer,
-    [stocksApi.reducerPath]: stocksApi.reducer,
+    stock:stockReducer,
   },
   middleware: (getDefaultMiddleware) => {
-    const defaultMiddleware = getDefaultMiddleware({
+    getDefaultMiddleware({
       serializableCheck: {
         ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
       },
     });
-    return defaultMiddleware.concat(stocksApi.middleware);
   },
   devTools: process.env.NODE_ENV !== "production",
 });
