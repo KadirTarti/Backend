@@ -7,7 +7,6 @@
 const User = require('../models/user')
 const Token = require('../models/token')
 const passwordEncrypt = require('../helpers/passwordEncrypt')
-const { CustomError } = require('../errors/customError')
 
 module.exports = {
     list: async (req, res) => {
@@ -27,6 +26,7 @@ module.exports = {
 
         // Sadece kendi kayıtlarını görebilir:
         // Çalışanlarımız ve Admin tük kullanıcıları görebilir
+        // Şirket politikası na göre isStaff kaldırılabilir
         const customFilters = (req.user?.isAdmin || req.user?.isStaff) ? {} : { _id: req.user._id }
 
         const data = await res.getModelList(User, customFilters)
@@ -117,7 +117,7 @@ module.exports = {
 
         // Sadece kendi kaydını güncelleyebilir:
         //const customFilters = req.user?.isAdmin ? { _id: req.params.id } : { _id: req.user._id }
-        const customFilters = req.user?.isAdmin ? { _id: req.params.id } : { _id: req.user._id };
+        const customFilters = { _id: req.params.id }
 
         // Yeni kayıtlarda admin/staff durumunu değiştiremez:
         if (!req.user?.isAdmin) {
@@ -125,21 +125,13 @@ module.exports = {
             delete req.body.isAdmin
         }
 
-        try {
-            const data = await User.updateOne(customFilters, req.body, { runValidators: true });
+        const data = await User.updateOne(customFilters, req.body, { runValidators: true })
 
-            if (!data.matchedCount) {
-                return res.status(404).send(CustomError);
-            }
-            res.status(202).send({
-                error: false,
-                data,
-                new: await User.findOne(customFilters),
-            });
-        } catch (error) {
-            console.error(error);
-            res.status(500).send(CustomError);
-        }
+        res.status(202).send({
+            error: false,
+            data,
+            new: await User.findOne(customFilters),
+        })
     },
 
     delete: async (req, res) => {
