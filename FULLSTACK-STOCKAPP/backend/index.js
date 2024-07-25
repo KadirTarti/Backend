@@ -26,9 +26,19 @@ dbConnection()
 
 //cors
 const cors = require('cors');
+// if(process.env.NODE_ENV == "development"){
+//     app.use(cors())
+// }else{
+//     app.use(
+//       cors({
+//         origin: "http://localhost:5173",
+//         methods: "GET,HEAD,PUT,PATCH,POST,DELETE",
+//       })
+//     );
+// }
 app.use(cors())
 /* ------------------------------------------------------- */
-// Middlewares:
+
 
 // Accept JSON:
 app.use(express.json())
