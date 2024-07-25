@@ -37,7 +37,10 @@ const BrandCard = ({ name, image, _id, handleOpen, setInitialState }) => {
             handleOpen();
           }}
         />
-        <DeleteOutlineIcon sx={btnStyle} onClick={() => deleteBrand(_id)} />
+         <DeleteOutlineIcon
+          sx={btnStyle}
+          onClick={() => deleteStockData("brands",_id)}
+        />
       </CardActions>
     </Card>
   );
