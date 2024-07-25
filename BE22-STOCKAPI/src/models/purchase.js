@@ -39,6 +39,7 @@ const PurchaseSchema = new mongoose.Schema(
 
     amount: {
       type: Number,
+      set: function() {return this.price * this.quantity},
       default: function() {return this.price * this.quantity},
       transform: function() {return this.price * this.quantity}
     }    

@@ -24,19 +24,18 @@ const SaleSchema = new mongoose.Schema(
     },
     quantity: {
       type: Number,
-      trim: true,
       required: true,
     },
     price: {
       type: Number,
-      trim: true,
       required: true,
     },
-    priceTotal: {
+    amount: {
       type: Number,
-      trim: true,
-      required: true,
-    },
+      set: function() {return this.price * this.quantity},
+      default: function() {return this.price * this.quantity},
+      transform: function() {return this.price * this.quantity}
+    }    
     },
   {
     collection: "sales",
@@ -44,4 +43,4 @@ const SaleSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Sales",SaleSchema);
+module.exports = mongoose.model("Sale",SaleSchema);
