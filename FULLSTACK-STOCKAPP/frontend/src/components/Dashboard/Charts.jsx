@@ -2,6 +2,7 @@ import { AreaChart, Card, Title } from "@tremor/react";
 import Grid from "@mui/material/Grid";
 import Loading from "../Commons/Loading";
 import { useGetPurchasesQuery, useGetSalesQuery } from "../../services/stocks";
+import e from "express";
 
 const chartdata = [
   {
@@ -71,17 +72,6 @@ const dataFormatter = (number) =>
   `€${Intl.NumberFormat("de").format(number).toString()}`;
 
 export default function Charts() {
-  const { sales, purchases } = useSelector((state) => state.stock);
-  const salesData = sales.map((item) => ({
-    date: new Date(item.createdAt).toLocaleDateString(),
-    sale: item.amount,
-  }));
-  const purchasesData = purchases.map((item) => ({
-    date: new Date(item.createdAt).toLocaleString(),
-    purchase: item.amount,
-  }));
-
-  xport default function Charts() {
     const { sales, purchases } = useSelector((state) => state.stock);
     const salesData = sales.map((item) => ({
       date: new Date(item.createdAt).toLocaleDateString(),
