@@ -6,10 +6,9 @@ import CardActions from "@mui/material/CardActions";
 import CardMedia from "@mui/material/CardMedia";
 import * as React from "react";
 import { btnStyle, flex } from "../../styles/globalStyle";
-import { useDeleteBrandMutation } from "../../services/stocks";
 
 const BrandCard = ({ name, image, _id, handleOpen, setInitialState }) => {
-  const [deleteBrand] = useDeleteBrandMutation();
+  const { deleteStockData } = useStockCall();
   return (
     <Card
       elevation={10}
