@@ -81,7 +81,6 @@ const UserSchema = new mongoose.Schema({
         type: Boolean,
         default: true
     },
-
     isStaff: {
         type: Boolean,
         default: false
