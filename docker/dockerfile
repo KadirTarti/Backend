@@ -1,1 +1,16 @@
-FROM current-alpine3.20
+# Altyapı
+FROM node:current-alpine3.20
+
+
+# Çalışma alanı
+WORKDIR /aktApp
+
+#Dosyaları Aktar
+#! single dosya böyle yapılabilir
+# COPY test.js /aktApp/
+
+#!çoklu dosya aktarma
+COPY . . 
+
+#komut çalıştır
+CMD node test.js
