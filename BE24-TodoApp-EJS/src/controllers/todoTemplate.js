@@ -24,5 +24,11 @@ module.exports = {
 
             res.redirect("/view") //* yönlendirme için kullanılan method. route adını yazıyoruz.
         }
+    },
+    read: async (req,res) => {
+        const data = await Todo.findByPk(req.params.todoId)
+        //* ilgili veri dataValues olarak geliyor
+        res.render("todoRead", {todo: data.dataValues})
     }
+
 }
