@@ -12,13 +12,21 @@
     <title>Document</title>
   </head>
   <body>
-      <div class="container">
-          <div class="row">
-          <h1>Todo Create</h1>
-        <form class="row g-3">
+    <div class="container">
+      <div class="row">
+        <h1>Todo Create</h1>
+        <div>
+          <a class="btn btn-sm btn-primary" href="/view">Todo List</a>
+        </div>
+        <form class="row g-3" method="POST">
           <div class="col-md-6">
             <label for="inputEmail4" class="form-label">Title</label>
-            <input type="email" class="form-control" id="inputEmail4" />
+            <input
+              type="text"
+              name="title"
+              class="form-control"
+              id="inputEmail4"
+            />
           </div>
           <div class="mb-3">
             <label for="exampleFormControlTextarea1" class="form-label"
@@ -27,12 +35,13 @@
             <textarea
               class="form-control"
               id="exampleFormControlTextarea1"
+              name="description"
               rows="3"
             ></textarea>
           </div>
           <div class="col-md-4">
             <label for="inputState" class="form-label">Priority</label>
-            <select id="inputState" class="form-select">
+            <select id="inputState" class="form-select" name="priority">
               <option selected>Choose...</option>
               <option value="1">High</option>
               <option value="0">Medium</option>
@@ -41,7 +50,12 @@
           </div>
           <div class="col-12">
             <div class="form-check">
-              <input class="form-check-input" type="checkbox" id="gridCheck" />
+              <input
+                class="form-check-input"
+                type="checkbox"
+                id="gridCheck"
+                name="isDone"
+              />
               <label class="form-check-label" for="gridCheck">
                 Is Done ?
               </label>
