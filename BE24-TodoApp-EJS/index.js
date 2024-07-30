@@ -29,7 +29,7 @@ app.all("/", (req,res)=>{
     // res.send("Welcome My App")
     // const name = "Anthony"
     // const title= "TodoApp"
-    // res.render("index",{name,title})
+    // res.render("index",{title})
 
     res.render("index", req.query)
 })
