@@ -29,6 +29,15 @@ module.exports = {
         const data = await Todo.findByPk(req.params.todoId)
         //* ilgili veri dataValues olarak geliyor
         res.render("todoRead", {todo: data.dataValues})
+    },
+    update:async (req,res) => {
+        if(req.method == "GET") {
+            const data = await Todo.findByPk(req.params.todoId);
+            res.render("todoUpdate", { todo: data.dataValues });
+        }else{
+            const data = await Todo.update(req.body,{where:{id:req.params.todoId}})
+            res.redirect("/view");
+        }
     }
 
 }
