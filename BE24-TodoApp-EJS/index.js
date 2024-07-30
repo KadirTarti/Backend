@@ -14,9 +14,14 @@ const HOST=process.env?.HOST || '127.0.0.1'
 //catch async-error  
 require("express-async-errors")
 
+app.set("view engine", "ejs")
+
 // json to obj  and obj to json  
 //! yeri onemli yukarıda kalsın
 app.use(express.json())
+
+
+
 
 // ROUTER
 app.use(require('./src/routers/todoRouter'))
