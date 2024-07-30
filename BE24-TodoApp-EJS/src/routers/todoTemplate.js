@@ -37,6 +37,8 @@ router.get("/", todoTemplate.list)
 router.get("/create", todoTemplate.create)
 router.post("/create", todoTemplate.create)
 
+router.get("/:todoId",todoTemplate.read)
+
 module.exports=router
 
 
