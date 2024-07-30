@@ -42,6 +42,8 @@ router.get("/:todoId",todoTemplate.read)
 router.get("/update/:todoId",todoTemplate.update)
 router.post("/update/:todoId",todoTemplate.update)
 
+router.get("/delete/:todoId",todoTemplate.delete)
+
 module.exports=router
 
 
