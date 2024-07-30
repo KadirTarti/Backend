@@ -34,6 +34,8 @@ router.delete('/todos/:id', todo.delete)
 
 
 router.get("/", todoTemplate.list)
+router.get("/create", todoTemplate.create)
+router.post("/create", todoTemplate.create)
 
 module.exports=router
 

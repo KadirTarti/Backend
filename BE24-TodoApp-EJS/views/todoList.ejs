@@ -35,7 +35,7 @@
               <td><%= todo.title %></td>
               <td><%= todo.description %></td>
               <td><%= todo.priority %></td>
-              <td><%= todo.isDone %></td>
+              <td><%= !todo.isDone ? '❌' : '✅'  %></td>
               <td><%= todo.createdAt.toLocaleDateString() %></td>
             </tr>
             <% } %>

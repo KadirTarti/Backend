@@ -20,6 +20,10 @@ app.set("view engine", "ejs")
 //! yeri onemli yukarıda kalsın
 app.use(express.json())
 
+//* Accept form data
+// app.use(express.urlencoded({extended:false}))
+app.use(express.urlencoded({ extended: true }));
+
 
 app.all("/", (req,res)=>{
     // res.send("Welcome My App")
