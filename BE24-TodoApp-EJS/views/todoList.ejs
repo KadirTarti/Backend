@@ -12,7 +12,7 @@
     <title>Document</title>
   </head>
   <body>
-    <% console.log(data) %>
+    <%# console.log(data) %>
     <div class="container">
       <div class="row">
         <h1>Todo List</h1>
@@ -38,6 +38,7 @@
               <td><%= todo.priority %></td>
               <td><%= !todo.isDone ? '❌' : '✅'  %></td>
               <td><%= todo.createdAt.toLocaleDateString() %></td>
+              <td><a class="btn btn-sm btn-secondary" href="/view/<%= todo.id %>">Read</a></td>
             </tr>
             <% } %>
           </tbody>
