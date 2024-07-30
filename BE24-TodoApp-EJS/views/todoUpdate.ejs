@@ -24,6 +24,7 @@
             <input
               type="text"
               name="title"
+              value="<%= todo.title %>"
               class="form-control"
               id="inputEmail4"
             />
@@ -37,15 +38,14 @@
               id="exampleFormControlTextarea1"
               name="description"
               rows="3"
-            ></textarea>
+            ><%= todo.description %></textarea>
           </div>
           <div class="col-md-4">
             <label for="inputState" class="form-label">Priority</label>
             <select id="inputState" class="form-select" name="priority">
-              <option selected>Choose...</option>
-              <option value="1">High</option>
-              <option value="0">Medium</option>
-              <option value="-1">Low</option>
+              <option value="1" <%= todo.priority == '1' ? 'selected' : '' %> >High</option>
+              <option value="0" <%= todo.priority == '0' ? 'selected' : '' %>  >Medium</option>
+              <option value="-1" <%= todo.priority == '-1' ? 'selected' : '' %> >Low</option>
             </select>
           </div>
           <div class="col-12">
@@ -55,6 +55,7 @@
                 type="checkbox"
                 id="gridCheck"
                 name="isDone"
+                <%= todo.isDone ? 'checked' : "" %>
               />
               <label class="form-check-label" for="gridCheck">
                 Is Done ?
