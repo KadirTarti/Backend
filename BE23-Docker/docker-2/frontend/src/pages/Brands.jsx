@@ -1,56 +1,72 @@
-import { Typography, Box, Grid, Alert, Button } from "@mui/material"
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import BrandCard from "../components/BrandCard"
-import BrandModal from "../components/BrandModal"
-import useStockCall from "../hooks/useStockCall"
-import { flex } from "../styles/globalStyles"
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import loadingGif from "../assets/loading1.gif";
+import BrandCard from "../components/Cards/BrandCard";
+import MyButton from "../components/Commons/MyButton";
+import PageHeader from "../components/Commons/PageHeader";
+import BrandForm from "../components/Forms/BrandForm";
+import { useGetBrandsQuery } from "../services/stocks";
+import StockModal from "../components/Commons/StockModal";
 
 const Brands = () => {
-  const { getStockData } = useStockCall()
-  const { brands, loading } = useSelector((state) => state.stock)
-  const [open, setOpen] = useState(false)
-  const [info, setInfo] = useState({})
-
-  useEffect(() => {
-    getStockData("brands")
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  const { data: brands, isLoading } = useGetBrandsQuery();
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+    setInitialState({
+      name: "",
+      image: "",
+    });
+  };
+  const [initialState, setInitialState] = useState({
+    name: "",
+    image: "",
+  });
+  console.log("brands:", brands);
+  console.log("brands:", initialState);
 
   return (
-    <Box>
-      <Typography variant="h4" color="error" mb={2}>
-        Brands
-      </Typography>
-
-      <Button
-        variant="contained"
-        onClick={() => {
-          setInfo({})
-          setOpen(true)
-        }}
+    <Container maxWidth={"xl"}>
+      {/* <Typography
+        align="center"
+        variant="h4"
+        component="h1"
+        color="secondary.second"
       >
+        Brands
+      </Typography> */}
+      {/* <Button variant="contained" onClick={handleOpen}>
         New Brand
-      </Button>
-
-      <BrandModal open={open} setOpen={setOpen} info={info} setInfo={setInfo} />
-
-      {!loading && !brands?.length && (
-        <Alert severity="warning" sx={{ mt: 4, width: "50%" }}>
-          There is no brand to show
-        </Alert>
-      )}
-
-      {brands?.length > 0 && (
-        <Grid container sx={flex} mt={4}>
-          {brands?.map((brand) => (
-            <Grid item key={brand.id}>
-              <BrandCard brand={brand} setOpen={setOpen} setInfo={setInfo} />
+      </Button> */}
+      <PageHeader text="Brands" />
+      <MyButton variant="contained" onClick={handleOpen} title="New Brand" />
+      <Grid container spacing={2} mt={3}>
+        {/* stock ta oluşturduğumuz loading stateini bu şekilde kullanabiliriz. */}
+        {isLoading ? (
+          <img src={loadingGif} alt="loading..." height={500} />
+        ) : (
+          brands.map((brand) => (
+            <Grid item xs={12} md={6} lg={4} xl={3} key={brand._id}
+            >
+              <BrandCard
+                {...brand}
+                handleOpen={handleOpen}
+                setInitialState={setInitialState}
+              />
             </Grid>
-          ))}
-        </Grid>
+          ))
+        )}
+      </Grid>
+      {open && (
+        <StockModal open={open} handleClose={handleClose}>
+          <BrandForm handleClose={handleClose} initialState={initialState} />
+        </StockModal>
       )}
-    </Box>
-  )
-}
+    </Container>
+  );
+};
 
-export default Brands
+export default Brands;

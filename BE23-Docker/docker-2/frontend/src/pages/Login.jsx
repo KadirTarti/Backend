@@ -1,130 +1,86 @@
-import Avatar from "@mui/material/Avatar"
-import Container from "@mui/material/Container"
-import Grid from "@mui/material/Grid"
-import Typography from "@mui/material/Typography"
-import LockIcon from "@mui/icons-material/Lock"
-import image from "../assets/result.svg"
-import { Link } from "react-router-dom"
-import Box from "@mui/material/Box"
-import TextField from "@mui/material/TextField"
-import Button from "@mui/material/Button"
-import { Formik, Form } from "formik"
-import { object, string } from "yup"
-// import { login } from "../hooks/useAuthCall"
-import useAuthCall from "../hooks/useAuthCall"
+import LockIcon from "@mui/icons-material/Lock";
+import LockPersonIcon from "@mui/icons-material/LockPerson";
+import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import Typography from "@mui/material/Typography";
+import { Formik } from "formik";
+import { Link } from "react-router-dom";
+import logo from "../assets/inventoryMaster2.png";
+import AuthHeader from "../components/Commons/AuthHeader";
+import AuthImage from "../components/Commons/AuthImage";
+import LoginForm, { loginScheme } from "../components/Forms/LoginForm";
+import useAuthCall from "../hooks/useAuthCall";
+import AuthLogo from "../components/Commons/AuthLogo";
+import zIndex from "@mui/material/styles/zIndex";
 
 const Login = () => {
-  const { login } = useAuthCall()
-
-  //? harici validasyon şemasi
-  const loginSchema = object({
-    email: string()
-      .email("Lutfen valid bir email giriniz")
-      .required("Bu alan zorunludur"),
-    password: string()
-      .required("Bu alan zorunludur")
-      .min(8, "En az 8 karakter girilmelidir")
-      .max(16, "En fazla 16 karakter girilmelidir")
-      .matches(/\d+/, "En az bir rakam içermelidir.")
-      .matches(/[a-z]/, "En az bir küçük harf içermelidir.")
-      .matches(/[A-Z]/, "En az bir büyük harf içermelidir.")
-      .matches(/[!,?{}><%&$#£+-.]+/, "En az bir özel karekter içermelidir."),
-  })
-
+  const { login } = useAuthCall();
   return (
     <Container maxWidth="lg">
-      <Grid
-        container
-        justifyContent="center"
-        direction="row-reverse"
+      <Box sx={{ marginBottom: "16px" }}>
+        <AuthLogo logo={logo} />
+      </Box>
+      {/* <AuthHeader /> */}
+      <Box
         sx={{
-          height: "100vh",
+          boxShadow: "1px 1px 6px black",
+          mt: 2,
           p: 2,
+          width: "50%",
+          margin: "auto",
         }}
       >
-        <Grid item xs={12} mb={3}>
-          <Typography variant="h3" color="primary" align="center">
-            STOCK APP
-          </Typography>
-        </Grid>
-
         <Grid item xs={12} sm={10} md={6}>
           <Avatar
             sx={{
-              backgroundColor: "secondary.light",
+              backgroundColor: "primary.main",
               m: "auto",
-              width: 40,
-              height: 40,
+              width: 50,
+              height: 50,
+              mb: "10px",
             }}
           >
-            <LockIcon size="30" />
+            <LockPersonIcon size="30" />
           </Avatar>
           <Typography
-            variant="h4"
+            variant="h5"
             align="center"
             mb={4}
-            color="secondary.light"
+            color="primary.main"
+            fontFamily={"monospace"}
           >
-            Login
+            SIGN IN
           </Typography>
 
           <Formik
             initialValues={{ email: "", password: "" }}
-            validationSchema={loginSchema}
-            onSubmit={(values, action) => {
-              login(values)
-              action.resetForm()
-              action.setSubmitting(false)
+            validationSchema={loginScheme}
+            onSubmit={(values, actions) => {
+              login(values);
+              actions.resetForm();
+              actions.setSubmitting(false);
+            }}
+            component={(props) => <LoginForm {...props} />}
+          ></Formik>
+          <Box
+            sx={{
+              textAlign: "center",
+              mt: 2,
+              color: "secondary.main",
+              textDecoration: "underline",
+              fontSize: "16px",
             }}
           >
-            {({ handleChange, handleBlur, values, touched, errors }) => (
-              <Form>
-                <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
-                  <TextField
-                    label="Email"
-                    name="email"
-                    id="email"
-                    type="email"
-                    variant="outlined"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.email}
-                    error={touched.email && Boolean(errors.email)}
-                    helperText={errors.email}
-                  />
-                  <TextField
-                    label="password"
-                    name="password"
-                    id="password"
-                    type="password"
-                    variant="outlined"
-                    onChange={handleChange}
-                    onBlur={handleBlur}
-                    value={values.password}
-                    error={touched.password && Boolean(errors.password)}
-                    helperText={errors.password}
-                  />
-                  <Button variant="contained" type="submit">
-                    Submit
-                  </Button>
-                </Box>
-              </Form>
-            )}
-          </Formik>
-
-          <Box sx={{ textAlign: "center", mt: 2 }}>
-            <Link to="/register">Don't you have an account?</Link>
+            <Link to="/register">Don't have an account? Sign Up Here</Link>
           </Box>
         </Grid>
+      </Box>
 
-        <Grid item xs={10} sm={7} md={6}>
-          <Container>
-            <img src={image} alt="img" />
-          </Container>
-        </Grid>
-      </Grid>
+      {/* <AuthImage image={image} /> */}
     </Container>
-  )
-}
+  );
+};
 
-export default Login
+export default Login;

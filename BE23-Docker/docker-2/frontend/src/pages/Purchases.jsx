@@ -1,53 +1,47 @@
-import Button from "@mui/material/Button"
-import Typography from "@mui/material/Typography"
-import { useEffect, useState } from "react"
-import useStockCall from "../hooks/useStockCall"
-import PurchaseModal from "../components/PurchaseModal"
-import PurchaseTable from "../components/PurchaseTable"
+import Container from "@mui/material/Container";
+import React, { useState } from "react";
+import MyButton from "../components/Commons/MyButton";
+import PageHeader from "../components/Commons/PageHeader";
+import StockModal from "../components/Commons/StockModal";
+import PurchaseForm from "../components/Forms/PurchaseForm";
+import PurchaseTable from "../components/Tables/PurchaseTable";
 
 const Purchases = () => {
-  const { getStockData, getProdCatBrands } = useStockCall()
-  const [open, setOpen] = useState(false)
-
-  const [info, setInfo] = useState({
-    brand_id: "",
-    product_id: "",
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+    setInitialState({
+      brandId: "",
+      firmId: "",
+      productId: "",
+      quantity: "",
+      price: "",
+    });
+  };
+  const [initialState, setInitialState] = useState({
+    brandId: "",
+    firmId: "",
+    productId: "",
     quantity: "",
     price: "",
-  })
-
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => {
-    setOpen(false)
-    setInfo({ brand_id: "", product_id: "", quantity: "", price: "" })
-  }
-
-  useEffect(() => {
-    getProdCatBrands()
-    getStockData("purchases")
-    getStockData("firms")
-  }, []) // eslint-disable-line
+  });
 
   return (
-    <div>
-      <Typography variant="h4" color="error" mb={3}>
-        Purchases
-      </Typography>
-
-      <Button variant="contained" onClick={handleOpen}>
-        New Purchase
-      </Button>
-
-      <PurchaseModal
-        open={open}
-        handleClose={handleClose}
-        info={info}
-        setInfo={setInfo}
+    <Container maxWidth={"xl"}>
+      <PageHeader text="Purchases" />
+      <MyButton variant="contained" onClick={handleOpen} title="New Purchase" />
+      {open && (
+        <StockModal open={open} handleClose={handleClose}>
+          <PurchaseForm handleClose={handleClose} initialState={initialState} />
+        </StockModal>
+      )}
+      <PurchaseTable
+        setInitialState={setInitialState}
+        handleOpen={handleOpen}
       />
+    </Container>
+  );
+};
 
-      <PurchaseTable handleOpen={handleOpen} setInfo={setInfo} />
-    </div>
-  )
-}
-
-export default Purchases
+export default Purchases;

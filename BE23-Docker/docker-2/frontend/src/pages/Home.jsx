@@ -1,27 +1,17 @@
-import { Typography } from "@mui/material"
-import KpiCards from "../components/KpiCards"
-import Charts from "../components/Charts"
-import useStockCall from "../hooks/useStockCall"
-import { useEffect } from "react"
+import Container from "@mui/material/Container";
+import React from "react";
+import PageHeader from "../components/Commons/PageHeader";
+import Charts from "../components/Dashboard/Charts";
+import KpiCards from "../components/Dashboard/KpiCards";
 
 const Home = () => {
-  const { getStockData } = useStockCall()
-  useEffect(() => {
-    getStockData("sales")
-    getStockData("purchases")
-  }, [])
-
   return (
-    <div>
-      <Typography variant="h4" color="error" mb={2}>
-        Dashboard
-      </Typography>
-
+    <Container maxWidth={"xl"}>
+      <PageHeader text="Dashboard" />
       <KpiCards />
-
       <Charts />
-    </div>
-  )
-}
+    </Container>
+  );
+};
 
-export default Home
+export default Home;

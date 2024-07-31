@@ -1,88 +1,76 @@
-import { useEffect, useState } from "react"
-import Typography from "@mui/material/Typography"
-import Button from "@mui/material/Button"
-import Grid from "@mui/material/Grid"
-import { useSelector } from "react-redux"
-import useStockCall from "../hooks/useStockCall"
-import FirmCard from "../components/FirmCard"
-import FirmModal from "../components/FirmModal"
-// import axios from "axios"
-// import { useDispatch } from "react-redux"
-// import { fetchFail, fetchStart, getFirmsSuccess } from "../features/stockSlice"
+import React, { useEffect, useState } from "react";
+// import {useDispatch, useSelector} from "react-redux";
+// import { fetchFail, fetchStart, firmsSuccess } from '../features/stockSlice';
+// import axios from "axios";
+import Container from "@mui/material/Container";
+import Grid from "@mui/material/Grid";
+import { useSelector } from "react-redux";
+import FirmCard from "../components/Cards/FirmCard";
+import MyButton from "../components/Commons/MyButton";
+import PageHeader from "../components/Commons/PageHeader";
+import StockModal from "../components/Commons/StockModal";
+import FirmForm from "../components/Forms/FirmForm";
+import Loading from "../components/Commons/Loading";
+import { useGetFirmsQuery } from "../services/stocks";
 
 const Firms = () => {
-  // const { token } = useSelector((state) => state.auth)
-  // const dispatch = useDispatch()
-
-  // const getFirms = async () => {
-  //   dispatch(fetchStart())
-  //   try {
-  //     const { data } = await axios(
-  //       `${import.meta.env.VITE_BASE_URL}/stock/firms/`,
-  //       {
-  //         headers: { Authorization: `Token ${token}` },
-  //       }
-  //     )
-  //     dispatch(getFirmsSuccess(data))
-  //     console.log(data)
-  //   } catch (error) {
-  //     dispatch(fetchFail())
-  //     console.log(error)
-  //   }
-  // }
-
-  const { getStockData } = useStockCall()
-  const { firms } = useSelector((state) => state.stock)
-
-  const [info, setInfo] = useState({
+  const { data: firms, isLoading } = useGetFirmsQuery();
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+    setInitialState({
+      name: "",
+      phone: "",
+      address: "",
+      image: "",
+    });
+  };
+  const [initialState, setInitialState] = useState({
     name: "",
     phone: "",
     address: "",
     image: "",
-  })
-
-  const [open, setOpen] = useState(false)
-  const handleOpen = () => setOpen(true)
-  const handleClose = () => {
-    setOpen(false)
-    setInfo({ name: "", phone: "", address: "", image: "" })
-  }
-
-  useEffect(() => {
-    // getFirms()
-    getStockData("firms")
-  }, [])
-
+  });
+  console.log("firms:", firms);
+  console.log("firms:", initialState);
   return (
-    <div>
-      <Typography variant="h4" color={"error"} mb={3}>
+    <Container maxWidth={"xl"}>
+      {/* <Typography
+        align="center"
+        variant="h4"
+        component="h1"
+        color="secondary.second"
+      >
         Firms
-      </Typography>
-      <Button variant="contained" onClick={handleOpen} sx={{ mb: 4 }}>
-        NEW FIRM
-      </Button>
-
-      <FirmModal
-        open={open}
-        handleClose={handleClose}
-        info={info}
-        setInfo={setInfo}
-      />
-
-      <Grid container justifyContent={"center"} spacing={2}>
-        {firms?.map((firm) => (
-          <Grid item key={firm.id}>
+      </Typography> */}
+      <PageHeader text="Firms" />
+      {/* <Button variant="contained" onClick={handleOpen}>
+        New Firm
+      </Button> */}
+      <MyButton variant="contained" onClick={handleOpen} title="New Firm" />
+      {isLoading ? (
+        <Loading />
+      ) : (
+      <Grid container spacing={2} mt={3}>
+        {firms.map((firm) => (
+          <Grid item xs={12} md={6} lg={4} xl={3} key={firm._id}>
             <FirmCard
-              firm={firm}
+              {...firm}
               handleOpen={handleOpen}
-              info={info}
-              setInfo={setInfo}
+              setInitialState={setInitialState}
             />
           </Grid>
         ))}
       </Grid>
-    </div>
-  )
-}
+      )}
+      {open && (
+        <StockModal open={open} handleClose={handleClose}>
+          <FirmForm handleClose={handleClose} initialState={initialState} />
+        </StockModal>
+      )}
+    </Container>
+  );
+};
 
-export default Firms
+export default Firms;

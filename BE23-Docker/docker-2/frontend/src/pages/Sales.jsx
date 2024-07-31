@@ -1,55 +1,42 @@
-import { Button } from "@mui/material"
-import Typography from "@mui/material/Typography"
-import { useEffect, useState } from "react"
-import useStockCall from "../hooks/useStockCall"
-import SaleModal from "../components/SaleModal"
-import SaleTable from "../components/SaleTable"
+import Container from "@mui/material/Container";
+import React, { useState } from "react";
+import MyButton from "../components/Commons/MyButton";
+import PageHeader from "../components/Commons/PageHeader";
+import StockModal from "../components/Commons/StockModal";
+import SaleForm from "../components/Forms/SaleForm";
+import SaleTable from "../components/Tables/SaleTable";
 
 const Sales = () => {
-  const { getStockData, getProdCatBrands } = useStockCall()
-  const [open, setOpen] = useState(false)
-
-  const handleOpen = () => setOpen(true)
-
-  const [info, setInfo] = useState({
-    brand_id: "",
-    product_id: "",
+  const [open, setOpen] = useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => {
+    setOpen(false);
+    setInitialState({
+      brandId: "",
+      productId: "",
+      quantity: "",
+      price: "",
+    });
+  };
+  const [initialState, setInitialState] = useState({
+    brandId: "",
+    productId: "",
     quantity: "",
     price: "",
-  })
+  });
 
-  const handleClose = () => {
-    setOpen(false)
-    setInfo({ brand_id: "", product_id: "", quantity: "", price: "" })
-  }
-
-  useEffect(() => {
-    getProdCatBrands()
-    getStockData("sales")
-  }, []) // eslint-disable-line
   return (
-    <div>
-      <Typography variant="h4" color="error" mb={3}>
-        Sales
-      </Typography>
-      <Button
-        variant="contained"
-        sx={{ marginBottom: "1rem" }}
-        onClick={() => setOpen(true)}
-      >
-        New Sale
-      </Button>
+    <Container maxWidth={"xl"}>
+      <PageHeader text="Sales" />
+      <MyButton variant="contained" onClick={handleOpen} title="New Sale" />
+      {open && (
+        <StockModal open={open} handleClose={handleClose}>
+          <SaleForm handleClose={handleClose} initialState={initialState} />
+        </StockModal>
+      )}
+      <SaleTable setInitialState={setInitialState} handleOpen={handleOpen} />
+    </Container>
+  );
+};
 
-      <SaleModal
-        open={open}
-        handleClose={handleClose}
-        info={info}
-        setInfo={setInfo}
-      />
-
-      <SaleTable handleOpen={handleOpen} setInfo={setInfo} />
-    </div>
-  )
-}
-
-export default Sales
+export default Sales;
