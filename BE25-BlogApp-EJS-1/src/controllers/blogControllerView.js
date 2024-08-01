@@ -107,7 +107,12 @@ module.exports.BlogPostController = {
       error: false,
       blog: data,
     });
+
+    res.render('postRead', {post:data})
   },
+
+
+
   update: async (req, res) => {
     // const data = await BlogPost.findByIdAndUpdate(req.params.id,req.body,{new:true}) // {new:true} => return new data
     const data = await BlogPost.updateOne({ _id: req.params.id }, req.body); //* datayı döndürmez yaptığı işlemin özetini döner. O nedenle bu yöntemde newData şeklinde sorgu yazıp güncellenmiş halini gönderebiliriz
