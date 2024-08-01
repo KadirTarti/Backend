@@ -120,16 +120,15 @@ module.exports.BlogPostController = {
   },
 
   delete: async (req, res) => {
-    
-
     const data = await BlogPost.deleteOne({ _id: req.params.postId });
     if (data.deletedCount) {
-      res.redirect('/post');
+      res.redirect('/post')
     } else {
-     throw new Error ("Post not found"),
-      };
+      throw new Error('Post not found!')
     }
   },
+
+
 
   deleteMany: async (req, res) => {
     // const data = await BlogPost.deleteMany() //* optionda ekleyebilirsiniz.
