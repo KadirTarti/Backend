@@ -1,30 +1,28 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Abdulkadir's todo</title>
-</head>
-<body>
+  </head>
+  <body>
     <h1>TodoApp</h1>
     <%# console.log("EJS work!") %>
     <!-- safe print -->
     <%= '<b>Hello</b>' %>
-    
-    <br/>
+
+    <br />
     <!-- direct print -->
     <%- '<b>Hello</b>' %>
-    <br/>
-    <hr/>
-    
-    <h2>Welcome <%= name %>'s  <%= title %> </h2>
+    <br />
+    <hr />
+
+    <h2>Welcome <%= name %>'s <%= title %></h2>
 
     <form action="">
-<input type="text" name="name"><br/>
-<input type="text"  name="title">
-<button type="submit">Submit</button>
-
+      <input type="text" name="name" /><br />
+      <input type="text" name="title" />
+      <button type="submit">Submit</button>
     </form>
-
-</body>
+  </body>
 </html>
