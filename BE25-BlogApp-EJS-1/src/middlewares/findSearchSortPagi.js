@@ -31,7 +31,7 @@ module.exports = (req,res,next) => {
 
     //! Limit
     let limit = Number(req.query?.limit); // limit() metodu number bekler diyelim
-    limit = limit > 0 ? limit : 20;
+    limit = limit > 0 ? limit : 4;
     console.log(typeof limit, limit);
 
     //? Page
