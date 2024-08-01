@@ -23,14 +23,19 @@ app.use(
   })
 );
 
-/* -------------------------------------------------------------------------- */
-/*                                  >Template                                 */
-/* -------------------------------------------------------------------------- */
+//& -------------------------------------------------------------------------- */
+//&                                  >Template                                 */
+//& -------------------------------------------------------------------------- */
 app.set("view engine", "ejs")
 //*ejs default olarak kök dizinde view's klasörü arar. varsa bulur ve çalıştırır. yoksa ejs dosyalarının olduğu klasörü buraya tnaıtmak gerekli
 //  app.set("views", "./views")     -->   default klasör yolu
 app.set("views", "./public")
  
+
+app.use(express.urlencoded({extended:false}))  //   -> gelen form dataları string olarak ele alınır
+app.use(express.urlencoded({extended:true}))   //   -> gelen data JSON olarak ele alınır   -  default değer budur. extended:true kısmı yazılmasa da olur
+
+
 
 
 
