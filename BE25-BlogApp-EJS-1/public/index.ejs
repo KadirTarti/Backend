@@ -182,12 +182,16 @@
                         <a class="btn btn-sm btn-danger" href="/post/:id/delete" onclick="return confirm('Are you sure?')">Delete</a>
                     </div>
                 </article>
+
                 <!-- Pagination -->
                 <nav class="blog-pagination" aria-label="Pagination">
-                    <a class="btn btn-outline-primary rounded-pill" href="#">1</a>
-                    <a class="btn btn-outline-secondary rounded-pill">2</a>
+                    <% for( let pageNo = 0; pageNo <= details?.pages.totalPage; pageNo++ ) { %>
+                        <a class="btn btn-outline-primary rounded-pill" href="/post?pag=<%= pageNo %>"> <%= pageNo %></a>
+                        
+                    <% } %>
+                    <!-- <a class="btn btn-outline-secondary rounded-pill">2</a> -->
                 </nav>
-                <p class="text-end p-2 border-top">Total 5 Posts</p>
+                <p class="text-end p-2 border-top"> Total <%= details.total %> Posts</p>
             </div>
             <div class="col-md-4">
                 <div class="position-sticky" style="top: 2rem;">
@@ -195,36 +199,25 @@
                         <h3 class="fst-italic">Recent Posts</h3>
                         <ul class="list-unstyled">
                             <!-- Recent posts -->
-                            <li>
-                                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
-                                    href="/post/:id">
-                                    <div class="col-lg-8">
-                                        <h5>Sample Blog Post</h5>
-                                        <p class="my-2">Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
-                                        <small class="text-body-secondary">January 15, 2023</small>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
-                                    href="/post/:id">
-                                    <div class="col-lg-8">
-                                        <h5>Sample Blog Post</h5>
-                                        <p class="my-2">Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
-                                        <small class="text-body-secondary">January 15, 2023</small>
-                                    </div>
-                                </a>
-                            </li>
-                            <li>
-                                <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
-                                    href="/post/:id">
-                                    <div class="col-lg-8">
-                                        <h5>Sample Blog Post</h5>
-                                        <p class="my-2">Lorem ipsum dolor sit amet consectetur adipisicing elit...</p>
-                                        <small class="text-body-secondary">January 15, 2023</small>
-                                    </div>
-                                </a>
-                            </li>
+                            <% recentPosts.forEach(item => { %>
+                                <li>
+                                    <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
+                                        href="/post/:id">
+                                        <div class="col-lg-8">
+                                            <h5> <%= item.title %></h5>
+                                            <!-- <p class="my-2">Lorem ipsum dolor sit amet consectetur adipisicing elit...</p> -->
+                                            <!-- <div class='line-clamp-3 my-2'>
+                                                <%- item.content %>
+                                            </div> -->
+                                            <!-- üstteki div'in benzer bir yapısı alttaki regex ifadesi ile kurulabilir -->
+                                            <p class="line-clamp-3 my-2">
+                                                <%= item.content.replace(/<(.|\n)*?>/g,'') %>
+                                             </p>
+                                            <small class="text-body-secondary"> <%= item.createdAt.toLocaleString() %></small>
+                                        </div>
+                                    </a>
+                                </li>                                
+                            <% }) %>
                         </ul>
                     </div>
                 </div>

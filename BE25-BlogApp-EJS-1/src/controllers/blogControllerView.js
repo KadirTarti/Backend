@@ -76,7 +76,8 @@ module.exports.BlogPostController = {
     posts:data,
     categories,
     selectedCategory: req.query?.filter?.blogCategoryId,
-    recentPosts
+    recentPosts,
+    details: await res.getModelListDetails(BlogPost),
   })
   },
 
