@@ -36,6 +36,7 @@ app.use(express.urlencoded({extended:false}))  //   -> gelen form dataları stri
 app.use(express.urlencoded({extended:true}))   //   -> gelen data JSON olarak ele alınır   -  default değer budur. extended:true kısmı yazılmasa da olur
 
 
+app.use('/assets', express.static('./public/assets'))
 
 
 
