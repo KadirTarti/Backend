@@ -122,9 +122,24 @@ module.exports.BlogPostController = {
   delete: async (req, res) => {
     const data = await BlogPost.deleteOne({ _id: req.params.postId });
     if (data.deletedCount) {
-      res.redirect('/post')
+      // console.log(req);
+      // console.log(
+      //   req.rawHeaders[
+      //     req.rawHeaders.findIndex((item) =>
+      //       item.includes("http://127.0.0.1:8000")
+      //     )
+      //   ]
+      // );
+      // res.redirect('/post')
+      res.redirect(
+        req.rawHeaders[
+          req.rawHeaders.findIndex((item) =>
+            item.includes("http://127.0.0.1:8000")
+          )
+        ]
+      );
     } else {
-      throw new Error('Post not found!')
+      throw new Error("Post not found!");
     }
   },
 
