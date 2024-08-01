@@ -19,7 +19,7 @@
                 <% posts.forEach(post => { %>
                     <article class="blog-post">
                         <h2 class="display-5 mb-1">
-                            <a href="/post/:id" class="link-body-emphasis text-decoration-none"><%= post.title %></a>
+                            <a href="/post/<%= post.id %>" class="link-body-emphasis text-decoration-none"><%= post.title %></a>
                         </h2>
                         <p class="blog-post-meta"> <%=  post.createdAt.toLocaleString()   %></p>
                         <div class="line-clamp-3">  

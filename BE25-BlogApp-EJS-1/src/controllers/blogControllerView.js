@@ -100,17 +100,16 @@ module.exports.BlogPostController = {
   },
   
   read: async (req, res) => {
-    const data = await BlogPost.findOne({ _id: req.params.postId}).populate(
+    const data = await BlogPost.findOne({ _id: req.params.postId }).populate(
       "blogCategoryId"
     );
-    res.status(200).send({
-      error: false,
-      blog: data,
-    });
-
-    res.render('postRead', {post:data})
+    // res.status(200).send({
+    //   error: false,
+    //   blog: data,
+    // });
+// console.log("merhaba",data)
+    res.render('postRead',{post:data})
   },
-
 
 
   update: async (req, res) => {
@@ -141,7 +140,13 @@ module.exports.BlogPostController = {
           req.rawHeaders.findIndex((item) =>
             item.includes("http://127.0.0.1:8000")
           )
-        ]
+        ].includes(req.params.postId)
+          ? "/post"
+          : req.rawHeaders[
+              req.rawHeaders.findIndex((item) =>
+                item.includes("http://127.0.0.1:8000")
+              )
+            ]
       );
     } else {
       throw new Error("Post not found!");
