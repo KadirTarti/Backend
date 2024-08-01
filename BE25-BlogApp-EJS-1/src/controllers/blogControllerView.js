@@ -73,7 +73,8 @@ module.exports.BlogPostController = {
   
   res.render('index', {
     posts:data,
-    categories
+    categories,
+    selectedCategory: req.query?.filter?.blogCategoryId
   })
   },
 
