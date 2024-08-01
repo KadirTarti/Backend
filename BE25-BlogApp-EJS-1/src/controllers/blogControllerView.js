@@ -62,6 +62,8 @@ module.exports.BlogPostController = {
       },
       { path: "userId" },
     ]);
+
+    const categories = await BlogCategory.find()
     
   //   res.status(200).send({
   //     error: false,
@@ -70,7 +72,8 @@ module.exports.BlogPostController = {
   //   });
   
   res.render('index', {
-    posts:data
+    posts:data,
+    categories
   })
   },
 
