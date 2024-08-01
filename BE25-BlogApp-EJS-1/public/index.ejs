@@ -185,8 +185,8 @@
 
                 <!-- Pagination -->
                 <nav class="blog-pagination" aria-label="Pagination">
-                    <% for( let pageNo = 0; pageNo <= details?.pages.totalPage; pageNo++ ) { %>
-                        <a class="btn btn-outline-primary rounded-pill" href="/post?pag=<%= pageNo %>"> <%= pageNo %></a>
+                    <% for( let pageNo = 1; pageNo <= details?.pages.totalPage; pageNo++ ) { %>
+                        <a class="btn btn-<%= (details?.pages.activePage == pageNo) ? 'primary' : 'outline-primary' %> rounded-pill" href="/post?pag=<%= pageNo %>"> <%= pageNo %></a>
                         
                     <% } %>
                     <!-- <a class="btn btn-outline-secondary rounded-pill">2</a> -->
