@@ -23,6 +23,17 @@ app.use(
   })
 );
 
+/* -------------------------------------------------------------------------- */
+/*                                  >Template                                 */
+/* -------------------------------------------------------------------------- */
+app.set("view engine", "ejs")
+//*ejs default olarak kök dizinde view's klasörü arar. varsa bulur ve çalıştırır. yoksa ejs dosyalarının olduğu klasörü buraya tnaıtmak gerekli
+//  app.set("views", "./views")     -->   default klasör yolu
+app.set("views", "./public")
+ 
+
+
+
 //? user control
 app.use(require("./src/middlewares/userControl"));
 
