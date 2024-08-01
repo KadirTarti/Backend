@@ -100,7 +100,7 @@ module.exports.BlogPostController = {
   },
   
   read: async (req, res) => {
-    const data = await BlogPost.findOne({ _id: req.params.id }).populate(
+    const data = await BlogPost.findOne({ _id: req.params.postId}).populate(
       "blogCategoryId"
     );
     res.status(200).send({
