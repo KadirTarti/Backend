@@ -32,13 +32,13 @@ app.set("view engine", "ejs")
 app.set("views", "./public")
  
 
-app.use(express.urlencoded({extended:false}))  //   -> gelen form dataları string olarak ele alınır
+// app.use(express.urlencoded({extended:false}))  //   -> gelen form dataları string olarak ele alınır
 app.use(express.urlencoded({extended:true}))   //   -> gelen data JSON olarak ele alınır   -  default değer budur. extended:true kısmı yazılmasa da olur
 
 
-app.use('/assets', express.static('./public/assets'))
+app.use('/assets', express.static('./public/assets'));
 
-
+app.use('/libs', express.static('./node_modules'));
 
 //? user control
 app.use(require("./src/middlewares/userControl"));
