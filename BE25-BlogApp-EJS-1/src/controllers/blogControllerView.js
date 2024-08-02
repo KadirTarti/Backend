@@ -54,8 +54,7 @@ module.exports.BlogCategoryController = {
 
 module.exports.BlogPostController = {
   list: async (req, res) => {
-    
-        const data = await res.getModelList(BlogPost, [
+    const data = await res.getModelList(BlogPost, [
       {
         path: "blogCategoryId",
         select: "name -_id",
@@ -63,57 +62,66 @@ module.exports.BlogPostController = {
       { path: "userId" },
     ]);
 
-    console.log(req.session)
+    // console.log(req.query)
+    // console.log(req.session)
 
     const categories = await BlogCategory.find();
-    const recentPosts = await BlogPost.find().sort({createdAt: 'desc'}).limit(3)
-    console.log(req.url)
+    const recentPosts = await BlogPost.find()
+      .sort({ createdAt: "desc" })
+      .limit(3);
+    // console.log(req.url);
 
-    if(req.url.includes('?')){
-      // req.url += '&'  (fakat böyle yapınca sürekli üzerine &page kısmını ekliyor. path bozuluyor )
-      if(req.url.includes('page=')){
-        req.url = req.url.split('&page=')[0]
+    if (req.url.includes("?")) {
+      //  req.url += '&'
+      if (req.url.includes("page=")) {
+        req.url = req.url.split("&page=")[0];
       }
     } else {
-      req.url +='?'
+      req.url += "?";
     }
-    
 
-  
-  res.render('postList', {
-    posts:data,
-    categories,
-    selectedCategory: req.query?.filter?.blogCategoryId,
-    recentPosts,
-    details: await res.getModelListDetails(BlogPost),
-    pageUrl: req.url,
-    user: req.session
-  })
+    // res.status(200).send({
+    //   error: false,
+    //   details: await res.getModelListDetails(BlogPost),
+    //   blogs: data,
+    // });
+    // res.render("index", {
+    //   posts: data,
+    //   categories,
+    //   selectedCategory: req.query?.filter?.blogCategoryId,
+    //   recentPosts,
+    //   details: await res.getModelListDetails(BlogPost),
+    //   pageUrl: req.url,
+    // });
+    res.render("postList", {
+      posts: data,
+      categories,
+      selectedCategory: req.query?.filter?.blogCategoryId,
+      recentPosts,
+      details: await res.getModelListDetails(BlogPost),
+      pageUrl: req.url,
+      user: req.session
+    });
   },
-
-
   create: async (req, res) => {
     if(req.method == 'POST'){
+      req.body.userId = req.session.id
+      const data = await BlogPost.create(req.body);
 
-    req.body.userId = req.session.id
-    const data = await BlogPost.create(req.body);
-
-        // res.status(201).send({
+      // res.status(201).send({
       //   error: false,
       //   blog: data,
       // });
       res.redirect("/post/"+ data._id)
-
     }else{
       res.render('postForm',{
         user: req.session,
         categories: await BlogCategory.find(),
         title:"New Post",
-        post: null
+        post:null
       })
     }
   },
-  
   read: async (req, res) => {
     const data = await BlogPost.findOne({ _id: req.params.postId }).populate(
       "blogCategoryId"
@@ -123,24 +131,22 @@ module.exports.BlogPostController = {
     //   blog: data,
     // });
 // console.log("merhaba",data)
-    res.render('postRead',{post:data,  user:req.session,})
+    res.render('postRead',{post:data,user:req.session})
   },
-
-
   update: async (req, res) => {
     if(req.method == 'POST'){
+      // const data = await BlogPost.findByIdAndUpdate(req.params.id,req.body,{new:true}) // {new:true} => return new data
+      const data = await BlogPost.updateOne(
+        { _id: req.params.postId },
+        req.body
+      ); //* datayı döndürmez yaptığı işlemin özetini döner. O nedenle bu yöntemde newData şeklinde sorgu yazıp güncellenmiş halini gönderebiliriz
 
-    // const data = await BlogPost.findByIdAndUpdate(req.params.id,req.body,{new:true}) // {new:true} => return new data
-    const data = await BlogPost.updateOne({ _id: req.params.postId }, req.body); //* datayı döndürmez yaptığı işlemin özetini döner. O nedenle bu yöntemde newData şeklinde sorgu yazıp güncellenmiş halini gönderebiliriz
-    
-
-    // res.status(202).send({
+      // res.status(202).send({
       //   error: false,
       //   blog: data,
       //   newData: await BlogPost.findOne({ _id: req.params.id }),
       // });
       res.redirect('/post/'+ req.params.postId)
-
     }else{
       res.render("postForm", {
         user: req.session,
@@ -180,8 +186,6 @@ module.exports.BlogPostController = {
       throw new Error("Post not found!");
     }
   },
-
-
 
   deleteMany: async (req, res) => {
     // const data = await BlogPost.deleteMany() //* optionda ekleyebilirsiniz.
