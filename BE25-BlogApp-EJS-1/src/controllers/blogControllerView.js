@@ -63,6 +63,8 @@ module.exports.BlogPostController = {
       { path: "userId" },
     ]);
 
+    console.log(req.session)
+
     const categories = await BlogCategory.find();
     const recentPosts = await BlogPost.find().sort({createdAt: 'desc'}).limit(3)
     console.log(req.url)
@@ -84,7 +86,8 @@ module.exports.BlogPostController = {
     selectedCategory: req.query?.filter?.blogCategoryId,
     recentPosts,
     details: await res.getModelListDetails(BlogPost),
-    pageUrl: req.url
+    pageUrl: req.url,
+    user: req.session
   })
   },
 
