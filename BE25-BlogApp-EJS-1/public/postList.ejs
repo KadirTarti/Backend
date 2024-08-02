@@ -32,11 +32,14 @@
                             <%- post.content %>
                         </div>
                         <!-- bu kod ile ilk 400 karakteri gösterip sonuna 3 nokta eklemiş oluyoruz. uzun açıklamalarda bu da kullanılabilir <%#= post.content.substring(0, 400) %>... -->
-
-                        <div class="admin-area text-end">
-                            <a class="btn btn-sm btn-primary" href="/post/:id/update">Update</a>
-                            <a class="btn btn-sm btn-danger" href="/post/<%= post.id %>/delete" onclick="return confirm('Are you sure?')">Delete</a>
-                        </div>
+                         
+                        <% if (user.id == post.userId._id) { %>
+                         
+                            <div class="admin-area text-end">
+                                <a class="btn btn-sm btn-primary" href="/post/:id/update">Update</a>
+                                <a class="btn btn-sm btn-danger" href="/post/<%= post.id %>/delete" onclick="return confirm('Are you sure?')">Delete</a>
+                            </div>
+                        <% } %>
                     </article>
                 <% }) %>
                 <!-- <article class="blog-post">
@@ -171,7 +174,7 @@
                             <% recentPosts.forEach(item => { %>
                                 <li>
                                     <a class="d-flex flex-column flex-lg-row gap-3 align-items-start align-items-lg-center py-3 link-body-emphasis text-decoration-none border-top"
-                                        href="/post/:id">
+                                        href="/post/<%= item.id %>">
                                         <div class="col-lg-8">
                                             <h5> <%= item.title %></h5>
                                             <!-- <p class="my-2">Lorem ipsum dolor sit amet consectetur adipisicing elit...</p> -->
