@@ -13,7 +13,7 @@
             <p>
                 <a class="btn btn-sm btn-secondary" href="/">Go Home</a>
             </p>
-            <h1>Title</h1>
+            <h1><%= title %></h1>
             <form action="" method="POST">
                 <table class="table table-striped">
                     <thead>
@@ -27,11 +27,10 @@
                             <td>Category</td>
                             <td>
                                 <select name="blogCategoryId" class="form-select">
-                                    <option value="1">CategoryName</option>
-                                    <option value="1">CategoryName</option>
-                                    <option value="1">CategoryName</option>
-                                    <option value="1">CategoryName</option>
-                                    <option value="1">CategoryName</option>
+                                    <% categories.forEach(category => { %>
+                                        <option value="<%= category.id %>"><%= category.name %></option>
+                                       <% }) %>
+                                    
                                 </select>
                             </td>
                         </tr>
