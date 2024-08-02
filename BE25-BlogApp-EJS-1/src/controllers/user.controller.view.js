@@ -49,7 +49,9 @@ module.exports = {
       throw new Error("Email and password are required!")
     }
     } else {
-      res.render('loginForm')
+      res.render('loginForm', {
+        user:req.session,
+      })
     }
   },
   logout: (req, res) => {
