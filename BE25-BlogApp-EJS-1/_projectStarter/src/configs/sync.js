@@ -37,16 +37,16 @@ module.exports = async () => {
   // Example Category:
   // Example Category:
   const categories = [
-    "World",
-    "Technology",
-    "Design",
-    "Culture",
-    "Business",
-    "Politics",
-    "Science",
-    "Health",
-    "Style",
-    "Travel",
+    "Welt",
+ "Technik",
+"Design",
+"Kultur",
+"Wirtschaft",
+"Politik",
+"Wissenschaft",
+"Gesundheit",
+"Style",
+"Reisen",
   ];
   const now = new Date();
   for (let category of categories) {
@@ -58,7 +58,7 @@ module.exports = async () => {
       await BlogPost.create({
         userId: user._id,
         blogCategoryId: blogCategory._id,
-        title: `Sample ${category} Post -${key}`,
+        title: `Beispiel ${category} Post -${key}`,
         content: `
             <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique labore repellendus quibusdam consequuntur quae illum excepturi maxime expedita voluptatum, numquam rem distinctio pariatur magnam, voluptas odit reiciendis amet praesentium qui.
             Fugit dicta quos porro dolor, assumenda aperiam magnam sit eaque voluptate corporis. Facilis voluptatem ea aperiam eveniet hic atque ducimus doloribus, dolorem, vero labore porro earum, nostrum dolore vitae suscipit. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique labore repellendus quibusdam consequuntur quae illum excepturi maxime expedita voluptatum, numquam rem distinctio pariatur magnam, voluptas odit reiciendis amet praesentium qui.
