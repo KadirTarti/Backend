@@ -6,7 +6,7 @@
 
 const Pizza = require('../../models/pizza')
 const Topping = require('../../models/topping')
-
+const fs = require("node:fs")
 
 module.exports = {
   list: async (req, res) => {
@@ -122,7 +122,8 @@ module.exports = {
   },
 
   delete: async (req, res) => {
-    const data = await Pizza.deleteOne({ _id: req.params.id });
+    // const data = await Pizza.deleteOne({ _id: req.params.id });
+    const data = await Pizza.findOneAndDelete({ _id: req.params.id });
     //* silinen pizzanın resmininde durmasına gerek yok diyerek o resmi kayıtlarımızdan sildik.
     if (data?.images) {
       data?.images.forEach((image) => {

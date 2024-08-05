@@ -9,7 +9,7 @@
         <div class="carousel-inner" style="width: 100%;">
             {% pizza.images.forEach((image,index) => { %}
           <div class="carousel-item {%= index ? '' : 'active' %}" style="height: 300px;">
-            <img src="{%= image %}" class="d-block w-100" alt="..." style="object-fit: contain;" />
+            <img src="{%= image %}" class="d-block w-100 h-100" alt="..." style="object-fit: contain" />
           </div>
           {% }) %}
         </div>
