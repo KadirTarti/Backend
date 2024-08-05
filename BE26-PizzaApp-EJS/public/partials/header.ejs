@@ -46,8 +46,9 @@
                     <li class="nav-item"><span class="nav-link text-danger"><b>{%= user.username %}</b></span></li>
                     <li class="nav-item"><a class="btn btn-secondary mx-3" href="/orders">My Orders</a></li>
 
-                    <li class="nav-item"><a class="btn btn-secondary mx-3" href="/orders">Add Pizza</a></li>
-                    
+                    {% if (user?.isAdmin) { %}
+                    <li class="nav-item"><a class="btn btn-success mx-3" href="/pizzas/create">Add Pizza</a></li>
+                    {% } %}
                     <li class="nav-item"><a class="nav-link" href="/auth/logout"><b>Logout</b></a></li>
                 </ul>
                 {% } else { %}
