@@ -70,7 +70,7 @@ module.exports = async function () {
     _id: "654cddeb9846a03c2a0ee201",
     name: "Super Pizza 201",
     images: ["https://sparkpeo.hs.llnwd.net/e4/7/1/l719944983.jpg"],
-    price: 99.99,
+    price: 15.90,
     toppings: [
       "654cddeb9846a03c2a0ee101",
       "654cddeb9846a03c2a0ee102",
@@ -81,7 +81,7 @@ module.exports = async function () {
     _id: "654cddeb9846a03c2a0ee202",
     name: "Super Pizza 202",
     images:["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQljiC2wYE65lr6sfTx0CI-3fByV21OY-HEruMLWc14OLZ6T29vzOP4_0AQyrpITcuoZm0&usqp=CAU"],
-    price: 129.99,
+    price: 12.90,
     toppings: [
       "654cddeb9846a03c2a0ee102",
       "654cddeb9846a03c2a0ee103",
@@ -93,7 +93,7 @@ module.exports = async function () {
     name: "Super Pizza 203",
     images:
       ["https://www.wellseasonedstudio.com/wp-content/uploads/2021/06/Grilled-pizza-with-sausage-fennel-and-onions.jpg"],
-    price: 149.99,
+    price: 9.90,
     toppings: [
       "654cddeb9846a03c2a0ee103",
       "654cddeb9846a03c2a0ee104",
@@ -105,7 +105,7 @@ module.exports = async function () {
     name: "Super Pizza 204",
     images:
       ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8NaRA1XtgPgTFKkCe8ZKXeJDOQkhj7spI7A&usqp=CAU"],
-    price: 199.99,
+    price: 9.90,
     toppings: [
       "654cddeb9846a03c2a0ee101",
       "654cddeb9846a03c2a0ee103",
@@ -117,7 +117,7 @@ module.exports = async function () {
     name: "Super Pizza 205",
     images:
       ["https://www.thespruceeats.com/thmb/MD-dSsFP6k5XBSk9XcdOIfnF4K0=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/prosciutto-pizza-4844358-hero-04-c0a6f73057ce4fed88982b75a5c2c8e1.jpg"],
-    price: 199.99,
+    price: 12.90,
     toppings: [
       "654cddeb9846a03c2a0ee102",
       "654cddeb9846a03c2a0ee103",
@@ -131,7 +131,7 @@ module.exports = async function () {
       name: "Super Pizza 2" + x,
       images:
         ["https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTu32ZkwB6QN3SChlL-dVKiZd4SwpJEg3zAS2JP4S-X1PbK5Wo_nVVD-jjJe4rE8Gbo_Zc&usqp=CAU"],
-      price: 199.99,
+      price: 13.95,
       toppings: [
         "654cddeb9846a03c2a0ee101",
         "654cddeb9846a03c2a0ee102",
@@ -153,48 +153,48 @@ module.exports = async function () {
       pizzaId: "654cddeb9846a03c2a0ee201",
       size: "Small",
       quantity: 1,
-      price: 99.99,
-      totalPrice: 99.99,
+      price: 19.99,
+      totalPrice: 19.99,
     });
     await Order.create({
       userId: "654cddeb9846a03c2a0ee00" + userId,
       pizzaId: "654cddeb9846a03c2a0ee202",
       size: "Medium",
       quantity: 2,
-      price: 99.99,
-      totalPrice: 199.98,
+      price: 19.99,
+      totalPrice: 39.98,
     });
     await Order.create({
       userId: "654cddeb9846a03c2a0ee00" + userId,
       pizzaId: "654cddeb9846a03c2a0ee203",
       size: "Large",
       quantity: 3,
-      price: 99.99,
-      totalPrice: 299.97,
+      price: 9.99,
+      totalPrice: 29.97,
     });
     await Order.create({
       userId: "654cddeb9846a03c2a0ee00" + userId,
       pizzaId: "654cddeb9846a03c2a0ee202",
       size: "Xlarge",
       quantity: 2,
-      price: 99.99,
-      totalPrice: 199.98,
+      price: 9.99,
+      totalPrice: 19.98,
     });
     await Order.create({
       userId: "654cddeb9846a03c2a0ee00" + userId,
       pizzaId: "654cddeb9846a03c2a0ee203",
       size: "Medium",
       quantity: 3,
-      price: 99.99,
-      totalPrice: 299.97,
+      price: 9.99,
+      totalPrice: 29.97,
     });
     await Order.create({
       userId: "654cddeb9846a03c2a0ee00" + userId,
       pizzaId: "654cddeb9846a03c2a0ee204",
       size: "Large",
       quantity: 4,
-      price: 99.99,
-      totalPrice: 399.96,
+      price: 9.99,
+      totalPrice: 39.96,
     });
   }
 
