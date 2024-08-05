@@ -1,0 +1,67 @@
+{%- include('partials/header') -%}
+
+<!-- content start -->
+<div class="pb-5">
+  <div class="mx-auto d-flex justify-content-center align-items-center pt-5">
+    <div class="card w-50">
+      <div class="card-body">
+        <h2>{%= (pizza ? 'Update' : 'Create') %}</h2>
+        <hr />
+        <form action="" method="POST">
+          <table class="table">
+            <tbody>
+              <tr>
+                <td>Pizza Name</td>
+                <td>
+                  <input
+                    type="text"
+                    name="name"
+                    required
+                    class="form-control"
+                    value="{%= pizza?.name || '' %}"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Pizza Price</td>
+                <td>
+                  <input
+                    type="text"
+                    name="price"
+                    required
+                    class="form-control"
+                    value="{%= pizza?.price || '' %}"
+                  />
+                </td>
+              </tr>
+              <tr>
+                <td>Toppings</td>
+                <td>
+                    {% toppings.forEach(topping => { %}
+                  <div class="form-check">
+                    <input
+                      class="form-check-input"
+                      type="checkbox"
+                      name="toppingIds[]"
+                      value="{%= topping.id %}"
+                      id="flexCheckDefault"
+                    />
+                    <label class="form-check-label" for="flexCheckDefault">
+                      {%= topping.name %}
+                    </label>
+                  </div>
+                  {% }) %}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <br />
+          <input class="btn btn-primary" type="submit" value="OK" />
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- content end -->
+
+{%- include('partials/footer') -%}
