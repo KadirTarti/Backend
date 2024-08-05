@@ -47,7 +47,7 @@ app.use(express.urlencoded({ extended: true }))
 // StaticFiles:
 app.use('/assets', express.static('./public/assets'))
 /* ------------------------------------------------------- */
-//* Template içi cookie-session ekledik
+//* Template için cookie-session ekledik
 // SessionCookies:
 const session = require("cookie-session")
 app.use(session({ secret: process.env.SECRET_KEY }))
@@ -65,7 +65,7 @@ dbConnection()
 // Accept JSON:
 app.use(express.json())
 // Accept FormData
-app.use(express.urlencoded({ extended: false }));
+// app.use(express.urlencoded({ extended: false }));
 
 // Logger:
 app.use(require('./src/middlewares/logging'))
@@ -99,7 +99,7 @@ app.use(require('./src/middlewares/queryHandler'))
 // app.use('/', require('./src/routes/'))
 
 /* ------------------------------------------------------- */
-// Routes: TEMPLATE + SESSION:
+// Routes: TEMPLATE (EJS) + SESSION:
 
 // HomePath:
 app.all('/', (req, res) => {
