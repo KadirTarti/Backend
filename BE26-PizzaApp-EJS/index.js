@@ -36,9 +36,23 @@ require('express-async-errors')
 
 /* ------------------------------------------------------- */
 // TEMPLATE:
+let ejs = require('ejs')
+
+// ejs.delimiter = '?';
+// ejs.openDelimiter = '{';  // <  yerine { kullan
+// ejs.closeDemiliter= '}'; //  >   yerine }  kullan
+//! bunları değiştirmeden önce syntax farklılığı nedeniyle bazı ejs partial'leri görünmüyordu.
+
+//^alttakini yazınca üsttekilere ihtiyaç kalmadı
+app.set('view options', {
+  openDelimiter: '{',
+  closeDelimiter: '}'
+})
+
 
 app.set('views', './public')
 app.set('view engine', 'ejs')
+
 
 
 // Accept form data & convert to object:
