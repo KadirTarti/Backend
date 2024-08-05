@@ -120,19 +120,19 @@ module.exports = {
               </div>
               <div class="order-details">
                   <h2>Order Confirmation</h2>
-                  <p>Order Number: <strong>${data._id}</strong></p>
-                  <p>Date: <strong>${new Date(
+                  <p>Order Number: <strong>€{data._id}</strong></p>
+                  <p>Date: <strong>€{new Date(
                     data.createdAt
                   ).toLocaleDateString()}</strong></p>
-                  <p>Time: <strong>${new Date(
+                  <p>Time: <strong>€{new Date(
                     data.createdAt
                   ).toLocaleTimeString()}</strong></p>
                   <hr>
                   <h3>Pizza Details</h3>
-                  <p>Pizza: <strong>${pizzaData.name}</strong></p>
-                  <p>Size: <strong>${data.size}</strong></p>
-                  <p>Quantity: <strong>${data.quantity}</strong></p>
-                  <p>Total Price: <strong>${data.amount}</strong></p>
+                  <p>Pizza: <strong>{pizzaData.name}</strong></p>
+                  <p>Size: <strong>€{data.size}</strong></p>
+                  <p>Quantity: <strong>€{data.quantity}</strong></p>
+                  <p>Total Price: <strong>€{data.amount}</strong></p>
                   <div>
                       <img src="https://yuvamaya.com.tr/upload/recipes/pizza.jpg" alt="Pizza Image" class="pizza-image">
                   </div>
