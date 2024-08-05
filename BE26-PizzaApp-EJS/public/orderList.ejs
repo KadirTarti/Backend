@@ -20,7 +20,7 @@
                                 <label>🍕 Pizza: <strong> {%= order.pizzaId?.name %} </strong></label>
                                 <label>🍕 Size: <strong> {%= order.size %}</strong></label>
                                 <label>🍕 Quantitiy: <strong> {%= order.quantity %} </strong></label>
-                                <label>🍕 Total: {%= order.price %} x {%= order.quantity %} = <strong> {%= order.totalPrice %} </strong></label>
+                                <label>🍕 Total: {%= order.price %} x {%= order.quantity %} = <strong> {%= order.amount.toFixed(2) € %} </strong></label>
                             </p>
                         </div>
                     </div>
