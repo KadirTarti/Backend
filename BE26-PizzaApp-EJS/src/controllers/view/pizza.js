@@ -76,7 +76,11 @@ module.exports = {
 
   update: async (req, res) => {
     if (req.method == "POST") {
-      const images = [];
+      const pizza = await Pizza.findOne(
+        { _id: req.params.id },
+        { _id: 0, images: 1 }
+      );
+      const images = pizza.images || [];
       if (req.files) {
         req.files.forEach(
           (image) => images.push("/uploads/" + image.filename) //* önceki resimlerin üzerine ekledik.
