@@ -7,7 +7,7 @@
       <div class="card-body">
         <h2>{%= (pizza ? 'Update' : 'Create') %}</h2>
         <hr />
-        <form action="" method="POST">
+        <form action="" method="POST" enctype="multipart/form-data">
           <table class="table">
             <tbody>
               <tr>
@@ -53,6 +53,28 @@
                   {% }) %}
                 </td>
               </tr>
+
+              <tr>
+                <td>Pizza Images</td>
+                <td>
+                    <div id="imageGallery">
+
+                    </div>
+                  <div class="mb-3">
+                    <label for="formFileMultiple" class="form-label"
+                      >Multiple files input example</label
+                    >
+                    <input
+                      class="form-control"
+                      type="file"
+                      id="formFileMultiple"
+                      name="images"
+                      onchange="previewImage(this)"
+                      multiple
+                    />
+                  </div>
+                </td>
+              </tr>
             </tbody>
           </table>
           <br />
@@ -63,5 +85,25 @@
   </div>
 </div>
 <!-- content end -->
-
+<script>
+    function previewImage(input) {
+        const imageGallery = document.querySelector("#imageGallery");
+        imageGallery.innerHTML = ""
+        if(input.files && input.files.length>0){
+            console.log(input.files)
+            Array.from(input.files).forEach(item=>{
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                   const img = document.createElement('img');
+                   img.src= e.target.result  
+                   img.width= 200,
+                   img.height = 200,
+                   img.classList.add("m-2")
+                   imageGallery.appendChild(img)   
+                }
+                reader.readAsDataURL(item);
+            })
+        }
+    }
+    </script> 
 {%- include('partials/footer') -%}
