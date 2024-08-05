@@ -45,6 +45,7 @@
                       name="toppingIds[]"
                       value="{%= topping.id %}"
                       id="flexCheckDefault"
+                      {%= pizza?.toppingIds.some(pizzaTop => pizzaTop.id == topping.id) ? 'checked' : '' %}
                     />
                     <label class="form-check-label" for="flexCheckDefault">
                       {%= topping.name %}
@@ -57,13 +58,22 @@
               <tr>
                 <td>Pizza Images</td>
                 <td>
+                    <span>Old Images</span>
+                    {% if(pizza?.images.length) { %}
+                     <div>
+                        {% pizza.images.forEach(image => { %}
+                        <img src="{%= image %}" class="m-2" width="200px" height="200px" alt="">
+                         {% }) %}
+                     </div>
+                    {% } %}
+                    <hr>
                     <div id="imageGallery">
 
                     </div>
                   <div class="mb-3">
-                    <label for="formFileMultiple" class="form-label"
+                    <!-- <label for="formFileMultiple" class="form-label"
                       >Multiple files input example</label
-                    >
+                    > -->
                     <input
                       class="form-control"
                       type="file"
@@ -86,6 +96,7 @@
 </div>
 <!-- content end -->
 <script>
+        //https://developer.mozilla.org/en-US/docs/Web/API/FileReader
     function previewImage(input) {
         const imageGallery = document.querySelector("#imageGallery");
         imageGallery.innerHTML = ""
