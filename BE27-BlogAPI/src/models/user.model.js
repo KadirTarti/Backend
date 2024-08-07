@@ -25,7 +25,7 @@ const UserSchema = new mongoose.Schema({
         trim: true,
         required: true,
         unique: true,
-        validate: (email) => email.includes('@') && email.includes()
+        validate: (email) => email.includes('@') && email.includes('.')
     },
     firstName: {
         type: String,

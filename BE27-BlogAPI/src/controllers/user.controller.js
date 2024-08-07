@@ -68,7 +68,6 @@ module.exports = {
     
     res.status(201).send({
       error: false,
-      token: tokenData.token,
       data
     });
   },
