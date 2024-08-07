@@ -4,8 +4,6 @@
 ------------------------------------------------------- */
 
 const User = require("../models/user.model");
-const Token = require('../models/token.model')
-const passwordEncrypt = require('../helpers/passwordEncrypt')
 
 module.exports = {
   list: async (req, res) => {

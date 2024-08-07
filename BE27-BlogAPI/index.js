@@ -48,7 +48,7 @@ app.all("/", (req, res) => {
   });
 
 //* call routes
-  // app.use(require("./src/routes/"));
+  app.use(require("./src/routes"));
 
 //* catch mismatched routes
 app.use((req, res, next) => {
