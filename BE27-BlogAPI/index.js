@@ -9,5 +9,5 @@ app.get('/', (req, res) => {
 })
 
 app.listen(PORT, ()=>{
-    console.log(`Sunucu ${PORT}'da aktif`)
+    console.log(`*DB Connected*`)
 })
