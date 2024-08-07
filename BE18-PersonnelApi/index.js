@@ -25,7 +25,7 @@ require("express-async-errors");
 
 //! database connection
 const { dbConnection } = require("./src/configs/dbConnection");
-dbConnection();
+dbConnection()
 
 /* ------------------------------------------------------- */
 //* MORGAN LOGGING
