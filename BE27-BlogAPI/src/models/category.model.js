@@ -14,7 +14,7 @@ const CategorySchema = new mongoose.Schema({
     },
 }, 
 {
-    collection: 'category',
+    collection: 'categories',
     timestamps: true
 })
 

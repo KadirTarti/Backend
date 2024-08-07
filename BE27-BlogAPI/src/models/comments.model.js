@@ -28,7 +28,7 @@ const CommentSchema = new mongoose.Schema({
     },
 }, 
 {
-    collection: 'comment',
+    collection: 'comments',
     timestamps: true
 })
 

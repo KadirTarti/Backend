@@ -49,7 +49,7 @@ const BlogSchema = new mongoose.Schema({
     },
 }, 
 {
-    collection: 'blog',
+    collection: 'blogs',
     timestamps: true
 })
 
