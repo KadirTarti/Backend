@@ -33,9 +33,9 @@ app.use(require("./src/middlewares/authentication"));
 
 
 app.all("/", (req, res) => {
-    // res.send("Welcome to the Personnel API")
+    // res.send("Welcome to the Blog API")
     res.send({
-      message: "Welcome to the Personnel API",
+      message: "Welcome to the Blog API",
       user: req.user,
       api: {
         documents: {

@@ -1,6 +1,6 @@
 "use strict"
 /* -------------------------------------------------------
-    EXPRESS - Personnel API
+    AKT - BlogAPI
 ------------------------------------------------------- */
 const { mongoose } = require('../configs/dbConnection')
 const passwordEncrypt = require('../helpers/passwordEncrypt')

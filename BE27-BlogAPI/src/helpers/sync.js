@@ -1,6 +1,6 @@
 "use strict"
 /* -------------------------------------------------------
-    EXPRESS - Personnel API
+    AKT - BlogAPI
 ------------------------------------------------------- */
 // SYCHRONIZATION:
 
@@ -14,9 +14,9 @@ module.exports = async function() {
     console.log('- Database and all data DELETED!')
     /* REMOVE DATABASE */
     
-    /* Department & Personnel */
+    /* Department & User */
     const Department = require('../models/department.model')
-    const Personnel = require('../models/personnel.model')
+    const User = require('../models/user.model')
     const departments = [
         "FullStack Department",
         "DevOps Department",
@@ -26,29 +26,23 @@ module.exports = async function() {
         // Department.create:
         Department.create({ name: value }).then((department) => {
             console.log('- Department Added.')
-            // Personnel.create:
+            // User.create:
             for (let i in [...Array(10)]) {
-                Personnel.create({
-                    departmentId: department._id,
+                User.create({
                     username: "test" + (value[0] + i),
                     password: "1234",
+                    email: "test" + (value[0] + i) + "@site.com",
                     firstName: "firstName",
                     lastName: "lastName",
-                    phone: "123456789",
-                    email: "test" + (value[0] + i) + "@site.com",
-                    title: "title",
-                    salary: 2500,
-                    description: "description",
                     isActive: true,
+                    isStaff: false,
                     isAdmin: false,
-                    isLead: false,
-                    startedAt: "2023-10-15 13:14:15"
-                })
+                                    })
             }
-            console.log('- Personnels Added.')
+            console.log('- Users Added.')
         })
     })
-    /* Department & Personnel */
+    /* Department & User */
     console.log("Synchronized")
 }
 
