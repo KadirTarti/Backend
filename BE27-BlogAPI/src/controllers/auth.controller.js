@@ -1,6 +1,6 @@
 "use strict";
 /* -------------------------------------------------------
-EXPRESS - Personnel API
+AKT - BlogAPI
 ------------------------------------------------------- */
 
 const USER = require("../models/user.model");
