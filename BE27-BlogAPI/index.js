@@ -25,12 +25,10 @@ dbConnection();
 //* accept json
 app.use(express.json());
 
+
+//* call middewares
 app.use(require("./src/middlewares/logging"));
-
-
-//*Filter,Search,Sort,Pagination(res.getModelList)
 app.use(require("./src/middlewares/findSearchSortPagi"));
-
 app.use(require("./src/middlewares/authentication"));
 
 
@@ -49,6 +47,7 @@ app.all("/", (req, res) => {
     });
   });
 
+//* call routes
   app.use(require("./src/routes/"));
 
 //* catch mismatched routes
