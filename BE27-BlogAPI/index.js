@@ -28,7 +28,7 @@ app.use(express.json());
 
 //* call middewares
 app.use(require("./src/middlewares/logging"));
-app.use(require("./src/middlewares/findSearchSortPagi"));
+app.use(require("./src/middlewares/queryHandler"));
 app.use(require("./src/middlewares/authentication"));
 
 
