@@ -64,7 +64,7 @@ module.exports = {
           departmentId,
           isLead: true,
         },
-        { isLead: false }
+        { : false }
       );
     }
     const data = await Personnel.updateOne({ _id: req.params.id }, req.body, {
