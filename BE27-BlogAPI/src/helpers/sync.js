@@ -14,18 +14,18 @@ module.exports = async function() {
     console.log('- Database and all data DELETED!')
     /* REMOVE DATABASE */
     
-    /* Department & User */
-    const Department = require('../models/department.model')
+    /* blog & User */
+    const blog = require('../models/blog.model')
     const User = require('../models/user.model')
-    const departments = [
-        "FullStack Department",
-        "DevOps Department",
-        "CyberSec Department",
+    const blogs = [
+        "Travel blog",
+        "News blog",
+        "IT blog",
     ]
-    departments.forEach(value => {
-        // Department.create:
-        Department.create({ name: value }).then((department) => {
-            console.log('- Department Added.')
+    blogs.forEach(value => {
+        // blog.create:
+        blog.create({ name: value }).then((blog) => {
+            console.log('- blog Added.')
             // User.create:
             for (let i in [...Array(10)]) {
                 User.create({
@@ -42,7 +42,7 @@ module.exports = async function() {
             console.log('- Users Added.')
         })
     })
-    /* Department & User */
+    /* blog & User */
     console.log("Synchronized")
 }
 
