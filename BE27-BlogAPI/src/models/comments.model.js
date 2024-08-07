@@ -1,11 +1,12 @@
 "use strict"
 /* -------------------------------------------------------
-    AKT - BlogAPI
+    AKT - commentAPI
 ------------------------------------------------------- */
 const { mongoose } = require('../configs/dbConnection')
+const passwordEncrypt = require('../helpers/passwordEncrypt')
 /* ------------------------------------------------------- */
 
-const BlogSchema = new mongoose.Schema({
+const CommentSchema = new mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
         ref: 'User',
@@ -13,44 +14,22 @@ const BlogSchema = new mongoose.Schema({
         index: true,
         unique: true, 
     },
-    categoryId: {
+    blogId: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Category',
+        ref: 'Blog',
         required: true,
         index: true,
         unique: true,
     },
-    title: {
+    comment: {
         type: String,
         trim: true,
         required: true,
     },
-    content: {
-        type: String,
-        trim: true,
-        required: true,  
-    },
-    image: {
-        type: String,
-        trim: true,
-        required: true,  
-    },
-    isPublish: {
-        type: Boolean,
-        default: true
-    },
-    likes: { 
-        type: Number,
-        default: 0
-    },
-    countOfVisitors: {
-        type: String,
-        default: 0,
-    },
 }, 
 {
-    collection: 'blog',
+    collection: 'comment',
     timestamps: true
 })
 
-module.exports = mongoose.model('Blog', BlogSchema)
+module.exports = mongoose.model('Comment', CommentSchema)
