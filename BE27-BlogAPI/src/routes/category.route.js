@@ -7,7 +7,7 @@ const router = require('express').Router()
 // routes/user:
 
 const permissions = require('../middlewares/permissions')
-const user = require('../controllers/user.controller')
+const user = require('../controllers/category.controller')
 
 // URL: /users
 
