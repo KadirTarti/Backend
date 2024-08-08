@@ -27,11 +27,12 @@ if(tokenKey && tokenKey[0] == 'Token'){
   console.log(tokenData);
   if(tokenData) {
     req.user = tokenData.userId; // Bu satırın çalıştığından emin olun
-  } else {
-    return res.status(401).send({ error: true, message: "Invalid token" });
-  }
-} else {
-  return res.status(401).send({ error: true, message: "No token provided" });
+  } 
+//   else {
+//     return res.status(401).send({ error: true, message: "Invalid token" });
+//   }
+// } else {
+//   return res.status(401).send({ error: true, message: "No token provided" });
 }
 
 next();
