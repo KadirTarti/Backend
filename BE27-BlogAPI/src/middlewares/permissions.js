@@ -18,12 +18,20 @@ module.exports = {
             throw new Error('NoPermission: You must login and to be Admin')
         }
     },
-    isAdminOrOwn: (req,res,next) => {
-        if(req.user && req.user.isActive && req.user.isAdmin || req.user._id == req.params?.id) {
+    isStaff: (req,res,next) => {
+        if(req.user && req.user.isActive && req.user.isStaff) {
             next();
         }else {
             res.errorStatusCode = 403;
-            throw new Error('NoPermission: You must login and to be Admin or Owner')
+            throw new Error('NoPermission: You must login and to be Admin')
         }
     },
+    // isAdminOrOwn: (req,res,next) => {
+    //     if(req.user && req.user.isActive && req.user.isAdmin || req.user._id == req.params?.id) {
+    //         next();
+    //     }else {
+    //         res.errorStatusCode = 403;
+    //         throw new Error('NoPermission: You must login and to be Admin or Owner')
+    //     }
+    // },
 }

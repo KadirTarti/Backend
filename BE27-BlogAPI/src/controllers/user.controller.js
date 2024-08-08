@@ -7,6 +7,7 @@ const User = require("../models/user.model");
 
 module.exports = {
   list: async (req, res) => {
+    console.log("Current user roles:", req.user?.isAdmin, req.user?.isStaff); 
     /*
             #swagger.tags = ["Users"]
             #swagger.summary = "List Users"
@@ -25,6 +26,7 @@ module.exports = {
         // Çalışanlarımız ve Admin tük kullanıcıları görebilir
         // Şirket politikası na göre isStaff kaldırılabilir
         const customFilters = (req.user?.isAdmin || req.user?.isStaff) ? {} : { _id: req.user._id }
+        console.log("Custom filters:", customFilters);
         const data = await res.getModelList(User, customFilters)
 
     res.status(200).send({
