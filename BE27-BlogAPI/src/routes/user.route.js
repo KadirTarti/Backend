@@ -14,11 +14,11 @@ const user = require('../controllers/user.controller')
 router.route('/')
     // .get(permissions.isAdmin, user.list)
     //? user.list içinde isAdmin kontrolü yaptık:
-    .get(permissions.isLogin, user.list)
+    .get(user.list)
     .post(user.create)
 
 router.route('/:id')
-    .get(permissions.isLogin, user.read)
+    .get(user.read)
     .put(permissions.isLogin, user.update)
     .patch(permissions.isLogin, user.update)
     .delete(permissions.isAdmin, user.delete)

@@ -22,11 +22,17 @@ console.log(auth);
 const tokenKey = auth ? auth.split(" ") : null
 console.log(tokenKey);
 
-// if(tokenKey && tokenKey[0] == 'Token'){
-//   const tokenData = await Token.findOne({ token: tokenKey[1] }).populate("userId");
-//   console.log(tokenData);
-//   if(tokenData) req.user = tokenData.userId
-// }
+if(tokenKey && tokenKey[0] == 'Token'){
+  const tokenData = await Token.findOne({ token: tokenKey[1] }).populate("userId");
+  console.log(tokenData);
+  if(tokenData) {
+    req.user = tokenData.userId; // Bu satırın çalıştığından emin olun
+  } else {
+    return res.status(401).send({ error: true, message: "Invalid token" });
+  }
+} else {
+  return res.status(401).send({ error: true, message: "No token provided" });
+}
 
 next();
 }
