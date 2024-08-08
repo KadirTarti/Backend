@@ -102,12 +102,12 @@ module.exports = {
         //const customFilters = req.comment?.isAdmin ? { _id: req.params.id } : { _id: req.comment._id }
         const customFilters = { _id: req.params.id }
 
-        const data = await comment.updateOne(customFilters, req.body, { runValidators: true })
+        const data = await Comment.updateOne(customFilters, req.body, { runValidators: true })
 
         res.status(202).send({
             error: false,
             data,
-            new: await comment.findOne(customFilters),
+            new: await Comment.findOne(customFilters),
         })
     },
 
@@ -117,7 +117,7 @@ module.exports = {
             #swagger.summary = "Delete comment"
         */
             if (req.params.id !== req.comment._id) {
-                const data = await comment.deleteOne({ _id: req.params.id })
+                const data = await Comment.deleteOne({ _id: req.params.id })
                 const count = data?.deletedCount ?? 0
     
                 console.log('delete >> ', count);
