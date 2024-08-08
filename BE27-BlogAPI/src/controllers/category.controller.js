@@ -51,7 +51,7 @@ module.exports = {
           }
       */
            
-       if (req.user?.isActivei) {
+       if (req.user?.isActive) {
            const data = await Category.create(req.body)
            res.status(201).send({
              error: false,
@@ -71,7 +71,7 @@ module.exports = {
             #swagger.summary = "Get Single Category"
         */
 
-        const customFilters = (req.user?.isActive) ? {} : { id: req.user.id }
+        const customFilters = (req.user?.isActive) ? {} : { _id: req.user._id }
 
         const data = await Category.findOne(customFilters)
 
