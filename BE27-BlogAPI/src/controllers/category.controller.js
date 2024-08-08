@@ -116,8 +116,8 @@ module.exports = {
             #swagger.tags = ["Categorys"]
             #swagger.summary = "Delete Category"
         */
-       console.log(req.params.id, req.Category._id)
-            if (req.params.id !== req.Category._id) {
+       console.log(req.params.id, req.Category?._id)
+            if (req.params.id !== req.Category?._id) {
                 const data = await Category.deleteOne({ _id: req.params.id })
                 const count = data?.deletedCount ?? 0
     
