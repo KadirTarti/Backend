@@ -4,24 +4,24 @@
 ------------------------------------------------------- */
 const router = require('express').Router()
 /* ------------------------------------------------------- */
-// routes/user:
+// routes/category:
 
 const permissions = require('../middlewares/permissions')
-const user = require('../controllers/category.controller')
+const category = require('../controllers/category.controller')
 
-// URL: /users
+// URL: /categories
 
 router.route('/')
-    // .get(permissions.isAdmin, user.list)
-    //? user.list içinde isAdmin kontrolü yaptık:
-    .get(user.list)
-    .post(user.create)
+    // .get(permissions.isAdmin, category.list)
+    //? category.list içinde isAdmin kontrolü yaptık:
+    .get(category.list)
+    .post(category.create)
 
 router.route('/:id')
-    .get(user.read)
-    .put(permissions.isLogin, user.update)
-    .patch(permissions.isLogin, user.update)
-    .delete(permissions.isAdmin, user.delete)
+    .get(category.read)
+    .put(permissions.isLogin, category.update)
+    .patch(permissions.isLogin, category.update)
+    .delete(permissions.isAdmin, category.delete)
 
 /* ------------------------------------------------------- */
 module.exports = router
