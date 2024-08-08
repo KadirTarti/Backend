@@ -1,21 +1,18 @@
 "use strict"
 /* -------------------------------------------------------
-    NODEJS EXPRESS | CLARUSWAY FullStack Team
+ AKT - BlogApi
 ------------------------------------------------------- */
 const router = require('express').Router()
 /* ------------------------------------------------------- */
-// routes/:
+// routes/auth:
 
-// URL: /
+const auth = require('../controllers/auth.controller')
 
-// auth:
-router.use('/auth', require('./auth.route'))
-// user:
-router.use('/users', require('./user.route'))
-// token:
-router.use('/tokens', require('./token.route'))
+// URL: /auth
 
-
+router.post('/login', auth.login) // SimpleToken & JWT
+// router.post('/refresh', auth.refresh) // JWT Refresh
+router.get('/logout', auth.logout) // SimpleToken Logout
 
 /* ------------------------------------------------------- */
 module.exports = router

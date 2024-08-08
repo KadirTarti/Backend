@@ -1,6 +1,6 @@
 "use strict";
 /* -------------------------------------------------------
-    EXPRESS - User API
+    AKT - BlogApi
 ------------------------------------------------------- */
 
 const User = require("../models/user.model");
@@ -51,8 +51,8 @@ module.exports = {
           }
       */
        // Yeni kayıtlarda admin/staff = false
-       req.body.isStaff = false
-       req.body.isAdmin = false
+    //    req.body.isStaff = false
+    //    req.body.isAdmin = false
 
        console.log('create before');
        const data = await User.create(req.body)
