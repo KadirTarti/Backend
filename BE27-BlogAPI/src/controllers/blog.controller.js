@@ -21,11 +21,11 @@ module.exports = {
             `
         */
 
-            // Sadece kendi kayıtlarını görebilir:
-        // Çalışanlarımız ve Admin tük kullanıcıları görebilir
-        // Şirket politikası na göre isStaff kaldırılabilir
+    // Sadece kendi kayıtlarını görebilir:
+    // Çalışanlarımız ve Admin tük kullanıcıları görebilir
+    // Şirket politikası na göre isStaff kaldırılabilir
 
-        const data = await res.getModelList(blog)
+    const data = await res.getModelList(blog);
 
     res.status(200).send({
       error: false,
@@ -35,54 +35,52 @@ module.exports = {
   },
 
   create: async (req, res) => {
-     /*
+    /*
           #swagger.tags = ["blogs"]
           #swagger.summary = "Create blog"
           #swagger.parameters['body'] = {
               in: 'body',
               required: true,
               schema: {
-                  "blogname": "test",
-                  "password": "1234",
-                  "email": "test@site.com",
-                  "firstName": "test",
-                  "lastName": "test",
-              }
+                "categoryId": "65343222b67e9681f937f101",
+                "title": "Blog Title 1",
+                "content": "Blog Content 1",
+                "image": "http://imageURL",
+                "isPublish": true
+                }
           }
       */
-           
-       if (req.user?.isActive) {
-           const data = await blog.create(req.body)
-           res.status(201).send({
-             error: false,
-             data
-           });
-       } else {
-        res.errorStatusCode = 403
-        throw new Error('No permission. You must login!')
-       }
- 
-    
-      },
+
+    if (req.user?.isActive) {
+      const data = await blog.create(req.body);
+      res.status(201).send({
+        error: false,
+        data,
+      });
+    } else {
+      res.errorStatusCode = 403;
+      throw new Error("No permission. You must login!");
+    }
+  },
 
   read: async (req, res) => {
-      /*
+    /*
             #swagger.tags = ["blogs"]
             #swagger.summary = "Get Single blog"
         */
 
-        const customFilters = (req.user?.isActive) ? {} : { _id: req.user._id }
+    const customFilters = req.user?.isActive ? {} : { _id: req.user._id };
 
-        const data = await blog.findOne(customFilters)
+    const data = await blog.findOne(customFilters);
 
-        res.status(200).send({
-            error: false,
-            data
-        })
+    res.status(200).send({
+      error: false,
+      data,
+    });
   },
 
   update: async (req, res) => {
-     /*
+    /*
             #swagger.tags = ["blogs"]
             #swagger.summary = "Update blog"
             #swagger.parameters['body'] = {
@@ -97,37 +95,39 @@ module.exports = {
                 }
             }
         */
-   
-        const customFilters = { _id: req.params.id }
 
-        const data = await blog.updateOne(customFilters, req.body, { runValidators: true })
+    const customFilters = { _id: req.params.id };
 
-        res.status(202).send({
-            error: false,
-            data,
-            new: await blog.findOne(customFilters),
-        })
-    },
+    const data = await blog.updateOne(customFilters, req.body, {
+      runValidators: true,
+    });
+
+    res.status(202).send({
+      error: false,
+      data,
+      new: await blog.findOne(customFilters),
+    });
+  },
 
   delete: async (req, res) => {
-        /*
+    /*
             #swagger.tags = ["blogs"]
             #swagger.summary = "Delete blog"
         */
-       console.log(req.params.id, req.blog?._id)
-            if (req.params.id !== req.blog?._id) {
-                const data = await blog.deleteOne({ _id: req.params.id })
-                const count = data?.deletedCount ?? 0
-    
-                console.log('delete >> ', count);
-                res.status(count > 0 ? 204 : 404).send({
-                    error: count !== 0,
-                    data
-                })
-            } else {
-                // Admin kendini silemez.
-                res.errorStatusCode = 403
-                throw new Error('You can not remove your account.')
-            }
-        }
+    console.log(req.params.id, req.blog?._id);
+    if (req.params.id !== req.blog?._id) {
+      const data = await blog.deleteOne({ _id: req.params.id });
+      const count = data?.deletedCount ?? 0;
+
+      console.log("delete >> ", count);
+      res.status(count > 0 ? 204 : 404).send({
+        error: count !== 0,
+        data,
+      });
+    } else {
+      // Admin kendini silemez.
+      res.errorStatusCode = 403;
+      throw new Error("You can not remove your account.");
     }
+  },
+};

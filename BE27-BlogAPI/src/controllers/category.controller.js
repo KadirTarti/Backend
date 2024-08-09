@@ -42,12 +42,8 @@ module.exports = {
               in: 'body',
               required: true,
               schema: {
-                  "Categoryname": "test",
-                  "password": "1234",
-                  "email": "test@site.com",
-                  "firstName": "test",
-                  "lastName": "test",
-              }
+                "name": "Category 1"
+                    }
           }
       */
            

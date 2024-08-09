@@ -38,9 +38,9 @@ module.exports = {
               in: 'body',
               required: true,
               schema: {
-  "blogId": "65343222b67e9681f937f201",
-  "comment": "Comment 1"              }
-          }
+                "blogId": "65343222b67e9681f937f201",
+                "comment": "Comment 1"
+                }
       */
 
     if (user.isActive) {
