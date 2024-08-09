@@ -43,6 +43,10 @@
     "/auth/login": {
       "post": {
         "description": "",
+        "tags": [
+            "Authentication"
+          ],
+          "summary": "Login",
         "responses": {
           "default": {
             "description": ""
@@ -50,9 +54,27 @@
         }
       }
     },
+    "/auth/refresh": {
+        "post": {
+          "description": "",
+          "tags": [
+              "Authentication"
+            ],
+            "summary": "JWT Refresh",
+          "responses": {
+            "default": {
+              "description": ""
+            }
+          }
+        }
+      },
     "/auth/logout": {
       "get": {
         "description": "",
+        "tags": [
+          "Authentication"
+        ],
+        "summary": "Token Logout",
         "responses": {
           "200": {
             "description": "OK"
@@ -63,6 +85,7 @@
         }
       }
     },
+
     "/users/": {
       "get": {
         "tags": [
@@ -281,9 +304,9 @@
     "/categories/": {
       "get": {
         "tags": [
-          "Categorys"
+          "Categories"
         ],
-        "summary": "List Categorys",
+        "summary": "List Categories",
         "description": "\r  You can use <u>filter[] & search[] & sort[] & page & limit</u> queries with endpoint.\r  <ul> Examples:\r   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>\r   <li>URL/?<b>limit=10&page=1</b></li>\r  </ul>\r  ",
         "responses": {
           "200": {
@@ -293,7 +316,7 @@
       },
       "post": {
         "tags": [
-          "Categorys"
+          "Categories"
         ],
         "summary": "Create Category",
         "description": "",
@@ -323,7 +346,7 @@
     "/categories/{id}": {
       "get": {
         "tags": [
-          "Categorys"
+          "Categories"
         ],
         "summary": "Get Single Category",
         "description": "",
@@ -343,7 +366,7 @@
       },
       "put": {
         "tags": [
-          "Categorys"
+          "Categories"
         ],
         "summary": "Update Category",
         "description": "",
@@ -393,7 +416,7 @@
       },
       "delete": {
         "tags": [
-          "Categorys"
+          "Categories"
         ],
         "summary": "Delete Category",
         "description": "",
@@ -416,7 +439,7 @@
       },
       "patch": {
         "tags": [
-          "Categorys"
+          "Categories"
         ],
         "summary": "Update Category",
         "description": "",
@@ -468,9 +491,9 @@
     "/blogs/": {
       "get": {
         "tags": [
-          "blogs"
+          "Blogs"
         ],
-        "summary": "List blogs",
+        "summary": "List Blogs",
         "description": "\r  You can use <u>filter[] & search[] & sort[] & page & limit</u> queries with endpoint.\r  <ul> Examples:\r   <li>URL/?<b>filter[field1]=value1&filter[field2]=value2</b></li>\r   <li>URL/?<b>search[field1]=value1&search[field2]=value2</b></li>\r   <li>URL/?<b>sort[field1]=asc&sort[field2]=desc</b></li>\r   <li>URL/?<b>limit=10&page=1</b></li>\r  </ul>\r  ",
         "responses": {
           "200": {
@@ -480,7 +503,7 @@
       },
       "post": {
         "tags": [
-          "blogs"
+          "Blogs"
         ],
         "summary": "Create blog",
         "description": "",
@@ -526,7 +549,7 @@
     "/blogs/{id}": {
       "get": {
         "tags": [
-          "blogs"
+          "Blogs"
         ],
         "summary": "Get Single blog",
         "description": "",
@@ -546,7 +569,7 @@
       },
       "put": {
         "tags": [
-          "blogs"
+          "Blogs"
         ],
         "summary": "Update blog",
         "description": "",
@@ -596,7 +619,7 @@
       },
       "delete": {
         "tags": [
-          "blogs"
+          "Blogs"
         ],
         "summary": "Delete blog",
         "description": "",
@@ -619,7 +642,7 @@
       },
       "patch": {
         "tags": [
-          "blogs"
+          "Blogs"
         ],
         "summary": "Update blog",
         "description": "",

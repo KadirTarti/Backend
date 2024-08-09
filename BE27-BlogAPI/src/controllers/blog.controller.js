@@ -36,7 +36,7 @@ module.exports = {
 
   create: async (req, res) => {
     /*
-          #swagger.tags = ["blogs"]
+          #swagger.tags = ["Blogs"]
           #swagger.summary = "Create blog"
           #swagger.parameters['body'] = {
               in: 'body',
@@ -66,7 +66,7 @@ module.exports = {
 
   read: async (req, res) => {
     /*
-            #swagger.tags = ["blogs"]
+            #swagger.tags = ["Blogs"]
             #swagger.summary = "Get Single blog"
         */
 
@@ -82,17 +82,17 @@ module.exports = {
 
   update: async (req, res) => {
     /*
-            #swagger.tags = ["blogs"]
+            #swagger.tags = ["Blogs"]
             #swagger.summary = "Update blog"
             #swagger.parameters['body'] = {
                 in: 'body',
                 required: true,
                 schema: {
-                    "blogname": "test",
-                    "password": "1234",
-                    "email": "test@site.com",
-                    "firstName": "test",
-                    "lastName": "test",
+                "categoryId": "65343222b67e9681f937f101",
+                "title": "Blog Title 1",
+                "content": "Blog Content 1",
+                "image": "http://imageURL",
+                "isPublish": true
                 }
             }
         */
@@ -112,7 +112,7 @@ module.exports = {
 
   delete: async (req, res) => {
     /*
-            #swagger.tags = ["blogs"]
+            #swagger.tags = ["Blogs"]
             #swagger.summary = "Delete blog"
         */
     console.log(req.params.id, req.blog?._id);
