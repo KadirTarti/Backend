@@ -52,6 +52,7 @@ module.exports = {
       */
 
     if (req.user?.isActive) {
+      req.body.userId = req.user.id
       const data = await blog.create(req.body);
       res.status(201).send({
         error: false,
