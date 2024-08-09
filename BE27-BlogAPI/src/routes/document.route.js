@@ -7,7 +7,7 @@ const HOST = process.env?.HOST || '127.0.0.1'
 const PORT = process.env?.PORT || 8000
 /* ------------------------------------------------------- */
 const swaggerAutogen = require('swagger-autogen')()
-const packageJson = require('./package.json')
+const packageJson = require('../../package.json')
 
 const document = {
 	info: {
@@ -40,10 +40,10 @@ const document = {
 	security: [{ Token: [] }, { Bearer: [] }],
 	definitions: {
 		// Models:
-		"User": require('./src/models/user.model').schema.obj,
-		"Blog": require('./src/models/blog.model').schema.obj,
-		"Category": require('./src/models/category').schema.obj,
-		// "Firm": require('./src/models/firm').schema.obj,
+		"User": require('../models/user.model').schema.obj,
+		"Blog": require('../models/blog.model').schema.obj,
+		"Category": require('../models/category.model').schema.obj,
+		"Comment": require('../models/comment.model').schema.obj,
 		// "Product": require('./src/models/product').schema.obj,
 		// "Purchase": require('./src/models/purchase').schema.obj,
 		// "Sale": require('./src/models/sale').schema.obj,
