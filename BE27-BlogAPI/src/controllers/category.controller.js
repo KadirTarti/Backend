@@ -8,8 +8,8 @@ const Category = require("../models/category.model");
 module.exports = {
   list: async (req, res) => {
     /*
-            #swagger.tags = ["Categorys"]
-            #swagger.summary = "List Categorys"
+            #swagger.tags = ["Categories"]
+            #swagger.summary = "List Categories"
             #swagger.description = `
                 You can use <u>filter[] & search[] & sort[] & page & limit</u> queries with endpoint.
                 <ul> Examples:
@@ -20,10 +20,6 @@ module.exports = {
                 </ul>
             `
         */
-
-            // Sadece kendi kayıtlarını görebilir:
-        // Çalışanlarımız ve Admin tük kullanıcıları görebilir
-        // Şirket politikası na göre isStaff kaldırılabilir
 
         const data = await res.getModelList(Category)
 
@@ -36,7 +32,7 @@ module.exports = {
 
   create: async (req, res) => {
      /*
-          #swagger.tags = ["Categorys"]
+          #swagger.tags = ["Categories"]
           #swagger.summary = "Create Category"
           #swagger.parameters['body'] = {
               in: 'body',
@@ -63,7 +59,7 @@ module.exports = {
 
   read: async (req, res) => {
       /*
-            #swagger.tags = ["Categorys"]
+            #swagger.tags = ["Categories"]
             #swagger.summary = "Get Single Category"
         */
 
@@ -79,24 +75,18 @@ module.exports = {
 
   update: async (req, res) => {
      /*
-            #swagger.tags = ["Categorys"]
+            #swagger.tags = ["Categories"]
             #swagger.summary = "Update Category"
             #swagger.parameters['body'] = {
                 in: 'body',
                 required: true,
                 schema: {
-                    "Categoryname": "test",
-                    "password": "1234",
-                    "email": "test@site.com",
-                    "firstName": "test",
-                    "lastName": "test",
+                    "name": "Category 1"
                 }
             }
         */
    
-             // Sadece kendi kaydını güncelleyebilir:
-        //const customFilters = req.Category?.isAdmin ? { _id: req.params.id } : { _id: req.Category._id }
-        const customFilters = { _id: req.params.id }
+            
 
         const data = await Category.updateOne(customFilters, req.body, { runValidators: true })
 
@@ -109,7 +99,7 @@ module.exports = {
 
   delete: async (req, res) => {
         /*
-            #swagger.tags = ["Categorys"]
+            #swagger.tags = ["Categories"]
             #swagger.summary = "Delete Category"
         */
        console.log(req.params.id, req.Category?._id)
