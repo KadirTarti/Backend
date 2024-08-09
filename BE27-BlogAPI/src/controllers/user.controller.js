@@ -44,17 +44,20 @@ module.exports = {
               in: 'body',
               required: true,
               schema: {
-                  "username": "test",
-                  "password": "1234",
-                  "email": "test@site.com",
-                  "firstName": "test",
-                  "lastName": "test",
-              }
+                    "username": "test",
+                    "password": "1234",
+                    "email": "test@site.com",
+                    "firstName": "test",
+                    "lastName": "test",
+                    "image": "",
+                    "city": "",
+                    "bio": ""
+                        }
           }
       */
        // Yeni kayıtlarda admin/staff = false
-    //    req.body.isStaff = false
-    //    req.body.isAdmin = false
+       req.body.isStaff = false
+       req.body.isAdmin = false
 
        console.log('create before');
        const data = await User.create(req.body)
