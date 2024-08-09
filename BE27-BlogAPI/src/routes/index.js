@@ -25,7 +25,5 @@ router.use('/documents', require('./document.route'))
 
 
 
-
-
 /* ------------------------------------------------------- */
 module.exports = router

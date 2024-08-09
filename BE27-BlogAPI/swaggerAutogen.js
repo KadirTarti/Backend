@@ -1,6 +1,6 @@
 "use strict"
 /* -------------------------------------------------------
-	EXPRESS - Personnel API
+	AKT - Blog API
 ------------------------------------------------------- */
 require('dotenv').config()
 const HOST = process.env?.HOST || '127.0.0.1'
@@ -14,8 +14,8 @@ const document = {
 		version: packageJson.version,
 		title: packageJson.title,
 		description: packageJson.description,
-		termsOfService: "http://www.clarusway.com/#",
-		contact: { name: packageJson.author, email: "qadir@clarusway.com" },
+		termsOfService: "http://www.github.com/KadirTarti",
+		contact: { name: packageJson.author, email: "tartilaci@gmail.com" },
 		license: { name: packageJson.license, },
 	},
 	host: `${HOST}:${PORT}`,
@@ -43,7 +43,7 @@ const document = {
 		"User": require('./src/models/user.model').schema.obj,
 		"Blog": require('./src/models/blog.model').schema.obj,
 		"Category": require('./src/models/category.model').schema.obj,
-		// "Firm": require('./src/models/firm').schema.obj,
+		"Comment": require('./src/models/comment.model').schema.obj,
 		// "Product": require('./src/models/product').schema.obj,
 		// "Purchase": require('./src/models/purchase').schema.obj,
 		// "Sale": require('./src/models/sale').schema.obj,
