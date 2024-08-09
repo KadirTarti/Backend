@@ -27,26 +27,25 @@ app.use(express.json());
 
 
 //* call middewares
+
+app.use(require("./src/middlewares/authentication"));
 app.use(require("./src/middlewares/logging"));
 app.use(require("./src/middlewares/queryHandler"));
-app.use(require("./src/middlewares/authentication"));
 
 
-app.all("/", (req, res) => {
-    // res.send("Welcome to the Blog API")
-    res.send({
-      message: "Welcome to the Blog API",
-      user: req.user,
-      api: {
-        documents: {
-          swagger: "/documents/swagger",
-          redoc: "/documents/redoc",
-          json: "/documents/json",
-        },
+// HomePath:
+app.all('/', (req, res) => {
+  res.send({
+      error: false,
+      message: 'Welcome to Blog API',
+      documents: {
+          swagger: '/documents/swagger',
+          redoc: '/documents/redoc',
+          json: '/documents/json',
       },
-    });
-  });
-
+      user: req.user
+  })
+})
 //* call routes
   app.use(require("./src/routes"));
 
@@ -62,7 +61,7 @@ app.use((req, res, next) => {
 app.use(require("./src/middlewares/errorHandler"));
 
 // RUN SERVER:
-app.listen(PORT, () => console.log("http://127.0.0.1:" + PORT));
+app.listen(PORT, HOST, () => console.log("http://127.0.0.1:" + PORT));
 
 /* ------------------------------------------------------- */
 // require("./src/helpers/sync")()

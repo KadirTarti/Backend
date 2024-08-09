@@ -20,6 +20,8 @@ router.use('/categories', require('./category.route'))
 router.use('/blogs', require('./blog.route'))
 // comment
 router.use('/comments', require('./comment.route'))
+// document
+router.use('/documents', require('./document.route'))
 
 
 
