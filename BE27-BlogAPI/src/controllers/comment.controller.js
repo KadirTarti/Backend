@@ -79,18 +79,13 @@ module.exports = {
             #swagger.parameters['body'] = {
                 in: 'body',
                 required: true,
-                schema: {
-                    "commentname": "test",
-                    "password": "1234",
-                    "email": "test@site.com",
-                    "firstName": "test",
-                    "lastName": "test",
+   schema: {
+                "blogId": "65343222b67e9681f937f201",
+                "comment": "Comment 1"
                 }
             }
         */
 
-    // Sadece kendi kaydını güncelleyebilir:
-    //const customFilters = req.comment?.isAdmin ? { _id: req.params.id } : { _id: req.comment._id }
     const customFilters = { _id: req.params.id };
 
     const data = await Comment.updateOne(customFilters, req.body, {
@@ -106,8 +101,8 @@ module.exports = {
 
   delete: async (req, res) => {
     /*
-            #swagger.tags = ["comments"]
-            #swagger.summary = "Delete comment"
+            #swagger.tags = ["Comments"]
+            #swagger.summary = "Delete Comment"
         */
     if (req.params.id !== req.comment._id) {
       const data = await Comment.deleteOne({ _id: req.params.id });

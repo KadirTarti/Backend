@@ -88,6 +88,7 @@ module.exports = {
    
             
 
+            const customFilters = (req.user?.isActive) ? {} : { _id: req.user._id }
         const data = await Category.updateOne(customFilters, req.body, { runValidators: true })
 
         res.status(202).send({
