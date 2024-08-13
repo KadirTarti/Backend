@@ -13,10 +13,19 @@ const UserDetail = ({params}) => {
 
 export default UserDetail
 
-//* dinamik sayfalar için meta-data oluşturma
+//* dinamik sayfaları static olarak üretme
 export async function generateStaticParams() {
     const userArray = [ 1,2,3,4]
     return userArray.map(userId => {
         userId: userId.toString()
     })
+}
+
+//* dinamik sayfalar için meta-data oluşturma
+export async function generateMetaData ({params: {userId}}) {
+ return {
+  title: `User-${userId}`,
+  description: `this is the page of User-${userId}`
+};
+
 }

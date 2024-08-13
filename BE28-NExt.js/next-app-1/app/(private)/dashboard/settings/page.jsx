@@ -1,6 +1,11 @@
 import GoBack from '@/components/GoBack'
 import React from 'react'
 
+export const metadata = {
+  title: "Settings Page",
+  description: "Settings Page",
+};
+
 const Settings = () => {
   return (
     <div className='text-xl font-bold underline text-center'>
