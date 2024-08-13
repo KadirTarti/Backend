@@ -1,7 +1,9 @@
+"use client";
 import Image from "next/image";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import React from "react";
-import logo from "/public/clarusway-logo.png";
+// import logo from "/public/clarusway-logo.png";
 
 const navigation = [
   {
@@ -19,6 +21,8 @@ const navigation = [
 ];
 
 const Navbar = () => {
+  let pathname = usePathname();
+  console.log(pathname);
   return (
     <nav className="bg-navbarColor text-sm px-4 flex justify-between">
       <div className="flex items-center">
@@ -40,7 +44,9 @@ const Navbar = () => {
           {navigation.map((item) => (
             <li
               key={item.title}
-              className={`font-medium hover:bg-gray-300 rounded-full py-2 px-4 hover:text-white inline-block text-lg`}
+              className={`font-medium hover:bg-gray-300 rounded-full py-2 px-4 hover:text-white inline-block text-lg ${
+                item.path === pathname && "bg-gray-300"
+              } `}
             >
               {/* //? next/link arka planda sayfayı önceden fetch edilir. Bu, client tarafı gezintilerin performansını iyileştirmek için kullanışlıdır. Görünüm alanındaki herhangi bir <Link />  önceden yüklenecektir. */}
               <Link href={item.path}> {item.title} </Link>
