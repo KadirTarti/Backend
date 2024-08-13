@@ -1,5 +1,5 @@
 import TeamList from "@/components/TeamList";
-import { getUsers } from "@/helpers/apiFunctions";
+import { getUsers } from "@/helpers/apiFunction";
 import React from "react";
 
 //* You can use fetch with async/await in Server Components,

@@ -1,5 +1,5 @@
 import DetailCard from "@/components/DetailCard";
-import { getUsersDetail } from "@/helpers/apiFunctions";
+import { getUsersDetail } from "@/helpers/apiFunction";
 import React from "react";
 
 const UserDetail = async ({ params: { id } }) => {
