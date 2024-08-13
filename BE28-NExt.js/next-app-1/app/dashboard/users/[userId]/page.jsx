@@ -12,3 +12,11 @@ const UserDetail = ({params}) => {
 }
 
 export default UserDetail
+
+//* dinamik sayfalar için meta-data oluşturma
+export async function generateStaticParams() {
+    const userArray = [ 1,2,3,4]
+    return userArray.map(userId => {
+        userId: userId.toString()
+    })
+}
