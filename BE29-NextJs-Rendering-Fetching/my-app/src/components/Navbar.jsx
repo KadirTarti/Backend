@@ -45,7 +45,7 @@ import {
             </div>
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex flex-shrink-0 items-center">
-                <p className="text-white font-sans text-xl mr-3 font-bold">Star Screens</p>
+                <p className="text-white font-sans text-xl mr-3 font-bold">Star & Screens</p>
                 <Image
                   alt="Your Company"
                   src="/starLogo.png"
