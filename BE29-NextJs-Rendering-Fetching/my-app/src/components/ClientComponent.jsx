@@ -6,7 +6,7 @@ const ClientComponent = ({ children }) => {
   console.log("client comp.");
   return (
     <div onClick={() => alert("i'm client")}>
-      <h1>ClientComponent</h1>
+      <h1></h1>
       {children}
       {/* <ServerComponent /> */}
     </div>
