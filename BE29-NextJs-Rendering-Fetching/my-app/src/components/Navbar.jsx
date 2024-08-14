@@ -9,7 +9,7 @@ import {
   } from "@headlessui/react";
   import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
   import Image from "next/image";
-  import avatar from "/public/avatar.png";
+  import avatar from "/public/avatar1.jpg";
   import Link from "next/link";
   
   const navigation = [
@@ -45,11 +45,12 @@ import {
             </div>
             <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
               <div className="flex flex-shrink-0 items-center">
+                <p className="text-white font-sans text-xl mr-3 font-bold">Star Screens</p>
                 <Image
                   alt="Your Company"
-                  src="/clarusway_logo2.png"
-                  height={150}
-                  width={50}
+                  src="/starLogo.png"
+                  height={200}
+                  width={80}
                   className="h-8 w-auto"
                 />
               </div>
