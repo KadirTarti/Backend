@@ -4,9 +4,9 @@ import Image from "next/image";
 
 export default function Home() {
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24">
+    <main className="bg-blue-800 flex min-h-screen flex-col items-center">
     
-    <div class="bg-white py-24 sm:py-32">
+    <div class="bg-blue-900 rounded py-24 sm:py-32 text-justify">
   <div class="mx-auto grid max-w-7xl gap-x-8 gap-y-20 px-6 lg:px-8 xl:grid-cols-3">
     <div class="max-w-2xl">
       <h2 class="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Meet our leadership</h2>
@@ -18,7 +18,7 @@ export default function Home() {
           <img class="h-16 w-16 rounded-full" src="https://profile-images.xing.com/users/42caec9908e9e534dff8edc5a92a8aeb-6/image.1024x1024.jpg" alt=""/>
           <div>
             <h3 class="text-base font-semibold leading-7 tracking-tight text-gray-900">Abdulkadir Tartilaci</h3>
-            <p class="text-sm font-semibold leading-6 text-indigo-600">Co-Founder / CEO</p>
+            <p class="text-sm font-bold leading-6 text-red-500">Co-Founder / CEO</p>
           </div>
         </div>
       </li>
