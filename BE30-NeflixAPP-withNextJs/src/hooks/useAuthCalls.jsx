@@ -1,6 +1,9 @@
 import { auth } from "@/auth/firebase";
 import { toastErrorNotify, toastSuccessNotify } from "@/helpers/ToastNotify";
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
 import { useRouter } from "next/navigation";
 
 const useAuthCalls = () => {
@@ -19,7 +22,23 @@ const useAuthCalls = () => {
       toastErrorNotify(error.message);
     }
   };
-  return { createUser };
+
+  //* https://console.firebase.google.com/
+  //* => Authentication => sign-in-method => enable Email/password
+  //! Email/password ile girişi enable yap
+  const signIn = async (email, password) => {
+    try {
+      //? mevcut kullanıcının giriş yapması için kullanılan firebase metodu
+      await signInWithEmailAndPassword(auth, email, password);
+
+      toastSuccessNotify("Logged in successfully!");
+      router.push("/profile");
+    } catch (error) {
+      toastErrorNotify(error.message);
+    }
+  };
+
+  return { createUser, signIn };
 };
 
 export default useAuthCalls;
