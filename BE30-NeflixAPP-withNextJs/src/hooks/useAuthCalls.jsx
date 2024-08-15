@@ -1,15 +1,13 @@
-const { auth } = require("@/auth/firebase")
-const { createUserWithEmailAndPassword } = require("firebase/auth")
+import auth from "@/auth/firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
 
 const useAuthCalls = () => {
-const createUser = async (email, password) => {
+  const createUser = async (email, password) => {
     try {
-        createUserWithEmailAndPassword(auth, email, password)
-    } catch (error) {
-        
-    }
-}    
-    return {createUser}
-}
+      createUserWithEmailAndPassword(auth, email, password);
+    } catch (error) {}
+  };
+  return { createUser };
+};
 
 export default useAuthCalls;

@@ -17,7 +17,7 @@ function classNames(...classes) {
 
 const Navbar = () => {
   const [showBackground, setShowBackground] = useState(false);
-  const currentUser = { displayName: "A.kadir Tarti" };
+  const currentUser = { displayName: "A.kadir" };
 
   useEffect(() => {
     const handleScroll = () => {
