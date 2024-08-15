@@ -9,7 +9,7 @@ const DetailCard = ({ avatar, first_name, last_name, email }) => {
       <div className="flex flex-col items-center pb-10">
         <img
           className="w-24 h-24 mb-3 rounded-full shadow-lg"
-          src={}
+          src={avatar}
           alt="Bonnie image"
         />
         <h5>
