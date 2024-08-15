@@ -2,7 +2,11 @@ import React from 'react'
 
 const Login = () => {
   return (
-    <div>Login</div>
+    <main className="h-screen w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
+      <div className="bg-black w-full h-full bg-opacity-50">
+
+      </div>
+      </main>
   )
 }
 
