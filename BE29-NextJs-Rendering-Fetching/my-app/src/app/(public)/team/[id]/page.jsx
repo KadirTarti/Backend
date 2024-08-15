@@ -22,7 +22,7 @@ export async function generateStaticParams() {
   return users.map((user) => ({id: user.id.toString() }))
 }
 
-export async function generateMetaData({params: {id}}) {
+export async function generateMetadata({params: {id}}) {
   const person = await getUsersDetail(id);
   return{
     title: person.first_name + " " + person.last_name,
