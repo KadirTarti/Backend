@@ -1,5 +1,5 @@
 import React from "react";
-import GoogleIcon from "../../../../public/icons/GoogleIcon";
+import GoogleIcon from "@/../public/icons/GoogleIcon";
 
 const Register = () => {
   return (
