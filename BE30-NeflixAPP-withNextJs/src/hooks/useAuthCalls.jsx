@@ -1,13 +1,23 @@
 import { auth } from "@/auth/firebase";
 import { toastErrorNotify, toastSuccessNotify } from "@/helpers/ToastNotify";
+import { login, logout } from "@/redux/feature/authSlice";
 import {
   createUserWithEmailAndPassword,
+  onAuthStateChanged,
   signInWithEmailAndPassword,
 } from "firebase/auth";
 import { useRouter } from "next/navigation";
+import { useEffect } from "react";
+import { useDispatch } from "react-redux";
 
 const useAuthCalls = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    userObserver();
+  }, []);
+
   const createUser = async (email, password, displayName) => {
     try {
       //? yeni bir kullanıcı oluşturmak için kullanılan firebase metodu
@@ -38,7 +48,19 @@ const useAuthCalls = () => {
     }
   };
 
-  return { createUser, signIn };
+  const userObserver = () => {
+    //? Kullanıcının signin olup olmadığını takip eden ve kullanıcı değiştiğinde yeni kullanıcıyı response olarak dönen firebase metodu
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const { email, displayName, photoURL } = user;
+        dispatch(login({ email, displayName, photoURL }));
+      } else {
+        dispatch(logout());
+      }
+    });
+  };
+
+  return { createUser, signIn, userObserver };
 };
 
 export default useAuthCalls;
