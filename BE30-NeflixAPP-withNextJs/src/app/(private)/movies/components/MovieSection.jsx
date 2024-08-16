@@ -1,7 +1,8 @@
 "use client";
-import { getMovies } from "@/helpers/MovieFunctions";
+
 import React from "react";
 import MovieList from "./MovieList";
+import { getMovies } from "@/helpers/movieFunctions";
 
 const MovieSection = async ({ title, type }) => {
   const movies = await getMovies(type);
