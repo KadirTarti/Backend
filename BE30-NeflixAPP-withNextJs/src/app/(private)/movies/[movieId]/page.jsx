@@ -1,4 +1,4 @@
-import { getMovieDetail, getVideoKey } from "@/helpers/movieFunctions";
+import { getMovieDetail, getVideoKey } from "@/helpers/MovieFunctions";
 import React from "react";
 import VideoSection from "../components/VideoSection";
 import { BackspaceIcon } from "@heroicons/react/24/solid";
