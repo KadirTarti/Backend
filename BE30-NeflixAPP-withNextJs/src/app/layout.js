@@ -1,9 +1,9 @@
 import { Inter } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/Navbar";
+import Navbar from "@/components/Navbvar";
 import "react-toastify/dist/ReactToastify.css";
 import { ToastContainer } from "react-toastify";
-import ReduxProvider from "@/redux/providers";
+import ReduxProvider from "@/redux/provider";
 
 const inter = Inter({ subsets: ["latin"] });
 
