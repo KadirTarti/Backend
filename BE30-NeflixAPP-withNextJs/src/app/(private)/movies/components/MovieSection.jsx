@@ -1,4 +1,5 @@
-import { getMovies } from "@/helpers/movieFunctions";
+"use client";
+import { getMovies } from "@/helpers/MovieFunctions";
 import React from "react";
 import MovieList from "./MovieList";
 
