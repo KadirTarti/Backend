@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <main className="h-screen w-full bg-[url('/images/hero.jpg')] bg-no-repeat bg-center bg-fixed bg-cover">
       <div className="bg-black w-full h-full bg-opacity-50">
-        <div className="text-white text-center relative m-auto top-2/4">
+        <div className="text-white grid grid-rows-1 gap-4 text-center relative m-auto top-2/4">
           <h1 className="text-4xl font-[900] text-center mb-3">
           All the Movies of the World with One Click
           </h1>

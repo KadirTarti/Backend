@@ -11,7 +11,7 @@ const ProfileCard = ({ name, image }) => {
       <div className="w-44 h-44 rounded-md border-2 border-transparent group-hover:border-white overflow-hidden ">
         <img src={image} alt="profile" className="w-max h-max object-contain" />
       </div>
-      <div className="mt-4 text-gray-400 text-2xl text-center group-hover:text-white ">
+      <div className="mt-4 text-gray-400 text-xl text-center group-hover:text-white ">
         {name}
       </div>
     </div>

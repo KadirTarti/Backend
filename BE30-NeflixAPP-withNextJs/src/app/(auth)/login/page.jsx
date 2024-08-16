@@ -68,11 +68,10 @@ const Login = () => {
             <button className="btn-danger">Sign In</button>
             <button
               type="button"
-              className="btn-danger flex justify-between text-center "
-              onClick={signUpProvider}
+              className="btn-danger bg-white flex text-black justify-evenly gap-3 text-center hover:bg-blue-600 hover:text-[#ffffff]"
             >
-              Continue with Google
               <GoogleIcon />
+              Continue with Google
             </button>
           </form>
         </div>
