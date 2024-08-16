@@ -5,6 +5,7 @@ import {
   createUserWithEmailAndPassword,
   onAuthStateChanged,
   signInWithEmailAndPassword,
+  signOut,
 } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
@@ -48,19 +49,29 @@ const useAuthCalls = () => {
     }
   };
 
+  const logOut = () => {
+    signOut(auth);
+    toastSuccessNotify("Logged out successfully!");
+  };
+
   const userObserver = () => {
     //? Kullanıcının signin olup olmadığını takip eden ve kullanıcı değiştiğinde yeni kullanıcıyı response olarak dönen firebase metodu
     onAuthStateChanged(auth, (user) => {
       if (user) {
         const { email, displayName, photoURL } = user;
         dispatch(login({ email, displayName, photoURL }));
+        sessionStorage.setItem(
+          "user",
+          JSON.stringify({ email, displayName, photoURL })
+        );
       } else {
         dispatch(logout());
+        sessionStorage.removeItem("user");
       }
     });
   };
 
-  return { createUser, signIn, userObserver };
+  return { createUser, signIn, userObserver, logOut };
 };
 
 export default useAuthCalls;

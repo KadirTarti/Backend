@@ -10,6 +10,8 @@ import {
   MenuItems,
   Transition,
 } from "@headlessui/react";
+import useAuthCalls from "@/hooks/useAuthCalls";
+import { useSelector } from "react-redux";
 
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
@@ -17,7 +19,9 @@ function classNames(...classes) {
 
 const Navbar = () => {
   const [showBackground, setShowBackground] = useState(false);
-  const currentUser = { displayName: "A.kadir" };
+  const { logOut } = useAuthCalls();
+  const { currentUser } = useSelector((state) => state.auth);
+  // const currentUser = { displayName: "felix franko" };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -118,6 +122,7 @@ const Navbar = () => {
                           "block px-4 py-2 text-sm text-gray-700 hover:bg-slate-200 cursor-pointer"
                         )}
                         role="button"
+                        onClick={() => logOut()}
                       >
                         Log out
                       </span>
