@@ -9,7 +9,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-  const { signIn } = useAuthCalls();
+  const { signIn, signUpProvider } = useAuthCalls();
 
   const { email, password } = info;
 
@@ -66,6 +66,7 @@ const Login = () => {
             <button
               type="button"
               className="btn-danger flex justify-between text-center "
+              onClick={signUpProvider}
             >
               Continue with Google
               <GoogleIcon />
