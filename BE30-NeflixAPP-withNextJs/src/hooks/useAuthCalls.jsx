@@ -1,10 +1,15 @@
 import { auth } from "@/auth/firebase";
-import { toastErrorNotify, toastSuccessNotify } from "@/helpers/ToastNotify";
+import {
+  toastErrorNotify,
+  toastSuccessNotify,
+  toastWarnNotify,
+} from "@/helpers/ToastNotify";
 import { login, logout } from "@/redux/feature/authSlice";
 import {
   createUserWithEmailAndPassword,
   GoogleAuthProvider,
   onAuthStateChanged,
+  sendPasswordResetEmail,
   signInWithEmailAndPassword,
   signInWithPopup,
   signOut,
@@ -96,7 +101,29 @@ const useAuthCalls = () => {
       });
   };
 
-  return { createUser, signIn, userObserver, logOut, signUpProvider };
+  const forgotPassword = (email) => {
+    //? Email yoluyla şifre sıfırlama için kullanılan firebase metodu
+    sendPasswordResetEmail(auth, email)
+      .then(() => {
+        // Password reset email sent!
+        toastWarnNotify("Please check your mail box!");
+        // alert("Please check your mail box!");
+      })
+      .catch((err) => {
+        toastErrorNotify(err.message);
+        // alert(err.message);
+        // ..
+      });
+  };
+
+  return {
+    createUser,
+    signIn,
+    userObserver,
+    logOut,
+    signUpProvider,
+    forgotPassword,
+  };
 };
 
 export default useAuthCalls;
