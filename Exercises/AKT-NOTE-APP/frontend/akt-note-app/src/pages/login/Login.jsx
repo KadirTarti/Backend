@@ -6,8 +6,8 @@ const Login = () => {
     <>
       <Navbar/>
 
-      <div className="">
-        <div>
+      <div className="flex items-center justify-center mt-28">
+        <div className="w-96 border rounded bg-white px-7 py-10">
           <form onSubmit={()=> {}} action="">
             <h4 className="text-2xl mb-7">Login</h4>
             <input type="text" placeholder="Email" className="input-box" />
@@ -17,7 +17,7 @@ const Login = () => {
 
             <p className="text-sm text-center mt-4">
               Not registered yet?{''}
-              <Link to='register' className=''>
+              <Link to='register' className='font-medium text-primary underline'>
                 Create a new Account
               </Link>
             </p>
