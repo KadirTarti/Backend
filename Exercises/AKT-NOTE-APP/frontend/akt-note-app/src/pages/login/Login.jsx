@@ -6,7 +6,7 @@ const Login = () => {
     <>
       <Navbar/>
 
-      <div>
+      <div className="">
         <div>
           <form onSubmit={()=> {}} action="">
             <h4 className="text-2xl mb-7">Login</h4>
