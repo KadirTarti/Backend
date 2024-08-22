@@ -1,5 +1,5 @@
 import AppRouter from "./router/AppRouter"
-4
+import './index.css'
 
 
 
