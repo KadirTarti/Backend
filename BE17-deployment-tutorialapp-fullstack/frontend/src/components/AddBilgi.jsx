@@ -12,6 +12,13 @@ e.preventDefault()
 //    await axios.post(url, yeniVeri);
 //  };
 postTutorial({title:title,description:desc})
+.then(() => {
+  setTitle("");
+  setDesc("");
+})
+.catch((error) => {
+  console.error("Error submitting tutorial:", error);
+});
 
 // database e yolla
 // axios.post(url, {title:title,description:desc})
@@ -33,6 +40,7 @@ postTutorial({title:title,description:desc})
             id="title"
             placeholder="Enter your title"
             required
+            value={title}
 onChange={(e)=>setTitle(e.target.value)}
           />
         </div>
@@ -46,10 +54,14 @@ onChange={(e)=>setTitle(e.target.value)}
             id="desc"
             placeholder="Enter your Description"
             required
+            value={desc}
 onChange={(e)=>setDesc(e.target.value)}
           />
         </div>
-        <button type="submit" className="btn btn-danger mb-4">
+        <button
+
+         type="submit" 
+         className="btn btn-danger mb-4">
           Submit
         </button>
       </form>
