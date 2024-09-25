@@ -26,7 +26,7 @@ const Login = () => {
       <div className="bg-black w-full h-full lg:bg-opacity-50">
         <div className="bg-black bg-opacity-70 p-16 self-center relative top-28 lg:w-2/5 lg:max-w-md rounded-md w-full mx-auto">
           <form onSubmit={handleSubmit}>
-            <h2 className="text-red-main text-2xl font-[500] text-center tracking-[0.1em] mb-3 ">
+            <h2 className="text-red-main text-2xl font-[500] text-center  tracking-[0.1em] mb-3 ">
               Sign In
             </h2>
             <div className="relative z-0 w-full mb-6 group">
@@ -65,10 +65,10 @@ const Login = () => {
                 Sign Up
               </Link>
             </div>
-            <button className="btn-danger">Sign In</button>
+            <button className="btn-danger text-[1rem]">Sign In</button>
             <button
               type="button"
-              className="btn-danger bg-white flex text-black justify-evenly gap-3 text-center hover:bg-blue-600 hover:text-[#ffffff]"
+              className="btn-danger bg-white flex text-[1rem] text-black justify-evenly text-center hover:bg-blue-600 hover:text-[#ffffff]"
             >
               <GoogleIcon />
               Continue with Google
