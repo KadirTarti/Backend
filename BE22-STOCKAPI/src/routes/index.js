@@ -30,7 +30,7 @@ router.use('/purchases', require('./purchase'))
 router.use('/sales', require('./sale'))
 
 // document:
-router.use('/documents', require('./document'))
+router.use('/documents', require('./documents'))
 
 /* ------------------------------------------------------- */
 module.exports = router
