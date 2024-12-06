@@ -3,6 +3,7 @@ const User = require("../models/user.model");
 
 const passwordEncrpyt = require("../helpers/passwordEncrpyt");
 
+
 module.exports = {
   list: async (req, res) => {
     const data = await User.find().select("-password");
@@ -28,12 +29,35 @@ module.exports = {
   },
   update: async (req, res) => {
     const data = await User.updateOne({ _id: req.params.userId }, req.body);
+    const { name, bio, profilePic } = req.body;
+
     res.status(202).send({
       error: false,
       message: "User updated successfully!",
       result: data,
       user: await User.findOne({ _id: req.params.userId }),
     });
+
+    try {
+      const user = await User.findById(req.user);
+      if (!user) {
+        return res.status(404).json({ message: 'Kullanıcı bulunamadı.' });
+      }
+  
+      // Kullanıcı bilgilerini güncelle
+      user.name = name || user.name;
+      user.bio = bio || user.bio;
+      user.profilePic = profilePic || user.profilePic;
+  
+      await user.save();
+  
+      res.status(200).json({ message: 'Profil başarıyla güncellendi.', user });
+    } catch (error) {
+      res.status(500).json({ message: 'Sunucu hatası.' });
+    }
+
+
+
   },
   delete: async (req, res) => {
     const data = await User.deleteOne({ _id: req.params.userId });
@@ -97,4 +121,19 @@ module.exports = {
       message: "Logout Ok!",
     });
   },
+
+  getProfile: async (req, res) => {
+    try {
+      const user = await User.findById(req.user);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found!' });
+      }
+  
+      res.status(200).json({ user });
+    } catch (error) {
+      res.status(500).json({ message: 'Server Error!' });
+    }
+  }
+
+
 };

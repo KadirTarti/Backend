@@ -47,6 +47,18 @@ const UserSchema = new mongoose.Schema(
       set: (password) => passwordEncrpyt(password),//* set; db ye akydolurken veriyi işlemden geçirerk kaydolmasını sağlar
       //! db ye şifre bilgileri güvenlik amaçlı doğrudan eklenmez. Hashlenmiş bir şekilde veritabanına eklenir.
     },
+    bio: {
+      type: String,
+      default: '',
+    },
+    profilePic: {
+      type: String,
+      default: 'default-profile.jpg',
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
     firstName: String,
     lastName: String,
   },
@@ -55,5 +67,8 @@ const UserSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+UserSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+};
 
 module.exports = mongoose.model("User", UserSchema);
