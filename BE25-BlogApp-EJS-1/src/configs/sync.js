@@ -29,6 +29,8 @@ module.exports = async () => {
   );
 
   const user = await User.create({
+    avatar: "https://user-avatar.com",
+    bio: "Tech enthusiast and writer.",
     email: "test@test.com",
     password: "12345678",
     firstName: "Test",
@@ -52,6 +54,7 @@ module.exports = async () => {
   for (let category of categories) {
     const blogCategory = await BlogCategory.create({
       name: category,
+      slug: category.toLowerCase().replace(" ", "-"),
     });
     // Example Posts:
     for (let key in [...Array(10)]) {
@@ -59,18 +62,13 @@ module.exports = async () => {
         userId: user._id,
         blogCategoryId: blogCategory._id,
         title: `Sample ${category} Post -${key}`,
-        content: `
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique labore repellendus quibusdam consequuntur quae illum excepturi maxime expedita voluptatum, numquam rem distinctio pariatur magnam, voluptas odit reiciendis amet praesentium qui.
-            Fugit dicta quos porro dolor, assumenda aperiam magnam sit eaque voluptate corporis. Facilis voluptatem ea aperiam eveniet hic atque ducimus doloribus, dolorem, vero labore porro earum, nostrum dolore vitae suscipit. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique labore repellendus quibusdam consequuntur quae illum excepturi maxime expedita voluptatum, numquam rem distinctio pariatur magnam, voluptas odit reiciendis amet praesentium qui.
-            Fugit dicta quos porro dolor, assumenda aperiam magnam sit eaque voluptate corporis. Facilis voluptatem ea aperiam eveniet hic atque ducimus doloribus, dolorem, vero labore porro earum, nostrum dolore vitae suscipit. </p>
-            <div class="p-4 text-center"><img src="https://geekflare.com/wp-content/uploads/2016/04/featured-image-generator.jpg"></div>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique labore repellendus quibusdam consequuntur quae illum excepturi maxime expedita voluptatum, numquam rem distinctio pariatur magnam, voluptas odit reiciendis amet praesentium qui.
-            Fugit dicta quos porro dolor, assumenda aperiam magnam sit eaque voluptate corporis. Facilis voluptatem ea aperiam eveniet hic atque ducimus doloribus, dolorem, vero labore porro earum, nostrum dolore vitae suscipit. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique labore repellendus quibusdam consequuntur quae illum excepturi maxime expedita voluptatum, numquam rem distinctio pariatur magnam, voluptas odit reiciendis amet praesentium qui.
-            Fugit dicta quos porro dolor, assumenda aperiam magnam sit eaque voluptate corporis. Facilis voluptatem ea aperiam eveniet hic atque ducimus doloribus, dolorem, vero labore porro earum, nostrum dolore vitae suscipit. </p>
-            <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique labore repellendus quibusdam consequuntur quae illum excepturi maxime expedita voluptatum, numquam rem distinctio pariatur magnam, voluptas odit reiciendis amet praesentium qui.
-            Fugit dicta quos porro dolor, assumenda aperiam magnam sit eaque voluptate corporis. Facilis voluptatem ea aperiam eveniet hic atque ducimus doloribus, dolorem, vero labore porro earum, nostrum dolore vitae suscipit. Lorem ipsum dolor, sit amet consectetur adipisicing elit. Similique labore repellendus quibusdam consequuntur quae illum excepturi maxime expedita voluptatum, numquam rem distinctio pariatur magnam, voluptas odit reiciendis amet praesentium qui.
-            Fugit dicta quos porro dolor, assumenda aperiam magnam sit eaque voluptate corporis. Facilis voluptatem ea aperiam eveniet hic atque ducimus doloribus, dolorem, vero labore porro earum, nostrum dolore vitae suscipit. </p>
-            `,
+        featuredImage: "https://image-url.com",
+        subtitle: `A quick dive into ${category}`,
+        content: [
+          "Lorem ipsum dolor sit amet.",
+          "Fugit dicta quos porro dolor.",
+          "Facilis voluptatem ea aperiam.",
+        ],
         published: Boolean(key % 2),
         createdAt: now.getTime() - Math.random() * 10e8, // Random Time
       });
