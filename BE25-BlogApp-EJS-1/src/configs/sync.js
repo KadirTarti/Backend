@@ -39,16 +39,16 @@ module.exports = async () => {
   // Example Category:
   // Example Category:
   const categories = [
-    "World",
-    "Technology",
-    "Design",
-    "Culture",
-    "Business",
-    "Politics",
-    "Science",
-    "Health",
-    "Style",
-    "Travel",
+    "Welt",
+    "Technologie",
+    "Gestaltung",
+    "Kultur",
+    "Wirtschaft",
+    "Politik",
+    "Wissenschaft",
+    "Gesundheit",
+    "Stil",
+    "Reisen",
   ];
   const now = new Date();
   for (let category of categories) {
@@ -61,13 +61,12 @@ module.exports = async () => {
       await BlogPost.create({
         userId: user._id,
         blogCategoryId: blogCategory._id,
-        title: `Sample ${category} Post -${key}`,
+        title: `Beispiel ${category} Post -${key}`,
         featuredImage: "https://image-url.com",
-        subtitle: `A quick dive into ${category}`,
+        subtitle: `Ein kurzer Einblick in ${category}`,
         content: [
-          "Lorem ipsum dolor sit amet.",
-          "Fugit dicta quos porro dolor.",
-          "Facilis voluptatem ea aperiam.",
+          "Dies ist eine einfache Kategorie Inhalt.",
+          "Ich habe sie als Beispiel geschrieben.",
         ],
         published: Boolean(key % 2),
         createdAt: now.getTime() - Math.random() * 10e8, // Random Time

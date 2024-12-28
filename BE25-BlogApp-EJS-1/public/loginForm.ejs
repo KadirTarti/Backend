@@ -1,5 +1,5 @@
 <%- include('partials/head') %>
-<title>AKT BlogApp Login</title>
+<title>AKT BlogApp Anmeldung</title>
 </head>
 <body>
         <div class="container">
@@ -16,9 +16,9 @@
                </div>
                <% } %>
             <p>
-                <a class="btn btn-sm btn-secondary" href="/">Go Home</a>
+                <a class="btn btn-sm btn-secondary" href="/">Startseite</a>
             </p>
-            <h1>LOGIN</h1>
+            <h1>Anmeldung</h1>
             <form action="" method="POST">
                 <table class="table table-striped">
                     <tbody>
@@ -27,17 +27,17 @@
                             <td><input type="text" name="email" required class="form-control" value="test@test.com"></td>
                         </tr>
                         <tr>
-                            <td>Password</td>
+                            <td>Passwort</td>
                             <td><input type="password" name="password" required class="form-control" value="12345678"></td>
                         </tr>
                         <tr>
                             <td></td>
-                            <td><label><input type="checkbox" name="remindMe" value="1"> Remind Me</label></td>
+                            <td><label><input type="checkbox" name="remindMe" value="1"> Erinnere mich</label></td>
                         </tr>
                     </tbody>
                 </table>
                 <p>
-                    <button class="btn btn-primary" type="submit">Login</button>
+                    <button class="btn btn-primary" type="submit">Anmelden</button>
                 </p>
             </form>
         </div>

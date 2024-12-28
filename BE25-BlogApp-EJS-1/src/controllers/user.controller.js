@@ -98,27 +98,27 @@ module.exports = {
           }
             res.status(200).send({
               error: false,
-              message: "Login Ok!",
+              message: "Anmeldung Ok!",
               user,
             });
         }else {
           res.errorStatusCode = 401;
-          throw new Error("Login parameters not true!");
+          throw new Error("Anmeldeparameter nicht zureffend!");
         }
       }else {
         res.errorStatusCode = 401;
-        throw new Error("User not found!");
+        throw new Error("Benutzer nicht gefunden!");
       }
     }else {
       res.errorStatusCode = 401;
-      throw new Error("Email and password are required!")
+      throw new Error("E-Mail und Passwort sind erforderlich!")
     }
   },
   logout: (req, res) => {
     req.session = null
     res.status(200).send({
       error: false,
-      message: "Logout Ok!",
+      message: "Abmeldung Ok!",
     });
   },
 
@@ -126,12 +126,12 @@ module.exports = {
     try {
       const user = await User.findById(req.user);
       if (!user) {
-        return res.status(404).json({ message: 'User not found!' });
+        return res.status(404).json({ message: 'Benutzer nicht gefunden!' });
       }
   
       res.status(200).json({ user });
     } catch (error) {
-      res.status(500).json({ message: 'Server Error!' });
+      res.status(500).json({ message: 'Server-Fehler!' });
     }
   }
 

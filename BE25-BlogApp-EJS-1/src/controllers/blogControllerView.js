@@ -151,7 +151,7 @@ module.exports.BlogPostController = {
       res.render("postForm", {
         user: req.session,
         categories: await BlogCategory.find(),
-        title: 'Update Post',
+        title: 'Post aktualisieren',
         post: await BlogPost.findOne({_id:req.params.postId})
       });
     }

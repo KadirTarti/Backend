@@ -10,7 +10,7 @@
     <div class="row g-5">
         <div class="col-md-12 p-3">
             <p>
-                <a class="btn btn-sm btn-secondary" href="/">Go Home</a>
+                <a class="btn btn-sm btn-secondary" href="/">Startseite</a>
             </p>
             <h1><%= title %></h1>
             <form action="" method="POST">
@@ -23,7 +23,7 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Category</td>
+                            <td>Kategorie</td>
                             <td>
                                 <select name="blogCategoryId" class="form-select">
                                     <% categories.forEach(category => { %>
@@ -33,11 +33,11 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Title</td>
+                            <td>Titel</td>
                             <td><input type="text" name="title" required class="form-control" value="<%= post?.title %>"></td>
                         </tr>
                         <tr>
-                            <td>Content</td>
+                            <td>Inhalt</td>
                             <td>
                                 <textarea id='textEditor' name="content" class="form-control">
                                     <%= post?.content %>
@@ -45,11 +45,11 @@
                             </td>
                         </tr>
                         <tr>
-                            <td>Published</td>
+                            <td>Veröffentlicht</td>
                             <td>
                                 <select name="published" class="form-select">
-                                    <option value="0" <%= post?.published ? '' : 'selected' %>>No</option>
-                                    <option value="1" <%= post?.published ? 'selected' : '' %>>Yes</option>
+                                    <option value="0" <%= post?.published ? '' : 'selected' %>>Nein</option>
+                                    <option value="1" <%= post?.published ? 'selected' : '' %>>Ja</option>
                                 </select>
                             </td>
                         </tr>
@@ -63,7 +63,7 @@
                     </tbody>
                 </table>
                 <p>
-                    <button class="btn btn-primary" type="submit">SUBMIT</button>
+                    <button class="btn btn-success" type="submit">Einreichen</button>
                 </p>
             </form>
         </div>

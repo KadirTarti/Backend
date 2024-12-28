@@ -12,12 +12,12 @@
             <div class="col-md-8">
                 <% if (user.email) { %>
                     <div class="admin-area text-end">
-                        <a class="btn btn-primary" href="/post/create">New Post</a>
+                        <a class="btn btn-primary" href="/post/create">Neue Post</a>
                     </div>             
                 <% } %>
 
                 <h3 class="pb-4 fst-italic border-bottom">
-                    Welcome to my sample blog site completed with ejs!
+                    Willkommen auf meiner mit ejs erstellten Blogseite! (AKT)
                 </h3>
                 <!-- BlogPosts -->
                 <% posts.forEach(post => { %>
@@ -36,8 +36,8 @@
                         <% if (user.id == post.userId._id) { %>
                          
                             <div class="admin-area text-end">
-                                <a class="btn btn-sm btn-primary" href="/post/<%= post.id %>/update">Update</a>
-                                <a class="btn btn-sm btn-danger" href="/post/<%= post.id %>/delete" onclick="return confirm('Are you sure?')">Delete</a>
+                                <a class="btn btn-sm btn-primary" href="/post/<%= post.id %>/update">Aktualisieren</a>
+                                <a class="btn btn-sm btn-danger" href="/post/<%= post.id %>/delete" onclick="return confirm('Are you sure?')">Löschen</a>
                             </div>
                         <% } %>
                     </article>
@@ -56,7 +56,7 @@
             <div class="col-md-4">
                 <div class="position-sticky" style="top: 2rem;">
                     <div>
-                        <h3 class="fst-italic">Recent Posts</h3>
+                        <h3 class="fst-italic">Neueste Posts</h3>
                         <ul class="list-unstyled">
                             <!-- Recent posts -->
                             <% recentPosts.forEach(item => { %>
