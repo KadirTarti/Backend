@@ -31,7 +31,7 @@
         <!-- Blog Categories -->
         <div class="nav-scroller py-1 mb-3 border-bottom">
             <nav class="nav nav-underline justify-content-between">
-                <a class="nav-item nav-link link-body-emphasis <%= !selectedCategory ? 'active' : '' %>" href="/post"> All </a>
+                <a class="nav-item nav-link link-body-emphasis <%= !selectedCategory ? 'active' : '' %>" href="/post"> Alle </a>
 
                 <% categories.forEach(category => { %>
                     <a class="nav-item nav-link link-body-emphasis <% if (category.id == selectedCategory) { %>
@@ -225,12 +225,7 @@
         </div>
     </main>
     <!-- main end -->
-    <footer class="py-5 text-center text-body-secondary bg-body-tertiary">
-        <p>
-            <b>AKT - Copyright @2024</b>
-            <br>Visit to <a href="https://www.github.com/KadirTarti"> My GitHub Page</a>
-        </p>
-    </footer>
+
 </body>
 
 </html>
