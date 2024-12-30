@@ -22,9 +22,9 @@
                 <!-- BlogPosts -->
                 <% posts.forEach(post => { %>
                     <article class="blog-post">
-                        <h2 class="display-5 mb-1">
+                        <h4 class="display-7 mb-1">
                             <a href="/post/<%= post.id %>" class="link-body-emphasis text-decoration-none"><%= post.title %></a>
-                        </h2>
+                        </h4>
                         <p class="blog-post-meta"> <%=  post.createdAt.toLocaleString()   %></p>
                         <div class="line-clamp-3">  
                             <!-- line-clamp-3 sınıfı bizim belirlediğimiz bir css özelliği. Açıklamanın ilk 3 satırını gösteriyor. kalanını kesiyor -->
