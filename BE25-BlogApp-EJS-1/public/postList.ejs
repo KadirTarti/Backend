@@ -11,14 +11,16 @@
         <div class="row g-5">
             <div class="col-md-8">
                 <% if (user.email) { %>
+                    <p class="pb-3 fw-bolder fst-italic border-bottom text-center">
+                        Willkommen auf meiner mit ejs erstellten Blogseite! (AKT)
+                    </p>
                     <div class="admin-area text-end">
-                        <a class="btn btn-primary" href="/post/create">Neue Post</a>
+                        <a class="btn btn-success w-25 fw-bold shadow-lg text-white mb-3" href="/post/create">Neue Post</a>
                     </div>             
+                  
                 <% } %>
 
-                <h3 class="pb-4 fst-italic border-bottom">
-                    Willkommen auf meiner mit ejs erstellten Blogseite! (AKT)
-                </h3>
+               
                 <!-- BlogPosts -->
                 <% posts.forEach(post => { %>
                     <article class="blog-post p-3 shadow-lg">
@@ -35,8 +37,8 @@
                          
                         <% if (user.id == post.userId._id) { %>
                          
-                            <div class="admin-area text-end">
-                                <a class="btn btn-sm btn-primary" href="/post/<%= post.id %>/update">Aktualisieren</a>
+                            <div class="admin-area text-end mt-3">
+                                <a class="btn btn-sm btn-warning" href="/post/<%= post.id %>/update">Aktualisieren</a>
                                 <a class="btn btn-sm btn-danger" href="/post/<%= post.id %>/delete" onclick="return confirm('Are you sure?')">Löschen</a>
                             </div>
                         <% } %>
