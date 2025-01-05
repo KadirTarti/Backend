@@ -1,11 +1,26 @@
 <div class="nav-scroller py-1 mb-3 border-bottom">
     <nav class="nav nav-underline justify-content-between">
-        <a class="nav-item nav-link link-body-emphasis <%= !selectedCategory ? 'active' : '' %>" href="/post"> Alle </a>
+        <a class="categ nav-item nav-link link-body-emphasis <%= !selectedCategory ? 'active' : '' %>" href="/post"> Alle </a>
 
         <% categories.forEach(category => { %>
             <a class="nav-item nav-link link-body-emphasis <% if (category.id == selectedCategory) { %>
                 active <% } %>" href="/post?filter[blogCategoryId]=<%=category.id%>"> <%= category.name %> </a>
         <% }) %>
+
+   
+        <style>
+            @media (max-width: 768px) {
+                .nav {
+                    display: flex;
+                    flex-wrap: wrap;
+                    gap: 5px; /* Boşlukları azaltır */
+                }
+                .nav-item {
+                    flex: 1 1 calc(12% - 5px); /* Her bir eleman iki sütuna sığar */
+                    text-align: center; /* Elemanları ortalar */
+                }
+            }
+        </style>
     </nav>
 </div>
 </div>
