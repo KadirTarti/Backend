@@ -10,7 +10,16 @@
     <main class="container">
         <div class="row g-5">
             <div class="col-md-8">
-                <% if (user.email) { %>
+                <style>
+                    @media (max-width: 768px) {
+                      .col-md-8 {
+                        gap: 5px !important;
+                        margin-bottom: 5px !important;
+                        padding-bottom: 3px !important;
+                      }
+                    }
+                  </style>
+                 <% if (user.email) { %>
                     <p class="pb-3 fw-bolder fst-italic border-bottom text-center">
                         Willkommen auf meiner mit ejs erstellten Blogseite! (AKT)
                     </p>
@@ -24,6 +33,13 @@
                 <!-- BlogPosts -->
                 <% posts.forEach(post => { %>
                     <article class="blog-post p-3 shadow-lg">
+                        <style>
+                            @media (max-width: 768px) {
+                              .blog-post {
+                                padding: 5px;                                
+                              }
+                            }
+                          </style>
                         <h4 class="display-7 mb-1">
                             <a href="/post/<%= post.id %>" class="link-body-emphasis text-decoration-none"><%= post.title %></a>
                         </h4>
@@ -38,6 +54,7 @@
                         <% if (user.id == post.userId._id) { %>
                          
                             <div class="admin-area text-end mt-3">
+                          
                                 <a class="btn btn-sm btn-warning" href="/post/<%= post.id %>/update">Aktualisieren</a>
                                 <a class="btn btn-sm btn-danger" href="/post/<%= post.id %>/delete" onclick="return confirm('Are you sure?')">Löschen</a>
                             </div>
