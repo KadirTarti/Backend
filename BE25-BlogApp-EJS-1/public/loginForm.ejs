@@ -1,5 +1,7 @@
 <%- include('partials/head') %>
 <title>AKT BlogApp Anmeldung</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
 </head>
 <body>
         <div class="container">
@@ -28,7 +30,15 @@
                         </tr>
                         <tr>
                             <td>Passwort</td>
-                            <td><input type="password" name="password" required class="form-control" value="12345678"></td>
+    <td> 
+        <div class="input-group">
+            <input type="password" id="password" name="password" required class="form-control" value="12345678">
+            <button type="button" class="btn btn-outline-secondary active" id="togglePassword">
+                <i class="fa-solid fa-eye"></i>
+            </button>
+        </div>
+    </td>
+                           
                         </tr>
                         <tr>
                             <td></td>
@@ -64,6 +74,21 @@
             alertDiv.style.display = 'none'
         },4000)
     }
+
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const passwordField = document.getElementById('password');
+        const icon = this.querySelector('i');
+
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash'); 
+        } else {
+            passwordField.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    });
 </script>
 
 </body>
