@@ -31,7 +31,7 @@ module.exports = async () => {
   const user = await User.create({
     avatar: "https://avatars.githubusercontent.com/u/150926891?v=4",
     bio: "Tech enthusiast and writer.",
-    email: "test@test.com",
+    email: "abdulkadir@test.com",
     password: "12345678",
     firstName: "Test",
     lastName: "Test",
